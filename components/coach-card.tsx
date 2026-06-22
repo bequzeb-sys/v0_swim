@@ -1,0 +1,67 @@
+import Image from "next/image"
+import { MapPin, Star } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { content } from "@/lib/content"
+
+type Coach = (typeof content.coaches.list)[number]
+
+export function CoachCard({ coach }: { coach: Coach }) {
+  const c = content.coaches
+
+  return (
+    <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+      {/* Top: avatar + info */}
+      <div className="flex items-start gap-4 sm:gap-5">
+        <Image
+          src={coach.avatar || "/placeholder.svg"}
+          alt={coach.name}
+          width={96}
+          height={96}
+          className="size-20 shrink-0 rounded-full object-cover ring-2 ring-white/10 sm:size-24"
+        />
+        <div className="min-w-0 flex-1">
+          <h3 className="text-lg font-bold text-white sm:text-xl">{coach.name}</h3>
+          <div className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+            {coach.badges.map((badge, i) => (
+              <span key={badge} className="flex items-center gap-1.5">
+                <span className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2.5 py-1 text-xs font-medium text-teal-accent-light sm:px-3 sm:text-sm">
+                  {badge}
+                </span>
+                {i < coach.badges.length - 1 && (
+                  <span className="text-text-secondary">·</span>
+                )}
+              </span>
+            ))}
+          </div>
+          <div className="mt-3 flex items-center gap-1.5">
+            <Star className="size-5 shrink-0 fill-star-gold text-star-gold" />
+            <span className="font-bold text-white">{coach.rating}</span>
+            <span className="whitespace-nowrap text-text-secondary">
+              ({coach.reviews} {c.reviewsSuffix})
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="my-5 h-px w-full bg-white/10" />
+
+      {/* Location + price */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex min-w-0 items-center gap-2">
+          <MapPin className="size-5 shrink-0 text-teal-accent" />
+          <span className="truncate text-lg text-white">{coach.city}</span>
+        </div>
+        <div className="flex shrink-0 items-baseline whitespace-nowrap">
+          <span className="text-2xl font-bold text-white">{coach.price}</span>
+          <span className="ml-1 text-sm text-text-secondary">{c.priceUnit}</span>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <Button className="mt-5 w-full rounded-xl bg-teal-accent py-6 text-base font-bold text-primary-foreground hover:bg-teal-accent-light">
+        {c.cardCta}
+      </Button>
+    </article>
+  )
+}

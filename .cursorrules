@@ -1,0 +1,60 @@
+# SwimAI — Project Rules
+
+## Stack
+- Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, shadcn/ui
+- Package manager: pnpm only. Never suggest npm/yarn commands or generate package-lock.json/yarn.lock.
+- Icons: lucide-react only.
+
+## Content & i18n
+- NEVER hardcode user-visible strings directly in JSX. All copy must come from
+  i18n translation files (messages/en.json, messages/fr.json) via next-intl's
+  useTranslations() hook, once i18n is set up.
+- Until i18n is fully wired, the single source of truth for copy is lib/content.ts.
+  Do not introduce a second source of truth — if new copy is needed, add it there first.
+- French is the primary/default locale. English is secondary. Every new string
+  added to fr.json must have a matching key added to en.json in the same change.
+- Never invent translations silently — if unsure of an English phrasing, flag it
+  rather than guessing.
+
+## Components
+- One component = one file, PascalCase filename matching the default export.
+- Functional components only, typed props via an explicit `interface` (not inline
+  object types), e.g. `interface CoachCardProps { coach: Coach }`.
+- No inline `style={{...}}` objects except for things Tailwind genuinely cannot
+  express (e.g. dynamic background-image URLs, gradient stops with alpha values).
+  Everything else must use Tailwind utility classes.
+- No raw hex colors in JSX/CSS. All colors must reference the design tokens
+  defined in tailwind.config.ts (bg-deep, bg-navy, bg-panel, accent-teal,
+  accent-blue, text-secondary, star-gold). If a new color is genuinely needed,
+  add it to tailwind.config.ts first, then reference the token — never inline
+  a hex value in a component.
+- Shared types (Coach, NavLink, etc.) live in /types, never re-declared inline
+  in multiple components.
+
+## Routing
+- Every <Link> or button that implies navigation must point to a real route —
+  never href="#" or an empty onClick. If the destination page doesn't exist yet,
+  create a minimal stub page rather than leaving a dead link.
+- Routes follow the locale-prefixed structure once i18n is added: /[locale]/page-name.
+
+## Images
+- All raster images go through next/image (<Image />) with explicit width,
+  height, and alt text — never a bare <img> tag.
+- Decorative/background images that must be CSS background-image (not <Image />)
+  should be marked aria-hidden="true" and use the optimized WebP version of the
+  asset (not PNG/JPG) — see public/underwater-hero.webp as the existing pattern.
+- New image assets must be compressed/converted to WebP before being added to
+  /public. Flag any asset over ~200KB for review before committing.
+
+## Accessibility
+- Semantic HTML required: <header>, <nav>, <main>, <section>, <footer> — not
+  generic <div> soup for structural elements.
+- All interactive elements must be keyboard-reachable and have visible focus states.
+- Decorative-only elements (background images, icon-only flourishes) get
+  aria-hidden="true".
+
+## General
+- Before adding a new dependency, check if shadcn/ui, lucide-react, or an
+  existing util already covers the need.
+- Run `pnpm build` locally before considering a feature "done" — it must build
+  with zero errors.
