@@ -12,4 +12,19 @@ __v0_jsx-dev-runtime.ts
 # Common ignores
 node_modules
 .next/
-.DS_Store
+.DS_Store"debug-*.js" 
+"inspect*.py" 
+"playwright-*.js" 
+"playwright-*.mjs" 
+"*.mjs" 
+"output*.json" 
+"output*.txt" 
+"full-results.json" 
+"screenshot-check.png" 
+"check_auth.py" 
+"full-analysis.js" 
+"deep_inspect_auth.py" 
+"final_inspect.py" 
+"layout-check*.js" 
+"layout-test.js" 
+"run_inspect*.py" 

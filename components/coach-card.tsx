@@ -1,16 +1,20 @@
 import Image from "next/image"
 import { MapPin, Star } from "lucide-react"
+import { Link } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
 import type { Coach } from "@/lib/coaches"
 
 interface CoachCardProps {
   coach: Coach
+  translations: {
+    badges: Record<string, string>
+    reviewsSuffix: string
+    priceUnit: string
+    cardCta: string
+  }
 }
 
-export function CoachCard({ coach }: CoachCardProps) {
-  const t = useTranslations("coaches")
-
+export function CoachCard({ coach, translations: t }: CoachCardProps) {
   return (
     <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
       {/* Top: avatar + info */}
@@ -28,7 +32,7 @@ export function CoachCard({ coach }: CoachCardProps) {
             {coach.badgeKeys.map((badgeKey, i) => (
               <span key={badgeKey} className="flex items-center gap-1.5">
                 <span className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2.5 py-1 text-xs font-medium text-teal-accent-light sm:px-3 sm:text-sm">
-                  {t(`badges.${badgeKey}`)}
+                  {t.badges[badgeKey]}
                 </span>
                 {i < coach.badgeKeys.length - 1 && (
                   <span className="text-text-secondary">·</span>
@@ -40,7 +44,7 @@ export function CoachCard({ coach }: CoachCardProps) {
             <Star className="size-5 shrink-0 fill-star-gold text-star-gold" />
             <span className="font-bold text-white">{coach.rating}</span>
             <span className="whitespace-nowrap text-text-secondary">
-              ({coach.reviews} {t("reviewsSuffix")})
+              ({coach.reviews} {t.reviewsSuffix})
             </span>
           </div>
         </div>
@@ -57,14 +61,16 @@ export function CoachCard({ coach }: CoachCardProps) {
         </div>
         <div className="flex shrink-0 items-baseline whitespace-nowrap">
           <span className="text-2xl font-bold text-white">{coach.price}</span>
-          <span className="ml-1 text-sm text-text-secondary">{t("priceUnit")}</span>
+          <span className="ml-1 text-sm text-text-secondary">{t.priceUnit}</span>
         </div>
       </div>
 
       {/* CTA */}
-      <Button className="mt-5 w-full rounded-xl bg-teal-accent py-6 text-base font-bold text-primary-foreground hover:bg-teal-accent-light">
-        {t("cardCta")}
-      </Button>
+      <Link href={`/coaches/${coach.id}`} className="mt-5 block w-full">
+        <Button className="w-full rounded-xl bg-teal-accent py-6 text-base font-bold text-primary-foreground hover:bg-teal-accent-light">
+          {t.cardCta}
+        </Button>
+      </Link>
     </article>
   )
 }
