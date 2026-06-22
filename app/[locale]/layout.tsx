@@ -1,7 +1,11 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { AuthProvider } from '@/lib/auth/auth-context'
+import DevOverlay from '@/components/dev/dev-overlay'
+import '../globals.css'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -37,15 +41,25 @@ export const viewport: Viewport = {
   themeColor: '#050B1A',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode
+  params: Promise<{ locale: string }>
 }>) {
+  const { locale } = await params
+  const messages = await getMessages()
+
   return (
-    <html lang="fr" className={`dark ${inter.variable}`}>
+    <html lang={locale} className={`dark scroll-smooth ${inter.variable}`}>
       <body className="bg-background font-sans antialiased">
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          <AuthProvider>
+            {children}
+            {process.env.NODE_ENV === 'development' && <DevOverlay />}
+          </AuthProvider>
+        </NextIntlClientProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

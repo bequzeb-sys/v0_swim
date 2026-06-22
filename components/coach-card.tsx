@@ -1,12 +1,15 @@
 import Image from "next/image"
 import { MapPin, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { content } from "@/lib/content"
+import { useTranslations } from "next-intl"
+import type { Coach } from "@/lib/coaches"
 
-type Coach = (typeof content.coaches.list)[number]
+interface CoachCardProps {
+  coach: Coach
+}
 
-export function CoachCard({ coach }: { coach: Coach }) {
-  const c = content.coaches
+export function CoachCard({ coach }: CoachCardProps) {
+  const t = useTranslations("coaches")
 
   return (
     <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
@@ -22,12 +25,12 @@ export function CoachCard({ coach }: { coach: Coach }) {
         <div className="min-w-0 flex-1">
           <h3 className="text-lg font-bold text-white sm:text-xl">{coach.name}</h3>
           <div className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-            {coach.badges.map((badge, i) => (
-              <span key={badge} className="flex items-center gap-1.5">
+            {coach.badgeKeys.map((badgeKey, i) => (
+              <span key={badgeKey} className="flex items-center gap-1.5">
                 <span className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2.5 py-1 text-xs font-medium text-teal-accent-light sm:px-3 sm:text-sm">
-                  {badge}
+                  {t(`badges.${badgeKey}`)}
                 </span>
-                {i < coach.badges.length - 1 && (
+                {i < coach.badgeKeys.length - 1 && (
                   <span className="text-text-secondary">·</span>
                 )}
               </span>
@@ -37,7 +40,7 @@ export function CoachCard({ coach }: { coach: Coach }) {
             <Star className="size-5 shrink-0 fill-star-gold text-star-gold" />
             <span className="font-bold text-white">{coach.rating}</span>
             <span className="whitespace-nowrap text-text-secondary">
-              ({coach.reviews} {c.reviewsSuffix})
+              ({coach.reviews} {t("reviewsSuffix")})
             </span>
           </div>
         </div>
@@ -54,13 +57,13 @@ export function CoachCard({ coach }: { coach: Coach }) {
         </div>
         <div className="flex shrink-0 items-baseline whitespace-nowrap">
           <span className="text-2xl font-bold text-white">{coach.price}</span>
-          <span className="ml-1 text-sm text-text-secondary">{c.priceUnit}</span>
+          <span className="ml-1 text-sm text-text-secondary">{t("priceUnit")}</span>
         </div>
       </div>
 
       {/* CTA */}
       <Button className="mt-5 w-full rounded-xl bg-teal-accent py-6 text-base font-bold text-primary-foreground hover:bg-teal-accent-light">
-        {c.cardCta}
+        {t("cardCta")}
       </Button>
     </article>
   )

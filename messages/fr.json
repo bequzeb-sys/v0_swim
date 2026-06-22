@@ -1,0 +1,244 @@
+{
+  "brand": {
+    "swim": "Swim",
+    "ai": "AI"
+  },
+  "nav": {
+    "links": {
+      "coaches": "Trouver un coach",
+      "how": "Comment ça marche",
+      "pricing": "Tarifs",
+      "forCoaches": "Pour les coachs"
+    },
+    "cta": "Commencer"
+  },
+  "hero": {
+    "title1": "Trouvez votre coach",
+    "title2": "de natation idéal",
+    "subtitle1": "Réservez des coachs certifiés près de chez vous.",
+    "subtitle2": "Progressez plus vite grâce à l'IA."
+  },
+  "search": {
+    "locationLabel": "Localisation",
+    "locationPlaceholder": "Où ?",
+    "specialtyLabel": "Spécialité",
+    "specialtyPlaceholder": "Toutes spécialités",
+    "specialtyOptions": {
+      "all": "Toutes spécialités",
+      "freestyle": "Freestyle",
+      "openWater": "Eau libre",
+      "butterfly": "Papillon",
+      "competition": "Compétition"
+    },
+    "dateLabel": "Date",
+    "datePlaceholder": "Sélectionnez une date",
+    "cta": "Rechercher des coachs"
+  },
+  "coaches": {
+    "title": "Coachs disponibles près de chez vous",
+    "reviewsSuffix": "avis",
+    "priceUnit": "/séance",
+    "cardCta": "Voir le profil & réserver",
+    "badges": {
+      "freestyle": "Freestyle",
+      "competition": "Compétition",
+      "openWater": "Eau libre",
+      "allLevels": "Tous niveaux",
+      "butterfly": "Papillon",
+      "advanced": "Avancé"
+    }
+  },
+  "footer": {
+    "text": "Propulsé par SwimCoach AI — Discutez avec votre coach IA à tout moment",
+    "cta": "Essayez gratuitement"
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Trois étapes pour nager plus vite, plus loin.",
+    "steps": {
+      "step1": {
+        "title": "Recherchez",
+        "description": "Trouvez un coach selon votre localisation, votre spécialité et votre niveau."
+      },
+      "step2": {
+        "title": "Réservez",
+        "description": "Choisissez un créneau et confirmez votre séance en quelques clics."
+      },
+      "step3": {
+        "title": "Progressez",
+        "description": "Suivez vos progrès avec l'IA entre chaque séance."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Choisissez la formule qui vous correspond.",
+    "badge": {
+      "popular": "Le plus populaire"
+    },
+    "single": {
+      "name": "Séance à l'unité",
+      "price": "€45",
+      "unit": "/séance",
+      "description": "Idéal pour découvrir ou pour une séance ponctuelle.",
+      "cta": "Réserver une séance"
+    },
+    "monthly": {
+      "name": "Abonnement mensuel",
+      "price": "€160",
+      "unit": "/mois",
+      "sessions": "4 séances / mois",
+      "savings": "Économisez 20 € / mois",
+      "description": "Le meilleur rapport pour progresser régulièrement.",
+      "cta": "S'abonner"
+    }
+  },
+  "forCoaches": {
+    "title": "Pour les coachs",
+    "subtitle": "Rejoignez la communauté SwimAI et développez votre activité.",
+    "bullets": {
+      "b1": "Fixez vos propres horaires",
+      "b2": "Touchez plus d'élèves près de chez vous",
+      "b3": "Encaissez vos paiements en toute sécurité"
+    },
+    "cta": "Devenir coach"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "votre@email.com",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "••••••••",
+      "submitCta": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "signupLink": "Créer un compte"
+    },
+    "signup": {
+      "title": "Créer votre compte",
+      "subtitle": "Rejoignez SwimAI et commencez à progresser.",
+      "clientOption": "Je suis un client",
+      "clientDescription": "Trouvez le coach idéal et progressez plus vite.",
+      "coachOption": "Je suis un coach",
+      "coachDescription": "Développez votre activité et touchez plus d'élèves.",
+      "client": {
+        "title": "Créer un compte client",
+        "subtitle": "Rejoignez SwimAI et réservez votre premier coach.",
+        "nameLabel": "Nom complet",
+        "namePlaceholder": "Votre nom",
+        "emailLabel": "Adresse e-mail",
+        "emailPlaceholder": "votre@email.com",
+        "passwordLabel": "Mot de passe",
+        "passwordPlaceholder": "Créez un mot de passe",
+        "submitCta": "Créer mon compte"
+      },
+      "coach": {
+        "title": "Devenir coach SwimAI",
+        "subtitle": "Rejoignez la communauté et développez votre activité.",
+        "nameLabel": "Nom complet",
+        "namePlaceholder": "Votre nom",
+        "emailLabel": "Adresse e-mail",
+        "emailPlaceholder": "votre@email.com",
+        "passwordLabel": "Mot de passe",
+        "passwordPlaceholder": "Créez un mot de passe",
+        "submitCta": "Devenir coach"
+      }
+    }
+  },
+  "onboarding": {
+    "step": {
+      "of": "Étape {current} sur {total}"
+    },
+    "client": {
+      "goals": {
+        "title": "Quels sont vos objectifs ?",
+        "subtitle": "Sélectionnez l'objectif qui vous correspond le mieux.",
+        "learnToSwim": "Apprendre à nager",
+        "improveTechnique": "Améliorer ma technique",
+        "trainCompetition": "Préparer une compétition",
+        "fitness": "Remise en forme"
+      },
+      "location": {
+        "title": "Où êtes-vous situé ?",
+        "subtitle": "Pour trouver les coachs près de chez vous.",
+        "locationLabel": "Ville ou région",
+        "locationPlaceholder": "Ex : Paris, Lyon, Marseille…",
+        "levelLabel": "Niveau actuel",
+        "levelBeginner": "Débutant",
+        "levelIntermediate": "Intermédiaire",
+        "levelAdvanced": "Avancé",
+        "continue": "Continuer"
+      },
+      "done": {
+        "title": "Tout est prêt !",
+        "subtitle": "Vous êtes inscrit, {name}. Prêt à trouver votre coach ?",
+        "cta": "Trouver un coach"
+      }
+    },
+    "coach": {
+      "specialty": {
+        "title": "Quelle est votre spécialité ?",
+        "subtitle": "Sélectionnez une ou plusieurs disciplines dans lesquelles vous êtes certifié.",
+        "continue": "Continuer",
+        "freestyle": "Freestyle",
+        "openWater": "Eau libre",
+        "butterfly": "Papillon",
+        "competition": "Compétition"
+      },
+      "profile": {
+        "title": "Parlez-nous de vous",
+        "subtitle": "Présentez votre parcours et votre approche.",
+        "bioLabel": "Bio",
+        "bioPlaceholder": "Décrivez votre expérience, vos diplômes, votre philosophie d'enseignement…",
+        "cityLabel": "Ville",
+        "cityPlaceholder": "Ex : Paris, Marseille…",
+        "priceLabel": "Tarif par séance",
+        "priceUnit": "€ / séance",
+        "continue": "Continuer"
+      },
+      "availability": {
+        "title": "Quand êtes-vous disponible ?",
+        "subtitle": "Sélectionnez les jours où vous pouvez enseigner.",
+        "continue": "Continuer",
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mer",
+        "thu": "Jeu",
+        "fri": "Ven",
+        "sat": "Sam",
+        "sun": "Dim"
+      },
+      "done": {
+        "title": "Votre profil est prêt !",
+        "subtitle": "Tout est configuré, {name}. Les clients peuvent désormais vous trouver.",
+        "cta": "Voir mon tableau de bord"
+      }
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "home": "Accueil",
+      "bookings": "Réservations",
+      "messages": "Messages",
+      "settings": "Paramètres",
+      "profile": "Mon profil",
+      "schedule": "Disponibilités",
+      "logout": "Déconnexion",
+      "roleClient": "Client",
+      "roleCoach": "Coach"
+    },
+    "client": {
+      "home": { "title": "Tableau de bord" },
+      "bookings": { "title": "Mes réservations" },
+      "messages": { "title": "Messages" },
+      "settings": { "title": "Paramètres" }
+    },
+    "coach": {
+      "home": { "title": "Tableau de bord" },
+      "profile": { "title": "Mon profil" },
+      "schedule": { "title": "Disponibilités" },
+      "bookings": { "title": "Réservations" },
+      "settings": { "title": "Paramètres" }
+    }
+  }
+}

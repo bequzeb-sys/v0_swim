@@ -1,8 +1,8 @@
 import { MessageCircle, ChevronRight } from "lucide-react"
-import { content } from "@/lib/content"
+import { useTranslations } from "next-intl"
 
 export function FooterCTA() {
-  const c = content.footer
+  const t = useTranslations("footer")
 
   return (
     <section className="relative px-6 pb-12 pt-4">
@@ -11,13 +11,13 @@ export function FooterCTA() {
           <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-teal-accent shadow-lg shadow-teal-accent/20">
             <MessageCircle className="size-6" />
           </span>
-          <p className="text-base text-white sm:text-lg">{c.text}</p>
+          <p className="text-base text-white sm:text-lg">{t("text")}</p>
         </div>
         <a
-          href="#"
+          href="#search"
           className="flex shrink-0 items-center gap-1 text-lg font-bold text-teal-accent transition-colors hover:text-teal-accent-light"
         >
-          {c.cta}
+          {t("cta")}
           <ChevronRight className="size-5" />
         </a>
       </div>
