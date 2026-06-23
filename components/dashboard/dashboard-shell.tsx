@@ -37,14 +37,14 @@ const COACH_NAV = [
 
 const NAV_FADE = {
   initial: { opacity: 0, x: -10 },
-  animate: { opacity: 1, x: 0, transition: { duration: 0.18, ease: "easeOut" } },
-  exit: { opacity: 0, x: -8, transition: { duration: 0.12, ease: "easeIn" } },
-}
+  animate: { opacity: 1, x: 0, transition: { duration: 0.18, ease: "easeOut" as const } },
+  exit: { opacity: 0, x: -8, transition: { duration: 0.12, ease: "easeIn" as const } },
+} as const
 
 const SIDEBAR_VARIANTS = {
-  hidden: { x: "-100%", transition: { duration: 0.28, ease: "easeInOut" } },
-  visible: { x: 0, transition: { duration: 0.28, ease: "easeInOut" } },
-}
+  hidden: { x: "-100%", transition: { duration: 0.28, ease: "easeInOut" as const } },
+  visible: { x: 0, transition: { duration: 0.28, ease: "easeInOut" as const } },
+} as const
 
 interface DashboardShellProps {
   children: React.ReactNode

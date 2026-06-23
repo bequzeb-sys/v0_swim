@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
-import Link from "@/i18n/navigation"
+import { Link } from "@/i18n/navigation"
 import { coaches } from "@/lib/coaches"
 
 interface Props {

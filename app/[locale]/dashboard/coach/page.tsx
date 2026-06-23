@@ -292,7 +292,7 @@ export default async function CoachDashboardPage({ params }: Props) {
                     <td className="py-4 pr-4">
                       <span className={`rounded-full border px-2 py-0.5 text-xs ${typeClass}`}>
                         {session.type === "group"
-                          ? t("sessionTypeGroup", { count: session.groupSize })
+                          ? t("sessionTypeGroup", { count: session.groupSize ?? 0 })
                           : t("sessionTypeIndividual")}
                       </span>
                     </td>
@@ -317,7 +317,7 @@ export default async function CoachDashboardPage({ params }: Props) {
 
 interface PendingRequestRowProps {
   req: PendingRequest
-  t: ReturnType<typeof useTranslations>
+  t: (key: string) => string
 }
 
 function PendingRequestRow({ req, t }: PendingRequestRowProps) {

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { Plus } from "lucide-react"
 
 interface TimeSlot {
@@ -23,6 +23,7 @@ const TIME_SUGGESTIONS = [
 ]
 
 export default function CoachSchedulePage() {
+  const locale = useLocale()
   const t = useTranslations("dashboardCoach")
 
   const [slots, setSlots] = useState<TimeSlot[]>([
@@ -48,7 +49,7 @@ export default function CoachSchedulePage() {
     setSlots((prev) => prev.filter((s) => s.id !== id))
   }
 
-  const days = t.locale === "en" ? DAYS_EN : DAYS_FR
+  const days = locale === "en" ? DAYS_EN : DAYS_FR
 
   return (
     <div className="flex flex-col gap-6 p-6 lg:p-8">

@@ -78,7 +78,7 @@ export function ProgressChart({ locale }: ProgressChartProps) {
                 color: "#fff",
               }}
               itemStyle={{ color: "#2dd4bf" }}
-              formatter={(val: number) => [val, "Score"]}
+              formatter={(val) => [val ?? 0, "Score"]}
               labelStyle={{ color: "#a8b8d8" }}
             />
             <Line

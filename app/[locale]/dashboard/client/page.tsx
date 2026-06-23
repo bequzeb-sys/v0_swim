@@ -279,7 +279,7 @@ export default async function ClientDashboardPage({ params }: Props) {
 
 interface BookingRowProps {
   booking: Booking
-  t: ReturnType<typeof useTranslations>
+  t: (key: string, opts?: Record<string, string | number | Date>) => string
 }
 
 function BookingRow({ booking, t }: BookingRowProps) {
@@ -287,7 +287,7 @@ function BookingRow({ booking, t }: BookingRowProps) {
     ? "border-blue-accent/40 bg-blue-accent/10 text-blue-accent"
     : "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
   const typeLabel = booking.type === "group"
-    ? t("sessionTypeGroup", { count: booking.groupSize })
+    ? t("sessionTypeGroup", { count: booking.groupSize ?? 0 })
     : t("sessionTypeIndividual")
   const statusClass = booking.status === "confirmed"
     ? "border-teal-accent/40 text-teal-accent"

@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 
 interface RoleCardProps {
-  href: string
+  href: string | { pathname: string; query?: Record<string, string> }
   icon: React.ReactNode
   title: string
   description: string
