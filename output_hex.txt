@@ -1,0 +1,326 @@
+0000	23 20 53 77 69 6d 41 49  20 e2 80 94 20 50 72 6f   # SwimAI ... Pro
+0010	6a 65 63 74 20 52 75 6c  65 73 0d 0a 0d 0a 23 23   ject Rules....##
+0020	20 53 74 61 63 6b 0d 0a  2d 20 4e 65 78 74 2e 6a    Stack..- Next.j
+0030	73 20 31 36 20 28 41 70  70 20 52 6f 75 74 65 72   s 16 (App Router
+0040	29 2c 20 52 65 61 63 74  20 31 39 2c 20 54 79 70   ), React 19, Typ
+0050	65 53 63 72 69 70 74 2c  20 54 61 69 6c 77 69 6e   eScript, Tailwin
+0060	64 20 43 53 53 20 76 34  2c 20 73 68 61 64 63 6e   d CSS v4, shadcn
+0070	2f 75 69 0d 0a 2d 20 50  61 63 6b 61 67 65 20 6d   /ui..- Package m
+0080	61 6e 61 67 65 72 3a 20  70 6e 70 6d 20 6f 6e 6c   anager: pnpm onl
+0090	79 2e 20 4e 65 76 65 72  20 73 75 67 67 65 73 74   y. Never suggest
+00a0	20 6e 70 6d 2f 79 61 72  6e 20 63 6f 6d 6d 61 6e    npm/yarn comman
+00b0	64 73 20 6f 72 20 67 65  6e 65 72 61 74 65 0d 0a   ds or generate..
+00c0	20 20 70 61 63 6b 61 67  65 2d 6c 6f 63 6b 2e 6a     package-lock.j
+00d0	73 6f 6e 2f 79 61 72 6e  2e 6c 6f 63 6b 2e 0d 0a   son/yarn.lock...
+00e0	2d 20 49 63 6f 6e 73 3a  20 6c 75 63 69 64 65 2d   - Icons: lucide-
+00f0	72 65 61 63 74 20 6f 6e  6c 79 2e 0d 0a 2d 20 43   react only...- C
+0100	53 53 3a 20 54 61 69 6c  77 69 6e 64 20 76 34 20   SS: Tailwind v4 
+0110	77 69 74 68 20 60 40 69  6d 70 6f 72 74 20 27 74   with `@import 't
+0120	61 69 6c 77 69 6e 64 63  73 73 27 60 20 2b 20 60   ailwindcss'` + `
+0130	40 74 61 69 6c 77 69 6e  64 63 73 73 2f 70 6f 73   @tailwindcss/pos
+0140	74 63 73 73 60 0d 0a 20  20 50 6f 73 74 43 53 53   tcss`..  PostCSS
+0150	20 70 6c 75 67 69 6e 2e  20 4e 6f 20 74 61 69 6c    plugin. No tail
+0160	77 69 6e 64 2e 63 6f 6e  66 69 67 2e 74 73 20 e2   wind.config.ts .
+0170	80 94 20 64 65 73 69 67  6e 20 74 6f 6b 65 6e 73   .. design tokens
+0180	20 6c 69 76 65 20 69 6e  20 60 61 70 70 2f 67 6c    live in `app/gl
+0190	6f 62 61 6c 73 2e 63 73  73 60 2e 0d 0a 0d 0a 23   obals.css`.....#
+01a0	23 20 43 6f 6e 74 65 6e  74 20 26 20 69 31 38 6e   # Content & i18n
+01b0	0d 0a 2d 20 41 6c 6c 20  75 73 65 72 2d 76 69 73   ..- All user-vis
+01c0	69 62 6c 65 20 63 6f 70  79 20 6c 69 76 65 73 20   ible copy lives 
+01d0	69 6e 20 60 6d 65 73 73  61 67 65 73 2f 66 72 2e   in `messages/fr.
+01e0	6a 73 6f 6e 60 20 28 70  72 69 6d 61 72 79 29 20   json` (primary) 
+01f0	61 6e 64 0d 0a 20 20 60  6d 65 73 73 61 67 65 73   and..  `messages
+0200	2f 65 6e 2e 6a 73 6f 6e  60 20 28 73 65 63 6f 6e   /en.json` (secon
+0210	64 61 72 79 29 2c 20 61  63 63 65 73 73 65 64 20   dary), accessed 
+0220	76 69 61 20 6e 65 78 74  2d 69 6e 74 6c 27 73 20   via next-intl's 
+0230	60 75 73 65 54 72 61 6e  73 6c 61 74 69 6f 6e 73   `useTranslations
+0240	28 29 60 0d 0a 20 20 68  6f 6f 6b 2e 20 4e 65 76   ()`..  hook. Nev
+0250	65 72 20 68 61 72 64 63  6f 64 65 20 75 73 65 72   er hardcode user
+0260	2d 76 69 73 69 62 6c 65  20 73 74 72 69 6e 67 73   -visible strings
+0270	20 64 69 72 65 63 74 6c  79 20 69 6e 20 4a 53 58    directly in JSX
+0280	2e 0d 0a 2d 20 60 6c 69  62 2f 63 6f 6e 74 65 6e   ...- `lib/conten
+0290	74 2e 74 73 60 20 69 73  20 64 65 70 72 65 63 61   t.ts` is depreca
+02a0	74 65 64 2f 75 6e 75 73  65 64 20 e2 80 94 20 64   ted/unused ... d
+02b0	6f 20 6e 6f 74 20 61 64  64 20 6e 65 77 20 63 6f   o not add new co
+02c0	70 79 20 74 68 65 72 65  2c 20 61 6e 64 20 66 6c   py there, and fl
+02d0	61 67 0d 0a 20 20 69 74  20 66 6f 72 20 72 65 6d   ag..  it for rem
+02e0	6f 76 61 6c 20 69 66 20  79 6f 75 20 65 6e 63 6f   oval if you enco
+02f0	75 6e 74 65 72 20 69 74  2e 0d 0a 2d 20 46 72 65   unter it...- Fre
+0300	6e 63 68 20 69 73 20 74  68 65 20 70 72 69 6d 61   nch is the prima
+0310	72 79 2f 64 65 66 61 75  6c 74 20 6c 6f 63 61 6c   ry/default local
+0320	65 2e 20 45 76 65 72 79  20 6e 65 77 20 73 74 72   e. Every new str
+0330	69 6e 67 20 61 64 64 65  64 20 74 6f 20 60 66 72   ing added to `fr
+0340	2e 6a 73 6f 6e 60 0d 0a  20 20 6d 75 73 74 20 68   .json`..  must h
+0350	61 76 65 20 61 20 6d 61  74 63 68 69 6e 67 20 6b   ave a matching k
+0360	65 79 20 61 64 64 65 64  20 74 6f 20 60 65 6e 2e   ey added to `en.
+0370	6a 73 6f 6e 60 20 69 6e  20 74 68 65 20 73 61 6d   json` in the sam
+0380	65 20 63 68 61 6e 67 65  2e 0d 0a 2d 20 4e 65 76   e change...- Nev
+0390	65 72 20 69 6e 76 65 6e  74 20 74 72 61 6e 73 6c   er invent transl
+03a0	61 74 69 6f 6e 73 20 73  69 6c 65 6e 74 6c 79 20   ations silently 
+03b0	e2 80 94 20 69 66 20 75  6e 73 75 72 65 20 6f 66   ... if unsure of
+03c0	20 61 6e 20 45 6e 67 6c  69 73 68 20 70 68 72 61    an English phra
+03d0	73 69 6e 67 2c 20 66 6c  61 67 0d 0a 20 20 69 74   sing, flag..  it
+03e0	20 72 61 74 68 65 72 20  74 68 61 6e 20 67 75 65    rather than gue
+03f0	73 73 69 6e 67 2e 0d 0a  0d 0a 23 23 20 43 6f 6d   ssing.....## Com
+0400	70 6f 6e 65 6e 74 73 0d  0a 2d 20 4f 6e 65 20 63   ponents..- One c
+0410	6f 6d 70 6f 6e 65 6e 74  20 3d 20 6f 6e 65 20 66   omponent = one f
+0420	69 6c 65 2c 20 50 61 73  63 61 6c 43 61 73 65 20   ile, PascalCase 
+0430	66 69 6c 65 6e 61 6d 65  20 6d 61 74 63 68 69 6e   filename matchin
+0440	67 20 74 68 65 20 64 65  66 61 75 6c 74 20 65 78   g the default ex
+0450	70 6f 72 74 2e 0d 0a 2d  20 46 75 6e 63 74 69 6f   port...- Functio
+0460	6e 61 6c 20 63 6f 6d 70  6f 6e 65 6e 74 73 20 6f   nal components o
+0470	6e 6c 79 2c 20 74 79 70  65 64 20 70 72 6f 70 73   nly, typed props
+0480	20 76 69 61 20 61 6e 20  65 78 70 6c 69 63 69 74    via an explicit
+0490	20 60 69 6e 74 65 72 66  61 63 65 60 20 28 6e 6f    `interface` (no
+04a0	74 20 69 6e 6c 69 6e 65  0d 0a 20 20 6f 62 6a 65   t inline..  obje
+04b0	63 74 20 74 79 70 65 73  29 2c 20 65 2e 67 2e 20   ct types), e.g. 
+04c0	60 69 6e 74 65 72 66 61  63 65 20 43 6f 61 63 68   `interface Coach
+04d0	43 61 72 64 50 72 6f 70  73 20 7b 20 63 6f 61 63   CardProps { coac
+04e0	68 3a 20 43 6f 61 63 68  20 7d 60 2e 0d 0a 2d 20   h: Coach }`...- 
+04f0	4e 6f 20 69 6e 6c 69 6e  65 20 60 73 74 79 6c 65   No inline `style
+0500	3d 7b 7b 2e 2e 2e 7d 7d  60 20 6f 62 6a 65 63 74   ={{...}}` object
+0510	73 20 65 78 63 65 70 74  20 66 6f 72 20 74 68 69   s except for thi
+0520	6e 67 73 20 54 61 69 6c  77 69 6e 64 20 67 65 6e   ngs Tailwind gen
+0530	75 69 6e 65 6c 79 20 63  61 6e 6e 6f 74 0d 0a 20   uinely cannot.. 
+0540	20 65 78 70 72 65 73 73  20 28 65 2e 67 2e 20 64    express (e.g. d
+0550	79 6e 61 6d 69 63 20 62  61 63 6b 67 72 6f 75 6e   ynamic backgroun
+0560	64 2d 69 6d 61 67 65 20  55 52 4c 73 2c 20 67 72   d-image URLs, gr
+0570	61 64 69 65 6e 74 20 73  74 6f 70 73 20 77 69 74   adient stops wit
+0580	68 20 61 6c 70 68 61 20  76 61 6c 75 65 73 29 2e   h alpha values).
+0590	0d 0a 20 20 45 76 65 72  79 74 68 69 6e 67 20 65   ..  Everything e
+05a0	6c 73 65 20 6d 75 73 74  20 75 73 65 20 54 61 69   lse must use Tai
+05b0	6c 77 69 6e 64 20 75 74  69 6c 69 74 79 20 63 6c   lwind utility cl
+05c0	61 73 73 65 73 2e 0d 0a  2d 20 4e 6f 20 72 61 77   asses...- No raw
+05d0	20 68 65 78 2f 6f 6b 6c  63 68 20 63 6f 6c 6f 72    hex/oklch color
+05e0	73 20 69 6e 20 63 6f 6d  70 6f 6e 65 6e 74 20 66   s in component f
+05f0	69 6c 65 73 2e 20 41 6c  6c 20 63 6f 6c 6f 72 73   iles. All colors
+0600	20 6d 75 73 74 20 72 65  66 65 72 65 6e 63 65 20    must reference 
+0610	74 68 65 0d 0a 20 20 64  65 73 69 67 6e 20 74 6f   the..  design to
+0620	6b 65 6e 73 20 64 65 66  69 6e 65 64 20 69 6e 20   kens defined in 
+0630	60 61 70 70 2f 67 6c 6f  62 61 6c 73 2e 63 73 73   `app/globals.css
+0640	60 20 28 65 2e 67 2e 20  60 62 67 2d 74 65 61 6c   ` (e.g. `bg-teal
+0650	2d 61 63 63 65 6e 74 60  2c 0d 0a 20 20 60 74 65   -accent`,..  `te
+0660	78 74 2d 74 65 78 74 2d  73 65 63 6f 6e 64 61 72   xt-text-secondar
+0670	79 60 2c 20 60 66 69 6c  6c 2d 73 74 61 72 2d 67   y`, `fill-star-g
+0680	6f 6c 64 60 29 2e 0d 0a  20 20 2d 20 54 68 69 73   old`)...  - This
+0690	20 72 75 6c 65 20 61 70  70 6c 69 65 73 20 74 6f    rule applies to
+06a0	20 60 2e 74 73 78 60 20  63 6f 6d 70 6f 6e 65 6e    `.tsx` componen
+06b0	74 20 66 69 6c 65 73 20  61 6e 64 20 61 6e 79 20   t files and any 
+06c0	6f 74 68 65 72 20 6e 6f  6e 2d 43 53 53 20 66 69   other non-CSS fi
+06d0	6c 65 73 2e 0d 0a 20 20  2d 20 60 61 70 70 2f 67   les...  - `app/g
+06e0	6c 6f 62 61 6c 73 2e 63  73 73 60 20 69 73 20 74   lobals.css` is t
+06f0	68 65 20 74 6f 6b 65 6e  20 73 6f 75 72 63 65 20   he token source 
+0700	6f 66 20 74 72 75 74 68  20 61 6e 64 20 69 73 20   of truth and is 
+0710	65 78 70 65 63 74 65 64  20 74 6f 20 63 6f 6e 74   expected to cont
+0720	61 69 6e 0d 0a 20 20 20  20 72 61 77 20 68 65 78   ain..    raw hex
+0730	2f 6f 6b 6c 63 68 20 76  61 6c 75 65 73 20 69 6e   /oklch values in
+0740	20 69 74 73 20 60 3a 72  6f 6f 74 60 20 61 6e 64    its `:root` and
+0750	20 60 2e 64 61 72 6b 60  20 76 61 72 69 61 62 6c    `.dark` variabl
+0760	65 20 62 6c 6f 63 6b 73  20 e2 80 94 0d 0a 20 20   e blocks .....  
+0770	20 20 74 68 61 74 20 69  73 20 63 6f 72 72 65 63     that is correc
+0780	74 2c 20 6e 6f 74 20 61  20 76 69 6f 6c 61 74 69   t, not a violati
+0790	6f 6e 2e 0d 0a 2d 20 53  68 61 72 65 64 20 74 79   on...- Shared ty
+07a0	70 65 73 20 28 60 43 6f  61 63 68 60 2c 20 60 4e   pes (`Coach`, `N
+07b0	61 76 4c 69 6e 6b 60 2c  20 65 74 63 2e 29 20 6c   avLink`, etc.) l
+07c0	69 76 65 20 69 6e 20 60  2f 74 79 70 65 73 60 2c   ive in `/types`,
+07d0	20 6e 65 76 65 72 0d 0a  20 20 72 65 2d 64 65 63    never..  re-dec
+07e0	6c 61 72 65 64 20 69 6e  6c 69 6e 65 20 69 6e 20   lared inline in 
+07f0	6d 75 6c 74 69 70 6c 65  20 63 6f 6d 70 6f 6e 65   multiple compone
+0800	6e 74 73 2e 0d 0a 0d 0a  23 23 20 52 6f 75 74 69   nts.....## Routi
+0810	6e 67 0d 0a 2d 20 45 76  65 72 79 20 60 3c 4c 69   ng..- Every `<Li
+0820	6e 6b 3e 60 20 6f 72 20  62 75 74 74 6f 6e 20 74   nk>` or button t
+0830	68 61 74 20 69 6d 70 6c  69 65 73 20 6e 61 76 69   hat implies navi
+0840	67 61 74 69 6f 6e 20 6d  75 73 74 20 70 6f 69 6e   gation must poin
+0850	74 20 74 6f 20 61 20 72  65 61 6c 20 72 6f 75 74   t to a real rout
+0860	65 20 e2 80 94 0d 0a 20  20 6e 65 76 65 72 20 60   e .....  never `
+0870	68 72 65 66 3d 22 23 22  60 20 6f 72 20 61 6e 20   href="#"` or an 
+0880	65 6d 70 74 79 20 60 6f  6e 43 6c 69 63 6b 60 2e   empty `onClick`.
+0890	20 49 66 20 74 68 65 20  64 65 73 74 69 6e 61 74    If the destinat
+08a0	69 6f 6e 20 70 61 67 65  20 64 6f 65 73 6e 27 74   ion page doesn't
+08b0	20 65 78 69 73 74 0d 0a  20 20 79 65 74 2c 20 63    exist..  yet, c
+08c0	72 65 61 74 65 20 61 20  6d 69 6e 69 6d 61 6c 20   reate a minimal 
+08d0	73 74 75 62 20 70 61 67  65 20 72 61 74 68 65 72   stub page rather
+08e0	20 74 68 61 6e 20 6c 65  61 76 69 6e 67 20 61 20    than leaving a 
+08f0	64 65 61 64 20 6c 69 6e  6b 2e 0d 0a 2d 20 52 6f   dead link...- Ro
+0900	75 74 65 73 20 66 6f 6c  6c 6f 77 20 74 68 65 20   utes follow the 
+0910	6c 6f 63 61 6c 65 2d 70  72 65 66 69 78 65 64 20   locale-prefixed 
+0920	73 74 72 75 63 74 75 72  65 3a 20 60 2f 5b 6c 6f   structure: `/[lo
+0930	63 61 6c 65 5d 2f 70 61  67 65 2d 6e 61 6d 65 60   cale]/page-name`
+0940	2e 0d 0a 2d 20 2a 2a 44  6f 63 75 6d 65 6e 74 65   ...- **Documente
+0950	64 20 65 78 63 65 70 74  69 6f 6e 73 3a 2a 2a 20   d exceptions:** 
+0960	74 68 65 20 22 53 75 62  73 63 72 69 62 65 22 20   the "Subscribe" 
+0970	28 53 27 61 62 6f 6e 6e  65 72 29 20 61 6e 64 20   (S'abonner) and 
+0980	22 42 65 63 6f 6d 65 20  61 20 63 6f 61 63 68 22   "Become a coach"
+0990	0d 0a 20 20 28 44 65 76  65 6e 69 72 20 63 6f 61   ..  (Devenir coa
+09a0	63 68 29 20 62 75 74 74  6f 6e 73 20 61 72 65 20   ch) buttons are 
+09b0	69 6e 74 65 6e 74 69 6f  6e 61 6c 6c 79 20 60 68   intentionally `h
+09c0	72 65 66 3d 22 23 22 60  20 70 65 6e 64 69 6e 67   ref="#"` pending
+09d0	20 72 65 61 6c 20 70 61  79 6d 65 6e 74 2f 73 69    real payment/si
+09e0	67 6e 75 70 0d 0a 20 20  69 6e 66 72 61 73 74 72   gnup..  infrastr
+09f0	75 63 74 75 72 65 20 e2  80 94 20 74 68 69 73 20   ucture ... this 
+0a00	69 73 20 61 20 6b 6e 6f  77 6e 2c 20 61 63 63 65   is a known, acce
+0a10	70 74 65 64 20 67 61 70  2c 20 6e 6f 74 20 61 6e   pted gap, not an
+0a20	20 6f 76 65 72 73 69 67  68 74 2e 20 41 6e 79 20    oversight. Any 
+0a30	4e 45 57 0d 0a 20 20 60  68 72 65 66 3d 22 23 22   NEW..  `href="#"
+0a40	60 20 6d 75 73 74 20 62  65 20 65 78 70 6c 69 63   ` must be explic
+0a50	69 74 6c 79 20 66 6c 61  67 67 65 64 20 69 6e 20   itly flagged in 
+0a60	61 20 63 6f 6d 6d 65 6e  74 20 72 61 74 68 65 72   a comment rather
+0a70	20 74 68 61 6e 20 6c 65  66 74 20 73 69 6c 65 6e    than left silen
+0a80	74 6c 79 2e 0d 0a 0d 0a  23 23 20 49 6d 61 67 65   tly.....## Image
+0a90	73 0d 0a 2d 20 41 6c 6c  20 72 61 73 74 65 72 20   s..- All raster 
+0aa0	69 6d 61 67 65 73 20 67  6f 20 74 68 72 6f 75 67   images go throug
+0ab0	68 20 60 6e 65 78 74 2f  69 6d 61 67 65 60 20 28   h `next/image` (
+0ac0	60 3c 49 6d 61 67 65 20  2f 3e 60 29 20 77 69 74   `<Image />`) wit
+0ad0	68 20 65 78 70 6c 69 63  69 74 20 77 69 64 74 68   h explicit width
+0ae0	2c 0d 0a 20 20 68 65 69  67 68 74 2c 20 61 6e 64   ,..  height, and
+0af0	20 61 6c 74 20 74 65 78  74 20 e2 80 94 20 6e 65    alt text ... ne
+0b00	76 65 72 20 61 20 62 61  72 65 20 60 3c 69 6d 67   ver a bare `<img
+0b10	3e 60 20 74 61 67 2e 0d  0a 2d 20 44 65 63 6f 72   >` tag...- Decor
+0b20	61 74 69 76 65 2f 62 61  63 6b 67 72 6f 75 6e 64   ative/background
+0b30	20 69 6d 61 67 65 73 20  74 68 61 74 20 6d 75 73    images that mus
+0b40	74 20 62 65 20 43 53 53  20 60 62 61 63 6b 67 72   t be CSS `backgr
+0b50	6f 75 6e 64 2d 69 6d 61  67 65 60 20 28 6e 6f 74   ound-image` (not
+0b60	20 60 3c 49 6d 61 67 65  20 2f 3e 60 29 0d 0a 20    `<Image />`).. 
+0b70	20 73 68 6f 75 6c 64 20  62 65 20 6d 61 72 6b 65    should be marke
+0b80	64 20 60 61 72 69 61 2d  68 69 64 64 65 6e 3d 22   d `aria-hidden="
+0b90	74 72 75 65 22 60 20 61  6e 64 20 75 73 65 20 74   true"` and use t
+0ba0	68 65 20 6f 70 74 69 6d  69 7a 65 64 20 57 65 62   he optimized Web
+0bb0	50 20 76 65 72 73 69 6f  6e 20 6f 66 20 74 68 65   P version of the
+0bc0	0d 0a 20 20 61 73 73 65  74 20 28 6e 6f 74 20 50   ..  asset (not P
+0bd0	4e 47 2f 4a 50 47 29 20  e2 80 94 20 73 65 65 20   NG/JPG) ... see 
+0be0	60 70 75 62 6c 69 63 2f  75 6e 64 65 72 77 61 74   `public/underwat
+0bf0	65 72 2d 68 65 72 6f 2e  77 65 62 70 60 20 61 73   er-hero.webp` as
+0c00	20 74 68 65 20 65 78 69  73 74 69 6e 67 20 70 61    the existing pa
+0c10	74 74 65 72 6e 2e 0d 0a  2d 20 4e 65 77 20 69 6d   ttern...- New im
+0c20	61 67 65 20 61 73 73 65  74 73 20 6d 75 73 74 20   age assets must 
+0c30	62 65 20 63 6f 6d 70 72  65 73 73 65 64 2f 63 6f   be compressed/co
+0c40	6e 76 65 72 74 65 64 20  74 6f 20 57 65 62 50 20   nverted to WebP 
+0c50	62 65 66 6f 72 65 20 62  65 69 6e 67 20 61 64 64   before being add
+0c60	65 64 20 74 6f 0d 0a 20  20 60 2f 70 75 62 6c 69   ed to..  `/publi
+0c70	63 60 2e 20 46 6c 61 67  20 61 6e 79 20 61 73 73   c`. Flag any ass
+0c80	65 74 20 6f 76 65 72 20  7e 32 30 30 20 4b 42 20   et over ~200 KB 
+0c90	66 6f 72 20 72 65 76 69  65 77 20 62 65 66 6f 72   for review befor
+0ca0	65 20 63 6f 6d 6d 69 74  74 69 6e 67 2e 0d 0a 0d   e committing....
+0cb0	0a 23 23 20 41 63 63 65  73 73 69 62 69 6c 69 74   .## Accessibilit
+0cc0	79 0d 0a 2d 20 53 65 6d  61 6e 74 69 63 20 48 54   y..- Semantic HT
+0cd0	4d 4c 20 72 65 71 75 69  72 65 64 3a 20 60 3c 68   ML required: `<h
+0ce0	65 61 64 65 72 3e 60 2c  20 60 3c 6e 61 76 3e 60   eader>`, `<nav>`
+0cf0	2c 20 60 3c 6d 61 69 6e  3e 60 2c 20 60 3c 73 65   , `<main>`, `<se
+0d00	63 74 69 6f 6e 3e 60 2c  20 60 3c 66 6f 6f 74 65   ction>`, `<foote
+0d10	72 3e 60 0d 0a 20 20 e2  80 94 20 6e 6f 74 20 67   r>`..  ... not g
+0d20	65 6e 65 72 69 63 20 60  3c 64 69 76 3e 60 20 73   eneric `<div>` s
+0d30	6f 75 70 20 66 6f 72 20  73 74 72 75 63 74 75 72   oup for structur
+0d40	61 6c 20 65 6c 65 6d 65  6e 74 73 2e 0d 0a 2d 20   al elements...- 
+0d50	41 6c 6c 20 69 6e 74 65  72 61 63 74 69 76 65 20   All interactive 
+0d60	65 6c 65 6d 65 6e 74 73  20 6d 75 73 74 20 62 65   elements must be
+0d70	20 6b 65 79 62 6f 61 72  64 2d 72 65 61 63 68 61    keyboard-reacha
+0d80	62 6c 65 20 61 6e 64 20  68 61 76 65 20 76 69 73   ble and have vis
+0d90	69 62 6c 65 20 66 6f 63  75 73 0d 0a 20 20 73 74   ible focus..  st
+0da0	61 74 65 73 2e 0d 0a 2d  20 44 65 63 6f 72 61 74   ates...- Decorat
+0db0	69 76 65 2d 6f 6e 6c 79  20 65 6c 65 6d 65 6e 74   ive-only element
+0dc0	73 20 28 62 61 63 6b 67  72 6f 75 6e 64 20 69 6d   s (background im
+0dd0	61 67 65 73 2c 20 69 63  6f 6e 2d 6f 6e 6c 79 20   ages, icon-only 
+0de0	66 6c 6f 75 72 69 73 68  65 73 29 20 67 65 74 0d   flourishes) get.
+0df0	0a 20 20 60 61 72 69 61  2d 68 69 64 64 65 6e 3d   .  `aria-hidden=
+0e00	22 74 72 75 65 22 60 2e  0d 0a 0d 0a 23 23 20 45   "true"`.....## E
+0e10	73 74 61 62 6c 69 73 68  65 64 20 50 61 74 74 65   stablished Patte
+0e20	72 6e 73 0d 0a 0d 0a 23  23 23 20 41 6e 69 6d 61   rns....### Anima
+0e30	74 69 6f 6e 73 0d 0a 2d  20 46 72 61 6d 65 72 20   tions..- Framer 
+0e40	4d 6f 74 69 6f 6e 20 69  73 20 75 73 65 64 20 66   Motion is used f
+0e50	6f 72 20 74 68 65 20 64  61 73 68 62 6f 61 72 64   or the dashboard
+0e60	20 73 69 64 65 62 61 72  20 28 6d 6f 74 69 6f 6e    sidebar (motion
+0e70	2e 64 69 76 20 77 69 64  74 68 0d 0a 20 20 74 72   .div width..  tr
+0e80	61 6e 73 69 74 69 6f 6e  73 2c 20 41 6e 69 6d 61   ansitions, Anima
+0e90	74 65 50 72 65 73 65 6e  63 65 20 66 6f 72 20 6c   tePresence for l
+0ea0	61 62 65 6c 20 66 61 64  65 2f 73 6c 69 64 65 29   abel fade/slide)
+0eb0	2e 20 46 6f 6c 6c 6f 77  20 74 68 69 73 20 65 78   . Follow this ex
+0ec0	69 73 74 69 6e 67 0d 0a  20 20 70 61 74 74 65 72   isting..  patter
+0ed0	6e 20 66 6f 72 20 61 6e  79 20 6e 65 77 20 61 6e   n for any new an
+0ee0	69 6d 61 74 65 64 20 55  49 20 e2 80 94 20 64 6f   imated UI ... do
+0ef0	20 6e 6f 74 20 69 6e 74  72 6f 64 75 63 65 20 61    not introduce a
+0f00	20 64 69 66 66 65 72 65  6e 74 20 61 6e 69 6d 61    different anima
+0f10	74 69 6f 6e 0d 0a 20 20  61 70 70 72 6f 61 63 68   tion..  approach
+0f20	20 28 65 2e 67 2e 20 43  53 53 20 6b 65 79 66 72    (e.g. CSS keyfr
+0f30	61 6d 65 20 61 6e 69 6d  61 74 69 6f 6e 73 20 66   ame animations f
+0f40	6f 72 20 73 69 64 65 62  61 72 20 63 6f 6c 6c 61   or sidebar colla
+0f50	70 73 65 2f 65 78 70 61  6e 64 29 2e 0d 0a 0d 0a   pse/expand).....
+0f60	23 23 23 20 44 69 61 6c  6f 67 73 20 2f 20 4d 6f   ### Dialogs / Mo
+0f70	64 61 6c 73 0d 0a 2d 20  55 73 65 20 60 63 6f 6d   dals..- Use `com
+0f80	70 6f 6e 65 6e 74 73 2f  75 69 2f 64 69 61 6c 6f   ponents/ui/dialo
+0f90	67 2e 74 73 78 60 2c 20  77 68 69 63 68 20 77 72   g.tsx`, which wr
+0fa0	61 70 73 20 42 61 73 65  20 55 49 27 73 0d 0a 20   aps Base UI's.. 
+0fb0	20 60 44 69 61 6c 6f 67  2e 52 6f 6f 74 20 2f 20    `Dialog.Root / 
+0fc0	50 6f 72 74 61 6c 20 2f  20 42 61 63 6b 64 72 6f   Portal / Backdro
+0fd0	70 20 2f 20 50 6f 70 75  70 60 2e 20 54 68 69 73   p / Popup`. This
+0fe0	20 69 73 20 4e 4f 54 20  52 61 64 69 78 2e 0d 0a    is NOT Radix...
+0ff0	20 20 44 6f 20 6e 6f 74  20 75 73 65 20 61 20 22     Do not use a "
+1000	50 6f 73 69 74 69 6f 6e  65 72 22 20 41 50 49 20   Positioner" API 
+1010	e2 80 94 20 69 74 20 64  6f 65 73 20 6e 6f 74 20   ... it does not 
+1020	65 78 69 73 74 20 69 6e  20 74 68 69 73 20 73 65   exist in this se
+1030	74 75 70 2e 0d 0a 0d 0a  23 23 23 20 41 75 74 68   tup.....### Auth
+1040	0d 0a 2d 20 60 75 73 65  41 75 74 68 28 29 60 20   ..- `useAuth()` 
+1050	66 72 6f 6d 20 60 6c 69  62 2f 61 75 74 68 2f 61   from `lib/auth/a
+1060	75 74 68 2d 63 6f 6e 74  65 78 74 2e 74 73 78 60   uth-context.tsx`
+1070	20 69 73 20 74 68 65 20  73 69 6e 67 6c 65 20 61    is the single a
+1080	75 74 68 20 73 6f 75 72  63 65 2e 0d 0a 20 20 41   uth source...  A
+1090	6e 79 20 63 6f 6d 70 6f  6e 65 6e 74 20 74 68 61   ny component tha
+10a0	74 20 6e 65 65 64 73 20  74 68 65 20 6c 6f 67 67   t needs the logg
+10b0	65 64 2d 69 6e 20 75 73  65 72 27 73 20 64 61 74   ed-in user's dat
+10c0	61 20 4d 55 53 54 20 62  65 20 61 20 60 27 75 73   a MUST be a `'us
+10d0	65 20 63 6c 69 65 6e 74  27 60 0d 0a 20 20 63 6f   e client'`..  co
+10e0	6d 70 6f 6e 65 6e 74 20  74 68 61 74 20 72 65 61   mponent that rea
+10f0	64 73 20 60 75 73 65 41  75 74 68 28 29 60 20 64   ds `useAuth()` d
+1100	69 72 65 63 74 6c 79 2e  20 4e 65 76 65 72 20 68   irectly. Never h
+1110	61 72 64 63 6f 64 65 20  61 20 70 6c 61 63 65 68   ardcode a placeh
+1120	6f 6c 64 65 72 0d 0a 20  20 6e 61 6d 65 20 6f 72   older..  name or
+1130	20 65 6d 61 69 6c 20 22  66 6f 72 20 6e 6f 77 2e    email "for now.
+1140	22 0d 0a 0d 0a 23 23 23  20 6e 65 78 74 2d 69 6e   "....### next-in
+1150	74 6c 20 41 50 49 20 28  69 6d 70 6f 72 74 61 6e   tl API (importan
+1160	74 20 67 6f 74 63 68 61  73 29 0d 0a 2d 20 60 69   t gotchas)..- `i
+1170	31 38 6e 2f 6e 61 76 69  67 61 74 69 6f 6e 2e 74   18n/navigation.t
+1180	73 60 20 65 78 70 6f 72  74 73 20 60 7b 20 4c 69   s` exports `{ Li
+1190	6e 6b 2c 20 72 65 64 69  72 65 63 74 2c 20 75 73   nk, redirect, us
+11a0	65 52 6f 75 74 65 72 2c  20 75 73 65 50 61 74 68   eRouter, usePath
+11b0	6e 61 6d 65 20 7d 60 0d  0a 20 20 61 73 20 6e 61   name }`..  as na
+11c0	6d 65 64 20 65 78 70 6f  72 74 73 20 6f 6e 6c 79   med exports only
+11d0	20 e2 80 94 20 6e 6f 20  64 65 66 61 75 6c 74 20    ... no default 
+11e0	65 78 70 6f 72 74 2e 20  41 6c 77 61 79 73 20 75   export. Always u
+11f0	73 65 20 60 69 6d 70 6f  72 74 20 7b 20 4c 69 6e   se `import { Lin
+1200	6b 20 7d 20 66 72 6f 6d  20 2e 2e 2e 60 0d 0a 20   k } from ...`.. 
+1210	20 28 6e 65 76 65 72 20  60 69 6d 70 6f 72 74 20    (never `import 
+1220	4c 69 6e 6b 20 66 72 6f  6d 20 2e 2e 2e 60 29 2e   Link from ...`).
+1230	0d 0a 2d 20 60 75 73 65  54 72 61 6e 73 6c 61 74   ..- `useTranslat
+1240	69 6f 6e 73 28 29 60 20  64 6f 65 73 20 6e 6f 74   ions()` does not
+1250	20 65 78 70 6f 73 65 20  61 20 60 2e 6c 6f 63 61    expose a `.loca
+1260	6c 65 60 20 70 72 6f 70  65 72 74 79 2e 20 54 6f   le` property. To
+1270	20 67 65 74 20 74 68 65  20 63 75 72 72 65 6e 74    get the current
+1280	0d 0a 20 20 6c 6f 63 61  6c 65 20 69 6e 20 61 20   ..  locale in a 
+1290	63 6c 69 65 6e 74 20 63  6f 6d 70 6f 6e 65 6e 74   client component
+12a0	2c 20 63 61 6c 6c 20 60  75 73 65 4c 6f 63 61 6c   , call `useLocal
+12b0	65 28 29 60 20 66 72 6f  6d 20 60 6e 65 78 74 2d   e()` from `next-
+12c0	69 6e 74 6c 60 20 73 65  70 61 72 61 74 65 6c 79   intl` separately
+12d0	2e 0d 0a 2d 20 49 6e 20  73 65 72 76 65 72 20 63   ...- In server c
+12e0	6f 6d 70 6f 6e 65 6e 74  73 2c 20 75 73 65 20 60   omponents, use `
+12f0	67 65 74 54 72 61 6e 73  6c 61 74 69 6f 6e 73 60   getTranslations`
+1300	20 66 72 6f 6d 20 60 6e  65 78 74 2d 69 6e 74 6c    from `next-intl
+1310	2f 73 65 72 76 65 72 60  20 28 61 73 79 6e 63 29   /server` (async)
+1320	2e 0d 0a 20 20 49 6e 20  63 6c 69 65 6e 74 20 63   ...  In client c
+1330	6f 6d 70 6f 6e 65 6e 74  73 2c 20 75 73 65 20 60   omponents, use `
+1340	75 73 65 54 72 61 6e 73  6c 61 74 69 6f 6e 73 60   useTranslations`
+1350	20 66 72 6f 6d 20 60 6e  65 78 74 2d 69 6e 74 6c    from `next-intl
+1360	60 20 28 73 79 6e 63 29  2e 0d 0a 0d 0a 23 23 20   ` (sync).....## 
+1370	47 65 6e 65 72 61 6c 0d  0a 2d 20 42 65 66 6f 72   General..- Befor
+1380	65 20 61 64 64 69 6e 67  20 61 20 6e 65 77 20 64   e adding a new d
+1390	65 70 65 6e 64 65 6e 63  79 2c 20 63 68 65 63 6b   ependency, check
+13a0	20 69 66 20 73 68 61 64  63 6e 2f 75 69 2c 20 6c    if shadcn/ui, l
+13b0	75 63 69 64 65 2d 72 65  61 63 74 2c 20 6f 72 20   ucide-react, or 
+13c0	61 6e 0d 0a 20 20 65 78  69 73 74 69 6e 67 20 75   an..  existing u
+13d0	74 69 6c 20 61 6c 72 65  61 64 79 20 63 6f 76 65   til already cove
+13e0	72 73 20 74 68 65 20 6e  65 65 64 2e 0d 0a 2d 20   rs the need...- 
+13f0	52 75 6e 20 60 70 6e 70  6d 20 62 75 69 6c 64 60   Run `pnpm build`
+1400	20 6c 6f 63 61 6c 6c 79  20 62 65 66 6f 72 65 20    locally before 
+1410	63 6f 6e 73 69 64 65 72  69 6e 67 20 61 20 66 65   considering a fe
+1420	61 74 75 72 65 20 22 64  6f 6e 65 22 20 e2 80 94   ature "done" ...
+1430	20 69 74 20 6d 75 73 74  20 62 75 69 6c 64 0d 0a    it must build..
+1440	20 20 77 69 74 68 20 7a  65 72 6f 20 65 72 72 6f     with zero erro
+1450	72 73 2e 0d 0a                                     rs...
