@@ -18,7 +18,7 @@ export function LanguageSwitcher() {
     <div
       role="group"
       aria-label="Language switcher"
-      className="inline-flex items-center rounded-full border border-white/15 bg-white/5 p-0.5 text-[13px] font-semibold backdrop-blur-md"
+      className="inline-flex items-center rounded-xl border border-white/15 bg-white/5 px-1 py-0.5 text-[13px] font-semibold backdrop-blur-md"
     >
       {routing.locales.map((locale) => {
         const isActive = locale === currentLocale
@@ -34,8 +34,8 @@ export function LanguageSwitcher() {
             }}
             className={
               isActive
-                ? "rounded-full bg-gradient-to-r from-teal-accent to-blue-accent px-3 py-1 text-white shadow-sm shadow-teal-accent/30 transition-colors"
-                : "rounded-full px-3 py-1 text-white/70 transition-colors hover:text-white"
+                ? "rounded-lg bg-white/10 px-3 py-1 text-white shadow-sm transition-colors"
+                : "rounded-lg px-3 py-1 text-white/40 transition-colors hover:text-white/70"
             }
           >
             {LOCALE_LABELS[locale]}

@@ -12,8 +12,6 @@ import {
   Settings,
   LogOut,
   User,
-  Bell,
-  ChevronDown,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react"
@@ -339,62 +337,35 @@ export function DashboardShell({ children }: DashboardShellProps) {
         </motion.div>
       </motion.aside>
 
-      {/* ===== MAIN CONTENT ===== */}
-      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        {/* Mobile header */}
-        <header className="flex h-14 shrink-0 items-center gap-3 border-b border-white/10 bg-background px-4 lg:hidden">
-          <motion.button
-            type="button"
-            onClick={() => setMobileOpen(true)}
-            className="flex size-8 items-center justify-center rounded-lg text-white/60"
-            aria-label="Open menu"
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            <svg viewBox="0 0 24 24" fill="none" className="size-5" stroke="currentColor" strokeWidth="2">
-              <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" />
-            </svg>
-          </motion.button>
-          <span className="font-heading text-base font-bold text-white">
-            Swim<span className="text-teal-accent">AI</span>
-          </span>
-        </header>
+      {/* ===== MAIN CONTENT AREA — matches sidebar inset at top/bottom ===== */}
+      {/* Mobile header (only on small screens) */}
+      <header className="flex h-14 shrink-0 items-center gap-3 border-b border-white/10 bg-background px-4 lg:hidden">
+        <motion.button
+          type="button"
+          onClick={() => setMobileOpen(true)}
+          className="flex size-8 items-center justify-center rounded-lg text-white/60"
+          aria-label="Open menu"
+          whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" className="size-5" stroke="currentColor" strokeWidth="2">
+            <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" />
+          </svg>
+        </motion.button>
+        <span className="font-heading text-base font-bold text-white">
+          Swim<span className="text-teal-accent">AI</span>
+        </span>
+      </header>
 
-        {/* Top bar */}
-        <div className="flex h-14 shrink-0 items-center justify-between border-b border-white/10 bg-background px-6">
-          <div />
-          <div className="flex items-center gap-3">
-            <motion.button
-              type="button"
-              aria-label="Notifications"
-              className="relative flex size-9 items-center justify-center rounded-lg text-white/50"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,1)" }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            >
-              <Bell className="size-4" />
-              <span className="absolute right-1.5 top-1.5 flex size-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold leading-none text-white">
-                3
-              </span>
-            </motion.button>
-            <motion.button
-              type="button"
-              aria-label="Account menu"
-              className="flex items-center gap-2 rounded-lg px-1 py-1"
-              whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            >
-              <div className="flex size-8 items-center justify-center rounded-full bg-teal-accent/20 text-sm font-bold text-teal-accent">
-                {user.name.charAt(0).toUpperCase()}
-              </div>
-              <ChevronDown className="size-3 text-white/40" />
-            </motion.button>
-          </div>
-        </div>
-
-        <main className="flex-1 overflow-y-auto">{children}</main>
+      {/* Page content — on desktop the inner wrapper matches sidebar margin/height */}
+      <div
+        className="flex min-w-0 flex-1 flex-col overflow-hidden lg:shrink-0"
+        style={{ marginTop: "0.75rem", marginBottom: "0.75rem", marginRight: "0.75rem", height: "calc(100vh - 1.5rem)" }}
+      >
+        <main className="flex min-w-0 flex-1 overflow-hidden">
+          {children}
+        </main>
       </div>
     </div>
   )

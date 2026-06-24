@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { useAuth } from "@/lib/auth/auth-context"
-import { Link } from "@/i18n/navigation"
+import { Button } from "@/components/ui/button"
 
 export function HeaderActions() {
   const t = useTranslations("nav")
@@ -10,21 +10,16 @@ export function HeaderActions() {
 
   if (user) {
     return (
-      <Link
-        href="/dashboard"
-        className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-accent to-blue-accent-dark px-6 py-2.5 text-[15px] font-bold text-white shadow-lg shadow-blue-accent/30 transition-opacity hover:opacity-90"
-      >
+      <Button variant="entry" href="/dashboard">
         {t("dashboardCta")}
-      </Link>
+      </Button>
     )
   }
 
   return (
-    <a
-      href="#search"
-      className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-accent to-blue-accent-dark px-6 py-2.5 text-[15px] font-bold text-white shadow-lg shadow-blue-accent/30 transition-opacity hover:opacity-90"
-    >
+    // Commencer — entry variant, blue, rounded-xl, navigates to search
+    <Button variant="entry" href="#search">
       {t("cta")}
-    </a>
+    </Button>
   )
 }

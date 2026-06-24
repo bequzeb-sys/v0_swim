@@ -1,5 +1,6 @@
 import { Check } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button"
 
 export function ForCoaches() {
   const t = useTranslations("forCoaches")
@@ -35,12 +36,9 @@ export function ForCoaches() {
         </ul>
 
         <div className="mt-10 flex justify-center">
-          <a
-            href="#"
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-accent to-blue-accent-dark px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-blue-accent/30 transition-opacity hover:opacity-90"
-          >
+          <Button variant="entry" href="#">
             {t("cta")}
-          </a>
+          </Button>
         </div>
       </div>
     </section>

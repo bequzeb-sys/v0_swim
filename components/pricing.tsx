@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
 
@@ -34,18 +33,16 @@ export function Pricing() {
             <p className="mt-3 text-base leading-relaxed text-text-secondary">
               {t("single.description")}
             </p>
-            <a
-              href="#search"
-              className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-teal-accent py-6 text-base font-bold text-primary-foreground no-underline hover:bg-teal-accent-light"
-            >
-              {t("single.cta")}
-            </a>
+            <div className="mt-6">
+              <Button variant="primary" href="#search" className="w-full">
+                {t("single.cta")}
+              </Button>
+            </div>
           </article>
 
           {/* Monthly plan card — highlighted */}
           <article className="relative flex flex-col rounded-2xl border border-teal-accent/30 bg-white/5 p-6 backdrop-blur-md">
-            <span className="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-teal-accent to-blue-accent px-3 py-1 text-xs font-bold text-white shadow-lg shadow-teal-accent/20">
-              <Sparkles className="size-3.5" />
+            <span className="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full border border-teal-accent/40 bg-teal-accent/15 px-3 py-1 text-xs font-bold text-teal-accent shadow-lg shadow-teal-accent/20">
               {t("badge.popular")}
             </span>
             <h3 className="text-lg font-bold text-white sm:text-xl">
@@ -68,9 +65,12 @@ export function Pricing() {
             <p className="mt-3 text-base leading-relaxed text-text-secondary">
               {t("monthly.description")}
             </p>
-            <Button className="mt-6 w-full rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark py-6 text-base font-bold text-white shadow-lg shadow-blue-accent/30 hover:opacity-90">
-              {t("monthly.cta")}
-            </Button>
+            <div className="mt-6">
+              {/* S'abonner — entry variant, blue solid, rounded-xl */}
+              <Button variant="entry" href="#" className="w-full">
+                {t("monthly.cta")}
+              </Button>
+            </div>
           </article>
         </div>
       </div>

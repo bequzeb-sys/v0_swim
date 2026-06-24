@@ -1,4 +1,5 @@
-import { MessageCircle, ChevronRight } from "lucide-react"
+import { ChevronRight, MessageCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
 
 export function FooterCTA() {
@@ -13,13 +14,10 @@ export function FooterCTA() {
           </span>
           <p className="text-base text-white sm:text-lg">{t("text")}</p>
         </div>
-        <a
-          href="#search"
-          className="flex shrink-0 items-center gap-1 text-lg font-bold text-teal-accent transition-colors hover:text-teal-accent-light"
-        >
+        {/* Primary CTA — "Essayez gratuitement", teal, rounded-xl */}
+        <Button variant="primary" href="#search" iconRight={ChevronRight}>
           {t("cta")}
-          <ChevronRight className="size-5" />
-        </a>
+        </Button>
       </div>
     </section>
   )

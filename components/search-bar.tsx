@@ -78,7 +78,7 @@ export function SearchBar() {
 
         {/* CTA */}
         <div className="flex items-center md:pl-3">
-          <Button className="h-full w-full rounded-xl bg-teal-accent px-8 py-4 text-lg font-bold text-primary-foreground hover:bg-teal-accent-light md:w-auto">
+          <Button variant="primary" type="button" className="h-full md:w-auto">
             {t("cta")}
           </Button>
         </div>

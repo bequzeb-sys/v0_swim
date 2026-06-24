@@ -41,10 +41,26 @@
   never `href="#"` or an empty `onClick`. If the destination page doesn't exist
   yet, create a minimal stub page rather than leaving a dead link.
 - Routes follow the locale-prefixed structure: `/[locale]/page-name`.
-- **Documented exceptions:** the "Subscribe" (S'abonner) and "Become a coach"
-  (Devenir coach) buttons are intentionally `href="#"` pending real payment/signup
-  infrastructure — this is a known, accepted gap, not an oversight. Any NEW
-  `href="#"` must be explicitly flagged in a comment rather than left silently.
+- **Documented exception:** `href="#"` on "Subscribe" (S'abonner) and "Become a
+  coach" (Devenir coach) CTAs is accepted pending real payment/signup infrastructure.
+  Any OTHER new `href="#"` must be explicitly flagged in a comment.
+
+### Buttons (canonical CTA system)
+- ONE Button component: `components/ui/button.tsx`
+- Three variants, all `rounded-xl` (NEVER `rounded-full` pills, NEVER ad-hoc
+  inline button styling):
+  - `variant="primary"` (teal) — "perform the action": search, book, confirm,
+    save, submit, continue
+  - `variant="entry"` (blue) — "enter / start the journey": Commencer, Dashboard,
+    Become a coach, Subscribe
+  - `variant="ghost"` (transparent) — tertiary actions
+- The shape (`rounded-xl`) is shared across ALL variants. Color signals role,
+  shape signals "this is a button." Never use `rounded-full` or pill-shaped
+  buttons.
+- Supports optional `icon` (left) and `iconRight` (right) props (lucide-react
+  components). Supports `href` prop for polymorphic rendering via Next.js Link.
+- Language switcher is a segmented control, NOT a Button — it's a setting
+  indicator, not an action.
 
 ## Images
 - All raster images go through `next/image` (`<Image />`) with explicit width,

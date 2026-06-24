@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { MapPin, Star } from "lucide-react"
-import { Link } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
 import type { Coach } from "@/lib/coaches"
 
@@ -66,11 +65,11 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
       </div>
 
       {/* CTA */}
-      <Link href={`/coaches/${coach.id}`} className="mt-5 block w-full">
-        <Button className="w-full rounded-xl bg-teal-accent py-6 text-base font-bold text-primary-foreground hover:bg-teal-accent-light">
+      <div className="mt-5">
+        <Button variant="primary" href={`/coaches/${coach.id}`} className="w-full">
           {t.cardCta}
         </Button>
-      </Link>
+      </div>
     </article>
   )
 }
