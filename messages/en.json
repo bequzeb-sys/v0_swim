@@ -17,7 +17,13 @@
     "title1": "Find your ideal",
     "title2": "swim coach",
     "subtitle1": "Book certified coaches near you.",
-    "subtitle2": "Progress faster with AI."
+    "subtitle2": "Progress faster with AI.",
+    "trust": {
+      "launch": "Launching 2026",
+      "certified": "FFN-certified coaches",
+      "rating": "average rating",
+      "ratingValue": "4.8"
+    }
   },
   "search": {
     "locationLabel": "Location",
@@ -103,6 +109,12 @@
       "b3": "Get paid securely"
     },
     "cta": "Become a coach"
+  },
+  "testimonial": {
+    "label": "Sample testimonial",
+    "quote": "In 8 sessions with Marc, I went from struggling through 25m of freestyle to swimming my first 1km open water. The AI program between sessions helped me stay consistent.",
+    "name": "Marie",
+    "context": "34 · Paris · Beginner → Open water"
   },
   "auth": {
     "login": {

@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { CoachesGrid } from "@/components/coaches-grid"
+import { Testimonial } from "@/components/testimonial"
 import { HowItWorks } from "@/components/how-it-works"
 import { Pricing } from "@/components/pricing"
 import { ForCoaches } from "@/components/for-coaches"
@@ -15,6 +16,7 @@ export default function Page() {
       <main className="relative z-10">
         <Hero />
         <CoachesGrid />
+        <Testimonial />
         <HowItWorks />
         <Pricing />
         <ForCoaches />

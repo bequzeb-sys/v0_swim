@@ -17,7 +17,13 @@
     "title1": "Trouvez votre coach",
     "title2": "de natation idéal",
     "subtitle1": "Réservez des coachs certifiés près de chez vous.",
-    "subtitle2": "Progressez plus vite grâce à l'IA."
+    "subtitle2": "Progressez plus vite grâce à l'IA.",
+    "trust": {
+      "launch": "Lancement 2026",
+      "certified": "Coachs certifiés FFN",
+      "rating": "Note moyenne",
+      "ratingValue": "4.8"
+    }
   },
   "search": {
     "locationLabel": "Localisation",
@@ -103,6 +109,12 @@
       "b3": "Encaissez vos paiements en toute sécurité"
     },
     "cta": "Devenir coach"
+  },
+  "testimonial": {
+    "label": "Témoignage d'illustration",
+    "quote": "En 8 séances avec Marc, je suis passée du 25m crawlé avec difficulté à mon premier 1km en eau libre. Le programme IA entre les séances m'a aidée à garder le rythme.",
+    "name": "Marie",
+    "context": "34 ans · Paris · Débutante → Eau libre"
   },
   "auth": {
     "login": {

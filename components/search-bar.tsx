@@ -25,7 +25,7 @@ export function SearchBar() {
   return (
     <div
       id="search"
-      className="mx-auto w-full max-w-6xl rounded-2xl border border-white/10 bg-white/5 p-3 shadow-2xl shadow-black/40 backdrop-blur-md"
+      className="mx-auto w-full max-w-5xl rounded-2xl border border-white/10 bg-white/5 p-3 shadow-2xl shadow-black/40 backdrop-blur-md"
     >
       <div className="flex flex-col gap-3 md:flex-row md:items-stretch md:gap-0">
         {/* Localisation */}
