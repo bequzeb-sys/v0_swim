@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import {
   Dialog,
@@ -36,11 +35,11 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
   const t = useTranslations("booking")
   const tp = useTranslations("coachProfile")
   const { user } = useAuth()
-  const router = useRouter()
 
   const [open, setOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [confirmed, setConfirmed] = useState(false)
+  const [needsLogin, setNeedsLogin] = useState(false)
 
   const upcomingSlots = useMemo(() => {
     const slots: { date: Date; dayKey: DayKey }[] = []
@@ -69,18 +68,19 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
   }
 
   function handleOpenChange(next: boolean) {
-    if (!user && next) {
-      router.push(`/${locale}/login?redirect=/coaches/${coach.id}`)
-      return
-    }
     setOpen(next)
     if (!next) {
       setSelectedDate(null)
       setConfirmed(false)
+      setNeedsLogin(false)
     }
   }
 
   function handleConfirm() {
+    if (!user) {
+      setNeedsLogin(true)
+      return
+    }
     setConfirmed(true)
   }
 
@@ -88,7 +88,7 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
     setOpen(false)
     setSelectedDate(null)
     setConfirmed(false)
-    router.push(`/${locale}/dashboard/client/bookings`)
+    window.location.href = `/${locale}/dashboard/client/bookings`
   }
 
   return (
@@ -141,13 +141,28 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
               </DialogBody>
 
               <DialogFooter>
-                <Button
-                  onClick={handleConfirm}
-                  disabled={!selectedDate}
-                  className="w-full rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark text-sm font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  {t("confirm")}
-                </Button>
+                {needsLogin ? (
+                  <div className="flex flex-col gap-3">
+                    <p className="text-center text-sm text-text-secondary">
+                      {t("loginPrompt")}
+                    </p>
+                    <Button
+                      href={`/login?redirect=/coaches/${coach.id}`}
+                      variant="entry"
+                      className="w-full text-sm font-bold"
+                    >
+                      {t("loginCta")}
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={handleConfirm}
+                    disabled={!selectedDate}
+                    className="w-full rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark text-sm font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    {t("confirm")}
+                  </Button>
+                )}
               </DialogFooter>
             </>
           ) : (
