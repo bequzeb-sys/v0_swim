@@ -69,44 +69,73 @@
       },
       "step2": {
         "title": "Book",
-        "description": "Pick a slot and confirm your session in a few clicks."
+        "description": "Pick a slot and book your session — free, directly with the coach."
       },
       "step3": {
-        "title": "Progress",
-        "description": "Track your progress with AI support between sessions."
+        "title": "Progress with AI",
+        "description": "Between sessions, your AI coach has your back: personalized training programs, nutrition guidance, mental preparation, and 24/7 chat for any questions. Included with SwimAI membership.",
+        "features": {
+          "chat": "24/7 chat",
+          "programs": "Personalized programs",
+          "nutrition": "Nutrition guidance",
+          "mental": "Mental preparation"
+        }
       }
     }
   },
   "pricing": {
     "title": "Simple, transparent pricing",
-    "subtitle": "Pick the plan that fits you.",
-    "badge": {
-      "popular": "Most popular"
+    "subtitle": "Free booking. You only pay for the AI features.",
+    "client": {
+      "audience": "For clients",
+      "headline": "Free",
+      "subheadline": "Find and book your coaches",
+      "bullets": {
+        "b1": "Book as many coaches as you want",
+        "b2": "Pay the coach directly",
+        "b3": "No SwimAI fees on sessions"
+      },
+      "optional": "+ Optional AI membership for AI coach chat, training programs, nutrition and more.",
+      "cta": "Start free"
     },
-    "single": {
-      "name": "Single session",
-      "price": "€45",
-      "unit": "/session",
-      "description": "Great to try us out or book an occasional session.",
-      "cta": "Book a session"
-    },
-    "monthly": {
-      "name": "Monthly plan",
-      "price": "€160",
-      "unit": "/month",
-      "sessions": "4 sessions / month",
-      "savings": "Save €20 / month",
-      "description": "The best value if you want to progress consistently.",
-      "cta": "Subscribe"
+    "coach": {
+      "audience": "For coaches",
+      "headline": "Free for your first 3 bookings",
+      "subheadline": "No membership required until SwimAI brings you three confirmed clients.",
+      "bullets": {
+        "b1": "Create your profile for free",
+        "b2": "No commitment before 3 confirmed bookings",
+        "b3": "AI tools to coach better"
+      },
+      "optional": "+ Coach membership after your first 3 confirmed bookings.",
+      "cta": "Become a coach"
     }
   },
   "forCoaches": {
     "title": "For coaches",
-    "subtitle": "Join the SwimAI community and grow your business.",
-    "bullets": {
-      "b1": "Set your own schedule",
-      "b2": "Reach more students near you",
-      "b3": "Get paid securely"
+    "subtitle": "Focus on teaching — we handle the rest.",
+    "callout": "Sign-up and your first 3 bookings are 100% free. You only pay membership once SwimAI has proven itself.",
+    "benefits": {
+      "b1": {
+        "title": "Targeted visibility",
+        "description": "Reach students near you who are ready to book."
+      },
+      "b2": {
+        "title": "Scheduling tools",
+        "description": "Set your own schedule, we handle reminders and follow-ups."
+      },
+      "b3": {
+        "title": "Built-in messaging",
+        "description": "Chat with students without sharing your personal number."
+      },
+      "b4": {
+        "title": "AI tools for coaches",
+        "description": "Generate personalized plans, track student progress."
+      },
+      "b5": {
+        "title": "Professional profile",
+        "description": "Showcase your credentials, reviews, and rates clearly."
+      }
     },
     "cta": "Become a coach"
   },

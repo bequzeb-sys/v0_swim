@@ -69,44 +69,73 @@
       },
       "step2": {
         "title": "Réservez",
-        "description": "Choisissez un créneau et confirmez votre séance en quelques clics."
+        "description": "Choisissez un créneau et confirmez votre séance — gratuitement, directement avec le coach."
       },
       "step3": {
-        "title": "Progressez",
-        "description": "Suivez vos progrès avec l'IA entre chaque séance."
+        "title": "Progressez avec l'IA",
+        "description": "Entre vos séances, votre coach IA vous accompagne : programmes d'entraînement personnalisés, conseils nutrition, préparation mentale, et chat 24/7 pour toutes vos questions. Inclus avec l'adhésion SwimAI.",
+        "features": {
+          "chat": "Chat 24/7",
+          "programs": "Programmes personnalisés",
+          "nutrition": "Conseils nutrition",
+          "mental": "Préparation mentale"
+        }
       }
     }
   },
   "pricing": {
     "title": "Tarifs simples et transparents",
-    "subtitle": "Choisissez la formule qui vous correspond.",
-    "badge": {
-      "popular": "Le plus populaire"
+    "subtitle": "Booking gratuit. Vous ne payez que pour les fonctionnalités IA.",
+    "client": {
+      "audience": "Pour les clients",
+      "headline": "Gratuit",
+      "subheadline": "Trouvez et réservez vos coachs",
+      "bullets": {
+        "b1": "Réservez autant de coachs que vous voulez",
+        "b2": "Paiement directement avec le coach",
+        "b3": "Aucun frais SwimAI sur les séances"
+      },
+      "optional": "+ Adhésion IA optionnelle pour le chat coach IA, programmes d'entraînement, nutrition et plus.",
+      "cta": "Commencer gratuitement"
     },
-    "single": {
-      "name": "Séance à l'unité",
-      "price": "€45",
-      "unit": "/séance",
-      "description": "Idéal pour découvrir ou pour une séance ponctuelle.",
-      "cta": "Réserver une séance"
-    },
-    "monthly": {
-      "name": "Abonnement mensuel",
-      "price": "€160",
-      "unit": "/mois",
-      "sessions": "4 séances / mois",
-      "savings": "Économisez 20 € / mois",
-      "description": "Le meilleur rapport pour progresser régulièrement.",
-      "cta": "S'abonner"
+    "coach": {
+      "audience": "Pour les coachs",
+      "headline": "Gratuit jusqu'à 3 réservations",
+      "subheadline": "Aucune adhésion requise avant que SwimAI vous apporte trois clients confirmés.",
+      "bullets": {
+        "b1": "Créez votre profil gratuitement",
+        "b2": "Aucun engagement avant 3 réservations confirmées",
+        "b3": "Outils IA pour mieux coacher"
+      },
+      "optional": "+ Adhésion coach après vos 3 premières réservations confirmées.",
+      "cta": "Devenir coach"
     }
   },
   "forCoaches": {
     "title": "Pour les coachs",
-    "subtitle": "Rejoignez la communauté SwimAI et développez votre activité.",
-    "bullets": {
-      "b1": "Fixez vos propres horaires",
-      "b2": "Touchez plus d'élèves près de chez vous",
-      "b3": "Encaissez vos paiements en toute sécurité"
+    "subtitle": "Concentrez-vous sur l'enseignement, on s'occupe du reste.",
+    "callout": "Inscription et 3 premières réservations 100 % gratuites. Vous ne payez l'adhésion qu'une fois que SwimAI a fait ses preuves.",
+    "benefits": {
+      "b1": {
+        "title": "Visibilité ciblée",
+        "description": "Touchez des élèves proches de chez vous, prêts à réserver."
+      },
+      "b2": {
+        "title": "Gestion des créneaux",
+        "description": "Fixez vos propres horaires, on s'occupe des relances et rappels."
+      },
+      "b3": {
+        "title": "Communication intégrée",
+        "description": "Discutez avec vos élèves sans donner votre numéro perso."
+      },
+      "b4": {
+        "title": "Outils IA pour coachs",
+        "description": "Générez des plans personnalisés, suivez les progrès de vos élèves."
+      },
+      "b5": {
+        "title": "Profil professionnel",
+        "description": "Affichez vos diplômes, avis clients et tarifs en toute clarté."
+      }
     },
     "cta": "Devenir coach"
   },

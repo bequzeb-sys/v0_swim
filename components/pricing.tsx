@@ -1,5 +1,9 @@
+import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
+
+const CLIENT_BULLETS = ["b1", "b2", "b3"] as const
+const COACH_BULLETS = ["b1", "b2", "b3"] as const
 
 export function Pricing() {
   const t = useTranslations("pricing")
@@ -17,60 +21,81 @@ export function Pricing() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {/* Single session card */}
-          <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-            <h3 className="text-lg font-bold text-white sm:text-xl">
-              {t("single.name")}
+          {/* For clients — booking is free */}
+          <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md md:p-8">
+            <span
+              aria-hidden="true"
+              className="inline-flex w-fit items-center gap-1.5 rounded-full border border-teal-accent/30 bg-teal-accent/10 px-3 py-1 text-xs font-bold text-teal-accent"
+            >
+              {t("client.audience")}
+            </span>
+            <h3 className="mt-5 text-4xl font-extrabold leading-tight text-white md:text-5xl">
+              {t("client.headline")}
             </h3>
-            <div className="mt-5 flex items-baseline whitespace-nowrap">
-              <span className="text-4xl font-extrabold text-white">
-                {t("single.price")}
-              </span>
-              <span className="ml-1 text-base text-text-secondary">
-                {t("single.unit")}
-              </span>
-            </div>
-            <p className="mt-3 text-base leading-relaxed text-text-secondary">
-              {t("single.description")}
+            <p className="mt-2 text-base font-medium text-text-secondary">
+              {t("client.subheadline")}
             </p>
-            <div className="mt-6">
-              <Button variant="primary" href="#search" className="w-full">
-                {t("single.cta")}
-              </Button>
-            </div>
+            <ul className="mt-6 flex flex-col gap-3">
+              {CLIENT_BULLETS.map((key) => (
+                <li key={key} className="flex items-start gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-teal-accent"
+                  >
+                    <Check className="size-3.5" strokeWidth={3} />
+                  </span>
+                  <span className="text-base leading-relaxed text-white">
+                    {t(`client.bullets.${key}`)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-sm leading-relaxed text-text-secondary">
+              {t("client.optional")}
+            </p>
+            <div className="mt-6 grow" />
+            <Button variant="entry" href="#search" className="mt-6 w-full">
+              {t("client.cta")}
+            </Button>
           </article>
 
-          {/* Monthly plan card — highlighted */}
-          <article className="relative flex flex-col rounded-2xl border border-teal-accent/30 bg-white/5 p-6 backdrop-blur-md">
-            <span className="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full border border-teal-accent/40 bg-teal-accent/15 px-3 py-1 text-xs font-bold text-teal-accent shadow-lg shadow-teal-accent/20">
-              {t("badge.popular")}
+          {/* For coaches — free until 3 confirmed bookings */}
+          <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md md:p-8">
+            <span
+              aria-hidden="true"
+              className="inline-flex w-fit items-center gap-1.5 rounded-full border border-blue-accent/30 bg-blue-accent/10 px-3 py-1 text-xs font-bold text-blue-accent"
+            >
+              {t("coach.audience")}
             </span>
-            <h3 className="text-lg font-bold text-white sm:text-xl">
-              {t("monthly.name")}
+            <h3 className="mt-5 text-2xl font-extrabold leading-tight text-white md:text-3xl">
+              {t("coach.headline")}
             </h3>
-            <div className="mt-5 flex items-baseline whitespace-nowrap">
-              <span className="text-4xl font-extrabold text-white">
-                {t("monthly.price")}
-              </span>
-              <span className="ml-1 text-base text-text-secondary">
-                {t("monthly.unit")}
-              </span>
-            </div>
-            <p className="mt-2 text-sm font-medium text-teal-accent-light">
-              {t("monthly.sessions")}
+            <p className="mt-2 text-base font-medium text-text-secondary">
+              {t("coach.subheadline")}
             </p>
-            <p className="mt-1 text-sm font-medium text-teal-accent-light">
-              {t("monthly.savings")}
+            <ul className="mt-6 flex flex-col gap-3">
+              {COACH_BULLETS.map((key) => (
+                <li key={key} className="flex items-start gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-teal-accent"
+                  >
+                    <Check className="size-3.5" strokeWidth={3} />
+                  </span>
+                  <span className="text-base leading-relaxed text-white">
+                    {t(`coach.bullets.${key}`)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-sm leading-relaxed text-text-secondary">
+              {t("coach.optional")}
             </p>
-            <p className="mt-3 text-base leading-relaxed text-text-secondary">
-              {t("monthly.description")}
-            </p>
-            <div className="mt-6">
-              {/* S'abonner — entry variant, blue solid, rounded-xl */}
-              <Button variant="entry" href="#" className="w-full">
-                {t("monthly.cta")}
-              </Button>
-            </div>
+            <div className="mt-6 grow" />
+            {/* Documented exception: "Devenir coach" CTA is intentionally href="#" pending signup infra */}
+            <Button variant="entry" href="#" className="mt-6 w-full">
+              {t("coach.cta")}
+            </Button>
           </article>
         </div>
       </div>
