@@ -1,6 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { MapPin, Waves, Calendar } from "lucide-react"
+import { format } from "date-fns"
+import { useLocale, useTranslations } from "next-intl"
+import { useRouter } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
 import {
   Select,
@@ -9,7 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useTranslations } from "next-intl"
+import { DatePickerField } from "@/components/date-picker-field"
+import { fr, enUS } from "date-fns/locale"
 
 const specialtyKeys = [
   "all",
@@ -19,8 +24,25 @@ const specialtyKeys = [
   "competition",
 ] as const
 
+const LOCALE_MAP = { fr, en: enUS } as const
+
 export function SearchBar() {
   const t = useTranslations("search")
+  const locale = useLocale()
+  const router = useRouter()
+
+  const [location, setLocation] = useState("")
+  const [specialty, setSpecialty] = useState("all")
+  const [date, setDate] = useState<Date | undefined>(() => new Date())
+
+  function handleSearch() {
+    const params = new URLSearchParams()
+    if (location.trim()) params.set("location", location.trim())
+    if (specialty && specialty !== "all") params.set("badges", specialty)
+    if (date) params.set("date", format(date, "yyyy-MM-dd"))
+    const query = params.toString()
+    router.push(`/coaches${query ? `?${query}` : ""}`)
+  }
 
   return (
     <div
@@ -37,6 +59,9 @@ export function SearchBar() {
               type="text"
               placeholder={t("locationPlaceholder")}
               className="w-full bg-transparent text-lg font-medium text-white placeholder:text-white/70 focus:outline-none"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
           </div>
         </div>
@@ -48,11 +73,14 @@ export function SearchBar() {
           <Waves className="size-6 shrink-0 text-teal-accent" />
           <div className="flex w-full flex-col text-left">
             <span className="text-sm text-text-secondary">{t("specialtyLabel")}</span>
-            <Select defaultValue={t("specialtyOptions.all")}>
-              <SelectTrigger className="h-auto w-full border-0 bg-transparent p-0 text-lg font-medium text-white shadow-none focus:ring-0 focus-visible:ring-0 [&>svg]:text-white">
+            <Select value={specialty} onValueChange={(v) => setSpecialty(v ?? "all")}>
+              <SelectTrigger className="h-auto w-full gap-2 rounded-none border-0 bg-transparent p-0 text-lg font-medium text-white shadow-none outline-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 data-[size=default]:h-auto [&_svg]:text-white [&_svg:not([class*='size-'])]:size-4">
                 <SelectValue placeholder={t("specialtyPlaceholder")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                alignItemWithTrigger={false}
+                className="min-w-[var(--anchor-width)] rounded-2xl border border-white/10 bg-white/[8%] text-white shadow-xl shadow-black/20 backdrop-blur-md [&_[data-slot=select-item]]:text-white [&_[data-slot=select-item]]:focus:bg-white/10 [&_[data-slot=select-item]]:focus:text-white"
+              >
                 {specialtyKeys.map((key) => (
                   <SelectItem key={key} value={key}>
                     {t(`specialtyOptions.${key}`)}
@@ -70,15 +98,24 @@ export function SearchBar() {
           <Calendar className="size-6 shrink-0 text-teal-accent" />
           <div className="flex flex-col text-left">
             <span className="text-sm text-text-secondary">{t("dateLabel")}</span>
-            <span className="text-lg font-medium text-white/70">
-              {t("datePlaceholder")}
-            </span>
+            <DatePickerField
+              value={date}
+              onChange={setDate}
+              placeholder={t("datePlaceholder")}
+              locale={locale}
+              ariaLabel={t("dateLabel")}
+            />
           </div>
         </div>
 
         {/* CTA */}
         <div className="flex items-center md:pl-3">
-          <Button variant="primary" type="button" className="h-full md:w-auto">
+          <Button
+            variant="primary"
+            type="button"
+            className="h-full md:w-auto"
+            onClick={handleSearch}
+          >
             {t("cta")}
           </Button>
         </div>

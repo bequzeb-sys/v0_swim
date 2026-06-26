@@ -6,14 +6,34 @@ import { useRouter } from "@/i18n/navigation"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
+import { LanguageFlag } from "@/components/ui/language-flag"
+import type { LanguageCode } from "@/lib/coaches"
+import { cn } from "@/lib/utils"
+
+const ALL_LANGUAGE_CODES: LanguageCode[] = [
+  "fr",
+  "en",
+  "es",
+  "de",
+  "it",
+  "ar",
+  "zh",
+  "pt",
+  "ru",
+  "ja",
+]
+
+const MAX_LANGUAGES = 4
 
 export default function OnboardingCoachProfilePage() {
   const t = useTranslations("onboarding.coach.profile")
+  const tl = useTranslations("languages")
   const router = useRouter()
 
   const [bio, setBio] = useState("")
   const [city, setCity] = useState("")
   const [price, setPrice] = useState("")
+  const [selectedLanguages, setSelectedLanguages] = useState<LanguageCode[]>([])
 
   function handleContinue() {
     const params = new URLSearchParams({ step: "3" })
@@ -63,6 +83,48 @@ export default function OnboardingCoachProfilePage() {
               {t("priceUnit")}
             </span>
           </div>
+        </div>
+
+        {/* Languages */}
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <label className="text-sm font-medium text-white/70">
+              {t("languagesLabel")}
+            </label>
+            <span className="text-xs text-white/30">{t("languagesHint")}</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {ALL_LANGUAGE_CODES.map((code) => {
+              const selected = selectedLanguages.includes(code)
+              return (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => {
+                    if (selected) {
+                      setSelectedLanguages((prev) =>
+                        prev.filter((c) => c !== code)
+                      )
+                    } else if (selectedLanguages.length < MAX_LANGUAGES) {
+                      setSelectedLanguages((prev) => [...prev, code])
+                    }
+                  }}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm transition-all",
+                    selected
+                      ? "border-teal-accent bg-teal-accent/15 text-teal-accent-light"
+                      : "border-white/15 bg-white/5 text-white/70 hover:border-white/30 hover:text-white"
+                  )}
+                >
+                  <LanguageFlag code={code} size={16} />
+                  <span>{tl(code)}</span>
+                </button>
+              )
+            })}
+          </div>
+          {selectedLanguages.length === MAX_LANGUAGES && (
+            <p className="text-xs text-white/30">{t("languagesMax")}</p>
+          )}
         </div>
       </div>
       <button

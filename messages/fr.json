@@ -236,7 +236,10 @@
         "cityPlaceholder": "Ex : Paris, Marseille…",
         "priceLabel": "Tarif par séance",
         "priceUnit": "€ / séance",
-        "continue": "Continuer"
+        "continue": "Continuer",
+        "languagesLabel": "Langues parlées",
+        "languagesHint": "Sélectionnez jusqu'à 4 langues",
+        "languagesMax": "4 langues maximum sélectionnées"
       },
       "availability": {
         "title": "Quand êtes-vous disponible ?",
@@ -285,8 +288,44 @@
       "settings": { "title": "Paramètres" }
     }
   },
+  "languages": {
+    "fr": "Français",
+    "en": "Anglais",
+    "es": "Espagnol",
+    "de": "Allemand",
+    "it": "Italien",
+    "ar": "Arabe",
+    "zh": "Chinois",
+    "pt": "Portugais",
+    "ru": "Russe",
+    "ja": "Japonais"
+  },
+  "coachesPage": {
+    "title": "Trouvez votre coach",
+    "resultCount": "{count} coachs",
+    "emptyTitle": "Aucun coach ne correspond à vos critères",
+    "emptyReset": "Réinitialiser les filtres",
+    "mobileFilters": "Filtres",
+    "close": "Fermer",
+    "filters": {
+      "location": "Localisation",
+      "locationPlaceholder": "Ville ou région…",
+      "specialty": "Spécialité",
+      "language": "Langues parlées",
+      "maxPrice": "Prix maximum",
+      "minRating": "Note minimum",
+      "minExperience": "Expérience minimum",
+      "availability": "Disponibilité",
+      "gender": "Genre",
+      "genderAll": "Tous",
+      "genderFemale": "Femme",
+      "genderMale": "Homme",
+      "reset": "Réinitialiser les filtres"
+    }
+  },
   "coachProfile": {
     "bioTitle": "À propos",
+    "languagesTitle": "Langues parlées",
     "availabilityTitle": "Disponibilités",
     "bookCta": "Réserver une séance",
     "yearsExperience": "{count} ans d'expérience",

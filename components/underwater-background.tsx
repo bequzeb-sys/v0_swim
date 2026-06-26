@@ -3,10 +3,10 @@
 // solid deep-navy bg so content below the hero stays clean and readable.
 export function UnderwaterBackground() {
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-x-clip">
       {/* Real underwater photo */}
       <div
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat"
+        className="absolute inset-0 overflow-x-clip bg-cover bg-top bg-no-repeat"
         style={{ backgroundImage: "url('/underwater-hero.webp')" }}
       />
       {/* Gradient overlay: transparent at top (let light shaft show),

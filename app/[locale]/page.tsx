@@ -10,7 +10,7 @@ import { UnderwaterBackground } from "@/components/underwater-background"
 
 export default function Page() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
+    <div className="relative min-h-screen overflow-x-clip bg-background">
       <UnderwaterBackground />
       <Header />
       <main className="relative z-10">

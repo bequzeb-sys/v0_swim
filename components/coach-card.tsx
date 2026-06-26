@@ -1,7 +1,8 @@
 import Image from "next/image"
 import { MapPin, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import type { Coach } from "@/lib/coaches"
+import { LanguageList } from "@/components/ui/language-list"
+import type { Coach, LanguageCode } from "@/lib/coaches"
 
 interface CoachCardProps {
   coach: Coach
@@ -10,6 +11,7 @@ interface CoachCardProps {
     reviewsSuffix: string
     priceUnit: string
     cardCta: string
+    languages: Record<LanguageCode, string>
   }
 }
 
@@ -45,6 +47,14 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
             <span className="whitespace-nowrap text-text-secondary">
               ({coach.reviews} {t.reviewsSuffix})
             </span>
+          </div>
+          <div className="mt-2 flex items-center gap-1.5">
+            <LanguageList
+              codes={coach.languages}
+              labels={t.languages}
+              size={18}
+              showLabels={false}
+            />
           </div>
         </div>
       </div>

@@ -82,7 +82,7 @@ export default function CoachSchedulePage() {
                 <select
                   value={slot.day}
                   onChange={(e) => updateSlot(slot.id, "day", e.target.value)}
-                  className="w-full appearance-none rounded-xl border border-white/10 bg-white/[6%] px-3 py-2.5 text-sm text-white"
+                  className="w-full appearance-none rounded-xl border border-white/10 bg-white/[6%] py-2.5 pl-3 pr-9 text-sm text-white"
                 >
                   {days.map((d) => (
                     <option key={d} value={d} className="bg-[#050b1a]">
@@ -98,7 +98,7 @@ export default function CoachSchedulePage() {
                 <select
                   value={slot.time}
                   onChange={(e) => updateSlot(slot.id, "time", e.target.value)}
-                  className="w-full appearance-none rounded-xl border border-white/10 bg-white/[6%] px-3 py-2.5 text-sm text-white"
+                  className="w-full appearance-none rounded-xl border border-white/10 bg-white/[6%] py-2.5 pl-3 pr-9 text-sm text-white"
                 >
                   {TIME_SUGGESTIONS.map((time) => (
                     <option key={time} value={time} className="bg-[#050b1a]">

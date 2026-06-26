@@ -236,7 +236,10 @@
         "cityPlaceholder": "e.g. Paris, London…",
         "priceLabel": "Session rate",
         "priceUnit": "€ / session",
-        "continue": "Continue"
+        "continue": "Continue",
+        "languagesLabel": "Languages spoken",
+        "languagesHint": "Select up to 4 languages",
+        "languagesMax": "Maximum 4 languages selected"
       },
       "availability": {
         "title": "When are you available?",
@@ -285,8 +288,44 @@
       "settings": { "title": "Settings" }
     }
   },
+  "languages": {
+    "fr": "French",
+    "en": "English",
+    "es": "Spanish",
+    "de": "German",
+    "it": "Italian",
+    "ar": "Arabic",
+    "zh": "Chinese",
+    "pt": "Portuguese",
+    "ru": "Russian",
+    "ja": "Japanese"
+  },
+  "coachesPage": {
+    "title": "Find your coach",
+    "resultCount": "{count} coaches",
+    "emptyTitle": "No coaches match your criteria",
+    "emptyReset": "Reset filters",
+    "mobileFilters": "Filters",
+    "close": "Close",
+    "filters": {
+      "location": "Location",
+      "locationPlaceholder": "City or region…",
+      "specialty": "Specialty",
+      "language": "Languages spoken",
+      "maxPrice": "Maximum price",
+      "minRating": "Minimum rating",
+      "minExperience": "Minimum experience",
+      "availability": "Availability",
+      "gender": "Gender",
+      "genderAll": "All",
+      "genderFemale": "Female",
+      "genderMale": "Male",
+      "reset": "Reset filters"
+    }
+  },
   "coachProfile": {
     "bioTitle": "About",
+    "languagesTitle": "Languages spoken",
     "availabilityTitle": "Availability",
     "bookCta": "Book a session",
     "yearsExperience": "{count} years experience",

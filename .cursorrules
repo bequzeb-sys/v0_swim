@@ -106,6 +106,57 @@
   locale in a client component, call `useLocale()` from `next-intl` separately.
 - In server components, use `getTranslations` from `next-intl/server` (async).
   In client components, use `useTranslations` from `next-intl` (sync).
+- next-intl's router (from `i18n/navigation`) auto-prefixes the current
+  locale on `push()` / `Link href`. ALWAYS pass UNPREFIXED paths
+  (e.g. `/coaches/sophie-chen`, not `/fr/coaches/sophie-chen`). Mixing a
+  prefixed path with next-intl's router produces double-locale URLs like
+  `/fr/fr/coaches/sophie-chen`. If you need to navigate without locale
+  handling, use `next/navigation`'s router instead — but that's almost
+  always wrong in this app since pages are locale-prefixed.
+
+### shadcn defaults in dark mode
+- shadcn/ui components ship with `dark:` variant classes that have
+  HIGHER specificity than plain Tailwind utility classes (e.g.
+  `dark:bg-input/30` on `SelectTrigger`, dark-mode default backgrounds on
+  popover surfaces, etc.).
+- When overriding shadcn styling in dark-themed UI, plain `bg-transparent`
+  will NOT override `dark:bg-input/30` — Tailwind's `dark:` variant
+  always wins.
+- Always add explicit `dark:` prefixed overrides:
+  `dark:bg-transparent dark:hover:bg-transparent
+  dark:data-[state=open]:bg-transparent`.
+- If the library uses non-Tailwind CSS (e.g. react-day-picker's `rdp-*`
+  classes) with their own dark mode rules, use `dark:!utility` (!important)
+  to win over them.
+
+### Floating popover design system
+- The app has ONE canonical visual treatment for floating popover
+  surfaces (dropdowns, calendar pickers, future tooltips, etc.):
+
+  ```
+  rounded-2xl border border-white/10 bg-white/[8%]
+  shadow-xl shadow-black/20 backdrop-blur-md text-white
+  ```
+- Hover/focus state for items inside these popovers:
+  `focus:bg-white/10 focus:text-white`.
+- Source of truth: `components/date-picker-field.tsx` popover,
+  `components/search-bar.tsx` `SelectContent`.
+- When adding new floating UI (any new popover, dropdown, or tooltip),
+  match this exact treatment. Do NOT introduce a new visual style for
+  floating surfaces — consistency across these elements is the design
+  system contract.
+
+### Customizing third-party components
+- When a third-party component (react-day-picker, shadcn primitives,
+  Base UI) doesn't behave as needed, prefer REPLACING the offending part
+  with custom JSX over fighting the library's internal CSS.
+- Example: react-day-picker v10's Nav was structurally hard to reposition
+  via CSS. Fix: pass `hideNavigation={true}` and render a custom header
+  with our own buttons. Took one round; CSS-only patches took six rounds
+  and never fully worked.
+- Sign you should switch from "patch the library" to "replace the part":
+  if you've made 2+ CSS attempts and each produces a different failure
+  mode, the architecture is the problem, not the styling.
 
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an

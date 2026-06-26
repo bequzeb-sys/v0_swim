@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { MapPin, Star, Clock } from "lucide-react"
 import { getCoachById } from "@/lib/coaches"
+import type { LanguageCode } from "@/lib/coaches"
+import { LanguageList } from "@/components/ui/language-list"
 import { BookingPanel } from "@/components/coach-profile/booking-panel"
 import type { DayKey } from "@/lib/coaches"
 import { cn } from "@/lib/utils"
@@ -40,6 +42,11 @@ export default async function CoachProfilePage({ params }: Props) {
 
   const t = await getTranslations("coachProfile")
   const tc = await getTranslations("coaches")
+  const tl = await getTranslations("languages")
+  const langKeys = ["fr", "en", "es", "de", "it", "ar", "zh", "pt", "ru", "ja"] as const
+  const languageLabels = Object.fromEntries(
+    langKeys.map((k) => [k, tl(k)])
+  ) as Record<(typeof langKeys)[number], string>
 
   return (
     <main className="min-h-screen bg-background">
@@ -140,6 +147,17 @@ export default async function CoachProfilePage({ params }: Props) {
             <section>
               <h2 className="mb-3 text-lg font-bold text-white">{t("bioTitle")}</h2>
               <p className="text-sm leading-relaxed text-white/70">{coach.bio}</p>
+            </section>
+
+            {/* Languages */}
+            <section>
+              <h2 className="mb-3 text-lg font-bold text-white">{t("languagesTitle")}</h2>
+              <LanguageList
+                codes={coach.languages}
+                labels={languageLabels}
+                size={20}
+                showLabels
+              />
             </section>
 
             {/* Availability */}
