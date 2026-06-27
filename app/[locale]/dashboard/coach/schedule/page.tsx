@@ -10,32 +10,55 @@ interface TimeSlot {
   time: string
 }
 
-const DAYS_FR = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
-const DAYS_EN = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+function formatTimeRange(startHour: number, endHour: number, locale: string): string {
+  if (locale === "en") {
+    const fmt = (h: number) => {
+      const period = h >= 12 ? "PM" : "AM"
+      const display = h % 12 === 0 ? 12 : h % 12
+      return `${display}:00 ${period}`
+    }
+    return `${fmt(startHour)} – ${fmt(endHour)}`
+  }
+  const fmt = (h: number) => `${String(h).padStart(2, "0")}h00`
+  return `${fmt(startHour)} – ${fmt(endHour)}`
+}
 
-const TIME_SUGGESTIONS = [
-  "08h00 – 09h00",
-  "09h00 – 10h00",
-  "10h00 – 11h00",
-  "14h00 – 15h00",
-  "15h00 – 16h00",
-  "17h00 – 18h00",
+const TIME_SLOTS: { start: number; end: number }[] = [
+  { start: 8, end: 9 },
+  { start: 9, end: 10 },
+  { start: 10, end: 11 },
+  { start: 14, end: 15 },
+  { start: 15, end: 16 },
+  { start: 17, end: 18 },
 ]
+
+function formatTimeSuggestions(locale: string): string[] {
+  return TIME_SLOTS.map((s) => formatTimeRange(s.start, s.end, locale))
+}
+
+function defaultSlotDay(locale: string): string {
+  // Use the translation key for Monday — first day of availability by default
+  return locale === "en" ? "Mon" : "Lun"
+}
 
 export default function CoachSchedulePage() {
   const locale = useLocale()
   const t = useTranslations("dashboardCoach")
+  const tDays = useTranslations("coachProfile.days")
 
-  const [slots, setSlots] = useState<TimeSlot[]>([
-    { id: "1", day: "Lundi", time: "10h00 – 11h00" },
-    { id: "2", day: "Mercredi", time: "14h00 – 15h00" },
-    { id: "3", day: "Vendredi", time: "16h00 – 17h00" },
-  ])
+  const [slots, setSlots] = useState<TimeSlot[]>(() => {
+    const initialDay = defaultSlotDay(locale)
+    return [
+      { id: "1", day: initialDay, time: formatTimeRange(10, 11, locale) },
+      { id: "2", day: tDays("wed"), time: formatTimeRange(14, 15, locale) },
+      { id: "3", day: tDays("fri"), time: formatTimeRange(16, 17, locale) },
+    ]
+  })
 
   function addSlot() {
     setSlots((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), day: "Lundi", time: "09h00 – 10h00" },
+      { id: crypto.randomUUID(), day: defaultSlotDay(locale), time: formatTimeRange(9, 10, locale) },
     ])
   }
 
@@ -49,7 +72,9 @@ export default function CoachSchedulePage() {
     setSlots((prev) => prev.filter((s) => s.id !== id))
   }
 
-  const days = locale === "en" ? DAYS_EN : DAYS_FR
+  const dayKeys = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const
+  const days = dayKeys.map((k) => tDays(k))
+  const timeSuggestions = formatTimeSuggestions(locale)
 
   return (
     <div className="flex flex-col gap-6 p-6 lg:p-8">
@@ -100,7 +125,7 @@ export default function CoachSchedulePage() {
                   onChange={(e) => updateSlot(slot.id, "time", e.target.value)}
                   className="w-full appearance-none rounded-xl border border-white/10 bg-white/[6%] py-2.5 pl-3 pr-9 text-sm text-white"
                 >
-                  {TIME_SUGGESTIONS.map((time) => (
+                  {timeSuggestions.map((time) => (
                     <option key={time} value={time} className="bg-[#050b1a]">
                       {time}
                     </option>

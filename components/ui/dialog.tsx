@@ -29,8 +29,9 @@ function DialogClose({
 function DialogContent({
   className,
   children,
+  closeLabel = "Close",
   ...props
-}: DialogPrimitive.Popup.Props) {
+}: DialogPrimitive.Popup.Props & { closeLabel?: string }) {
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in dark:bg-black/70" />
@@ -44,7 +45,7 @@ function DialogContent({
         <div className="relative z-50 w-full max-w-md rounded-2xl border border-white/10 bg-sidebar p-6 shadow-2xl backdrop-blur-md">
           <DialogPrimitive.Close
             className="absolute right-4 top-4 rounded-lg p-1 text-white/40 transition-colors hover:bg-white/5 hover:text-white"
-            aria-label="Close"
+            aria-label={closeLabel}
           >
             <X className="size-4" />
           </DialogPrimitive.Close>

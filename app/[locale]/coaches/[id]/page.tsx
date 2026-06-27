@@ -80,7 +80,7 @@ export default async function CoachProfilePage({ params }: Props) {
             >
               <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            {tc("cardCta").replace("Voir le profil & ", "")}
+            {t("back")}
           </a>
 
           {/* Coach info */}

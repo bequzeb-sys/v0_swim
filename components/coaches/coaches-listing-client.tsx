@@ -44,6 +44,7 @@ interface Props {
   page: {
     title: string
     resultCountTemplate: string
+    back: string
     filters: {
       location: string
       locationPlaceholder: string
@@ -414,7 +415,7 @@ export function CoachesListingClient({
           >
             <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          {t.cardCta.replace("Voir le profil & ", "")}
+          {page.back}
         </Link>
 
         <div className="mb-6 flex items-center justify-between">
@@ -483,7 +484,7 @@ export function CoachesListingClient({
 
       {/* Mobile filter drawer */}
       <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
-        <DialogContent className="max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-h-[85vh] overflow-y-auto" closeLabel={page.close}>
           <DialogHeader>
             <DialogTitle>{page.mobileFilters}</DialogTitle>
           </DialogHeader>

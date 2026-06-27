@@ -331,6 +331,7 @@
     "yearsExperience": "{count} years experience",
     "notFoundTitle": "Coach not found",
     "notFoundCta": "Back to home",
+    "back": "Back",
     "days": {
       "mon": "Mon",
       "tue": "Tue",
@@ -347,6 +348,7 @@
     "confirm": "Confirm booking",
     "successTitle": "Booking confirmed!",
     "successMessage": "Your session with {coach} on {date} is confirmed.",
+    "close": "Close",
     "viewBookings": "View my bookings",
     "loginPrompt": "Sign in to book",
     "loginCta": "Sign in",

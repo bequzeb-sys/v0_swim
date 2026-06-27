@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { Calendar, Star, Users, Check, X, ChevronRight } from "lucide-react"
 import { Link } from "@/i18n/navigation"
 import { StarRating } from "@/components/dashboard/star-rating"
@@ -31,116 +31,141 @@ interface PendingRequest {
   message: string
 }
 
-function tomorrowLabel(): string {
+function formatRelativeDay(locale: string, offsetDays: number): string {
   const d = new Date()
-  d.setDate(d.getDate() + 1)
-  return d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })
+  d.setDate(d.getDate() + offsetDays)
+  return d.toLocaleDateString(locale === "en" ? "en-GB" : "fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  })
 }
 
-function dayAfterLabel(): string {
-  const d = new Date()
-  d.setDate(d.getDate() + 2)
-  return d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })
+const COACH_AVAILABILITY: { key: string; available: boolean }[] = [
+  { key: "mon", available: true },
+  { key: "tue", available: false },
+  { key: "wed", available: true },
+  { key: "thu", available: false },
+  { key: "fri", available: true },
+  { key: "sat", available: true },
+  { key: "sun", available: false },
+]
+
+function buildPendingRequests(locale: string): PendingRequest[] {
+  // Mock data — dates are computed relative to "today" so the dashboard
+  // shows fresh-looking pending requests in the user's locale.
+  // Client names and messages are intentionally French-only mock copy
+  // and will be replaced when real data exists.
+  const today = new Date()
+  function fmt(offsetDays: number) {
+    const d = new Date(today)
+    d.setDate(today.getDate() + offsetDays)
+    return d.toLocaleDateString(locale === "en" ? "en-GB" : "fr-FR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+  }
+  return [
+    {
+      id: "r1",
+      clientName: "Nicolas Petit",
+      clientInitial: "N",
+      date: fmt(5),
+      time: "10:00",
+      message: "Je souhaite progresser en brasse.",
+    },
+    {
+      id: "r2",
+      clientName: "Camille Dubois",
+      clientInitial: "C",
+      date: fmt(7),
+      time: "16:30",
+      message: "Bonjour, j'aimerais reprendre après une longue pause.",
+    },
+    {
+      id: "r3",
+      clientName: "Fatima Oussama",
+      clientInitial: "F",
+      date: fmt(6),
+      time: "09:30",
+      message: "Bonjour, j'ai un objectif triathlon cet été.",
+    },
+  ]
 }
 
-const pendingRequests: PendingRequest[] = [
-  {
-    id: "r1",
-    clientName: "Nicolas Petit",
-    clientInitial: "N",
-    date: "Mercredi 2 juillet 2026",
-    time: "10:00",
-    message: "Je souhaite progresser en brasse.",
-  },
-  {
-    id: "r2",
-    clientName: "Camille Dubois",
-    clientInitial: "C",
-    date: "Vendredi 4 juillet 2026",
-    time: "16:30",
-    message: "Bonjour, j'aimerais reprendre après une longue pause.",
-  },
-  {
-    id: "r3",
-    clientName: "Fatima Oussama",
-    clientInitial: "F",
-    date: "Jeudi 3 juillet 2026",
-    time: "09:30",
-    message: "Bonjour, j'ai un objectif triathlon cet été.",
-  },
-]
-
-const upcomingSessions: UpcomingSession[] = [
-  {
-    id: "s1",
-    clientName: "Léa Fontaine",
-    clientInitial: "L",
-    date: tomorrowLabel(),
-    timeStart: "09:00",
-    timeEnd: "10:00",
-    type: "individual",
-    status: "confirmed",
-  },
-  {
-    id: "s2",
-    clientName: "Thomas Renard",
-    clientInitial: "T",
-    date: tomorrowLabel(),
-    timeStart: "14:00",
-    timeEnd: "15:30",
-    type: "group",
-    groupSize: 3,
-    status: "confirmed",
-  },
-  {
-    id: "s3",
-    clientName: "Sophie Martin",
-    clientInitial: "S",
-    date: dayAfterLabel(),
-    timeStart: "10:00",
-    timeEnd: "11:00",
-    type: "individual",
-    status: "pending",
-  },
-  {
-    id: "s4",
-    clientName: "Antoine Leroy",
-    clientInitial: "A",
-    date: dayAfterLabel(),
-    timeStart: "16:00",
-    timeEnd: "17:00",
-    type: "individual",
-    status: "confirmed",
-  },
-  {
-    id: "s5",
-    clientName: "Julie Morel",
-    clientInitial: "J",
-    date: dayAfterLabel(),
-    timeStart: "17:30",
-    timeEnd: "19:00",
-    type: "group",
-    groupSize: 2,
-    status: "confirmed",
-  },
-]
-
-// Coach availability (Marc Delorme's days)
-const coachDays: { key: string; label: string; available: boolean }[] = [
-  { key: "mon", label: "Lun", available: true },
-  { key: "tue", label: "Mar", available: false },
-  { key: "wed", label: "Mer", available: true },
-  { key: "thu", label: "Jeu", available: false },
-  { key: "fri", label: "Ven", available: true },
-  { key: "sat", label: "Sam", available: true },
-  { key: "sun", label: "Dim", available: false },
-]
+function buildUpcomingSessions(locale: string): UpcomingSession[] {
+  return [
+    {
+      id: "s1",
+      clientName: "Léa Fontaine",
+      clientInitial: "L",
+      date: formatRelativeDay(locale, 1),
+      timeStart: "09:00",
+      timeEnd: "10:00",
+      type: "individual",
+      status: "confirmed",
+    },
+    {
+      id: "s2",
+      clientName: "Thomas Renard",
+      clientInitial: "T",
+      date: formatRelativeDay(locale, 1),
+      timeStart: "14:00",
+      timeEnd: "15:30",
+      type: "group",
+      groupSize: 3,
+      status: "confirmed",
+    },
+    {
+      id: "s3",
+      clientName: "Sophie Martin",
+      clientInitial: "S",
+      date: formatRelativeDay(locale, 2),
+      timeStart: "10:00",
+      timeEnd: "11:00",
+      type: "individual",
+      status: "pending",
+    },
+    {
+      id: "s4",
+      clientName: "Antoine Leroy",
+      clientInitial: "A",
+      date: formatRelativeDay(locale, 2),
+      timeStart: "16:00",
+      timeEnd: "17:00",
+      type: "individual",
+      status: "confirmed",
+    },
+    {
+      id: "s5",
+      clientName: "Julie Morel",
+      clientInitial: "J",
+      date: formatRelativeDay(locale, 2),
+      timeStart: "17:30",
+      timeEnd: "19:00",
+      type: "group",
+      groupSize: 2,
+      status: "confirmed",
+    },
+  ]
+}
 
 // ---------- Page ----------
 
 export default async function CoachDashboardPage({ params }: Props) {
-  const { locale } = await params
+  await params
+  const activeLocale = await getLocale()
   const t = await getTranslations("dashboardCoach")
+  const tDays = await getTranslations("coachProfile.days")
+  const pendingRequests = buildPendingRequests(activeLocale)
+  const upcomingSessions = buildUpcomingSessions(activeLocale)
+  const coachDays = COACH_AVAILABILITY.map((d) => ({
+    key: d.key,
+    label: tDays(d.key),
+    available: d.available,
+  }))
 
   return (
     <>

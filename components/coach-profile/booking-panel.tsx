@@ -101,7 +101,7 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
       </Button>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent>
+        <DialogContent closeLabel={t("close")}>
           {!confirmed ? (
             <>
               <DialogHeader>

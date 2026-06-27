@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { GraduationCap, Calendar, Waves, Clock, MapPin, ChevronRight } from "lucide-react"
 import { Link } from "@/i18n/navigation"
 import { ProgressChart } from "@/components/dashboard/client-progress-chart"
@@ -37,63 +37,73 @@ interface HistoryRow {
   rating: number
 }
 
-function tomorrowLabel(): string {
+function tomorrowLabel(locale: string): string {
   const d = new Date()
   d.setDate(d.getDate() + 1)
-  return d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })
+  return d.toLocaleDateString(locale === "en" ? "en-GB" : "fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  })
 }
 
-function historyDates(): string[] {
+function historyDates(locale: string): string[] {
   const dates: string[] = []
   for (let i = 1; i <= 5; i++) {
     const d = new Date()
     d.setDate(d.getDate() - i * 3)
     dates.push(
-      d.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
+      d.toLocaleDateString(locale === "en" ? "en-GB" : "fr-FR", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
     )
   }
   return dates
 }
 
-const bookings: Booking[] = [
-  {
-    id: "b1",
-    coachName: "Marc Delorme",
-    coachInitial: "M",
-    date: tomorrowLabel(),
-    timeStart: "09:00",
-    timeEnd: "10:00",
-    specialty: "Freestyle · Individuel",
-    type: "individual",
-    status: "confirmed",
-  },
-  {
-    id: "b2",
-    coachName: "Sophie Chen",
-    coachInitial: "S",
-    date: tomorrowLabel(),
-    timeStart: "14:00",
-    timeEnd: "15:30",
-    specialty: "Eau libre · Groupe (2-4)",
-    type: "group",
-    groupSize: 2,
-    status: "confirmed",
-  },
-  {
-    id: "b3",
-    coachName: "Marc Delorme",
-    coachInitial: "M",
-    date: tomorrowLabel(),
-    timeStart: "17:00",
-    timeEnd: "18:00",
-    specialty: "Compétition · Individuel",
-    type: "individual",
-    status: "pending",
-  },
-]
+function buildBookings(locale: string): Booking[] {
+  return [
+    {
+      id: "b1",
+      coachName: "Marc Delorme",
+      coachInitial: "M",
+      date: tomorrowLabel(locale),
+      timeStart: "09:00",
+      timeEnd: "10:00",
+      specialty: "Freestyle · Individuel",
+      type: "individual",
+      status: "confirmed",
+    },
+    {
+      id: "b2",
+      coachName: "Sophie Chen",
+      coachInitial: "S",
+      date: tomorrowLabel(locale),
+      timeStart: "14:00",
+      timeEnd: "15:30",
+      specialty: "Eau libre · Groupe (2-4)",
+      type: "group",
+      groupSize: 2,
+      status: "confirmed",
+    },
+    {
+      id: "b3",
+      coachName: "Marc Delorme",
+      coachInitial: "M",
+      date: tomorrowLabel(locale),
+      timeStart: "17:00",
+      timeEnd: "18:00",
+      specialty: "Compétition · Individuel",
+      type: "individual",
+      status: "pending",
+    },
+  ]
+}
 
-const history: HistoryRow[] = (() => {
-  const dates = historyDates()
+function buildHistory(locale: string): HistoryRow[] {
+  const dates = historyDates(locale)
   return [
     { id: "h1", coachName: "Marc Delorme", coachInitial: "M", date: dates[0], type: "individual", duration: 60, notes: "Bonne progression en crawl, à travailler sur la respiration bilatérale.", rating: 5.0 },
     { id: "h2", coachName: "Sophie Chen", coachInitial: "S", date: dates[1], type: "group", duration: 60, notes: "Séance en eau libre réussie, bonne endurance générale.", rating: 4.5 },
@@ -101,13 +111,17 @@ const history: HistoryRow[] = (() => {
     { id: "h4", coachName: "Sophie Chen", coachInitial: "S", date: dates[3], type: "group", duration: 90, notes: "Premier triathlon en conditions réelles — séance d'avant-course.", rating: 4.5 },
     { id: "h5", coachName: "Marc Delorme", coachInitial: "M", date: dates[4], type: "individual", duration: 60, notes: "Technique de départ et coulée à améliorer.", rating: 4.0 },
   ]
-})()
+}
 
 // ---------- Page ----------
 
 export default async function ClientDashboardPage({ params }: Props) {
-  const { locale } = await params
+  await params
+  const activeLocale = await getLocale()
   const t = await getTranslations("dashboardClient")
+  const tBadges = await getTranslations("coaches.badges")
+  const bookings = buildBookings(activeLocale)
+  const history = buildHistory(activeLocale)
 
   return (
     <>
@@ -156,7 +170,7 @@ export default async function ClientDashboardPage({ params }: Props) {
                 </span>
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {["Freestyle", "Individuel"].map((badge) => (
+                {[tBadges("freestyle"), t("sessionTypeIndividual")].map((badge) => (
                   <span
                     key={badge}
                     className="rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs text-teal-accent"
@@ -213,7 +227,7 @@ export default async function ClientDashboardPage({ params }: Props) {
             </div>
 
             {/* Right: Progress chart */}
-            <ProgressChart locale={locale} />
+            <ProgressChart locale={activeLocale} />
           </div>
 
           {/* Session history table */}
@@ -313,7 +327,7 @@ export default async function ClientDashboardPage({ params }: Props) {
               <span className="text-xs text-white/50">{t("withCoach", { coach: "Marc Delorme" })}</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {["Freestyle", "Individuel"].map((badge) => (
+              {[tBadges("freestyle"), t("sessionTypeIndividual")].map((badge) => (
                 <span key={badge} className="rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs text-teal-accent">{badge}</span>
               ))}
             </div>
@@ -348,7 +362,7 @@ export default async function ClientDashboardPage({ params }: Props) {
               {bookings.map((booking) => <BookingRow key={booking.id} booking={booking} t={t} />)}
             </div>
           </div>
-          <ProgressChart locale={locale} />
+          <ProgressChart locale={activeLocale} />
         </div>
 
         {/* Session history */}

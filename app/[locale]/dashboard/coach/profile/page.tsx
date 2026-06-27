@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useAuth } from "@/lib/auth/auth-context"
 import { Button } from "@/components/ui/button"
@@ -12,17 +11,11 @@ import { Check, MapPin } from "lucide-react"
 export default function CoachProfilePage() {
   const t = useTranslations("dashboardCoach")
   const { user } = useAuth()
-  const params = useParams()
-  const locale = (params.locale as string) || "fr"
 
   const [name, setName] = useState(user?.name ?? "")
-  const [city, setCity] = useState("Paris")
-  const [bio, setBio] = useState(
-    locale === "fr"
-      ? "Coach diplômé d'État, 8 ans d'expérience. Spécialisé en natation course et water-polo."
-      : "State-certified coach, 8 years of experience. Specialized in competitive swimming and water polo."
-  )
-  const [experience, setExperience] = useState("8")
+  const [city, setCity] = useState("")
+  const [bio, setBio] = useState("")
+  const [experience, setExperience] = useState("")
   const [saved, setSaved] = useState(false)
 
   function handleSave(e: React.FormEvent) {

@@ -331,6 +331,7 @@
     "yearsExperience": "{count} ans d'expérience",
     "notFoundTitle": "Coach introuvable",
     "notFoundCta": "Retour à l'accueil",
+    "back": "Retour",
     "days": {
       "mon": "Lun",
       "tue": "Mar",
@@ -347,6 +348,7 @@
     "confirm": "Confirmer la réservation",
     "successTitle": "Réservation confirmée !",
     "successMessage": "Votre séance avec {coach} le {date} est réservée.",
+    "close": "Fermer",
     "viewBookings": "Voir mes réservations",
     "loginPrompt": "Connectez-vous pour réserver",
     "loginCta": "Se connecter",
