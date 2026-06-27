@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation"
 import { SlidersHorizontal } from "lucide-react"
 import { CoachCard } from "@/components/coach-card"
 import { Input } from "@/components/ui/input"
+import { Pill } from "@/components/ui/pill"
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,6 @@ import {
 } from "@/components/ui/dialog"
 import { LanguageFlag } from "@/components/ui/language-flag"
 import type { Coach, CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
-import { cn } from "@/lib/utils"
 
 const ALL_BADGES: CoachBadgeKey[] = [
   "freestyle",
@@ -240,30 +240,22 @@ export function CoachesListingClient({
       <fieldset>
         <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.language}</legend>
         <div className="flex flex-wrap gap-1.5">
-          {ALL_LANGUAGES.map((code) => {
-            const selected = selectedLanguages.has(code)
-            return (
-              <button
-                key={code}
-                type="button"
-                onClick={() =>
-                  setSelectedLanguages((prev) => {
-                    const next = new Set(prev)
-                    next.has(code) ? next.delete(code) : next.add(code)
-                    return next
-                  })
-                }
-                className={cn(
-                  "inline-flex items-center gap-1 rounded-md border px-2 py-1 text-sm transition-all",
-                  selected
-                    ? "border-teal-accent bg-teal-accent/15 text-teal-accent-light"
-                    : "border-white/15 bg-white/5 text-white/70 hover:border-white/30"
-                )}
-              >
-                <LanguageFlag code={code} size={16} />
-              </button>
-            )
-          })}
+          {ALL_LANGUAGES.map((code) => (
+            <Pill
+              key={code}
+              selected={selectedLanguages.has(code)}
+              ariaLabel={page.filters.language}
+              className="rounded-md"
+              onClick={() =>
+                setSelectedLanguages((prev) => {
+                  const next = new Set(prev)
+                  next.has(code) ? next.delete(code) : next.add(code)
+                  return next
+                })
+              }
+              icon={<LanguageFlag code={code} size={16} />}
+            />
+          ))}
         </div>
       </fieldset>
 
@@ -334,30 +326,22 @@ export function CoachesListingClient({
       <fieldset>
         <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.availability}</legend>
         <div className="flex flex-wrap gap-1.5">
-          {ALL_DAYS.map((day) => {
-            const selected = selectedDays.has(day)
-            return (
-              <button
-                key={day}
-                type="button"
-                onClick={() =>
-                  setSelectedDays((prev) => {
-                    const next = new Set(prev)
-                    next.has(day) ? next.delete(day) : next.add(day)
-                    return next
-                  })
-                }
-                className={cn(
-                  "rounded-md border px-2.5 py-1 text-sm transition-all",
-                  selected
-                    ? "border-teal-accent bg-teal-accent/15 text-teal-accent-light"
-                    : "border-white/15 bg-white/5 text-white/70 hover:border-white/30"
-                )}
-              >
-                {dayLabels[day]}
-              </button>
-            )
-          })}
+          {ALL_DAYS.map((day) => (
+            <Pill
+              key={day}
+              selected={selectedDays.has(day)}
+              className="rounded-md px-2.5 py-1"
+              onClick={() =>
+                setSelectedDays((prev) => {
+                  const next = new Set(prev)
+                  next.has(day) ? next.delete(day) : next.add(day)
+                  return next
+                })
+              }
+            >
+              {dayLabels[day]}
+            </Pill>
+          ))}
         </div>
       </fieldset>
 

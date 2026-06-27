@@ -7,9 +7,9 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { LanguageFlag } from "@/components/ui/language-flag"
+import { Pill } from "@/components/ui/pill"
 import { Button } from "@/components/ui/button"
 import type { LanguageCode } from "@/lib/coaches"
-import { cn } from "@/lib/utils"
 
 const ALL_LANGUAGE_CODES: LanguageCode[] = [
   "fr",
@@ -98,9 +98,11 @@ export default function OnboardingCoachProfilePage() {
             {ALL_LANGUAGE_CODES.map((code) => {
               const selected = selectedLanguages.includes(code)
               return (
-                <button
+                <Pill
                   key={code}
-                  type="button"
+                  selected={selected}
+                  className="gap-1.5 px-2.5 py-1.5"
+                  icon={<LanguageFlag code={code} size={16} />}
                   onClick={() => {
                     if (selected) {
                       setSelectedLanguages((prev) =>
@@ -110,16 +112,9 @@ export default function OnboardingCoachProfilePage() {
                       setSelectedLanguages((prev) => [...prev, code])
                     }
                   }}
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm transition-all",
-                    selected
-                      ? "border-teal-accent bg-teal-accent/15 text-teal-accent-light"
-                      : "border-white/15 bg-white/5 text-white/70 hover:border-white/30 hover:text-white"
-                  )}
                 >
-                  <LanguageFlag code={code} size={16} />
-                  <span>{tl(code)}</span>
-                </button>
+                  {tl(code)}
+                </Pill>
               )
             })}
           </div>
