@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
 import { Input } from "@/components/ui/input"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
+import { Button } from "@/components/ui/button"
 
 const LEVELS = ["beginner", "intermediate", "advanced"] as const
 type Level = (typeof LEVELS)[number]
@@ -74,13 +75,14 @@ export default function OnboardingClientLocationPage() {
           </div>
         </div>
       </div>
-      <button
+      <Button
         type="button"
         onClick={handleContinue}
-        className="mt-6 flex h-11 w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark text-sm font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98]"
+        variant="entry"
+        className="mt-6 w-full text-sm active:scale-[0.98]"
       >
         {t("continue")}
-      </button>
+      </Button>
     </OnboardingShell>
   )
 }

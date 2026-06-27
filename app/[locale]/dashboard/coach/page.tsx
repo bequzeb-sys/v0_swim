@@ -1,8 +1,9 @@
 import { getLocale, getTranslations } from "next-intl/server"
-import { Calendar, Star, Users, Check, X, ChevronRight } from "lucide-react"
+import { Calendar, Star, Users, ChevronRight } from "lucide-react"
 import { Link } from "@/i18n/navigation"
 import { StarRating } from "@/components/dashboard/star-rating"
 import { WelcomeHeader } from "@/components/dashboard/welcome-header"
+import { CoachPendingRequestsList, type PendingRequest } from "@/components/dashboard/coach-pending-requests"
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -20,15 +21,6 @@ interface UpcomingSession {
   type: "individual" | "group"
   groupSize?: number
   status: "confirmed" | "pending"
-}
-
-interface PendingRequest {
-  id: string
-  clientName: string
-  clientInitial: string
-  date: string
-  time: string
-  message: string
 }
 
 function formatRelativeDay(locale: string, offsetDays: number): string {
@@ -237,9 +229,7 @@ export default async function CoachDashboardPage({ params }: Props) {
                 {t("pendingRequests")}
               </h2>
               <div className="flex flex-col gap-4">
-                {pendingRequests.map((req) => (
-                  <PendingRequestRow key={req.id} req={req} t={t} />
-                ))}
+                <CoachPendingRequestsList requests={pendingRequests} />
               </div>
             </div>
 
@@ -394,7 +384,7 @@ export default async function CoachDashboardPage({ params }: Props) {
           <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
             <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">{t("pendingRequests")}</h2>
             <div className="flex flex-col gap-4">
-              {pendingRequests.map((req) => <PendingRequestRow key={req.id} req={req} t={t} />)}
+              <CoachPendingRequestsList requests={pendingRequests} />
             </div>
           </div>
           <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
@@ -469,36 +459,4 @@ export default async function CoachDashboardPage({ params }: Props) {
   )
 }
 
-// ---------- PendingRequestRow sub-component ----------
-
-interface PendingRequestRowProps {
-  req: PendingRequest
-  t: (key: string) => string
-}
-
-function PendingRequestRow({ req, t }: PendingRequestRowProps) {
-  return (
-    <div className="flex flex-col gap-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 sm:flex-row sm:items-start">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-sm font-bold text-amber-400">
-        {req.clientInitial}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-sm font-medium text-white">{req.clientName}</p>
-          <span className="text-xs text-white/50">{req.date} · {req.time}</span>
-        </div>
-        <p className="mt-1 text-xs text-white/50 italic">&ldquo;{req.message}&rdquo;</p>
-      </div>
-      <div className="flex shrink-0 gap-2">
-        <span className="flex items-center gap-1.5 rounded-lg border border-teal-accent/40 bg-teal-accent/10 px-3 py-1.5 text-xs font-medium text-teal-accent">
-          <Check className="size-3" />
-          {t("pendingAccept")}
-        </span>
-        <span className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/50">
-          <X className="size-3" />
-          {t("pendingDecline")}
-        </span>
-      </div>
-    </div>
-  )
-}
+// ---------- end of page ----------

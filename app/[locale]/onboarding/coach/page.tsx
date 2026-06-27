@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
+import { Button } from "@/components/ui/button"
 
 const SPECIALTIES = ["freestyle", "openWater", "butterfly", "competition"] as const
 type Specialty = (typeof SPECIALTIES)[number]
@@ -76,14 +77,15 @@ export default function OnboardingCoachPage() {
           />
         ))}
       </div>
-      <button
+      <Button
         type="button"
         onClick={handleContinue}
         disabled={selected.size === 0}
-        className="mt-6 flex h-11 w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark text-sm font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+        variant="entry"
+        className="mt-6 w-full text-sm active:scale-[0.98]"
       >
         {t("continue")}
-      </button>
+      </Button>
     </OnboardingShell>
   )
 }

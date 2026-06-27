@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { LanguageFlag } from "@/components/ui/language-flag"
+import { Button } from "@/components/ui/button"
 import type { LanguageCode } from "@/lib/coaches"
 import { cn } from "@/lib/utils"
 
@@ -127,13 +128,14 @@ export default function OnboardingCoachProfilePage() {
           )}
         </div>
       </div>
-      <button
+      <Button
         type="button"
         onClick={handleContinue}
-        className="mt-6 flex h-11 w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark text-sm font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98]"
+        variant="entry"
+        className="mt-6 w-full text-sm active:scale-[0.98]"
       >
         {t("continue")}
-      </button>
+      </Button>
     </OnboardingShell>
   )
 }

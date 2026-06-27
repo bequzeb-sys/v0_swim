@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/lib/auth/auth-context"
+import { useRouter } from "@/i18n/navigation"
 import type { Coach, DayKey } from "@/lib/coaches"
 import { cn } from "@/lib/utils"
 
@@ -35,6 +36,7 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
   const t = useTranslations("booking")
   const tp = useTranslations("coachProfile")
   const { user } = useAuth()
+  const router = useRouter()
 
   const [open, setOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
@@ -88,14 +90,15 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
     setOpen(false)
     setSelectedDate(null)
     setConfirmed(false)
-    window.location.href = `/${locale}/dashboard/client/bookings`
+    router.push("/dashboard/client/bookings")
   }
 
   return (
     <>
       <Button
         onClick={() => handleOpenChange(true)}
-        className="w-full rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark py-6 text-base font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98] sm:sticky sm:top-4 sm:w-auto"
+        variant="entry"
+        className="w-full py-6 text-base active:scale-[0.98] sm:sticky sm:top-4 sm:w-auto"
       >
         {tp("bookCta")}
       </Button>
@@ -158,7 +161,8 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
                   <Button
                     onClick={handleConfirm}
                     disabled={!selectedDate}
-                    className="w-full rounded-xl bg-gradient-to-r from-blue-accent to-blue-accent-dark text-sm font-bold text-white shadow-lg shadow-blue-accent/25 transition-all hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+                    variant="entry"
+                    className="w-full text-sm active:scale-[0.98]"
                   >
                     {t("confirm")}
                   </Button>
@@ -195,7 +199,8 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
               <DialogFooter>
                 <Button
                   onClick={handleViewBookings}
-                  className="w-full rounded-xl bg-teal-accent text-sm font-bold text-primary-foreground shadow-lg shadow-teal-accent/25 transition-all hover:bg-teal-accent-light active:scale-[0.98]"
+                  variant="primary"
+                  className="w-full text-sm active:scale-[0.98]"
                 >
                   {t("viewBookings")}
                 </Button>

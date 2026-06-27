@@ -107,7 +107,8 @@ export default function ClientSettingsPage() {
         <div className="flex items-center gap-3">
           <Button
             type="submit"
-            className="rounded-xl bg-teal-accent px-6 font-bold text-primary-foreground hover:bg-teal-accent-light active:scale-[0.98]"
+            variant="primary"
+            className="active:scale-[0.98]"
           >
             {saved ? (
               <span className="flex items-center gap-2">

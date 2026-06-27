@@ -1,30 +1,16 @@
 import { getLocale, getTranslations } from "next-intl/server"
-import { GraduationCap, Calendar, Waves, Clock, MapPin, ChevronRight } from "lucide-react"
+import { GraduationCap, Calendar, Waves, ChevronRight } from "lucide-react"
 import { Link } from "@/i18n/navigation"
 import { ProgressChart } from "@/components/dashboard/client-progress-chart"
 import { StarRating } from "@/components/dashboard/star-rating"
 import { WelcomeHeader } from "@/components/dashboard/welcome-header"
+import { ClientBookingsList, type Booking } from "@/components/dashboard/client-bookings-list"
 
 interface Props {
   params: Promise<{ locale: string }>
 }
 
-// ---------- Client-side welcome header (must be inside the glass card, needs useAuth) ----------
-
 // ---------- Mock data ----------
-
-interface Booking {
-  id: string
-  coachName: string
-  coachInitial: string
-  date: string
-  timeStart: string
-  timeEnd: string
-  specialty: string
-  type: "individual" | "group"
-  groupSize?: number
-  status: "confirmed" | "pending"
-}
 
 interface HistoryRow {
   id: string
@@ -220,9 +206,7 @@ export default async function ClientDashboardPage({ params }: Props) {
 
               {/* Booking rows */}
               <div className="flex flex-col gap-4">
-                {bookings.map((booking) => (
-                  <BookingRow key={booking.id} booking={booking} t={t} />
-                ))}
+                <ClientBookingsList bookings={bookings} />
               </div>
             </div>
 
@@ -284,10 +268,13 @@ export default async function ClientDashboardPage({ params }: Props) {
             </div>
 
             <div className="mt-3 flex justify-center">
-              <span className="flex cursor-pointer items-center gap-1.5 text-sm text-teal-accent">
+              <Link
+                href="/dashboard/client/bookings"
+                className="flex items-center gap-1.5 text-sm text-teal-accent"
+              >
                 {t("viewFullHistory")}
                 <ChevronRight className="size-4" />
-              </span>
+              </Link>
             </div>
           </div>
         </div>
@@ -359,7 +346,7 @@ export default async function ClientDashboardPage({ params }: Props) {
               </Link>
             </div>
             <div className="flex flex-col gap-4">
-              {bookings.map((booking) => <BookingRow key={booking.id} booking={booking} t={t} />)}
+              <ClientBookingsList bookings={bookings} />
             </div>
           </div>
           <ProgressChart locale={activeLocale} />
@@ -411,9 +398,12 @@ export default async function ClientDashboardPage({ params }: Props) {
             </table>
           </div>
           <div className="mt-3 flex justify-center">
-            <span className="flex cursor-pointer items-center gap-1.5 text-sm text-teal-accent">
+            <Link
+              href="/dashboard/client/bookings"
+              className="flex items-center gap-1.5 text-sm text-teal-accent"
+            >
               {t("viewFullHistory")}<ChevronRight className="size-4" />
-            </span>
+            </Link>
           </div>
         </div>
       </div>
@@ -421,60 +411,4 @@ export default async function ClientDashboardPage({ params }: Props) {
   )
 }
 
-// ---------- BookingRow sub-component (server component) ----------
-
-interface BookingRowProps {
-  booking: Booking
-  t: (key: string, opts?: Record<string, string | number | Date>) => string
-}
-
-function BookingRow({ booking, t }: BookingRowProps) {
-  const typeClass = booking.type === "group"
-    ? "border-blue-accent/40 bg-blue-accent/10 text-blue-accent"
-    : "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
-  const typeLabel = booking.type === "group"
-    ? t("sessionTypeGroup", { count: booking.groupSize ?? 0 })
-    : t("sessionTypeIndividual")
-  const statusClass = booking.status === "confirmed"
-    ? "border-teal-accent/40 text-teal-accent"
-    : "border-amber-500/40 text-amber-400"
-  const statusLabel = booking.status === "confirmed"
-    ? t("bookingConfirmed")
-    : t("bookingPending")
-
-  const dateParts = booking.date.split(" ")
-
-  return (
-    <div className="flex flex-col gap-4 rounded-xl border border-white/10 bg-white/[3%] p-5 backdrop-blur-sm sm:flex-row sm:items-center">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-sm font-bold text-teal-accent">
-        {booking.coachInitial}
-      </div>
-      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-4 gap-y-2">
-        <div className="flex min-w-0 items-center gap-2">
-          <p className="truncate text-sm font-medium text-white">{booking.coachName}</p>
-          <span className={`shrink-0 rounded-full border px-2 py-0.5 text-xs ${typeClass}`}>
-            {typeLabel}
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs text-white/50">
-          <Calendar className="size-3 shrink-0 text-white/30" />
-          <span>{dateParts[0]} {parseInt(dateParts[1])} {dateParts[2]}</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs text-white/50">
-          <Clock className="size-3 shrink-0 text-white/30" />
-          <span>{booking.timeStart}–{booking.timeEnd}</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs text-white/40">
-          <MapPin className="size-3 shrink-0 text-white/30" />
-          <span>{booking.specialty}</span>
-        </div>
-        <span className={`shrink-0 rounded-full border px-2 py-0.5 text-xs ${statusClass}`}>
-          {statusLabel}
-        </span>
-      </div>
-      <span className="shrink-0 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/50">
-        {t("cancel")}
-      </span>
-    </div>
-  )
-}
+// ---------- end of page ----------
