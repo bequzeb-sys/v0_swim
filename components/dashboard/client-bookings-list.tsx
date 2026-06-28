@@ -55,7 +55,7 @@ function BookingRow({ booking, onCancel }: BookingRowProps) {
   const dateParts = booking.date.split(" ")
 
   return (
-    <div className={`flex flex-col gap-4 rounded-xl border border-white/10 bg-white/[3%] p-5 backdrop-blur-sm sm:flex-row sm:items-center ${isCancelled ? "opacity-40" : ""}`}>
+    <div className={`flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md sm:flex-row sm:items-center ${isCancelled ? "opacity-40" : ""}`}>
       <div className={`flex size-10 shrink-0 items-center justify-center rounded-md text-sm font-bold ${isCancelled ? "bg-white/5 text-white/40" : "bg-teal-accent/20 text-teal-accent"}`}>
         {booking.coachInitial}
       </div>

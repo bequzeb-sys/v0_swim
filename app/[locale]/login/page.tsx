@@ -54,7 +54,7 @@ function LoginForm() {
     : "/signup"
 
   return (
-    <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[4%] p-8 backdrop-blur-md shadow-2xl">
+    <div className="w-full max-w-md rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-8 shadow-2xl shadow-black/20 backdrop-blur-md">
       {/* Logo mark */}
       <div className="mb-6 flex justify-center">
         <div className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-accent to-blue-accent-dark shadow-lg shadow-blue-accent/25">

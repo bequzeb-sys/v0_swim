@@ -412,7 +412,7 @@ export function CoachesListingClient({
         <div className="flex gap-8">
           {/* Desktop sidebar */}
           <aside className="hidden w-80 shrink-0 lg:block">
-            <div className="sticky top-28 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl border border-white/10 bg-white/[4%] p-5 backdrop-blur-md">
+            <div className="sticky top-28 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
               <FilterContent />
             </div>
           </aside>
@@ -435,7 +435,7 @@ export function CoachesListingClient({
             </div>
 
             {filtered.length === 0 ? (
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[4%] py-20 text-center backdrop-blur-md">
+              <div className="flex flex-col items-center justify-center rounded-3xl border border-blue-300/20 bg-blue-400/[8%] py-20 text-center shadow-xl shadow-black/20 backdrop-blur-md">
                 <p className="text-lg font-medium text-white/70">{page.emptyTitle}</p>
                 <button
                   type="button"

@@ -28,7 +28,7 @@ export function HowItWorks() {
           {(["step1", "step2"] as const).map((key, i) => (
             <li
               key={key}
-              className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md"
+              className="flex flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md"
             >
               <span
                 aria-hidden="true"

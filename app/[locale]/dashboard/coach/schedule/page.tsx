@@ -83,7 +83,7 @@ export default function CoachSchedulePage() {
       </h1>
 
       {slots.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[4%] p-10 text-center backdrop-blur-md">
+        <div className="flex flex-col items-center gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-10 text-center shadow-xl shadow-black/20 backdrop-blur-md">
           <p className="text-sm text-white/50">{t("scheduleNoSlots")}</p>
           <button
             type="button"
@@ -99,7 +99,7 @@ export default function CoachSchedulePage() {
           {slots.map((slot) => (
             <div
               key={slot.id}
-              className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[4%] p-4 backdrop-blur-md sm:flex-row sm:items-center"
+              className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-4 shadow-xl shadow-black/20 backdrop-blur-md sm:flex-row sm:items-center"
             >
               {/* Day */}
               <div className="flex flex-col gap-1.5 sm:w-40">

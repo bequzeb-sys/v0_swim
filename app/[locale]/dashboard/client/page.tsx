@@ -112,7 +112,7 @@ export default async function ClientDashboardPage({ params }: Props) {
   return (
     <>
       {/* Desktop: the outer glass card is rendered by the shell layout wrapper (margin + height match sidebar) */}
-      <div className="hidden h-full w-full flex-col rounded-2xl border border-white/10 bg-white/[4%] backdrop-blur-md lg:flex">
+      <div className="hidden h-full w-full flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] shadow-xl shadow-black/20 backdrop-blur-md lg:flex">
 
         {/* === Top of card: welcome header === */}
         <div className="shrink-0 border-b border-white/10 px-6 py-5">
@@ -125,7 +125,7 @@ export default async function ClientDashboardPage({ params }: Props) {
           {/* Stats row */}
           <div className="grid shrink-0 grid-cols-1 gap-10 border-b border-white/10 p-6 md:grid-cols-3 *:rounded-2xl">
             {/* Card 1: Lessons completed */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <GraduationCap className="size-5 text-teal-accent" />
               </div>
@@ -137,7 +137,7 @@ export default async function ClientDashboardPage({ params }: Props) {
             </div>
 
             {/* Card 2: Next session */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
                 <Calendar className="size-5 text-blue-accent" />
               </div>
@@ -168,7 +168,7 @@ export default async function ClientDashboardPage({ params }: Props) {
             </div>
 
             {/* Card 3: Total distance */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <Waves className="size-5 text-teal-accent" />
               </div>
@@ -189,7 +189,7 @@ export default async function ClientDashboardPage({ params }: Props) {
           <div className="grid shrink-0 grid-cols-1 gap-10 border-b border-white/10 p-6 md:grid-cols-2 *:rounded-2xl">
 
             {/* Left: Upcoming Bookings card */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               {/* Header */}
               <div className="flex items-center justify-between">
                 <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">
@@ -289,7 +289,7 @@ export default async function ClientDashboardPage({ params }: Props) {
 
         {/* Stats row */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 *:rounded-2xl">
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <GraduationCap className="size-5 text-teal-accent" />
             </div>
@@ -299,7 +299,7 @@ export default async function ClientDashboardPage({ params }: Props) {
             </div>
             <p className="text-xs text-white/40">{t("statsLessonsEncouragement")}</p>
           </div>
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
               <Calendar className="size-5 text-blue-accent" />
             </div>
@@ -319,7 +319,7 @@ export default async function ClientDashboardPage({ params }: Props) {
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <Waves className="size-5 text-teal-accent" />
             </div>
@@ -338,7 +338,7 @@ export default async function ClientDashboardPage({ params }: Props) {
 
         {/* Two-column row */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 *:rounded-2xl">
-          <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">{t("upcomingBookings")}</h2>
               <Link href="/dashboard/client/bookings" className="flex items-center gap-1 text-xs text-teal-accent transition-colors hover:text-teal-accent-light">
@@ -353,7 +353,7 @@ export default async function ClientDashboardPage({ params }: Props) {
         </div>
 
         {/* Session history */}
-        <div className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[4%] p-6 backdrop-blur-md">
+        <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">{t("sessionHistory")}</h2>
           </div>

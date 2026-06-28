@@ -58,7 +58,7 @@ export default async function ClientMessagesPage({ params }: Props) {
           <button
             key={msg.id}
             type="button"
-            className="flex cursor-pointer items-start gap-3 rounded-2xl border border-white/10 bg-white/[4%] p-4 text-left backdrop-blur-md transition-colors hover:bg-white/[6%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+            className="flex cursor-pointer items-start gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-4 text-left shadow-xl shadow-black/20 backdrop-blur-md transition-colors hover:bg-blue-400/[12%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
           >
             <div className="relative shrink-0">
               <Image

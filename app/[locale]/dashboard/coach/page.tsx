@@ -162,7 +162,7 @@ export default async function CoachDashboardPage({ params }: Props) {
   return (
     <>
       {/* Desktop: outer glass card, margin + height matched to sidebar */}
-      <div className="hidden h-full w-full flex-col rounded-2xl border border-white/10 bg-white/[4%] backdrop-blur-md lg:flex">
+      <div className="hidden h-full w-full flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] shadow-xl shadow-black/20 backdrop-blur-md lg:flex">
 
         {/* === Top of card: welcome header === */}
         <div className="shrink-0 border-b border-white/10 px-6 py-5">
@@ -175,7 +175,7 @@ export default async function CoachDashboardPage({ params }: Props) {
           {/* Stats row */}
           <div className="grid shrink-0 grid-cols-1 gap-10 border-b border-white/10 p-6 md:grid-cols-3 *:rounded-2xl">
             {/* Card 1: Sessions this month */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
                 <Calendar className="size-5 text-blue-accent" />
               </div>
@@ -192,7 +192,7 @@ export default async function CoachDashboardPage({ params }: Props) {
             </div>
 
             {/* Card 2: Average rating */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <Star className="size-5 text-teal-accent" />
               </div>
@@ -204,7 +204,7 @@ export default async function CoachDashboardPage({ params }: Props) {
             </div>
 
             {/* Card 3: Active students */}
-            <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <Users className="size-5 text-teal-accent" />
               </div>
@@ -224,7 +224,7 @@ export default async function CoachDashboardPage({ params }: Props) {
           {/* Two-column row */}
           <div className="grid shrink-0 grid-cols-1 gap-10 border-b border-white/10 p-6 md:grid-cols-2 *:rounded-2xl">
             {/* Left: Pending requests */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">
                 {t("pendingRequests")}
               </h2>
@@ -234,7 +234,7 @@ export default async function CoachDashboardPage({ params }: Props) {
             </div>
 
             {/* Right: My availability */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+            <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
               <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">
                 {t("myAvailability")}
               </h2>
@@ -337,7 +337,7 @@ export default async function CoachDashboardPage({ params }: Props) {
 
         {/* Stats row */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 *:rounded-2xl">
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
               <Calendar className="size-5 text-blue-accent" />
             </div>
@@ -352,7 +352,7 @@ export default async function CoachDashboardPage({ params }: Props) {
               +2 {t("statsSessionsTrend")}
             </p>
           </div>
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <Star className="size-5 text-teal-accent" />
             </div>
@@ -362,7 +362,7 @@ export default async function CoachDashboardPage({ params }: Props) {
             </div>
             <StarRating value={4.8} size={14} />
           </div>
-          <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-3 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <Users className="size-5 text-teal-accent" />
             </div>
@@ -381,13 +381,13 @@ export default async function CoachDashboardPage({ params }: Props) {
 
         {/* Two-column row */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 *:rounded-2xl">
-          <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">{t("pendingRequests")}</h2>
             <div className="flex flex-col gap-4">
               <CoachPendingRequestsList requests={pendingRequests} />
             </div>
           </div>
-          <div className="flex flex-col gap-4 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
+          <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">{t("myAvailability")}</h2>
             <div className="flex flex-wrap gap-2">
               {coachDays.map((day) => (
@@ -403,7 +403,7 @@ export default async function CoachDashboardPage({ params }: Props) {
         </div>
 
         {/* Upcoming sessions */}
-        <div className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[4%] p-6 backdrop-blur-md">
+        <div className="flex flex-col gap-4 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">{t("upcomingSessions")}</h2>
           </div>

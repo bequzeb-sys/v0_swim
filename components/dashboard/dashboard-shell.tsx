@@ -122,7 +122,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
         <motion.div
           animate={{ width: collapsed ? "5rem" : "18rem" }}
           transition={{ type: "spring", stiffness: 260, damping: 28 }}
-          className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[5%] shadow-xl shadow-black/40 backdrop-blur-md"
+          className="flex h-full flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] shadow-xl shadow-black/20 backdrop-blur-md"
         >
           {/* Logo row + collapse toggle */}
           <div className="flex shrink-0 items-center border-b border-white/10 px-3 py-5">

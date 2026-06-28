@@ -36,7 +36,7 @@ export function ProgressChart({ locale }: ProgressChartProps) {
   })
 
   return (
-    <section className="rounded-2xl border border-white/10 bg-white/[4%] p-5 backdrop-blur-md">
+    <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-medium uppercase tracking-wider text-white/40">

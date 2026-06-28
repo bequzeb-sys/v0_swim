@@ -186,7 +186,7 @@ export default async function CoachProfilePage({ params }: Props) {
 
           {/* Right: booking panel */}
           <div className="sm:col-span-1">
-            <div className="rounded-2xl border border-white/10 bg-white/[4%] p-5 backdrop-blur-md">
+            <div className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
               <p className="mb-1 text-2xl font-bold text-white">{coach.price}</p>
               <p className="mb-4 text-sm text-white/50">{tc("priceUnit")}</p>
               <BookingPanel coach={coach} locale={locale} />
