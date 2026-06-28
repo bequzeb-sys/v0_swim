@@ -6,7 +6,7 @@ export function Hero() {
   const t = useTranslations("hero")
 
   return (
-    <section className="relative px-6 pb-12 pt-36 md:pt-44">
+    <section className="relative px-6 pb-12 pt-8 md:pt-10">
       <div className="mx-auto max-w-5xl text-center">
         <h1 className="text-balance text-5xl font-extrabold leading-[0.98] tracking-tight text-white sm:text-6xl md:text-7xl">
           {t("title1")}
