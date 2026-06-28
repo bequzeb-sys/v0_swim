@@ -3,163 +3,265 @@
 ## Stack
 - Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, shadcn/ui
 - Package manager: pnpm only. Never suggest npm/yarn commands or generate
-  package-lock.json/yarn.lock.
+ package-lock.json/yarn.lock.
 - Icons: lucide-react only.
 - CSS: Tailwind v4 with `@import 'tailwindcss'` + `@tailwindcss/postcss`
-  PostCSS plugin. No tailwind.config.ts — design tokens live in `app/globals.css`.
+ PostCSS plugin. No tailwind.config.ts — design tokens live in `app/globals.css`.
 
 ## Content & i18n
 - All user-visible copy lives in `messages/fr.json` (primary) and
-  `messages/en.json` (secondary), accessed via next-intl's `useTranslations()`
-  hook. Never hardcode user-visible strings directly in JSX.
+ `messages/en.json` (secondary), accessed via next-intl's `useTranslations()`
+ hook. Never hardcode user-visible strings directly in JSX.
 - `lib/content.ts` is deprecated/unused — do not add new copy there, and flag
-  it for removal if you encounter it.
+ it for removal if you encounter it.
 - French is the primary/default locale. Every new string added to `fr.json`
-  must have a matching key added to `en.json` in the same change.
+ must have a matching key added to `en.json` in the same change.
 - Never invent translations silently — if unsure of an English phrasing, flag
-  it rather than guessing.
+ it rather than guessing.
 
 ## Components
 - One component = one file, PascalCase filename matching the default export.
 - Functional components only, typed props via an explicit `interface` (not inline
-  object types), e.g. `interface CoachCardProps { coach: Coach }`.
+ object types), e.g. `interface CoachCardProps { coach: Coach }`.
 - No inline `style={{...}}` objects except for things Tailwind genuinely cannot
-  express (e.g. dynamic background-image URLs, gradient stops with alpha values).
-  Everything else must use Tailwind utility classes.
+ express (e.g. dynamic background-image URLs, gradient stops with alpha values).
+ Everything else must use Tailwind utility classes.
 - No raw hex/oklch colors in component files. All colors must reference the
-  design tokens defined in `app/globals.css` (e.g. `bg-teal-accent`,
-  `text-text-secondary`, `fill-star-gold`).
-  - This rule applies to `.tsx` component files and any other non-CSS files.
-  - `app/globals.css` is the token source of truth and is expected to contain
-    raw hex/oklch values in its `:root` and `.dark` variable blocks —
-    that is correct, not a violation.
+ design tokens defined in `app/globals.css` (e.g. `bg-teal-accent`,
+ `text-text-secondary`, `fill-star-gold`).
+ - This rule applies to `.tsx` component files and any other non-CSS files.
+ - `app/globals.css` is the token source of truth and is expected to contain
+ raw hex/oklch values in its `:root` and `.dark` variable blocks —
+ that is correct, not a violation.
 - Shared types (`Coach`, `NavLink`, etc.) live in `/types`, never
-  re-declared inline in multiple components.
+ re-declared inline in multiple components.
+
+### Content-card design system (canonical glass-card recipe)
+- ONE canonical surface treatment for content cards app-wide:
+
+```
+rounded-3xl border-blue-300/20 bg-blue-400/[8%] shadow-xl
+shadow-black/20 backdrop-blur-md
+```
+
+- Applied to: coach cards, pricing cards, for-coaches benefit cards, footer
+ strip, testimonial card, dashboard stat/booking/message/schedule cards,
+ dashboard sidebar + content frame, onboarding shell containers, login/signup
+ form containers, coach profile page panel, coaches-listing filter sidebar.
+- Documented exceptions — do NOT apply this recipe to these, they are
+ intentionally distinct:
+  - Status-coded cards (`components/dashboard/coach-pending-requests.tsx`)
+    — teal/amber/faded-white color-coding is semantic (accepted/pending/
+    declined). Converting these would erase meaningful state signaling.
+  - Dashed-border "add new item" affordances (e.g. coach schedule's
+    "Add slot" button) — dashed border + transparent bg is a deliberate
+    "click here to add" UX convention, distinct from content cards.
+  - Signup `RoleCard` components (`app/[locale]/signup/page.tsx`) — hover
+    state intentionally shifts teal to match the client/coach role icons
+    inside; do not normalize to a single hover color.
+  - Featured/headline callouts that need to stand out from sibling cards
+    (the for-coaches "Inscription et 3 premières réservations" callout,
+    How It Works' Step 3 card) — these keep a distinct teal-gradient
+    identity (`border-teal-accent/40 bg-gradient-to-r from-teal-accent/15
+    via-teal-accent/5 to-transparent`) precisely BECAUSE they need to
+    visually outrank their neighbors. Don't "fix" this inconsistency —
+    it's load-bearing hierarchy.
+  - Floating popovers, the shared Dialog, and filter/selection pills —
+    see their own existing sections below; these were never part of the
+    content-card system to begin with.
+- When adding a NEW content card anywhere in the app, use this recipe by
+ default. Only deviate if the card needs one of the above documented
+ exception reasons — and if so, document the new exception here too.
 
 ## Routing
 - Every `<Link>` or button that implies navigation must point to a real route —
-  never `href="#"` or an empty `onClick`. If the destination page doesn't exist
-  yet, create a minimal stub page rather than leaving a dead link.
+ never `href="#"` or an empty `onClick`. If the destination page doesn't exist
+ yet, create a minimal stub page rather than leaving a dead link.
 - Routes follow the locale-prefixed structure: `/[locale]/page-name`.
 - **Documented exception:** `href="#"` on "Subscribe" (S'abonner) and "Become a
-  coach" (Devenir coach) CTAs is accepted pending real payment/signup infrastructure.
-  Any OTHER new `href="#"` must be explicitly flagged in a comment.
+ coach" (Devenir coach) CTAs is accepted pending real payment/signup infrastructure.
+ Any OTHER new `href="#"` must be explicitly flagged in a comment.
 
 ### Buttons (canonical CTA system)
 - ONE Button component: `components/ui/button.tsx`
 - Three variants, all `rounded-xl` (NEVER `rounded-full` pills, NEVER ad-hoc
-  inline button styling):
-  - `variant="primary"` (teal) — "perform the action": search, book, confirm,
-    save, submit, continue
-  - `variant="entry"` (blue) — "enter / start the journey": Commencer, Dashboard,
-    Become a coach, Subscribe
-  - `variant="ghost"` (transparent) — tertiary actions
+ inline button styling):
+ - `variant="primary"` (teal) — "perform the action": search, book, confirm,
+ save, submit, continue
+ - `variant="entry"` (blue) — "enter / start the journey": Commencer, Dashboard,
+ Become a coach, Subscribe
+ - `variant="ghost"` (transparent) — tertiary actions
 - The shape (`rounded-xl`) is shared across ALL variants. Color signals role,
-  shape signals "this is a button." Never use `rounded-full` or pill-shaped
-  buttons.
+ shape signals "this is a button." Never use `rounded-full` or pill-shaped
+ buttons.
 - Supports optional `icon` (left) and `iconRight` (right) props (lucide-react
-  components). Supports `href` prop for polymorphic rendering via Next.js Link.
+ components). Supports `href` prop for polymorphic rendering via Next.js Link.
 - Language switcher is a segmented control, NOT a Button — it's a setting
-  indicator, not an action.
+ indicator, not an action.
 
 ## Images
 - All raster images go through `next/image` (`<Image />`) with explicit width,
-  height, and alt text — never a bare `<img>` tag.
+ height, and alt text — never a bare `<img>` tag.
 - Decorative/background images that must be CSS `background-image` (not `<Image />`)
-  should be marked `aria-hidden="true"` and use the optimized WebP version of the
-  asset (not PNG/JPG) — see `public/underwater-hero.webp` as the existing pattern.
+ should be marked `aria-hidden="true"` and use the optimized WebP version of the
+ asset (not PNG/JPG) — see `public/underwater-hero.webp` as the existing pattern.
 - New image assets must be compressed/converted to WebP before being added to
-  `/public`. Flag any asset over ~200 KB for review before committing.
+ `/public`. Flag any asset over ~200 KB for review before committing.
 
 ## Accessibility
 - Semantic HTML required: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
-  — not generic `<div>` soup for structural elements.
+ — not generic `<div>` soup for structural elements.
 - All interactive elements must be keyboard-reachable and have visible focus
-  states.
+ states.
 - Decorative-only elements (background images, icon-only flourishes) get
-  `aria-hidden="true"`.
+ `aria-hidden="true"`.
+
+### Cursor and focus-visible states (systemic, not per-element)
+- EVERY clickable element needs `cursor-pointer` explicitly — contrary to
+ common assumption, native `<button>` elements do NOT get a pointer cursor
+ by default (the CSS UA default is `cursor: default`). This must be set
+ explicitly on every button, and on any non-button element with an `onClick`
+ handler (e.g. a `motion.div` used as a dismiss backdrop).
+- The canonical focus-visible treatment for native buttons (NOT the shared
+ `Button`/`Pill`/`SelectTrigger` components, which have their own established
+ rings):
+
+ ```
+ focus-visible:outline-none focus-visible:ring-2
+ focus-visible:ring-teal-accent/60
+ ```
+- Disabled buttons intentionally KEEP their focus-visible ring — do not add a
+ `disabled:focus-visible:ring-0` override. A focusable-but-disabled element
+ should remain keyboard-discoverable (W3C guidance); only
+ `pointer-events-none`/`opacity-40` communicate the disabled state, the
+ focus ring stays.
+- When adding any new native `<button>` or `motion.button`, include both
+ `cursor-pointer` and the focus-visible ring from day one — don't rely on a
+ later audit to catch it.
 
 ## Established Patterns
 
 ### Animations
 - Framer Motion is used for the dashboard sidebar (motion.div width
-  transitions, AnimatePresence for label fade/slide). Follow this existing
-  pattern for any new animated UI — do not introduce a different animation
-  approach (e.g. CSS keyframe animations for sidebar collapse/expand).
+ transitions, AnimatePresence for label fade/slide). Follow this existing
+ pattern for any new animated UI — do not introduce a different animation
+ approach (e.g. CSS keyframe animations for sidebar collapse/expand).
 
 ### Dialogs / Modals
 - Use `components/ui/dialog.tsx`, which wraps Base UI's
-  `Dialog.Root / Portal / Backdrop / Popup`. This is NOT Radix.
-  Do not use a "Positioner" API — it does not exist in this setup.
+ `Dialog.Root / Portal / Backdrop / Popup`. This is NOT Radix.
+ Do not use a "Positioner" API — it does not exist in this setup.
 
 ### Auth
 - `useAuth()` from `lib/auth/auth-context.tsx` is the single auth source.
-  Any component that needs the logged-in user's data MUST be a `'use client'`
-  component that reads `useAuth()` directly. Never hardcode a placeholder
-  name or email "for now."
+ Any component that needs the logged-in user's data MUST be a `'use client'`
+ component that reads `useAuth()` directly. Never hardcode a placeholder
+ name or email "for now."
 
 ### next-intl API (important gotchas)
 - `i18n/navigation.ts` exports `{ Link, redirect, useRouter, usePathname }`
-  as named exports only — no default export. Always use `import { Link } from ...`
-  (never `import Link from ...`).
+ as named exports only — no default export. Always use `import { Link } from ...`
+ (never `import Link from ...`).
 - `useTranslations()` does not expose a `.locale` property. To get the current
-  locale in a client component, call `useLocale()` from `next-intl` separately.
+ locale in a client component, call `useLocale()` from `next-intl` separately.
 - In server components, use `getTranslations` from `next-intl/server` (async).
-  In client components, use `useTranslations` from `next-intl` (sync).
+ In client components, use `useTranslations` from `next-intl` (sync).
 - next-intl's router (from `i18n/navigation`) auto-prefixes the current
-  locale on `push()` / `Link href`. ALWAYS pass UNPREFIXED paths
-  (e.g. `/coaches/sophie-chen`, not `/fr/coaches/sophie-chen`). Mixing a
-  prefixed path with next-intl's router produces double-locale URLs like
-  `/fr/fr/coaches/sophie-chen`. If you need to navigate without locale
-  handling, use `next/navigation`'s router instead — but that's almost
-  always wrong in this app since pages are locale-prefixed.
+ locale on `push()` / `Link href`. ALWAYS pass UNPREFIXED paths
+ (e.g. `/coaches/sophie-chen`, not `/fr/coaches/sophie-chen`). Mixing a
+ prefixed path with next-intl's router produces double-locale URLs like
+ `/fr/fr/coaches/sophie-chen`. If you need to navigate without locale
+ handling, use `next/navigation`'s router instead — but that's almost
+ always wrong in this app since pages are locale-prefixed.
+- next-intl supports localized URL path segments via the `pathnames` config
+ in `i18n/routing.ts` (e.g. `/coaches` → `/recherche` in FR, `/search` in EN).
+ Once `pathnames` is configured, EVERY route not explicitly listed in the
+ `pathnames` map fails strict type-checking on `Link`/`router.push`. If you
+ add a new top-level route, add it to the `pathnames` map (even as
+ `'/new-route': '/new-route'` for an unlocalized route) or every existing
+ `Link`/`router` call elsewhere may start failing to type-check.
+- Dynamic segments (e.g. `/coaches/[id]`) require the OBJECT form when
+ navigating: `{ pathname: "/coaches/[id]", params: { id } }` — a plain string
+ path is rejected once `pathnames` is configured.
+- For locale-switching ON a dynamic route, pass BOTH `pathname` (from
+ `usePathname()`) AND `params` (from `useParams()`) to `router.replace()` —
+ omitting `params` loses the dynamic segment when switching locale.
 
 ### shadcn defaults in dark mode
 - shadcn/ui components ship with `dark:` variant classes that have
-  HIGHER specificity than plain Tailwind utility classes (e.g.
-  `dark:bg-input/30` on `SelectTrigger`, dark-mode default backgrounds on
-  popover surfaces, etc.).
+ HIGHER specificity than plain Tailwind utility classes (e.g.
+ `dark:bg-input/30` on `SelectTrigger`, dark-mode default backgrounds on
+ popover surfaces, etc.).
 - When overriding shadcn styling in dark-themed UI, plain `bg-transparent`
-  will NOT override `dark:bg-input/30` — Tailwind's `dark:` variant
-  always wins.
+ will NOT override `dark:bg-input/30` — Tailwind's `dark:` variant
+ always wins.
 - Always add explicit `dark:` prefixed overrides:
-  `dark:bg-transparent dark:hover:bg-transparent
-  dark:data-[state=open]:bg-transparent`.
+ `dark:bg-transparent dark:hover:bg-transparent
+ dark:data-[state=open]:bg-transparent`.
 - If the library uses non-Tailwind CSS (e.g. react-day-picker's `rdp-*`
-  classes) with their own dark mode rules, use `dark:!utility` (!important)
-  to win over them.
+ classes) with their own dark mode rules, use `dark:!utility` (!important)
+ to win over them.
+- Base UI's `Select` and `Popover` share the same `modal` prop but have
+ OPPOSITE defaults: `Select.Root`'s `modal` defaults to `true` (locks page
+ scroll while open), `Popover.Root`'s defaults to `false` (page stays
+ scrollable). If a `Select` dropdown unexpectedly locks page scroll while a
+ `Popover` next to it doesn't, this is why — set `modal={false}` explicitly
+ on the shared `components/ui/select.tsx` wrapper (already done) rather than
+ passing it per call site.
 
 ### Floating popover design system
 - The app has ONE canonical visual treatment for floating popover
-  surfaces (dropdowns, calendar pickers, future tooltips, etc.):
+ surfaces (dropdowns, calendar pickers, future tooltips, etc.):
 
-  ```
-  rounded-2xl border border-white/10 bg-white/[8%]
-  shadow-xl shadow-black/20 backdrop-blur-md text-white
-  ```
+ ```
+ rounded-2xl border border-white/10 bg-white/[8%]
+ shadow-xl shadow-black/20 backdrop-blur-md text-white
+ ```
 - Hover/focus state for items inside these popovers:
-  `focus:bg-white/10 focus:text-white`.
+ `focus:bg-white/10 focus:text-white`.
 - Source of truth: `components/date-picker-field.tsx` popover,
-  `components/search-bar.tsx` `SelectContent`.
+ `components/search-bar.tsx` `SelectContent`.
 - When adding new floating UI (any new popover, dropdown, or tooltip),
-  match this exact treatment. Do NOT introduce a new visual style for
-  floating surfaces — consistency across these elements is the design
-  system contract.
+ match this exact treatment. Do NOT introduce a new visual style for
+ floating surfaces — consistency across these elements is the design
+ system contract.
 
 ### Customizing third-party components
 - When a third-party component (react-day-picker, shadcn primitives,
-  Base UI) doesn't behave as needed, prefer REPLACING the offending part
-  with custom JSX over fighting the library's internal CSS.
+ Base UI) doesn't behave as needed, prefer REPLACING the offending part
+ with custom JSX over fighting the library's internal CSS.
 - Example: react-day-picker v10's Nav was structurally hard to reposition
-  via CSS. Fix: pass `hideNavigation={true}` and render a custom header
-  with our own buttons. Took one round; CSS-only patches took six rounds
-  and never fully worked.
+ via CSS. Fix: pass `hideNavigation={true}` and render a custom header
+ with our own buttons. Took one round; CSS-only patches took six rounds
+ and never fully worked.
 - Sign you should switch from "patch the library" to "replace the part":
-  if you've made 2+ CSS attempts and each produces a different failure
-  mode, the architecture is the problem, not the styling.
+ if you've made 2+ CSS attempts and each produces a different failure
+ mode, the architecture is the problem, not the styling.
+- When a Base UI component renders its value/label display separately from
+ its option list (e.g. `Select.Value` vs. `Select.Item`), do NOT assume the
+ value display auto-resolves a label from the selected option. Base UI's
+ `<Select.Value>` renders the RAW stored value by default; it only shows a
+ translated/formatted label if you pass `children` as a function:
+ `<Select.Value>{(value) => translateLabel(value)}</Select.Value>`. Passing
+ `undefined` as children does NOT trigger a placeholder fallback once a real
+ value is set — Base UI considers any non-null value "selected" and skips
+ the placeholder branch entirely.
 
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an
-  existing util already covers the need.
+ existing util already covers the need.
 - Run `pnpm build` locally before considering a feature "done" — it must build
-  with zero errors.
+ with zero errors.
+
+## Spacing/layout disputes — measure, don't calculate
+- When a visual spacing/gap issue persists across 2+ rounds of `className`
+ value changes that don't match the rendered result, STOP recalculating from
+ source code. Source-level math (padding + margin + line-height + parent
+ overflow, etc.) frequently fails to predict real rendered spacing, especially
+ with sticky/floating elements, custom line-heights, or multi-layer wrapper
+ components.
+- Instead: take a screenshot of the actual rendered page, measure the gap
+ directly from the image (even approximately), and apply ONE direct value
+ change based on that real measurement. This converges in 1-2 rounds;
+ continued on-paper recalculation can drag on indefinitely without ever
+ matching what's actually on screen.
