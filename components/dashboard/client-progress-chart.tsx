@@ -45,7 +45,7 @@ export function ProgressChart({ locale }: ProgressChartProps) {
         {/* Selector — visual only */}
         <button
           type="button"
-          className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/60 transition-colors hover:bg-white/10"
+          className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/60 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           <span>{t("performanceScore")}</span>
           <TrendingUp className="size-3 text-teal-accent" />

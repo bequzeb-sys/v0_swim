@@ -96,7 +96,7 @@ function BookingRow({ booking, onCancel }: BookingRowProps) {
         <button
           type="button"
           onClick={() => onCancel(booking.id)}
-          className="shrink-0 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white/70 active:scale-[0.97]"
+          className="shrink-0 cursor-pointer rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 active:scale-[0.97]"
         >
           {t("cancel")}
         </button>

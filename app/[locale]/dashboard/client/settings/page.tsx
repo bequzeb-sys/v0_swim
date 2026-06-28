@@ -76,7 +76,7 @@ export default function ClientSettingsPage() {
           <div className="flex gap-2">
             <button
               type="button"
-              className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
+              className={`flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 ${
                 locale === "fr"
                   ? "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
                   : "border-white/10 bg-white/[4%] text-white/50 hover:bg-white/[6%]"
@@ -89,7 +89,7 @@ export default function ClientSettingsPage() {
             </button>
             <button
               type="button"
-              className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
+              className={`flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 ${
                 locale === "en"
                   ? "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
                   : "border-white/10 bg-white/[4%] text-white/50 hover:bg-white/[6%]"

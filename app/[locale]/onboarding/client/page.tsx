@@ -23,7 +23,7 @@ function GoalCard({
     <button
       type="button"
       onClick={onClick}
-      className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/[4%] p-4 text-left transition-all hover:border-teal-accent/40 hover:bg-white/[6%] active:scale-[0.98]"
+      className="group flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-white/[4%] p-4 text-left transition-all hover:border-teal-accent/40 hover:bg-white/[6%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 active:scale-[0.98]"
     >
       <div
         className={`flex size-5 shrink-0 items-center justify-center rounded-md border transition-all ${

@@ -102,7 +102,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-30 cursor-pointer bg-black/60 backdrop-blur-sm lg:hidden"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
@@ -178,7 +178,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
               type="button"
               onClick={() => setCollapsed((c) => !c)}
               aria-label={collapsed ? t("sidebar.expandSidebar") : t("sidebar.collapseSidebar")}
-              className="hidden size-7 shrink-0 items-center justify-center rounded-md text-white/40 lg:flex"
+              className="hidden size-7 shrink-0 cursor-pointer items-center justify-center rounded-md text-white/40 transition-colors hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 lg:flex"
               whileHover={{ scale: 1.1, color: "rgba(255,255,255,0.8)" }}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -208,7 +208,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                       onClick={() => handleNav(href)}
                       aria-label={label}
                       className={cn(
-                        "group relative flex w-full items-center rounded-xl py-2.5 text-sm font-medium",
+                        "group relative flex w-full cursor-pointer items-center rounded-xl py-2.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
                         active
                           ? "bg-teal-accent/15 text-teal-accent"
                           : "text-white/60",
@@ -276,7 +276,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   type="button"
                   onClick={handleLogout}
                   aria-label={t("sidebar.logout")}
-                  className="flex size-9 items-center justify-center rounded-xl text-white/40"
+                  className="flex size-9 cursor-pointer items-center justify-center rounded-xl text-white/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.8)" }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -314,7 +314,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 <motion.button
                   type="button"
                   onClick={handleLogout}
-                  className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm text-white/50"
+                  className="flex w-full cursor-pointer items-center gap-2 rounded-xl px-3 py-2 text-sm text-white/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   whileHover={{ scale: 1.01, backgroundColor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.8)" }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 28 }}
@@ -346,7 +346,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
         <motion.button
           type="button"
           onClick={() => setMobileOpen(true)}
-          className="flex size-8 items-center justify-center rounded-lg text-white/60"
+          className="flex size-8 cursor-pointer items-center justify-center rounded-lg text-white/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
           aria-label="Open menu"
           whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
           whileTap={{ scale: 0.95 }}

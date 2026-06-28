@@ -42,7 +42,8 @@ export function Pill({
       aria-pressed={selected}
       aria-label={ariaLabel}
       className={cn(
-        "inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-sm transition-all",
+        "inline-flex cursor-pointer items-center gap-1 rounded-lg border px-2 py-1 text-sm transition-all",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
         "disabled:cursor-not-allowed disabled:opacity-50",
         selected
           ? "border-teal-accent bg-teal-accent/15 text-teal-accent-light"

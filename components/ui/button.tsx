@@ -27,7 +27,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 }
 
 const baseClasses =
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl text-base font-semibold no-underline transition-all duration-150 outline-none select-none focus-visible:ring-2 focus-visible:ring-teal-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40"
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl text-base font-semibold no-underline transition-all duration-150 outline-none select-none focus-visible:ring-2 focus-visible:ring-teal-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-40"
 
 const sizeClasses = "px-6 py-3"
 

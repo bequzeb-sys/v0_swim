@@ -39,7 +39,7 @@ export function LanguageSwitcher() {
       <Popover.Trigger
         aria-label={triggerLabel}
         className={cn(
-          "inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5",
+          "inline-flex cursor-pointer items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5",
           "text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         )}
@@ -66,7 +66,7 @@ export function LanguageSwitcher() {
                   type="button"
                   onClick={() => switchLocale(locale)}
                   className={cn(
-                    "flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm font-medium",
+                    "flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm font-medium",
                     "text-white/70 transition-colors",
                     "hover:bg-white/10 hover:text-white",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"

@@ -54,7 +54,7 @@ function AuthPanel() {
         <button
           type="button"
           onClick={() => login(SAMPLE_CLIENT)}
-          className="flex w-full items-center gap-2 rounded-lg bg-teal-accent/20 px-3 py-2 text-sm font-medium text-teal-accent transition-colors hover:bg-teal-accent/30"
+          className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-teal-accent/20 px-3 py-2 text-sm font-medium text-teal-accent transition-colors hover:bg-teal-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           <LogIn className="size-3.5 shrink-0" />
           Log in as Client
@@ -62,7 +62,7 @@ function AuthPanel() {
         <button
           type="button"
           onClick={() => login(SAMPLE_COACH)}
-          className="flex w-full items-center gap-2 rounded-lg bg-blue-accent/20 px-3 py-2 text-sm font-medium text-blue-accent transition-colors hover:bg-blue-accent/30"
+          className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-blue-accent/20 px-3 py-2 text-sm font-medium text-blue-accent transition-colors hover:bg-blue-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           <LogIn className="size-3.5 shrink-0" />
           Log in as Coach
@@ -74,7 +74,7 @@ function AuthPanel() {
         <button
           type="button"
           onClick={logout}
-          className="flex w-full items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-sm font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white/80"
+          className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-sm font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           <LogOut className="size-3.5 shrink-0" />
           Log out

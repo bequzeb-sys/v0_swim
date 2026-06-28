@@ -127,7 +127,7 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
                         type="button"
                         onClick={() => setSelectedDate(dateStr)}
                         className={cn(
-                          "flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium transition-all",
+                          "flex cursor-pointer items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
                           isSelected
                             ? "border-blue-accent bg-blue-accent/15 text-white"
                             : "border-white/10 bg-white/[4%] text-white/70 hover:border-white/20 hover:bg-white/[6%]"

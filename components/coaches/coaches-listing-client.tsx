@@ -374,7 +374,7 @@ export function CoachesListingClient({
         <button
           type="button"
           onClick={resetFilters}
-          className="mt-2 w-full rounded-lg border border-white/10 bg-white/5 py-2 text-sm text-white/60 transition-colors hover:border-white/20 hover:text-white/80"
+          className="mt-2 w-full cursor-pointer rounded-lg border border-white/10 bg-white/5 py-2 text-sm text-white/60 transition-colors hover:border-white/20 hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           {page.filters.reset}
         </button>
@@ -424,7 +424,7 @@ export function CoachesListingClient({
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:border-white/25"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
               >
                 <SlidersHorizontal className="size-4" />
                 {page.mobileFilters}
@@ -440,7 +440,7 @@ export function CoachesListingClient({
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="mt-4 rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white/70 transition-colors hover:border-white/25 hover:text-white"
+                  className="mt-4 cursor-pointer rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white/70 transition-colors hover:border-white/25 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {page.emptyReset}
                 </button>

@@ -89,7 +89,7 @@ function PendingRequestRow({ req, status, onAccept, onDecline }: PendingRequestR
         <button
           type="button"
           onClick={() => onAccept(req.id)}
-          className="flex items-center gap-1.5 rounded-lg border border-teal-accent/40 bg-teal-accent/10 px-3 py-1.5 text-xs font-medium text-teal-accent transition-colors hover:bg-teal-accent/20 active:scale-[0.97]"
+          className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-teal-accent/40 bg-teal-accent/10 px-3 py-1.5 text-xs font-medium text-teal-accent transition-colors hover:bg-teal-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 active:scale-[0.97]"
         >
           <Check className="size-3" />
           {t("pendingAccept")}
@@ -97,7 +97,7 @@ function PendingRequestRow({ req, status, onAccept, onDecline }: PendingRequestR
         <button
           type="button"
           onClick={() => onDecline(req.id)}
-          className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-white/20 hover:bg-white/10 active:scale-[0.97]"
+          className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-white/20 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 active:scale-[0.97]"
         >
           <X className="size-3" />
           {t("pendingDecline")}

@@ -88,7 +88,7 @@ export default function CoachSchedulePage() {
           <button
             type="button"
             onClick={addSlot}
-            className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+            className="flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
           >
             <Plus className="size-4" />
             {t("scheduleAddSlot")}
@@ -137,7 +137,7 @@ export default function CoachSchedulePage() {
               <button
                 type="button"
                 onClick={() => removeSlot(slot.id)}
-                className="self-end rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/40 transition-colors hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 sm:self-auto"
+                className="cursor-pointer self-end rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/40 transition-colors hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 sm:self-auto"
               >
                 ✕
               </button>
@@ -148,7 +148,7 @@ export default function CoachSchedulePage() {
           <button
             type="button"
             onClick={addSlot}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-white/10 bg-white/[2%] p-4 text-sm font-medium text-white/40 transition-colors hover:border-teal-accent/30 hover:bg-teal-accent/5 hover:text-teal-accent"
+            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-dashed border-white/10 bg-white/[2%] p-4 text-sm font-medium text-white/40 transition-colors hover:border-teal-accent/30 hover:bg-teal-accent/5 hover:text-teal-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
           >
             <Plus className="size-4" />
             {t("scheduleAddSlot")}
