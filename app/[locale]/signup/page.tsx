@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 
 interface RoleCardProps {
-  href: string | { pathname: string; query?: Record<string, string> }
+  href: Parameters<typeof Link>[0]["href"]
   icon: React.ReactNode
   title: string
   description: string
@@ -34,10 +34,10 @@ export default function SignupPage() {
   const searchParams = useSearchParams()
   const redirectParam = searchParams.get("redirect")
 
-  const clientHref = redirectParam
+  const clientHref: Parameters<typeof Link>[0]["href"] = redirectParam
     ? { pathname: "/signup/client", query: { redirect: redirectParam } }
     : "/signup/client"
-  const coachHref = redirectParam
+  const coachHref: Parameters<typeof Link>[0]["href"] = redirectParam
     ? { pathname: "/signup/coach", query: { redirect: redirectParam } }
     : "/signup/coach"
 

@@ -4,9 +4,14 @@ import { cn } from "@/lib/utils"
 
 type ButtonVariant = "primary" | "entry" | "ghost"
 
+// Accept next-intl's strict href type so we can pass either a plain string
+// (same in both locales) or the localized object form ({ pathname, params })
+// without `as` casts at every call site.
+type ButtonHref = Parameters<typeof Link>[0]["href"] | string
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
-  href?: string
+  href?: ButtonHref
   icon?: LucideIcon
   iconRight?: LucideIcon
   disabled?: boolean
@@ -72,7 +77,7 @@ export function Button({
   if (href !== undefined) {
     return (
       <Link
-        href={href}
+        href={href as Parameters<typeof Link>[0]["href"]}
         onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
         className={classes}
         aria-disabled={disabled}

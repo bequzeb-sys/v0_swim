@@ -36,7 +36,10 @@ export default function SignupClientPage() {
 
     const redirectParam = searchParams.get("redirect")
     if (redirectParam) {
-      router.push(`/onboarding/client?redirect=${encodeURIComponent(redirectParam)}`)
+      router.push({
+        pathname: "/onboarding/client",
+        query: { redirect: redirectParam },
+      })
     } else {
       router.push("/onboarding/client")
     }

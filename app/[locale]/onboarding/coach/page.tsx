@@ -59,7 +59,10 @@ export default function OnboardingCoachPage() {
 
   function handleContinue() {
     const params = new URLSearchParams({ step: "2" })
-    router.push(`/onboarding/coach/profile?${params.toString()}`)
+    router.push({
+      pathname: "/onboarding/coach/profile",
+      query: Object.fromEntries(params),
+    })
   }
 
   return (

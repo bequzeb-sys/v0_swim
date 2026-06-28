@@ -17,7 +17,7 @@ export default function OnboardingClientDonePage() {
   function handleCta() {
     const redirectTo = searchParams.get("redirect")
     if (redirectTo) {
-      router.push(redirectTo)
+      router.push(redirectTo as Parameters<typeof router.push>[0])
     } else {
       router.push("/dashboard")
     }

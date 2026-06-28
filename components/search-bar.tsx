@@ -40,8 +40,12 @@ export function SearchBar() {
     if (location.trim()) params.set("location", location.trim())
     if (specialty && specialty !== "all") params.set("badges", specialty)
     if (date) params.set("date", format(date, "yyyy-MM-dd"))
-    const query = params.toString()
-    router.push(`/coaches${query ? `?${query}` : ""}`)
+    const queryString = params.toString()
+    router.push(
+      queryString
+        ? { pathname: "/coaches", query: Object.fromEntries(params) }
+        : "/coaches"
+    )
   }
 
   return (

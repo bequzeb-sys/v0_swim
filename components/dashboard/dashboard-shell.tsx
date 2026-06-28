@@ -60,7 +60,10 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
   useEffect(() => {
     if (user === null) {
-      router.replace("/login?redirect=/dashboard")
+      router.replace({
+        pathname: "/login",
+        query: { redirect: "/dashboard" },
+      })
     }
   }, [user, router])
 
@@ -85,7 +88,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
     router.replace("/")
   }
 
-  function handleNav(href: string) {
+  function handleNav(href: Parameters<typeof router.push>[0]) {
     router.push(href)
   }
 

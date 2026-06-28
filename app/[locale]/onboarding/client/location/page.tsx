@@ -45,7 +45,10 @@ export default function OnboardingClientLocationPage() {
 
   function handleContinue() {
     const params = new URLSearchParams({ step: "3" })
-    router.push(`/onboarding/client/done?${params.toString()}`)
+    router.push({
+      pathname: "/onboarding/client/done",
+      query: Object.fromEntries(params),
+    })
   }
 
   return (

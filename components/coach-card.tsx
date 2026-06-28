@@ -76,9 +76,13 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
 
       {/* CTA */}
       <div className="mt-5">
-        <Button variant="primary" href={`/coaches/${coach.id}`} className="w-full">
-          {t.cardCta}
-        </Button>
+<Button
+        variant="primary"
+        href={{ pathname: "/coaches/[id]", params: { id: coach.id } }}
+        className="w-full"
+      >
+        {t.cardCta}
+      </Button>
       </div>
     </article>
   )

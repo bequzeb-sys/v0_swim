@@ -48,7 +48,10 @@ export default function OnboardingCoachAvailabilityPage() {
 
   function handleContinue() {
     const params = new URLSearchParams({ step: "4" })
-    router.push(`/onboarding/coach/done?${params.toString()}`)
+    router.push({
+      pathname: "/onboarding/coach/done",
+      query: Object.fromEntries(params),
+    })
   }
 
   return (

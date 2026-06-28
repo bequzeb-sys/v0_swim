@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl"
 import { usePathname, useRouter } from "@/i18n/navigation"
+import { useParams } from "next/navigation"
 import { routing } from "@/i18n/routing"
 
 const LOCALE_LABELS: Record<(typeof routing.locales)[number], string> = {
@@ -13,6 +14,11 @@ export function LanguageSwitcher() {
   const currentLocale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
+  // `useParams` from `next/navigation` includes both `[locale]` and our
+  // own dynamic segments (e.g. `[id]` for `/coaches/[id]`). next-intl's
+  // localized router needs both the canonical pathname AND the actual
+  // param values to produce the correct localized URL on locale switch.
+  const routeParams = useParams() as Record<string, string | string[]>
 
   return (
     <div
@@ -30,7 +36,13 @@ export function LanguageSwitcher() {
             aria-current={isActive ? "true" : undefined}
             onClick={() => {
               if (isActive) return
-              router.replace(pathname, { locale })
+              router.replace(
+                {
+                  pathname,
+                  params: routeParams,
+                } as Parameters<typeof router.replace>[0],
+                { locale }
+              )
             }}
             className={
               isActive

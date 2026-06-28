@@ -40,14 +40,18 @@ function LoginForm() {
 
     const redirectTo = searchParams.get("redirect")
     if (redirectTo) {
-      router.push(redirectTo)
+      // `redirectTo` flows from the `redirect` query param (set by protected CTAs),
+      // so its value is only known at runtime. Cast to next-intl's href union.
+      router.push(redirectTo as Parameters<typeof router.push>[0])
     } else {
       router.push("/dashboard")
     }
   }
 
   const redirectParam = searchParams.get("redirect")
-  const signupHref = redirectParam ? { pathname: "/signup", query: { redirect: redirectParam } } : "/signup"
+  const signupHref: Parameters<typeof Link>[0]["href"] = redirectParam
+    ? { pathname: "/signup", query: { redirect: redirectParam } }
+    : "/signup"
 
   return (
     <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[4%] p-8 backdrop-blur-md shadow-2xl">

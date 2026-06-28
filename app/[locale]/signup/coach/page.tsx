@@ -36,7 +36,10 @@ export default function SignupCoachPage() {
 
     const redirectParam = searchParams.get("redirect")
     if (redirectParam) {
-      router.push(`/onboarding/coach?redirect=${encodeURIComponent(redirectParam)}`)
+      router.push({
+        pathname: "/onboarding/coach",
+        query: { redirect: redirectParam },
+      })
     } else {
       router.push("/onboarding/coach")
     }

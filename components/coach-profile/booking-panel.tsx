@@ -150,7 +150,10 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
                       {t("loginPrompt")}
                     </p>
                     <Button
-                      href={`/login?redirect=/coaches/${coach.id}`}
+                      href={{
+                        pathname: "/login",
+                        query: { redirect: `/coaches/${coach.id}` },
+                      }}
                       variant="entry"
                       className="w-full text-sm font-bold"
                     >

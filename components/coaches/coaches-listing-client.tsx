@@ -126,7 +126,7 @@ export function CoachesListingClient({
       if (newDays.size > 0) params.set("days", [...newDays].join(","))
       if (newGender) params.set("gender", newGender)
       const qs = params.toString()
-      router.replace(qs ? `/coaches?${qs}` : "/coaches", { scroll: false })
+      router.replace(qs ? { pathname: "/coaches", query: Object.fromEntries(params) } : "/coaches", { scroll: false })
     },
     [router]
   )
@@ -158,7 +158,7 @@ export function CoachesListingClient({
         if (gender) params.set("gender", gender)
         if (value !== null) params.set(urlKey, String(value))
         const qs = params.toString()
-        router.replace(qs ? `/coaches?${qs}` : "/coaches", { scroll: false })
+        router.replace(qs ? { pathname: "/coaches", query: Object.fromEntries(params) } : "/coaches", { scroll: false })
       }, 200)
     },
     [location, selectedBadges, selectedLanguages, selectedDays, gender, router]
@@ -387,7 +387,7 @@ export function CoachesListingClient({
       {/* Back + page heading (matches /coaches/[id] back-button pattern) */}
       <div className="mx-auto max-w-7xl px-4 pt-6">
         <Link
-          href="/#coaches"
+          href={{ pathname: "/", hash: "coaches" }}
           className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white/80"
         >
           <svg
