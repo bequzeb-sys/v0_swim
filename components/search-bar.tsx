@@ -75,7 +75,13 @@ export function SearchBar() {
             <span className="text-sm text-text-secondary">{t("specialtyLabel")}</span>
             <Select value={specialty} onValueChange={(v) => setSpecialty(v ?? "all")}>
               <SelectTrigger className="h-auto w-full gap-2 rounded-none border-0 bg-transparent p-0 text-lg font-medium text-white shadow-none outline-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 data-[size=default]:h-auto [&_svg]:text-white [&_svg:not([class*='size-'])]:size-4">
-                <SelectValue placeholder={t("specialtyPlaceholder")} />
+                <SelectValue placeholder={t("specialtyPlaceholder")}>
+                  {(value: string | null) =>
+                    value && value !== "all"
+                      ? t(`specialtyOptions.${value}`)
+                      : t("specialtyPlaceholder")
+                  }
+                </SelectValue>
               </SelectTrigger>
               <SelectContent
                 alignItemWithTrigger={false}
