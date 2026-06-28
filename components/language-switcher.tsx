@@ -4,56 +4,86 @@ import { useLocale } from "next-intl"
 import { usePathname, useRouter } from "@/i18n/navigation"
 import { useParams } from "next/navigation"
 import { routing } from "@/i18n/routing"
-
-const LOCALE_LABELS: Record<(typeof routing.locales)[number], string> = {
-  fr: "FR",
-  en: "EN",
-}
+import { useTranslations } from "next-intl"
+import { Popover } from "@base-ui/react/popover"
+import { LanguageFlag } from "@/components/ui/language-flag"
+import type { LanguageCode } from "@/lib/coaches"
+import { cn } from "@/lib/utils"
 
 export function LanguageSwitcher() {
+  const t = useTranslations("languages")
   const currentLocale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
-  // `useParams` from `next/navigation` includes both `[locale]` and our
-  // own dynamic segments (e.g. `[id]` for `/coaches/[id]`). next-intl's
-  // localized router needs both the canonical pathname AND the actual
-  // param values to produce the correct localized URL on locale switch.
+  // next-intl needs both the canonical pathname template and the actual param
+  // values from useParams to produce the correctly localized URL.
   const routeParams = useParams() as Record<string, string | string[]>
 
+  const otherLocales = routing.locales.filter((l) => l !== currentLocale)
+
+  function switchLocale(nextLocale: string) {
+    router.replace(
+      {
+        pathname,
+        params: routeParams,
+      } as Parameters<typeof router.replace>[0],
+      { locale: nextLocale }
+    )
+  }
+
+  const triggerLabel =
+    currentLocale === "fr" ? "Changer la langue en English" : "Change language to Français"
+
   return (
-    <div
-      role="group"
-      aria-label="Language switcher"
-      className="inline-flex items-center rounded-xl border border-white/15 bg-white/5 px-1 py-0.5 text-[13px] font-semibold backdrop-blur-md"
-    >
-      {routing.locales.map((locale) => {
-        const isActive = locale === currentLocale
-        return (
-          <button
-            key={locale}
-            type="button"
-            aria-pressed={isActive}
-            aria-current={isActive ? "true" : undefined}
-            onClick={() => {
-              if (isActive) return
-              router.replace(
-                {
-                  pathname,
-                  params: routeParams,
-                } as Parameters<typeof router.replace>[0],
-                { locale }
-              )
-            }}
-            className={
-              isActive
-                ? "rounded-lg bg-white/10 px-3 py-1 text-white shadow-sm transition-colors"
-                : "rounded-lg px-3 py-1 text-white/40 transition-colors hover:text-white/70"
-            }
+    <Popover.Root>
+      <Popover.Trigger
+        aria-label={triggerLabel}
+        className={cn(
+          "inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5",
+          "text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        )}
+      >
+        <LanguageFlag
+          code={currentLocale as LanguageCode}
+          size={22}
+          aria-hidden="true"
+        />
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Positioner sideOffset={8} align="end" className="z-50">
+          <Popover.Popup
+            className={cn(
+              "rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md",
+              "text-white",
+              "data-[state=open]:animate-in data-[state=closed]:animate-out"
+            )}
           >
-            {LOCALE_LABELS[locale]}
-          </button>
-        )
-      })}
-    </div>
+            <div className="flex flex-col gap-1">
+              {otherLocales.map((locale) => (
+                <button
+                  key={locale}
+                  type="button"
+                  onClick={() => switchLocale(locale)}
+                  className={cn(
+                    "flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm font-medium",
+                    "text-white/70 transition-colors",
+                    "hover:bg-white/10 hover:text-white",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  )}
+                >
+                  <LanguageFlag
+                    code={locale as LanguageCode}
+                    size={18}
+                    aria-hidden="true"
+                  />
+                  <span>{t(locale)}</span>
+                </button>
+              ))}
+            </div>
+          </Popover.Popup>
+        </Popover.Positioner>
+      </Popover.Portal>
+    </Popover.Root>
   )
 }
