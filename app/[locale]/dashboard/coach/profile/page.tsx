@@ -36,7 +36,7 @@ export default function CoachProfilePage() {
       >
         {/* Avatar placeholder */}
         <div className="flex items-center gap-4">
-          <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-xl font-bold text-teal-accent">
+          <div className="flex size-16 shrink-0 items-center justify-center rounded-md bg-teal-accent/15 text-xl font-bold text-teal-accent">
             {user?.name?.charAt(0) ?? "C"}
           </div>
           <div>

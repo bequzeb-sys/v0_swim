@@ -262,7 +262,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
               <>
                 {/* Avatar only */}
                 <motion.div
-                  className="flex size-10 items-center justify-center rounded-full bg-teal-accent/20 text-sm font-bold text-teal-accent"
+                  className="flex size-10 items-center justify-center rounded-md bg-teal-accent/20 text-sm font-bold text-teal-accent"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
@@ -289,7 +289,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   layout
                 >
                   <motion.div
-                    className="flex size-8 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-sm font-bold text-teal-accent"
+                    className="flex size-8 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-sm font-bold text-teal-accent"
                     whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >

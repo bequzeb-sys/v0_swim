@@ -176,7 +176,7 @@ export default async function CoachDashboardPage({ params }: Props) {
           <div className="grid shrink-0 grid-cols-1 gap-10 border-b border-white/10 p-6 md:grid-cols-3 *:rounded-2xl">
             {/* Card 1: Sessions this month */}
             <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blue-accent/15">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
                 <Calendar className="size-5 text-blue-accent" />
               </div>
               <div>
@@ -193,7 +193,7 @@ export default async function CoachDashboardPage({ params }: Props) {
 
             {/* Card 2: Average rating */}
             <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <Star className="size-5 text-teal-accent" />
               </div>
               <div>
@@ -205,7 +205,7 @@ export default async function CoachDashboardPage({ params }: Props) {
 
             {/* Card 3: Active students */}
             <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <Users className="size-5 text-teal-accent" />
               </div>
               <div>
@@ -296,7 +296,7 @@ export default async function CoachDashboardPage({ params }: Props) {
                       <tr key={session.id} className="transition-colors hover:bg-white/[2%]">
                         <td className="py-4 pr-4">
                           <div className="flex items-center gap-2.5">
-                            <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-xs font-bold text-teal-accent">
+                            <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-xs font-bold text-teal-accent">
                               {session.clientInitial}
                             </div>
                             <span className="text-sm text-white">{session.clientName}</span>
@@ -338,7 +338,7 @@ export default async function CoachDashboardPage({ params }: Props) {
         {/* Stats row */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 *:rounded-2xl">
           <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blue-accent/15">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
               <Calendar className="size-5 text-blue-accent" />
             </div>
             <div>
@@ -353,7 +353,7 @@ export default async function CoachDashboardPage({ params }: Props) {
             </p>
           </div>
           <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <Star className="size-5 text-teal-accent" />
             </div>
             <div>
@@ -363,7 +363,7 @@ export default async function CoachDashboardPage({ params }: Props) {
             <StarRating value={4.8} size={14} />
           </div>
           <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <Users className="size-5 text-teal-accent" />
             </div>
             <div>
@@ -433,7 +433,7 @@ export default async function CoachDashboardPage({ params }: Props) {
                     <tr key={session.id} className="transition-colors hover:bg-white/[2%]">
                       <td className="py-4 pr-4">
                         <div className="flex items-center gap-2.5">
-                          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-xs font-bold text-teal-accent">{session.clientInitial}</div>
+                          <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-xs font-bold text-teal-accent">{session.clientInitial}</div>
                           <span className="text-sm text-white">{session.clientName}</span>
                         </div>
                       </td>

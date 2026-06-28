@@ -28,7 +28,7 @@ function PendingRequestRow({ req, status, onAccept, onDecline }: PendingRequestR
   if (status === "accepted") {
     return (
       <div className="flex flex-col gap-4 rounded-xl border border-teal-accent/20 bg-teal-accent/5 p-5 opacity-60 sm:flex-row sm:items-start">
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-sm font-bold text-teal-accent">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-teal-accent/15 text-sm font-bold text-teal-accent">
           {req.clientInitial}
         </div>
         <div className="min-w-0 flex-1">
@@ -51,7 +51,7 @@ function PendingRequestRow({ req, status, onAccept, onDecline }: PendingRequestR
   if (status === "declined") {
     return (
       <div className="flex flex-col gap-4 rounded-xl border border-white/10 bg-white/[2%] p-5 opacity-40 sm:flex-row sm:items-start">
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/5 text-sm font-bold text-white/50">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-white/5 text-sm font-bold text-white/50">
           {req.clientInitial}
         </div>
         <div className="min-w-0 flex-1">
@@ -73,7 +73,7 @@ function PendingRequestRow({ req, status, onAccept, onDecline }: PendingRequestR
 
   return (
     <div className="flex flex-col gap-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 sm:flex-row sm:items-start">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-sm font-bold text-amber-400">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-amber-500/15 text-sm font-bold text-amber-400">
         {req.clientInitial}
       </div>
       <div className="min-w-0 flex-1">

@@ -27,7 +27,7 @@ export default function OnboardingCoachDonePage() {
     <OnboardingShell current={4} total={4}>
       <StepIndicator current={4} total={4} />
       <div className="mt-6 flex flex-col items-center text-center">
-        <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-blue-accent/15">
+        <div className="mb-4 flex size-14 items-center justify-center rounded-md bg-blue-accent/15">
           <CheckCircle2 className="size-8 text-blue-accent" />
         </div>
         <h1 className="text-xl font-bold text-white">{t("title")}</h1>

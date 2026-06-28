@@ -77,7 +77,7 @@ export default async function ClientBookingsPage({ params }: Props) {
               alt={booking.coach.name}
               width={56}
               height={56}
-              className="size-14 shrink-0 rounded-full object-cover ring-2 ring-white/10"
+              className="size-14 shrink-0 rounded-md object-cover ring-2 ring-white/10"
             />
             <div className="min-w-0 flex-1">
               <p className="font-medium text-white">{booking.coach.name}</p>

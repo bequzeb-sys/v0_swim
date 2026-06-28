@@ -126,7 +126,7 @@ export default async function ClientDashboardPage({ params }: Props) {
           <div className="grid shrink-0 grid-cols-1 gap-10 border-b border-white/10 p-6 md:grid-cols-3 *:rounded-2xl">
             {/* Card 1: Lessons completed */}
             <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <GraduationCap className="size-5 text-teal-accent" />
               </div>
               <div>
@@ -138,7 +138,7 @@ export default async function ClientDashboardPage({ params }: Props) {
 
             {/* Card 2: Next session */}
             <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blue-accent/15">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
                 <Calendar className="size-5 text-blue-accent" />
               </div>
               <div>
@@ -148,7 +148,7 @@ export default async function ClientDashboardPage({ params }: Props) {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-xs font-bold text-teal-accent">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-xs font-bold text-teal-accent">
                   M
                 </div>
                 <span className="text-xs text-white/50">
@@ -169,7 +169,7 @@ export default async function ClientDashboardPage({ params }: Props) {
 
             {/* Card 3: Total distance */}
             <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+              <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
                 <Waves className="size-5 text-teal-accent" />
               </div>
               <div>
@@ -239,7 +239,7 @@ export default async function ClientDashboardPage({ params }: Props) {
                     <tr key={row.id} className="transition-colors hover:bg-white/[2%]">
                       <td className="py-4 pr-4">
                         <div className="flex items-center gap-2.5">
-                          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-xs font-bold text-teal-accent">
+                          <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-xs font-bold text-teal-accent">
                             {row.coachInitial}
                           </div>
                           <span className="text-sm text-white">{row.coachName}</span>
@@ -290,7 +290,7 @@ export default async function ClientDashboardPage({ params }: Props) {
         {/* Stats row */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 *:rounded-2xl">
           <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <GraduationCap className="size-5 text-teal-accent" />
             </div>
             <div>
@@ -300,7 +300,7 @@ export default async function ClientDashboardPage({ params }: Props) {
             <p className="text-xs text-white/40">{t("statsLessonsEncouragement")}</p>
           </div>
           <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blue-accent/15">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-blue-accent/15">
               <Calendar className="size-5 text-blue-accent" />
             </div>
             <div>
@@ -310,7 +310,7 @@ export default async function ClientDashboardPage({ params }: Props) {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-xs font-bold text-teal-accent">M</div>
+              <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-xs font-bold text-teal-accent">M</div>
               <span className="text-xs text-white/50">{t("withCoach", { coach: "Marc Delorme" })}</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -320,7 +320,7 @@ export default async function ClientDashboardPage({ params }: Props) {
             </div>
           </div>
           <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/[8%] p-6 backdrop-blur-md">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-teal-accent/15">
+            <div className="flex size-11 shrink-0 items-center justify-center rounded-md bg-teal-accent/15">
               <Waves className="size-5 text-teal-accent" />
             </div>
             <div>
@@ -374,7 +374,7 @@ export default async function ClientDashboardPage({ params }: Props) {
                   <tr key={row.id} className="transition-colors hover:bg-white/[2%]">
                     <td className="py-4 pr-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-xs font-bold text-teal-accent">{row.coachInitial}</div>
+                        <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-xs font-bold text-teal-accent">{row.coachInitial}</div>
                         <span className="text-sm text-white">{row.coachName}</span>
                       </div>
                     </td>

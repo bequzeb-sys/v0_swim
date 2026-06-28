@@ -38,7 +38,7 @@ export function Testimonial() {
               width={48}
               height={48}
               aria-hidden="true"
-              className="size-12 shrink-0 rounded-full"
+              className="size-12 shrink-0 rounded-md"
             />
             <div className="flex flex-col text-left">
               <span className="text-base font-bold text-white">

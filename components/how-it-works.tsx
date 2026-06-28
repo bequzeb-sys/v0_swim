@@ -32,7 +32,7 @@ export function HowItWorks() {
             >
               <span
                 aria-hidden="true"
-                className="flex size-12 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-lg font-bold text-teal-accent shadow-lg shadow-teal-accent/20"
+                className="flex size-12 shrink-0 items-center justify-center rounded-md bg-teal-accent/15 text-lg font-bold text-teal-accent shadow-lg shadow-teal-accent/20"
               >
                 {i + 1}
               </span>
@@ -51,7 +51,7 @@ export function HowItWorks() {
           <div className="flex items-center gap-4">
             <span
               aria-hidden="true"
-              className="flex size-12 shrink-0 items-center justify-center rounded-full bg-teal-accent/20 text-lg font-bold text-teal-accent shadow-lg shadow-teal-accent/30"
+              className="flex size-12 shrink-0 items-center justify-center rounded-md bg-teal-accent/20 text-lg font-bold text-teal-accent shadow-lg shadow-teal-accent/30"
             >
               3
             </span>

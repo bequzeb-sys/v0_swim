@@ -40,7 +40,7 @@ export function Pricing() {
                 <li key={key} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-teal-accent"
+                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-teal-accent/15 text-teal-accent"
                   >
                     <Check className="size-3.5" strokeWidth={3} />
                   </span>
@@ -78,7 +78,7 @@ export function Pricing() {
                 <li key={key} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-teal-accent"
+                    className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-teal-accent/15 text-teal-accent"
                   >
                     <Check className="size-3.5" strokeWidth={3} />
                   </span>

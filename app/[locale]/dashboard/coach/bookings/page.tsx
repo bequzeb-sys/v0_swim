@@ -64,7 +64,7 @@ export default async function CoachBookingsPage({ params }: Props) {
             key={booking.id}
             className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[4%] p-4 backdrop-blur-md sm:flex-row sm:items-center"
           >
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-white/60">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-md bg-white/10 text-sm font-bold text-white/60">
               {booking.clientName.charAt(0)}
             </div>
             <div className="min-w-0 flex-1">

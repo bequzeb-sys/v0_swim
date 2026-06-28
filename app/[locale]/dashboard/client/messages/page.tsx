@@ -66,7 +66,7 @@ export default async function ClientMessagesPage({ params }: Props) {
                 alt={msg.coach.name}
                 width={48}
                 height={48}
-                className="size-12 rounded-full object-cover ring-2 ring-white/10"
+                className="size-12 rounded-md object-cover ring-2 ring-white/10"
               />
               {msg.unread && (
                 <span className="absolute -right-0.5 -top-0.5 flex size-3 rounded-full bg-teal-accent ring-2 ring-background" />

@@ -91,7 +91,7 @@ export default async function CoachProfilePage({ params }: Props) {
                 alt={coach.name}
                 width={120}
                 height={120}
-                className="size-28 rounded-full object-cover ring-4 ring-white/10 sm:size-32"
+                className="size-28 rounded-md object-cover ring-4 ring-white/10 sm:size-32"
               />
             </div>
             <div className="min-w-0 flex-1">

@@ -25,7 +25,7 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
           alt={coach.name}
           width={96}
           height={96}
-          className="size-20 shrink-0 rounded-full object-cover ring-2 ring-white/10 sm:size-24"
+          className="size-20 shrink-0 rounded-md object-cover ring-2 ring-white/10 sm:size-24"
         />
         <div className="min-w-0 flex-1">
           <h3 className="text-lg font-bold text-white sm:text-xl">{coach.name}</h3>

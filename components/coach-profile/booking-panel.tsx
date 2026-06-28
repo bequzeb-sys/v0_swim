@@ -172,7 +172,7 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
           ) : (
             <>
               <div className="flex flex-col items-center gap-4 py-4 text-center">
-                <div className="flex size-14 items-center justify-center rounded-full bg-teal-accent/20">
+                <div className="flex size-14 items-center justify-center rounded-md bg-teal-accent/20">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
