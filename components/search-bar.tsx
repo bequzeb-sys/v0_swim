@@ -51,7 +51,7 @@ export function SearchBar() {
   return (
     <div
       id="search"
-      className="mx-auto w-full max-w-5xl rounded-2xl border border-white/10 bg-white/5 p-3 shadow-2xl shadow-black/40 backdrop-blur-md"
+      className="mx-auto w-full max-w-5xl rounded-2xl border border-blue-300/20 bg-blue-400/[8%] p-3 shadow-2xl shadow-black/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
     >
       <div className="flex flex-col gap-3 md:flex-row md:items-stretch md:gap-0">
         {/* Localisation */}
@@ -121,7 +121,7 @@ export function SearchBar() {
         {/* CTA */}
         <div className="flex items-center md:pl-3">
           <Button
-            variant="primary"
+            variant="entry"
             type="button"
             className="h-full md:w-auto"
             onClick={handleSearch}

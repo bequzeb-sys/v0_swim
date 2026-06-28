@@ -17,7 +17,7 @@ interface CoachCardProps {
 
 export function CoachCard({ coach, translations: t }: CoachCardProps) {
   return (
-    <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+    <article className="flex flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
       {/* Top: avatar + info */}
       <div className="flex items-start gap-4 sm:gap-5">
         <Image
@@ -32,7 +32,7 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
           <div className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1">
             {coach.badgeKeys.map((badgeKey, i) => (
               <span key={badgeKey} className="flex items-center gap-1.5">
-                <span className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2.5 py-1 text-xs font-medium text-teal-accent-light sm:px-3 sm:text-sm">
+                <span className="whitespace-nowrap rounded-full border border-blue-400/30 bg-blue-900/40 px-2.5 py-1 text-xs font-medium text-blue-200 sm:px-3 sm:text-sm">
                   {t.badges[badgeKey]}
                 </span>
                 {i < coach.badgeKeys.length - 1 && (

@@ -36,23 +36,13 @@ export function Header() {
 
   return (
     <>
-      {/* Subtle dark strip for nav contrast against the bright top of the photo */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-32"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(5,11,26,0.45) 0%, rgba(5,11,26,0) 100%)",
-        }}
-      />
-
       {/* Floating sticky pill */}
       <header
         className={cn(
-          "sticky top-3 z-50 mx-2 mt-3 transition-all duration-300",
+          "sticky top-3 z-50 mx-auto mt-3 w-fit transition-all duration-300",
           scrolled
-            ? "bg-white/[9%] backdrop-blur-md border-white/15 shadow-lg shadow-black/20"
-            : "bg-white/[3%] backdrop-blur-sm border-white/[8%]"
+            ? "bg-blue-400/[12%] backdrop-blur-xl border-blue-300/25 shadow-lg shadow-black/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+            : "bg-blue-400/[6%] backdrop-blur-lg border-blue-300/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
         )}
         style={{
           borderWidth: "1px",
@@ -61,7 +51,7 @@ export function Header() {
         }}
       >
         <nav
-          className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4"
+          className="flex items-center gap-8 px-5 py-4"
           style={{ borderRadius: "1.125rem" }}
         >
           {/* Logo */}
@@ -95,7 +85,7 @@ export function Header() {
           </ul>
 
           {/* Right-side actions: language switcher + auth-aware CTA */}
-          <div className="flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-3">
             <LanguageSwitcher />
             <HeaderActions />
           </div>
