@@ -22,7 +22,7 @@ export function Pricing() {
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* For clients — booking is free */}
-          <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md md:p-8">
+          <article className="flex flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md md:p-8">
             <span
               aria-hidden="true"
               className="inline-flex w-fit items-center gap-1.5 rounded-full border border-teal-accent/30 bg-teal-accent/10 px-3 py-1 text-xs font-bold text-teal-accent"
@@ -60,7 +60,7 @@ export function Pricing() {
           </article>
 
           {/* For coaches — free until 3 confirmed bookings */}
-          <article className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md md:p-8">
+          <article className="flex flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md md:p-8">
             <span
               aria-hidden="true"
               className="inline-flex w-fit items-center gap-1.5 rounded-full border border-blue-accent/30 bg-blue-accent/10 px-3 py-1 text-xs font-bold text-blue-accent"

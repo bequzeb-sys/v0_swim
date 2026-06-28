@@ -51,7 +51,7 @@ export function ForCoaches() {
           {BENEFITS.map(({ key, Icon }) => (
             <li
               key={key}
-              className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md"
+              className="flex flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md"
             >
               <span
                 aria-hidden="true"

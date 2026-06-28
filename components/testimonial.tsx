@@ -19,7 +19,7 @@ export function Testimonial() {
           </span>
         </div>
 
-        <figure className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md md:p-6">
+        <figure className="relative rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md md:p-6">
           <Quote
             aria-hidden="true"
             className="absolute left-5 top-5 size-6 text-teal-accent"
