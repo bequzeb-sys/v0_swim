@@ -1,6 +1,8 @@
 "use client"
 
 import { LogIn, LogOut, User } from "lucide-react"
+import { useSearchParams } from "next/navigation"
+import { useRouter } from "@/i18n/navigation"
 import { useAuth } from "@/lib/auth/auth-context"
 import type { FakeUser } from "@/lib/auth/types"
 
@@ -20,6 +22,18 @@ const SAMPLE_COACH: FakeUser = {
 
 function AuthPanel() {
   const { user, login, logout } = useAuth()
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  function handleLogin(sample: FakeUser) {
+    login(sample)
+    const redirectTo = searchParams.get("redirect")
+    if (redirectTo) {
+      // `redirectTo` flows from the `redirect` query param (set by protected CTAs),
+      // so its value is only known at runtime. Cast to next-intl's href union.
+      router.push(redirectTo as Parameters<typeof router.push>[0])
+    }
+  }
 
   return (
     <div
@@ -53,7 +67,7 @@ function AuthPanel() {
       <div className="flex flex-col gap-2">
         <button
           type="button"
-          onClick={() => login(SAMPLE_CLIENT)}
+          onClick={() => handleLogin(SAMPLE_CLIENT)}
           className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-teal-accent/20 px-3 py-2 text-sm font-medium text-teal-accent transition-colors hover:bg-teal-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           <LogIn className="size-3.5 shrink-0" />
@@ -61,7 +75,7 @@ function AuthPanel() {
         </button>
         <button
           type="button"
-          onClick={() => login(SAMPLE_COACH)}
+          onClick={() => handleLogin(SAMPLE_COACH)}
           className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-blue-accent/20 px-3 py-2 text-sm font-medium text-blue-accent transition-colors hover:bg-blue-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
         >
           <LogIn className="size-3.5 shrink-0" />

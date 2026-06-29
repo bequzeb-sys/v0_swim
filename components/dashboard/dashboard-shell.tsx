@@ -60,12 +60,16 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
   useEffect(() => {
     if (user === null) {
+      // Use the actual current pathname so a logged-out user deep-linking
+      // to e.g. /dashboard/coach/schedule returns there after login
+      // (not to the generic /dashboard). Matches the booking-panel pattern:
+      // every protected CTA forwards the user's real current path as redirect.
       router.replace({
         pathname: "/login",
-        query: { redirect: "/dashboard" },
+        query: { redirect: pathname },
       })
     }
-  }, [user, router])
+  }, [user, router, pathname])
 
   useEffect(() => {
     setMobileOpen(false)
