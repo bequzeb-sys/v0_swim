@@ -84,6 +84,22 @@ shadow-black/20 backdrop-blur-md
  onboarding chain (`/onboarding/coach` → profile → availability → done) exist
  and work end-to-end; both "Devenir coach" CTAs now link there directly.
  Any OTHER new `href="#"` must be explicitly flagged in a comment.
+- Before adding a `href="#"` placeholder with a "pending infrastructure"
+comment, verify the claim is still true — check whether the actual
+destination (signup page, onboarding flow, etc.) already exists and
+works. Placeholder comments go stale the moment the real
+infrastructure ships; an unreviewed `href="#"` can sit for many
+checkpoints after its blocking reason has already been resolved.
+- Hash-only anchors (`href="#search"`, `href="#pricing"`, etc.) must
+NEVER be routed through next-intl's `<Link>` — next-intl's `Link`
+calls `getPathname()` internally, which has no defined behavior for
+a bare hash string (not a registered route). The shared `Button`
+component (`components/ui/button.tsx`) has a guard clause that
+detects `href` values starting with `#` and renders a native `<a>`
+instead, bypassing next-intl's router entirely — any new component
+that renders its own hash-anchor links (not through `Button`) must
+replicate this same native-`<a>` bypass, or the anchor will silently
+fail to scroll.
 
 ### Buttons (canonical CTA system)
 - ONE Button component: `components/ui/button.tsx`
@@ -100,7 +116,36 @@ shadow-black/20 backdrop-blur-md
 - Supports optional `icon` (left) and `iconRight` (right) props (lucide-react
  components). Supports `href` prop for polymorphic rendering via Next.js Link.
 - Language switcher is a segmented control, NOT a Button — it's a setting
- indicator, not an action.
+indicator, not an action.
+- A pill/navbar container that needs to be WIDER than its content
+(not width-hugging) must NOT combine `justify-between` with a
+width-hugging class (`w-fit`) — `justify-between` requires excess
+width to distribute; `w-fit` provides none, causing all children to
+collapse together with no visible gap. Two real incidents hit this
+exact mistake on the same navbar component.
+- To genuinely center ONE item among several while the other items
+hug the container's edges (e.g. nav links centered, logo left,
+CTA+switcher right, all within ONE wider pill), `justify-between`
++ `gap-*` is insufficient — it centers content WITHIN remaining
+space after edge items claim theirs, not within the full container.
+Use a CSS grid instead: `grid-cols-[auto_1fr_auto]` with the center
+item's column using `justify-self-center` — this guarantees true
+mathematical centering regardless of how wide the edge items are.
+- CAUTION: a grid's middle column can behave unexpectedly when its
+only content is conditionally hidden (`hidden lg:flex` etc.) at
+certain breakpoints — if edge-alignment breaks specifically BELOW a
+breakpoint where the center content disappears, consider a hybrid:
+plain `flex` + `ml-auto` (which reliably pushes trailing content to
+the true edge regardless of whether a middle item exists) BELOW the
+breakpoint, switching to the `grid` centering technique only AT/ABOVE
+the breakpoint where the center content is actually visible (e.g.
+`flex ... lg:grid lg:grid-cols-[auto_1fr_auto]`).
+- A pill/header that needs to never touch the true viewport edges at
+narrow widths (while still capping at a maximum width on wide
+screens) should use `max-w-[min(Xrem,calc(100vw-Yrem))]` rather than
+a plain `max-w-[Xrem]` — this guarantees a minimum edge margin of
+`Y/2`rem on each side at any viewport width, shrinking gracefully
+below the cap instead of ever reaching the screen edge.
 
 ## Images
 - All raster images go through `next/image` (`<Image />`) with explicit width,
@@ -146,9 +191,31 @@ shadow-black/20 backdrop-blur-md
 
 ### Animations
 - Framer Motion is used for the dashboard sidebar (motion.div width
- transitions, AnimatePresence for label fade/slide). Follow this existing
- pattern for any new animated UI — do not introduce a different animation
- approach (e.g. CSS keyframe animations for sidebar collapse/expand).
+transitions, AnimatePresence for label fade/slide). Follow this existing
+pattern for any new animated UI — do not introduce a different animation
+approach (e.g. CSS keyframe animations for sidebar collapse/expand).
+- When combining Base UI's `Dialog` (or any Base UI primitive with
+its own open/close state) with Framer Motion's `AnimatePresence`
+for enter/exit animations, the `Dialog.Portal` MUST have the
+`keepMounted` prop. Without it, Base UI removes the Portal's DOM
+subtree immediately when `open` becomes `false` — before
+`AnimatePresence` gets the chance to play the exit animation. The
+symptom is: enter animates smoothly, but exit/close snaps shut
+instantly with no transition at all. With `keepMounted`, Base UI
+keeps the subtree in the DOM regardless of `open` state, and the
+outer `{condition && (...)}` React conditional (which
+`AnimatePresence` is watching) becomes the sole mount/unmount
+authority — Base UI's own `data-closed`/`data-ending-style`
+attributes are exposed as CSS hooks but impose no default hidden
+styling, so they don't fight the motion component's own opacity/
+transform animation.
+- Framer Motion's `exit` prop can carry its OWN `transition` nested
+inside the exit value object (e.g. `exit={{ x: "100%", transition:
+{ duration: 0.35, ease: "easeIn" } }}`) — this is the correct way
+to give the exit animation different timing than the enter
+animation (which uses the separate top-level `transition` prop),
+rather than trying to detect direction and conditionally swap a
+single transition object.
 
 ### Dialogs / Modals
 - Use `components/ui/dialog.tsx`, which wraps Base UI's
@@ -157,9 +224,23 @@ shadow-black/20 backdrop-blur-md
 
 ### Auth
 - `useAuth()` from `lib/auth/auth-context.tsx` is the single auth source.
- Any component that needs the logged-in user's data MUST be a `'use client'`
- component that reads `useAuth()` directly. Never hardcode a placeholder
- name or email "for now."
+Any component that needs the logged-in user's data MUST be a `'use client'`
+component that reads `useAuth()` directly. Never hardcode a placeholder
+name or email "for now."
+- Any auth guard that redirects a logged-out user to `/login` MUST
+use the actual current path (`usePathname()` from `@/i18n/navigation`)
+as the `redirect` query value — NEVER a hardcoded destination like
+`/dashboard`. A hardcoded redirect loses the user's original deep-
+linked destination (e.g. `/dashboard/coach/schedule` → bounced to
+generic `/dashboard` after login instead of back to `/schedule`).
+- Dev-only quick-login shortcuts (e.g. `components/dev/fake-auth-debug.tsx`)
+do NOT automatically inherit the real login form's `?redirect=`
+handling just because they call the same `login()` function —
+`login()` is a pure state mutation with no navigation side effect.
+Any component offering a login shortcut must explicitly read
+`searchParams.get("redirect")` and `router.push()` itself, mirroring
+the production `LoginForm.handleSubmit` pattern, or it will silently
+do nothing when reached via a redirect bounce.
 
 ### next-intl API (important gotchas)
 - `i18n/navigation.ts` exports `{ Link, redirect, useRouter, usePathname }`
@@ -264,7 +345,39 @@ shadow-black/20 backdrop-blur-md
  with sticky/floating elements, custom line-heights, or multi-layer wrapper
  components.
 - Instead: take a screenshot of the actual rendered page, measure the gap
- directly from the image (even approximately), and apply ONE direct value
- change based on that real measurement. This converges in 1-2 rounds;
- continued on-paper recalculation can drag on indefinitely without ever
- matching what's actually on screen.
+directly from the image (even approximately), and apply ONE direct value
+change based on that real measurement. This converges in 1-2 rounds;
+continued on-paper recalculation can drag on indefinitely without ever
+matching what's actually on screen.
+
+### Sticky positioning — verify with live pixel measurement, not Computed tab alone
+- `position: sticky` can show as `sticky` in DevTools' Computed tab
+while NOT actually behaving as sticky (moving 1:1 with scroll,
+identical to `static`). The Computed tab confirms the CSS VALUE was
+applied; it does NOT confirm the element is actually pinning itself
+during scroll. Do not trust "Computed says sticky" as proof the
+bug is fixed.
+- The decisive test: log `document.querySelector(selector).getBoundingClientRect().top`
+at `scrollY: 0` and again after scrolling ~100px. If `top` changed
+by roughly the same amount as `scrollY` did, the element is NOT
+sticking — something is blocking it even though the CSS class is
+present.
+- Common real cause: the sticky element's PARENT container is sized
+to exactly the sticky element's own height (e.g. a `<>` fragment or
+wrapper that doesn't extend down with the rest of the page content).
+`position: sticky` only has "room" to stick within its nearest
+scrolling ancestor — if that ancestor is no taller than the sticky
+element itself, there's no scroll distance for it to stick across,
+and it behaves like a normal in-flow element for the entire page
+height.
+- The fix is structural, not a CSS value change: ensure the sticky
+element and the actual long-scrolling page content are true
+siblings within a container that extends the full page height — not
+one nested inside a wrapper sized only to the sticky element's own
+content.
+- This is a DIFFERENT failure mode from the earlier-documented
+"ancestor `overflow: hidden` breaks sticky" issue — both produce
+the same visible symptom (element doesn't stick) but have different
+causes and different fixes. Check BOTH: (1) any ancestor `overflow-*`
+declaration, AND (2) whether the immediate parent's height actually
+extends with the scrollable content.
