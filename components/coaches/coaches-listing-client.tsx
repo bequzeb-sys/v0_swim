@@ -383,7 +383,7 @@ export function CoachesListingClient({
   )
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="relative z-10">
       <SecondaryPageHeader />
       <div className="mx-auto max-w-7xl px-4 pt-6">
         <div className="mb-6 flex items-center justify-between">
