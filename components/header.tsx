@@ -90,7 +90,9 @@ export function Header() {
 
           {/* Right-side actions: language switcher + auth-aware CTA */}
           <div className="ml-auto flex items-center gap-3">
-            <LanguageSwitcher />
+            <div className="hidden lg:flex">
+              <LanguageSwitcher />
+            </div>
             <HeaderActions />
             {/* Hamburger trigger — mobile/tablet only */}
             <DialogPrimitive.Trigger
@@ -130,16 +132,33 @@ export function Header() {
                   className="flex h-full w-[min(20rem,85vw)] flex-col gap-2 border-l border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md rounded-l-3xl"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-white/50 uppercase tracking-wider">
-                      {t("menu")}
-                    </span>
-                    <DialogPrimitive.Close
-                      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-xl text-white/60 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-                      aria-label={t("closeMenu")}
+                    <Link
+                      href="/"
+                      onClick={() => setDrawerOpen(false)}
+                      className="flex items-center gap-2"
                     >
-                      <X className="size-4" aria-hidden="true" />
-                    </DialogPrimitive.Close>
+                      <span className="flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-blue-accent to-blue-accent-dark text-white shadow-lg shadow-blue-accent/30">
+                        <Waves className="size-4" strokeWidth={2.5} />
+                      </span>
+                      <span className="text-xl font-extrabold tracking-tight text-white">
+                        {tBrand("swim")}
+                        <span className="bg-gradient-to-r from-teal-accent-light to-blue-accent bg-clip-text text-transparent">
+                          {tBrand("ai")}
+                        </span>
+                      </span>
+                    </Link>
+                    <div className="flex items-center gap-2">
+                      <LanguageSwitcher />
+                      <DialogPrimitive.Close
+                        className="inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5 text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                        aria-label={t("closeMenu")}
+                      >
+                        <X className="size-4" aria-hidden="true" />
+                      </DialogPrimitive.Close>
+                    </div>
                   </div>
+
+                  <div className="border-t border-white/10 mt-3" />
 
                   <nav className="flex flex-col gap-1" aria-label={t("menu")}>
                     {navLinks.map((link) => (
@@ -154,10 +173,6 @@ export function Header() {
                       </Button>
                     ))}
                   </nav>
-
-                  <div className="mt-2 flex items-center justify-between border-t border-white/10 pt-4">
-                    <LanguageSwitcher />
-                  </div>
 
                   <div className="mt-2">
                     <HeaderActions onNavigate={() => setDrawerOpen(false)} />
