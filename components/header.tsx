@@ -43,7 +43,7 @@ export function Header() {
       {/* Floating sticky pill */}
       <header
         className={cn(
-          "sticky top-3 z-50 mx-auto mt-3 w-fit transition-all duration-300",
+          "sticky top-3 z-50 mx-auto mt-3 max-w-[min(72rem,calc(100vw-2rem))] transition-all duration-300",
           scrolled
             ? "bg-blue-400/[12%] backdrop-blur-xl border-blue-300/25 shadow-lg shadow-black/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
             : "bg-blue-400/[6%] backdrop-blur-lg border-blue-300/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
@@ -55,7 +55,7 @@ export function Header() {
         }}
       >
         <nav
-          className="flex items-center gap-8 px-5 py-4"
+          className="flex items-center gap-3 px-5 py-4 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-8"
           style={{ borderRadius: "1.125rem" }}
         >
           {/* Logo */}
@@ -75,7 +75,7 @@ export function Header() {
           </Link>
 
           {/* Center nav — hidden on small screens */}
-          <ul className="hidden items-center gap-9 lg:flex">
+          <ul className="hidden items-center justify-self-center gap-9 lg:flex">
             {navLinks.map((link) => (
               <li key={link.key}>
                 <a
@@ -89,11 +89,11 @@ export function Header() {
           </ul>
 
           {/* Right-side actions: language switcher + auth-aware CTA */}
-          <div className="ml-auto flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-3 lg:ml-0">
             <div className="hidden lg:flex">
               <LanguageSwitcher />
             </div>
-            <HeaderActions />
+            <HeaderActions compact />
             {/* Hamburger trigger — mobile/tablet only */}
             <DialogPrimitive.Trigger
               className="inline-flex size-10 cursor-pointer items-center justify-center rounded-xl border border-blue-300/20 bg-blue-400/10 text-white/80 transition-colors hover:bg-blue-400/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 lg:hidden"
