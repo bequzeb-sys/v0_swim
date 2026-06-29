@@ -7,8 +7,9 @@ export function Testimonial() {
 
   return (
     <section
+      id="testimonial"
       aria-label={t("label")}
-      className="relative scroll-mt-24 px-6 py-10"
+      className="relative scroll-mt-28 px-6 py-10"
     >
       <div className="mx-auto max-w-xl">
         {/* Visible sample-testimonial disclosure so we never ship this as real social proof */}

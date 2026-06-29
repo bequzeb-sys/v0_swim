@@ -50,7 +50,6 @@ export default async function CoachesPage() {
       page={{
         title: t("title"),
         resultCountTemplate: t.raw("resultCount"),
-        back: td("back"),
         filters: {
           location: t("filters.location"),
           locationPlaceholder: t("filters.locationPlaceholder"),

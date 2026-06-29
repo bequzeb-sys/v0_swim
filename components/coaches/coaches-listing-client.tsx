@@ -1,12 +1,13 @@
 "use client"
 
 import { useState, useCallback, useEffect, useRef } from "react"
-import { useRouter, Link } from "@/i18n/navigation"
+import { useRouter } from "@/i18n/navigation"
 import { useSearchParams } from "next/navigation"
 import { SlidersHorizontal } from "lucide-react"
 import { CoachCard } from "@/components/coach-card"
 import { Input } from "@/components/ui/input"
 import { Pill } from "@/components/ui/pill"
+import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import {
   Dialog,
   DialogContent,
@@ -44,7 +45,6 @@ interface Props {
   page: {
     title: string
     resultCountTemplate: string
-    back: string
     filters: {
       location: string
       locationPlaceholder: string
@@ -384,24 +384,8 @@ export function CoachesListingClient({
 
   return (
     <main className="min-h-screen bg-background">
-      {/* Back + page heading (matches /coaches/[id] back-button pattern) */}
+      <SecondaryPageHeader />
       <div className="mx-auto max-w-7xl px-4 pt-6">
-        <Link
-          href={{ pathname: "/", hash: "coaches" }}
-          className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white/80"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            className="size-4"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          {page.back}
-        </Link>
-
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-white md:text-3xl">{page.title}</h1>
           <span className="text-sm text-white/50">{page.resultCountTemplate.replace("{count}", String(filtered.length))}</span>

@@ -6,6 +6,7 @@ import { getCoachById } from "@/lib/coaches"
 import type { LanguageCode } from "@/lib/coaches"
 import { LanguageList } from "@/components/ui/language-list"
 import { BookingPanel } from "@/components/coach-profile/booking-panel"
+import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import type { DayKey } from "@/lib/coaches"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
@@ -50,6 +51,7 @@ export default async function CoachProfilePage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-background">
+      <SecondaryPageHeader />
       {/* Hero */}
       <div className="relative border-b border-white/10">
         <div
@@ -66,23 +68,6 @@ export default async function CoachProfilePage({ params }: Props) {
           aria-hidden="true"
         />
         <div className="relative mx-auto max-w-3xl px-4 py-12">
-          {/* Back */}
-          <a
-            href={`/${locale}/#coaches`}
-            className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white/80"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="size-4"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M19 12H5M12 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {t("back")}
-          </a>
-
           {/* Coach info */}
           <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
             <div className="relative shrink-0">

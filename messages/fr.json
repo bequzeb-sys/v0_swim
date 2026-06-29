@@ -464,5 +464,123 @@
     "settingsLanguageEn": "English",
     "settingsSave": "Enregistrer",
     "settingsSaved": "Paramètres enregistrés !"
+  },
+  "siteFooter": {
+    "tagline": "Trouvez votre coach de natation idéal et progressez plus vite grâce à l'IA.",
+    "copyright": "© {year} SwimAI. Tous droits réservés.",
+    "madeWith": "Fait avec passion pour la natation.",
+    "product": {
+      "heading": "Produit",
+      "findCoach": "Trouver un coach",
+      "pricing": "Tarifs",
+      "howItWorks": "Comment ça marche",
+      "forCoaches": "Pour les coachs"
+    },
+    "company": {
+      "heading": "Entreprise",
+      "becomeCoach": "Devenir coach",
+      "about": "À propos — bientôt disponible",
+      "contact": "Contact — bientôt disponible"
+    },
+    "legal": {
+      "heading": "Légal",
+      "mentionsLegales": "Mentions légales",
+      "cgu": "Conditions générales d'utilisation",
+      "confidentialite": "Politique de confidentialité"
+    },
+    "legalPages": {
+      "mentionsLegales": {
+        "metaTitle": "Mentions légales — SwimAI",
+        "title": "Mentions légales",
+        "subtitle": "Informations légales relatives à l'utilisation du site SwimAI.",
+        "inDev": "Document en cours de rédaction. Les informations détaillées seront disponibles prochainement.",
+        "sections": {
+          "editor": {
+            "title": "Éditeur du site",
+            "line1": "[Raison sociale ou nom du fondateur]",
+            "line2": "[Forme juridique] au capital de [montant] €",
+            "line3": "[Adresse du siège social]",
+            "line4": "[Numéro SIRET / RCS / TVA intracommunautaire] — en cours d'immatriculation"
+          },
+          "hosting": {
+            "title": "Hébergement",
+            "line1": "Hébergé par Vercel Inc.",
+            "line2": "440 N Barranca Ave #4138, Covina, CA 91723, États-Unis",
+            "line3": "Site web : vercel.com"
+          },
+          "intellectual": {
+            "title": "Propriété intellectuelle",
+            "p1": "L'ensemble des contenus présents sur le site SwimAI (textes, images, logos, code source) est protégé par les lois en vigueur sur la propriété intellectuelle.",
+            "p2": "Toute reproduction, intégrale ou partielle, sans autorisation écrite préalable est strictement interdite."
+          },
+          "contact": {
+            "title": "Contact",
+            "body": "Pour toute question relative au site ou à ces mentions légales, vous pouvez nous écrire à : [adresse e-mail de contact]."
+          }
+        }
+      },
+      "cgu": {
+        "metaTitle": "Conditions générales d'utilisation — SwimAI",
+        "title": "Conditions générales d'utilisation",
+        "subtitle": "Règles encadrant l'utilisation de la plateforme SwimAI.",
+        "inDev": "Document en cours de rédaction. Les CGU définitives seront disponibles avant l'ouverture publique du service.",
+        "sections": {
+          "scope": {
+            "title": "1. Objet",
+            "body": "Les présentes conditions générales d'utilisation (CGU) régissent l'utilisation de la plateforme SwimAI, qui met en relation des clients et des coachs de natation et propose des outils d'accompagnement par intelligence artificielle."
+          },
+          "services": {
+            "title": "2. Services proposés",
+            "p1": "SwimAI permet aux clients de rechercher des coachs, de réserver des séances et d'accéder à un accompagnement IA (chat, programmes, conseils nutrition, préparation mentale) selon les conditions d'adhésion en vigueur.",
+            "p2": "SwimAI permet aux coachs de publier un profil, de gérer leurs disponibilités et leurs réservations."
+          },
+          "account": {
+            "title": "3. Compte utilisateur",
+            "body": "L'utilisateur s'engage à fournir des informations exactes lors de son inscription et à préserver la confidentialité de ses identifiants. Toute activité réalisée depuis son compte est réputée effectuée par lui-même."
+          },
+          "booking": {
+            "title": "4. Réservations et paiements",
+            "body": "La réservation d'une séance avec un coach est gratuite. Le paiement de la séance s'effectue directement entre le client et le coach, selon les modalités convenues entre eux. SwimAI n'intervient pas dans la transaction financière de la séance elle-même."
+          },
+          "ai": {
+            "title": "5. Services d'intelligence artificielle",
+            "body": "Les contenus générés par l'IA SwimAI sont fournis à titre informatif et indicatif. Ils ne remplacent en aucun cas l'avis d'un professionnel de santé, d'un médecin ou d'un entraîneur qualifié. L'utilisateur reste seul responsable des décisions prises sur la base de ces contenus."
+          },
+          "liability": {
+            "title": "6. Responsabilité",
+            "body": "SwimAI s'efforce d'assurer la fiabilité des informations diffusées mais ne saurait garantir l'exactitude, la complétude ou l'actualité de celles-ci. L'utilisation de la plateforme se fait sous l'entière responsabilité de l'utilisateur."
+          }
+        }
+      },
+      "confidentialite": {
+        "metaTitle": "Politique de confidentialité — SwimAI",
+        "title": "Politique de confidentialité",
+        "subtitle": "Comment SwimAI collecte, utilise et protège vos données personnelles.",
+        "inDev": "Document en cours de rédaction. La politique de confidentialité détaillée sera disponible avant le lancement public.",
+        "sections": {
+          "controller": {
+            "title": "1. Responsable du traitement",
+            "line1": "[Raison sociale ou nom du fondateur], éditeur de la plateforme SwimAI.",
+            "line2": "Contact DPO / données personnelles : [adresse e-mail]"
+          },
+          "dataCollected": {
+            "title": "2. Données collectées",
+            "body": "SwimAI collecte les données strictement nécessaires à la fourniture du service : données d'identification (nom, e-mail), données de profil (objectifs, niveau, préférences), données de réservation (créneaux, coachs), et données techniques de connexion."
+          },
+          "purpose": {
+            "title": "3. Finalités",
+            "body": "Les données sont utilisées pour la mise en relation client/coach, la gestion des réservations, l'amélioration des services (notamment IA), et la communication avec les utilisateurs. Aucune donnée n'est cédée à des tiers à des fins commerciales."
+          },
+          "hosting": {
+            "title": "4. Hébergement des données",
+            "body": "Les données sont hébergées par Vercel Inc. (440 N Barranca Ave #4138, Covina, CA 91723, États-Unis) et par Supabase (infrastructure de base de données). Des mesures techniques et organisationnelles appropriées sont mises en œuvre pour protéger les données."
+          },
+          "rights": {
+            "title": "5. Vos droits",
+            "body": "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité et d'opposition concernant vos données personnelles. Pour exercer ces droits, contactez : [adresse e-mail]."
+          }
+        }
+      }
+    }
   }
 }

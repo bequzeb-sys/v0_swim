@@ -6,6 +6,7 @@ import { HowItWorks } from "@/components/how-it-works"
 import { Pricing } from "@/components/pricing"
 import { ForCoaches } from "@/components/for-coaches"
 import { FooterCTA } from "@/components/footer-cta"
+import { Footer } from "@/components/footer"
 import { UnderwaterBackground } from "@/components/underwater-background"
 
 export default function Page() {
@@ -22,6 +23,7 @@ export default function Page() {
         <ForCoaches />
         <FooterCTA />
       </main>
+      <Footer />
     </div>
   )
 }

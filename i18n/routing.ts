@@ -34,5 +34,8 @@ export const routing = defineRouting({
       en: '/coaches/[id]',
       fr: '/coachs/[id]',
     },
+    '/mentions-legales': '/mentions-legales',
+    '/cgu': '/cgu',
+    '/confidentialite': '/confidentialite',
   },
 })
