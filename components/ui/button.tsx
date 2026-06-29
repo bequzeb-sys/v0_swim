@@ -75,6 +75,27 @@ export function Button({
   )
 
   if (href !== undefined) {
+    // Hash anchors (#search, #pricing, etc.) are same-page navigation —
+    // never locale-prefixed, never route-resolved. Render as a native
+    // <a> so the browser handles the scroll directly. Routing these
+    // through next-intl's Link would send "#search" through getPathname,
+    // which has no defined result for a hash and produces a malformed
+    // href that doesn't scroll.
+    if (typeof href === "string" && href.startsWith("#")) {
+      return (
+        <a
+          href={href}
+          onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+          className={classes}
+          aria-disabled={disabled}
+        >
+          <ButtonInner variant={variant} icon={Icon} iconRight={IconRight}>
+            {children}
+          </ButtonInner>
+        </a>
+      )
+    }
+
     return (
       <Link
         href={href as Parameters<typeof Link>[0]["href"]}
