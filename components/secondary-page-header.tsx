@@ -35,7 +35,7 @@ export function SecondaryPageHeader() {
   return (
     <header
       className={cn(
-        "sticky top-3 z-50 mx-auto mt-3 w-fit transition-all duration-300",
+        "sticky top-3 z-50 mx-auto mt-3 max-w-[min(52rem,calc(100vw-2rem))] px-4 transition-all duration-300",
         scrolled
           ? "bg-blue-400/[12%] backdrop-blur-xl border-blue-300/25 shadow-lg shadow-black/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
           : "bg-blue-400/[6%] backdrop-blur-lg border-blue-300/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
@@ -47,16 +47,16 @@ export function SecondaryPageHeader() {
       }}
     >
       <nav
-        className="flex items-center gap-4 px-4 py-2.5"
+        className="flex items-center justify-between py-2.5"
         style={{ borderRadius: "1.125rem" }}
       >
         {/* Back — always returns to the homepage */}
         <Link
           href="/"
-          className="inline-flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+          className="inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5 text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+          aria-label={tBack("back")}
         >
           <ChevronLeft className="size-4" aria-hidden="true" />
-          <span>{tBack("back")}</span>
         </Link>
 
         {/* Logo + wordmark — also goes to "/" */}
@@ -77,7 +77,7 @@ export function SecondaryPageHeader() {
         </Link>
 
         {/* Language switcher — same component as the main header */}
-        <div className="ml-2 flex items-center">
+        <div className="flex items-center">
           <LanguageSwitcher />
         </div>
       </nav>

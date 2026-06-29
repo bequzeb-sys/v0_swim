@@ -7,7 +7,6 @@ import { SlidersHorizontal } from "lucide-react"
 import { CoachCard } from "@/components/coach-card"
 import { Input } from "@/components/ui/input"
 import { Pill } from "@/components/ui/pill"
-import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import {
   Dialog,
   DialogContent,
@@ -384,7 +383,6 @@ export function CoachesListingClient({
 
   return (
     <main className="relative z-10">
-      <SecondaryPageHeader />
       <div className="mx-auto max-w-7xl px-4 pt-6">
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-white md:text-3xl">{page.title}</h1>

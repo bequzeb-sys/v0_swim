@@ -4,6 +4,7 @@ import { coaches } from "@/lib/coaches"
 import type { CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 import { CoachesListingClient } from "@/components/coaches/coaches-listing-client"
 import { UnderwaterBackground } from "@/components/underwater-background"
+import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import type { Metadata } from "next"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,8 +38,9 @@ export default async function CoachesPage() {
   ) as Record<DayKey, string>
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-background">
+    <>
       <UnderwaterBackground />
+      <SecondaryPageHeader />
       <CoachesListingClient
         coaches={coaches}
         translations={{
@@ -76,6 +78,6 @@ export default async function CoachesPage() {
         badgeLabels={badgeLabels}
         dayLabels={dayLabels}
       />
-    </div>
+    </>
   )
 }

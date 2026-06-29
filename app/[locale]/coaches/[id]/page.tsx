@@ -51,7 +51,7 @@ export default async function CoachProfilePage({ params }: Props) {
   ) as Record<(typeof langKeys)[number], string>
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-background">
+    <>
       <UnderwaterBackground />
       <SecondaryPageHeader />
       <main className="relative z-10">
@@ -170,6 +170,6 @@ export default async function CoachProfilePage({ params }: Props) {
           </div>
         </div>
       </main>
-    </div>
+    </>
   )
 }
