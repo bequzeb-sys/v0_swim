@@ -106,7 +106,7 @@ export function Header() {
       </header>
 
       {/* Mobile/tablet side drawer */}
-      <DialogPrimitive.Portal>
+      <DialogPrimitive.Portal keepMounted>
         <AnimatePresence>
           {drawerOpen && (
             <>
@@ -116,7 +116,7 @@ export function Header() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   className="size-full bg-black/60 backdrop-blur-sm"
                 />
@@ -127,7 +127,7 @@ export function Header() {
                 <motion.div
                   initial={{ x: "100%" }}
                   animate={{ x: 0 }}
-                  exit={{ x: "100%" }}
+                  exit={{ x: "100%", transition: { duration: 0.35, ease: "easeIn" } }}
                   transition={{ type: "spring", stiffness: 380, damping: 38 }}
                   className="flex h-full w-[min(20rem,85vw)] flex-col gap-2 border-l border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md rounded-l-3xl"
                 >
@@ -175,7 +175,10 @@ export function Header() {
                   </nav>
 
                   <div className="mt-2">
-                    <HeaderActions onNavigate={() => setDrawerOpen(false)} />
+                    <HeaderActions
+                      onNavigate={() => setDrawerOpen(false)}
+                      className="w-full"
+                    />
                   </div>
                 </motion.div>
               </DialogPrimitive.Popup>

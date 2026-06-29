@@ -8,11 +8,13 @@ import { Button } from "@/components/ui/button"
 interface HeaderActionsProps {
   onNavigate?: () => void
   compact?: boolean
+  className?: string
 }
 
 export function HeaderActions({
   onNavigate,
   compact = false,
+  className,
 }: HeaderActionsProps = {}) {
   const t = useTranslations("nav")
   const { user } = useAuth()
@@ -23,7 +25,7 @@ export function HeaderActions({
 
   if (user) {
     return (
-      <Button variant="entry" href="/dashboard" onClick={handleClick}>
+      <Button variant="entry" href="/dashboard" onClick={handleClick} className={className}>
         {compact ? <Plus size={18} aria-hidden="true" /> : null}
         <span className={compact ? "hidden lg:inline" : undefined}>
           {t("dashboardCta")}
@@ -34,7 +36,7 @@ export function HeaderActions({
 
   return (
     // Commencer — entry variant, blue, rounded-xl, navigates to search
-    <Button variant="entry" href="#search" onClick={handleClick}>
+    <Button variant="entry" href="#search" onClick={handleClick} className={className}>
       {compact ? <Plus size={18} aria-hidden="true" /> : null}
       <span className={compact ? "hidden lg:inline" : undefined}>
         {t("cta")}
