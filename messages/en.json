@@ -159,6 +159,8 @@
     "signup": {
       "title": "Create your account",
       "subtitle": "Join SwimAI and start progressing.",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Sign in",
       "clientOption": "I'm a client",
       "clientDescription": "Find the perfect coach and progress faster.",
       "coachOption": "I'm a coach",

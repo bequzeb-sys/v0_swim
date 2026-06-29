@@ -92,8 +92,7 @@ export function Pricing() {
               {t("coach.optional")}
             </p>
             <div className="mt-6 grow" />
-            {/* Documented exception: "Devenir coach" CTA is intentionally href="#" pending signup infra */}
-            <Button variant="entry" href="#" className="mt-6 w-full">
+            <Button variant="entry" href="/signup/coach" className="mt-6 w-full">
               {t("coach.cta")}
             </Button>
           </article>

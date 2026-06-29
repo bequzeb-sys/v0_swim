@@ -12,6 +12,7 @@ import type { FakeUser } from "@/lib/auth/types"
 
 function LoginForm() {
   const t = useTranslations("auth.login")
+  const tBrand = useTranslations("brand")
   const searchParams = useSearchParams()
   const router = useRouter()
   const { login } = useAuth()
@@ -55,12 +56,20 @@ function LoginForm() {
 
   return (
     <div className="w-full max-w-md rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-8 shadow-2xl shadow-black/20 backdrop-blur-md">
-      {/* Logo mark */}
-      <div className="mb-6 flex justify-center">
-        <div className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-accent to-blue-accent-dark shadow-lg shadow-blue-accent/25">
-          <Waves className="size-6 text-white" strokeWidth={2.5} />
-        </div>
-      </div>
+      {/* Logo + wordmark → homepage */}
+      <Link href="/" className="mb-6 flex justify-center" aria-label="SwimAI — Accueil">
+        <span className="flex items-center gap-2.5">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-accent to-blue-accent-dark text-white shadow-lg shadow-blue-accent/30">
+            <Waves className="size-5" strokeWidth={2.5} />
+          </span>
+          <span className="text-2xl font-extrabold tracking-tight text-white">
+            {tBrand("swim")}
+            <span className="bg-gradient-to-r from-teal-accent-light to-blue-accent bg-clip-text text-transparent">
+              {tBrand("ai")}
+            </span>
+          </span>
+        </span>
+      </Link>
 
       {/* Heading */}
       <h1 className="mb-1 text-center text-2xl font-bold text-white">{t("title")}</h1>

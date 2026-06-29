@@ -78,8 +78,11 @@ shadow-black/20 backdrop-blur-md
  never `href="#"` or an empty `onClick`. If the destination page doesn't exist
  yet, create a minimal stub page rather than leaving a dead link.
 - Routes follow the locale-prefixed structure: `/[locale]/page-name`.
-- **Documented exception:** `href="#"` on "Subscribe" (S'abonner) and "Become a
- coach" (Devenir coach) CTAs is accepted pending real payment/signup infrastructure.
+- **Documented exception:** `href="#"` on "Subscribe" (S'abonner) is accepted
+ pending real payment infrastructure. "Become a coach" (Devenir coach) was
+ removed from this exception list — `/signup/coach` and the full coach
+ onboarding chain (`/onboarding/coach` → profile → availability → done) exist
+ and work end-to-end; both "Devenir coach" CTAs now link there directly.
  Any OTHER new `href="#"` must be explicitly flagged in a comment.
 
 ### Buttons (canonical CTA system)

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Waves } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link, useRouter } from "@/i18n/navigation"
 import { useAuth } from "@/lib/auth/auth-context"
@@ -13,6 +13,7 @@ import type { FakeUser } from "@/lib/auth/types"
 export default function SignupCoachPage() {
   const t = useTranslations("auth.signup.coach")
   const tParent = useTranslations("auth.signup")
+  const tBrand = useTranslations("brand")
   const searchParams = useSearchParams()
   const router = useRouter()
   const { login } = useAuth()
@@ -64,6 +65,21 @@ export default function SignupCoachPage() {
 
       {/* Card */}
       <div className="relative z-10 w-full max-w-md rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-8 shadow-2xl shadow-black/20 backdrop-blur-md">
+        {/* Logo + wordmark → homepage */}
+        <Link href="/" className="mb-4 flex justify-center" aria-label="SwimAI — Accueil">
+          <span className="flex items-center gap-2.5">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-accent to-blue-accent-dark text-white shadow-lg shadow-blue-accent/30">
+              <Waves className="size-5" strokeWidth={2.5} />
+            </span>
+            <span className="text-2xl font-extrabold tracking-tight text-white">
+              {tBrand("swim")}
+              <span className="bg-gradient-to-r from-teal-accent-light to-blue-accent bg-clip-text text-transparent">
+                {tBrand("ai")}
+              </span>
+            </span>
+          </span>
+        </Link>
+
         {/* Back link */}
         <Link
           href={{ pathname: "/signup", query: Object.fromEntries(searchParams) }}
@@ -112,6 +128,24 @@ export default function SignupCoachPage() {
             {t("submitCta")}
           </Button>
         </form>
+
+        {/* Login link */}
+        <div className="mt-6 flex items-center justify-center gap-1.5 text-sm text-white/50">
+          <span>{tParent("haveAccount")}</span>
+          <Link
+            href={
+              searchParams.get("redirect")
+                ? {
+                    pathname: "/login",
+                    query: { redirect: searchParams.get("redirect") as string },
+                  }
+                : "/login"
+            }
+            className="font-medium text-teal-accent transition-colors hover:text-teal-accent-light"
+          >
+            {tParent("loginLink")}
+          </Link>
+        </div>
       </div>
     </main>
   )

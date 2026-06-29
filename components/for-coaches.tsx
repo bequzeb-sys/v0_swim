@@ -69,9 +69,8 @@ export function ForCoaches() {
           ))}
         </ul>
 
-        {/* CTA — documented exception: "Devenir coach" intentionally href="#" pending signup infra */}
         <div className="mt-10 flex justify-center">
-          <Button variant="entry" href="#">
+          <Button variant="entry" href="/signup/coach">
             {t("cta")}
           </Button>
         </div>
