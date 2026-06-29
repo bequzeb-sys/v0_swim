@@ -11,7 +11,10 @@
       "forCoaches": "For coaches"
     },
     "cta": "Get started",
-    "dashboardCta": "Dashboard"
+    "dashboardCta": "Dashboard",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menu": "Menu"
   },
   "hero": {
     "title1": "Find your ideal",

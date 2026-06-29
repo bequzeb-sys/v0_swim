@@ -11,7 +11,10 @@
       "forCoaches": "Pour les coachs"
     },
     "cta": "Commencer",
-    "dashboardCta": "Tableau de bord"
+    "dashboardCta": "Tableau de bord",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "menu": "Menu"
   },
   "hero": {
     "title1": "Trouvez votre coach",
