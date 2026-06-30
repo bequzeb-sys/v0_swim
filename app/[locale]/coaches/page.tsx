@@ -70,6 +70,8 @@ export default async function CoachesPage() {
           reviewsSuffix: tc("reviewsSuffix"),
           priceUnit: tc("priceUnit"),
           cardCta: tc("cardCta"),
+          listingCta: tc("listingCta"),
+          languagesTitle: td("languagesTitle"),
           languages: languageLabels,
         }}
         page={{

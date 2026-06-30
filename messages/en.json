@@ -102,6 +102,7 @@
     "reviewsSuffix": "reviews",
     "priceUnit": "/session",
     "cardCta": "View profile & book",
+    "listingCta": "Profile",
     "badges": {
       "apprentissage": "Learn to Swim",
       "aquagym": "Aqua Fitness",

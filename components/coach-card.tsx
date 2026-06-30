@@ -12,6 +12,7 @@ interface CoachCardProps {
     reviewsSuffix: string
     priceUnit: string
     cardCta: string
+    languagesTitle: string
     languages: Record<LanguageCode, string>
   }
 }
@@ -24,21 +25,20 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
         <Image
           src={coach.avatar || "/placeholder.svg"}
           alt={coach.name}
-          width={96}
-          height={96}
-          className="size-20 shrink-0 rounded-md object-cover ring-2 ring-white/10 sm:size-24"
+          width={112}
+          height={112}
+          sizes="112px"
+          className="size-28 shrink-0 rounded-md object-cover ring-2 ring-white/10 sm:size-32"
         />
         <div className="min-w-0 flex-1">
           <h3 className="text-lg font-bold text-white sm:text-xl">{coach.name}</h3>
-          <div className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-            {coach.badgeKeys.map((badgeKey, i) => (
-              <span key={badgeKey} className="flex items-center gap-1.5">
-                <span className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light">
-                  {t.badges[badgeKey]}
-                </span>
-                {i < coach.badgeKeys.length - 1 && (
-                  <span className="text-text-secondary">·</span>
-                )}
+          <div className="mt-1.5 flex w-fit flex-col gap-1">
+            {coach.badgeKeys.slice(0, 2).map((badgeKey) => (
+              <span
+                key={badgeKey}
+                className="inline-flex w-fit whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light"
+              >
+                {t.badges[badgeKey]}
               </span>
             ))}
           </div>
@@ -49,12 +49,14 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
               ({coach.reviews} {t.reviewsSuffix})
             </span>
           </div>
-          <div className="mt-2 flex items-center gap-1.5">
+          <div className="mt-2 flex items-center gap-2">
+            <span className="text-xs text-white/40">{t.languagesTitle}</span>
             <LanguageList
               codes={coach.languages}
               labels={t.languages}
               size={18}
               showLabels={false}
+              max={3}
             />
           </div>
         </div>

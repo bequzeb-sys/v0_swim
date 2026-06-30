@@ -5,7 +5,7 @@ import { useRouter } from "@/i18n/navigation"
 import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { SlidersHorizontal, ChevronDown } from "lucide-react"
-import { CoachCard } from "@/components/coach-card"
+import { CoachListingCard } from "@/components/coaches/coach-listing-card"
 import { Input } from "@/components/ui/input"
 import { Pill } from "@/components/ui/pill"
 import {
@@ -16,6 +16,7 @@ import {
   DialogBody,
 } from "@/components/ui/dialog"
 import { LanguageFlag } from "@/components/ui/language-flag"
+import { Scrollbar } from "@/components/ui/scrollbar"
 import type { Coach, CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 import * as Flags from "country-flag-icons/react/3x2"
 import { Popover } from "@base-ui/react/popover"
@@ -62,7 +63,9 @@ interface Props {
     badges: Record<string, string>
     reviewsSuffix: string
     priceUnit: string
-    cardCta: string
+    listingCta: string
+                      cardCta: string
+                      languagesTitle: string
     languages: Record<LanguageCode, string>
   }
   page: {
@@ -107,6 +110,9 @@ export function CoachesListingClient({
 
   const [mobileOpen, setMobileOpen] = useState(false)
   const [countryOpen, setCountryOpen] = useState(false)
+  const sidebarRef = useRef<HTMLDivElement>(null)
+  const resetStripRef = useRef<HTMLDivElement>(null)
+  const [resetStripHeight, setResetStripHeight] = useState(0)
 
   const getParam = <T,>(key: string, defaultVal: T, parse?: (v: string) => T): T => {
     const val = searchParams.get(key)
@@ -218,6 +224,12 @@ export function CoachesListingClient({
     selectedDays.size > 0 ||
     gender !== ""
 
+  useEffect(() => {
+    if (resetStripRef.current) {
+      setResetStripHeight(resetStripRef.current.offsetHeight)
+    }
+  }, [hasActiveFilters])
+
   const filtered = coaches.filter((coach) => {
     if (country && coach.country !== country) return false
     if (location && !coach.city.toLowerCase().includes(location.toLowerCase())) return false
@@ -232,10 +244,10 @@ export function CoachesListingClient({
   })
 
   const FilterContent = () => (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       {/* Pays */}
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.country}</legend>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.country}</legend>
         <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
           <Popover.Trigger className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-blue-300/20 bg-blue-400/[8%] px-4 py-3 text-left text-sm font-medium text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-teal-accent/60">
             {country ? (
@@ -298,7 +310,7 @@ export function CoachesListingClient({
 
       {/* Localisation */}
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.location}</legend>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.location}</legend>
         <Input
           type="text"
           value={location}
@@ -310,7 +322,7 @@ export function CoachesListingClient({
 
       {/* Spécialité */}
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.specialty}</legend>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.specialty}</legend>
         <div className="flex flex-col gap-1.5">
           {ALL_BADGES.map((badge) => (
             <label key={badge} className="flex cursor-pointer items-center gap-2.5">
@@ -334,7 +346,7 @@ export function CoachesListingClient({
 
       {/* Langues */}
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.language}</legend>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.language}</legend>
         <div className="flex flex-wrap gap-1.5">
           {ALL_LANGUAGES.map((code) => (
             <Pill
@@ -420,7 +432,7 @@ export function CoachesListingClient({
 
       {/* Disponibilité */}
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.availability}</legend>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.availability}</legend>
         <div className="flex flex-wrap gap-1.5">
           {ALL_DAYS.map((day) => (
             <Pill
@@ -443,7 +455,7 @@ export function CoachesListingClient({
 
       {/* Genre */}
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.gender}</legend>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.gender}</legend>
         <div className="flex flex-col gap-1.5">
           {([
             ["", page.filters.all],
@@ -465,39 +477,48 @@ export function CoachesListingClient({
         </div>
       </fieldset>
 
-      {/* Reset */}
-      {hasActiveFilters && (
-        <button
-          type="button"
-          onClick={resetFilters}
-          className="mt-2 w-full cursor-pointer rounded-lg border border-white/10 bg-white/5 py-2 text-sm text-white/60 transition-colors hover:border-white/20 hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-        >
-          {page.filters.reset}
-        </button>
-      )}
     </div>
   )
 
   return (
     <main className="relative z-10">
-      <div className="mx-auto max-w-7xl px-4 pt-6">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-white md:text-3xl">{page.title}</h1>
-          <span className="text-sm text-white/50">{page.resultCountTemplate.replace("{count}", String(filtered.length))}</span>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 pb-6">
-        <div className="flex gap-8">
+      <div className="mx-auto max-w-7xl px-4 py-6">
+        <div className="flex items-start gap-8">
           {/* Desktop sidebar */}
           <aside className="hidden w-80 shrink-0 lg:block">
-            <div className="sticky top-28 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
-              <FilterContent />
+            <div className="fixed left-[max(1rem,calc(50vw-640px+1rem))] top-28 w-80">
+              <div className="relative flex h-[calc(100vh-8rem)] flex-col">
+                <div ref={sidebarRef} className="flex-1 overflow-y-auto rounded-t-3xl border border-b-0 border-blue-300/20 bg-blue-400/[8%] pl-4 pr-7 pt-4 pb-2 shadow-xl shadow-black/20 backdrop-blur-md scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  <FilterContent />
+                </div>
+                <div ref={resetStripRef} className="rounded-b-3xl border border-t-0 border-blue-300/20 bg-blue-400/[8%] px-4 py-3 shadow-xl shadow-black/20 backdrop-blur-md">
+                  <button
+                    type="button"
+                    onClick={resetFilters}
+                    disabled={!hasActiveFilters}
+                    className={cn(
+                      "w-full rounded-xl border py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                      hasActiveFilters
+                        ? "cursor-pointer border-teal-accent/30 bg-teal-accent/10 text-teal-accent hover:bg-teal-accent/20"
+                        : "cursor-not-allowed border-white/10 bg-white/5 text-white/30"
+                    )}
+                  >
+                    {page.filters.reset}
+                  </button>
+                </div>
+                <Scrollbar scrollRef={sidebarRef} offsetBottom={resetStripHeight} />
+              </div>
             </div>
           </aside>
 
           {/* Results */}
           <div className="min-w-0 flex-1">
+            <div className="mb-4 flex items-center justify-between">
+              <h1 className="text-2xl font-bold text-white md:text-3xl">{page.title}</h1>
+              <span className="text-sm text-white/50">
+                {page.resultCountTemplate.replace("{count}", String(filtered.length))}
+              </span>
+            </div>
             {/* Mobile filter button */}
             <div className="mb-4 lg:hidden">
               <button
@@ -525,17 +546,18 @@ export function CoachesListingClient({
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 {filtered.map((coach) => (
-                  <CoachCard
+                  <CoachListingCard
                     key={coach.id}
                     coach={coach}
-                    translations={{
+                    t={{
                       badges: t.badges,
-                      reviewsSuffix: t.reviewsSuffix,
+                      languages: t.languages as unknown as Record<string, string>,
+                      listingCta: t.listingCta,
+                      reviews: t.reviewsSuffix,
                       priceUnit: t.priceUnit,
-                      cardCta: t.cardCta,
-                      languages: t.languages,
+                      languagesTitle: t.languagesTitle,
                     }}
                   />
                 ))}

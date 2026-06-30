@@ -6,6 +6,7 @@ export async function CoachesGrid() {
   const t = await getTranslations("coaches")
   const badgeKeys = t.raw("badges") as Record<string, string>
   const langT = await getTranslations("languages")
+  const tProfile = await getTranslations("coachProfile")
   const langKeys = [
     "fr",
     "en",
@@ -38,6 +39,7 @@ export async function CoachesGrid() {
                 reviewsSuffix: t("reviewsSuffix"),
                 priceUnit: t("priceUnit"),
                 cardCta: t("cardCta"),
+                languagesTitle: tProfile("languagesTitle"),
                 languages: languageLabels,
               }}
             />
