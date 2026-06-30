@@ -96,7 +96,7 @@ export function SearchBar() {
               </SelectTrigger>
               <SelectContent
                 alignItemWithTrigger={false}
-                className="min-w-[var(--anchor-width)] rounded-2xl border border-white/10 bg-white/[8%] text-white shadow-xl shadow-black/20 backdrop-blur-md [&_[data-slot=select-item]]:text-white [&_[data-slot=select-item]]:focus:bg-white/10 [&_[data-slot=select-item]]:focus:text-white"
+                className="min-w-[var(--anchor-width)] rounded-2xl border border-blue-300/20 bg-blue-400/[8%] text-white shadow-xl shadow-black/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] [&_[data-slot=select-item]]:text-white [&_[data-slot=select-item]]:focus:bg-white/10 [&_[data-slot=select-item]]:focus:text-white"
               >
                 {specialtyKeys.map((key) => (
                   <SelectItem key={key} value={key}>

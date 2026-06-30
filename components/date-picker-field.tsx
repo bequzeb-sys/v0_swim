@@ -52,8 +52,7 @@ export function DatePickerField({
         <Popover.Positioner sideOffset={8} align="start" className="z-50">
           <Popover.Popup
             className={cn(
-              "rounded-2xl border border-white/10 p-3 shadow-xl backdrop-blur-md",
-              "bg-white/[8%] text-white",
+              "rounded-2xl border border-blue-300/20 bg-blue-400/[8%] p-3 text-white shadow-xl shadow-black/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]",
               "data-[state=open]:animate-in data-[state=closed]:animate-out",
             )}
           >
