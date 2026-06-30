@@ -1,3 +1,4 @@
+import { memo } from "react"
 import Image from "next/image"
 import { MapPin, Star } from "lucide-react"
 import * as Flags from "country-flag-icons/react/3x2"
@@ -17,7 +18,7 @@ interface CoachListingCardProps {
   }
 }
 
-export function CoachListingCard({ coach, t }: CoachListingCardProps) {
+function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
   return (
     <article className="flex flex-row items-stretch gap-5 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
 
@@ -108,3 +109,5 @@ export function CoachListingCard({ coach, t }: CoachListingCardProps) {
     </article>
   )
 }
+
+export const CoachListingCard = memo(CoachListingCardInner)

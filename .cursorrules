@@ -69,6 +69,13 @@ shadow-black/20 backdrop-blur-md
   - Floating popovers, the shared Dialog, and filter/selection pills —
     see their own existing sections below; these were never part of the
     content-card system to begin with.
+  - Fixed sidebar on the coaches listing page (`components/coaches/coaches-listing-client.tsx`)
+    — `backdrop-blur-md` intentionally OMITTED. The sidebar uses `position: fixed` which
+    forces a separate GPU compositor layer. Combined with React repaints on filter state
+    changes, `backdrop-blur-md` on a fixed element causes a visible horizontal flash line
+    across all blurred elements on the page. Fix: remove blur, compensate with
+    `bg-blue-400/[15%]` (higher opacity). All other glass cards remain unaffected.
+    This is a browser compositing limitation, not a design decision.
 - When adding a NEW content card anywhere in the app, use this recipe by
  default. Only deviate if the card needs one of the above documented
  exception reasons — and if so, document the new exception here too.

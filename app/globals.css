@@ -173,3 +173,12 @@
     @apply font-sans;
   }
 }
+
+/* Prevent GPU compositing flash on backdrop-blur elements during React repaint */
+@media (prefers-reduced-motion: no-preference) {
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    transform: translateZ(0);
+  }
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useEffect, useRef } from "react"
+import { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -242,6 +242,15 @@ export function CoachesListingClient({
     if (gender && coach.gender !== gender) return false
     return true
   })
+
+  const cardTranslations = useMemo(() => ({
+    badges: t.badges,
+    languages: t.languages as unknown as Record<string, string>,
+    listingCta: t.listingCta,
+    reviews: t.reviewsSuffix,
+    priceUnit: t.priceUnit,
+    languagesTitle: t.languagesTitle,
+  }), [t.badges, t.languages, t.listingCta, t.reviewsSuffix, t.priceUnit, t.languagesTitle])
 
   const FilterContent = () => (
     <div className="flex flex-col gap-4">
@@ -487,11 +496,14 @@ export function CoachesListingClient({
           {/* Desktop sidebar */}
           <aside className="hidden w-80 shrink-0 lg:block">
             <div className="fixed left-[max(1rem,calc(50vw-640px+1rem))] top-28 w-80">
-              <div className="relative flex h-[calc(100vh-8rem)] flex-col">
-                <div ref={sidebarRef} className="flex-1 overflow-y-auto rounded-t-3xl border border-b-0 border-blue-300/20 bg-blue-400/[8%] pl-4 pr-7 pt-4 pb-2 shadow-xl shadow-black/20 backdrop-blur-md scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className="relative flex h-[calc(100vh-8rem)] flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[15%] shadow-xl shadow-black/20">
+                <div
+                  ref={sidebarRef}
+                  className="flex-1 overflow-y-auto pl-4 pr-7 pt-4 pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                >
                   <FilterContent />
                 </div>
-                <div ref={resetStripRef} className="rounded-b-3xl border border-t-0 border-blue-300/20 bg-blue-400/[8%] px-4 py-3 shadow-xl shadow-black/20 backdrop-blur-md">
+                <div ref={resetStripRef} className="px-4 py-3">
                   <button
                     type="button"
                     onClick={resetFilters}
@@ -512,7 +524,7 @@ export function CoachesListingClient({
           </aside>
 
           {/* Results */}
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 isolate">
             <div className="mb-4 flex items-center justify-between">
               <h1 className="text-2xl font-bold text-white md:text-3xl">{page.title}</h1>
               <span className="text-sm text-white/50">
@@ -551,14 +563,7 @@ export function CoachesListingClient({
                   <CoachListingCard
                     key={coach.id}
                     coach={coach}
-                    t={{
-                      badges: t.badges,
-                      languages: t.languages as unknown as Record<string, string>,
-                      listingCta: t.listingCta,
-                      reviews: t.reviewsSuffix,
-                      priceUnit: t.priceUnit,
-                      languagesTitle: t.languagesTitle,
-                    }}
+                    t={cardTranslations}
                   />
                 ))}
               </div>

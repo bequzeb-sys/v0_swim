@@ -62,7 +62,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`dark scroll-smooth ${inter.variable}`}>
-      <body className="bg-background font-sans antialiased">
+      <body className="bg-background font-sans antialiased overflow-y-scroll">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             {children}
