@@ -6,7 +6,19 @@ import { useTranslations } from "next-intl"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { Button } from "@/components/ui/button"
 
-const SPECIALTIES = ["freestyle", "openWater", "butterfly", "competition"] as const
+const SPECIALTIES = [
+  "apprentissage",
+  "aquagym",
+  "aquaphobie",
+  "bebeNageur",
+  "competition",
+  "eauLibre",
+  "natationAdaptee",
+  "natationPalmes",
+  "perfectionnement",
+  "sauvetageAquatique",
+  "triathlon",
+] as const
 type Specialty = (typeof SPECIALTIES)[number]
 
 function SpecialtyCard({

@@ -35,10 +35,17 @@
     "specialtyPlaceholder": "All specialties",
     "specialtyOptions": {
       "all": "All specialties",
-      "freestyle": "Freestyle",
-      "openWater": "Open water",
-      "butterfly": "Butterfly",
-      "competition": "Competition"
+      "apprentissage": "Learn to Swim",
+      "aquagym": "Aqua Fitness",
+      "aquaphobie": "Water Confidence",
+      "bebeNageur": "Baby Swimming",
+      "competition": "Competitive Swimming",
+      "eauLibre": "Open Water Swimming",
+      "natationAdaptee": "Adaptive Swimming",
+      "natationPalmes": "Finswimming",
+      "perfectionnement": "Stroke Improvement",
+      "sauvetageAquatique": "Water Safety & Rescue",
+      "triathlon": "Triathlon"
     },
     "dateLabel": "Date",
     "datePlaceholder": "Select a date",
@@ -50,12 +57,17 @@
     "priceUnit": "/session",
     "cardCta": "View profile & book",
     "badges": {
-      "freestyle": "Freestyle",
-      "competition": "Competition",
-      "openWater": "Open water",
-      "allLevels": "All levels",
-      "butterfly": "Butterfly",
-      "advanced": "Advanced"
+      "apprentissage": "Learn to Swim",
+      "aquagym": "Aqua Fitness",
+      "aquaphobie": "Water Confidence",
+      "bebeNageur": "Baby Swimming",
+      "competition": "Competitive Swimming",
+      "eauLibre": "Open Water Swimming",
+      "natationAdaptee": "Adaptive Swimming",
+      "natationPalmes": "Finswimming",
+      "perfectionnement": "Stroke Improvement",
+      "sauvetageAquatique": "Water Safety & Rescue",
+      "triathlon": "Triathlon"
     }
   },
   "footer": {
@@ -227,10 +239,17 @@
         "title": "What's your specialty?",
         "subtitle": "Select one or more disciplines you're certified in.",
         "continue": "Continue",
-        "freestyle": "Freestyle",
-        "openWater": "Open water",
-        "butterfly": "Butterfly",
-        "competition": "Competition"
+        "apprentissage": "Learn to Swim",
+        "aquagym": "Aqua Fitness",
+        "aquaphobie": "Water Confidence",
+        "bebeNageur": "Baby Swimming",
+        "competition": "Competitive Swimming",
+        "eauLibre": "Open Water Swimming",
+        "natationAdaptee": "Adaptive Swimming",
+        "natationPalmes": "Finswimming",
+        "perfectionnement": "Stroke Improvement",
+        "sauvetageAquatique": "Water Safety & Rescue",
+        "triathlon": "Triathlon"
       },
       "profile": {
         "title": "Tell us about yourself",

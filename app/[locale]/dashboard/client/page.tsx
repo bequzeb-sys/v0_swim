@@ -156,7 +156,7 @@ export default async function ClientDashboardPage({ params }: Props) {
                 </span>
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {[tBadges("freestyle"), t("sessionTypeIndividual")].map((badge) => (
+                {[tBadges("apprentissage"), t("sessionTypeIndividual")].map((badge) => (
                   <span
                     key={badge}
                     className="rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs text-teal-accent"
@@ -314,7 +314,7 @@ export default async function ClientDashboardPage({ params }: Props) {
               <span className="text-xs text-white/50">{t("withCoach", { coach: "Marc Delorme" })}</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {[tBadges("freestyle"), t("sessionTypeIndividual")].map((badge) => (
+              {[tBadges("apprentissage"), t("sessionTypeIndividual")].map((badge) => (
                 <span key={badge} className="rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs text-teal-accent">{badge}</span>
               ))}
             </div>

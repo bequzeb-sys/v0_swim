@@ -1,14 +1,19 @@
 // Real coach data — name, city, avatar, rating, review count, price.
 // Badge labels are translatable, so they live in messages/*.json
-// and are referenced by translation key (e.g. 'freestyle', 'competition')
+// and are referenced by translation key (e.g. 'apprentissage', 'competition')
 // via the `badgeKeys` array.
 export type CoachBadgeKey =
-  | 'freestyle'
+  | 'apprentissage'
+  | 'aquagym'
+  | 'aquaphobie'
+  | 'bebeNageur'
   | 'competition'
-  | 'openWater'
-  | 'allLevels'
-  | 'butterfly'
-  | 'advanced'
+  | 'eauLibre'
+  | 'natationAdaptee'
+  | 'natationPalmes'
+  | 'perfectionnement'
+  | 'sauvetageAquatique'
+  | 'triathlon'
 
 export type LanguageCode =
   | 'fr'
@@ -60,7 +65,7 @@ export const coaches: Coach[] = [
     rating: '4.8',
     reviews: 124,
     price: '€45',
-    badgeKeys: ['freestyle', 'competition'],
+    badgeKeys: ['triathlon', 'competition'],
     bio:
       "Ancien nageur de niveau régional, je coach à la Réunion depuis 8 ans. Mon approche combine technique de nage et préparation mentale pour des résultats durables. J'ai accompagné des dizaines de swimmers vers leurs premiers triathlons.",
     yearsExperience: 8,
@@ -76,7 +81,7 @@ export const coaches: Coach[] = [
     rating: '4.8',
     reviews: 98,
     price: '€45',
-    badgeKeys: ['openWater', 'allLevels'],
+    badgeKeys: ['eauLibre', 'apprentissage'],
     bio:
       "Monitrice dipl\u00f4mée et ancienne compétitrice en eau libre, je suis passionnée par l'accompagnement des débutants et des nageurs intermédiaire. Mes séances en piscine et en extérieur sont adaptées à chaque niveau, avec un focus sur la confiance dans l'eau.",
     yearsExperience: 5,
@@ -92,7 +97,7 @@ export const coaches: Coach[] = [
     rating: '4.8',
     reviews: 87,
     price: '€45',
-    badgeKeys: ['butterfly', 'advanced'],
+    badgeKeys: ['perfectionnement', 'competition'],
     bio:
       "Entraîneur diplômé d'état avec 12 ans d'expérience, j'ai préparé des nageurs du niveau régional au national. Spécialisé en papillon et brasse, j'aide les nageurs avancés à franchir un cap technique et à optimiser leur rendement dans l'eau.",
     yearsExperience: 12,
@@ -108,7 +113,7 @@ export const coaches: Coach[] = [
     rating: '4.7',
     reviews: 62,
     price: '€40',
-    badgeKeys: ['allLevels'],
+    badgeKeys: ['apprentissage', 'aquaphobie'],
     bio:
       "Ancienne maître-nageuse en piscine municipale, je privilégie une approche progressive et bienveillante. J'enseigne aux adultes comme aux enfants, du premier contact avec l'eau jusqu'au perfectionnement technique.",
     yearsExperience: 6,
@@ -124,7 +129,7 @@ export const coaches: Coach[] = [
     rating: '4.9',
     reviews: 156,
     price: '€55',
-    badgeKeys: ['competition'],
+    badgeKeys: ['competition', 'perfectionnement'],
     bio:
       "Préparateur physique et entraîneur de compétition depuis 12 ans, j'accompagne des nageurs ambitieux vers leurs objectifs chronométriques. Approche analytique combinée à un suivi personnalisé entre les séances.",
     yearsExperience: 12,
@@ -140,7 +145,7 @@ export const coaches: Coach[] = [
     rating: '4.6',
     reviews: 41,
     price: '€38',
-    badgeKeys: ['allLevels'],
+    badgeKeys: ['aquaphobie', 'apprentissage'],
     bio:
       "Spécialisée dans l'apprentissage des débutants et la gestion de la peur de l'eau, j'accompagne adultes et enfants vers une nage autonome et sereine, à leur rythme.",
     yearsExperience: 4,
@@ -156,7 +161,7 @@ export const coaches: Coach[] = [
     rating: '4.8',
     reviews: 73,
     price: '€50',
-    badgeKeys: ['openWater'],
+    badgeKeys: ['eauLibre', 'triathlon'],
     bio:
       "Triathlète et coach eau libre, je prépare mes nageurs aux défis en mer et en lac : technique de nage en milieu naturel, gestion du stress, sécurité. Sessions piscine et plein air selon la saison.",
     yearsExperience: 9,
@@ -172,7 +177,7 @@ export const coaches: Coach[] = [
     rating: '4.9',
     reviews: 201,
     price: '€60',
-    badgeKeys: ['butterfly', 'advanced'],
+    badgeKeys: ['perfectionnement', 'natationPalmes'],
     bio:
       "Ancienne nageuse de niveau national au Japon, j'enseigne le papillon et les nages techniques avec une exigence bienveillante. Pour nageurs intermédiaires souhaitant franchir un cap technique.",
     yearsExperience: 15,
@@ -188,7 +193,7 @@ export const coaches: Coach[] = [
     rating: '4.5',
     reviews: 28,
     price: '€35',
-    badgeKeys: ['allLevels'],
+    badgeKeys: ['apprentissage', 'bebeNageur'],
     bio:
       "Jeune monitrice diplômée, passionnée par la transmission. J'enseigne aux enfants et aux adultes débutants dans une atmosphère détendue et encourageante.",
     yearsExperience: 3,
@@ -204,7 +209,7 @@ export const coaches: Coach[] = [
     rating: '4.7',
     reviews: 94,
     price: '€52',
-    badgeKeys: ['competition', 'advanced'],
+    badgeKeys: ['competition', 'triathlon'],
     bio:
       "Entraîneur certifié niveau régional, je coach des nageurs compétiteurs et des triathlètes confirmés. Préparation physique spécifique, analyse vidéo, programmation annuelle.",
     yearsExperience: 10,

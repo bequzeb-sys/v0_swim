@@ -35,10 +35,17 @@
     "specialtyPlaceholder": "Toutes spécialités",
     "specialtyOptions": {
       "all": "Toutes spécialités",
-      "freestyle": "Freestyle",
-      "openWater": "Eau libre",
-      "butterfly": "Papillon",
-      "competition": "Compétition"
+      "apprentissage": "Apprentissage",
+      "aquagym": "Aquagym",
+      "aquaphobie": "Aquaphobie",
+      "bebeNageur": "Bébé Nageur",
+      "competition": "Compétition",
+      "eauLibre": "Eau Libre",
+      "natationAdaptee": "Natation Adaptée / Handicap",
+      "natationPalmes": "Natation avec Palmes",
+      "perfectionnement": "Perfectionnement",
+      "sauvetageAquatique": "Sauvetage Aquatique",
+      "triathlon": "Triathlon"
     },
     "dateLabel": "Date",
     "datePlaceholder": "Sélectionnez une date",
@@ -50,12 +57,17 @@
     "priceUnit": "/séance",
     "cardCta": "Voir le profil & réserver",
     "badges": {
-      "freestyle": "Freestyle",
+      "apprentissage": "Apprentissage",
+      "aquagym": "Aquagym",
+      "aquaphobie": "Aquaphobie",
+      "bebeNageur": "Bébé Nageur",
       "competition": "Compétition",
-      "openWater": "Eau libre",
-      "allLevels": "Tous niveaux",
-      "butterfly": "Papillon",
-      "advanced": "Avancé"
+      "eauLibre": "Eau Libre",
+      "natationAdaptee": "Natation Adaptée / Handicap",
+      "natationPalmes": "Natation avec Palmes",
+      "perfectionnement": "Perfectionnement",
+      "sauvetageAquatique": "Sauvetage Aquatique",
+      "triathlon": "Triathlon"
     }
   },
   "footer": {
@@ -227,10 +239,17 @@
         "title": "Quelle est votre spécialité ?",
         "subtitle": "Sélectionnez une ou plusieurs disciplines dans lesquelles vous êtes certifié.",
         "continue": "Continuer",
-        "freestyle": "Freestyle",
-        "openWater": "Eau libre",
-        "butterfly": "Papillon",
-        "competition": "Compétition"
+        "apprentissage": "Apprentissage",
+        "aquagym": "Aquagym",
+        "aquaphobie": "Aquaphobie",
+        "bebeNageur": "Bébé Nageur",
+        "competition": "Compétition",
+        "eauLibre": "Eau Libre",
+        "natationAdaptee": "Natation Adaptée / Handicap",
+        "natationPalmes": "Natation avec Palmes",
+        "perfectionnement": "Perfectionnement",
+        "sauvetageAquatique": "Sauvetage Aquatique",
+        "triathlon": "Triathlon"
       },
       "profile": {
         "title": "Parlez-nous de vous",

@@ -18,12 +18,17 @@ import { LanguageFlag } from "@/components/ui/language-flag"
 import type { Coach, CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 
 const ALL_BADGES: CoachBadgeKey[] = [
-  "freestyle",
+  "apprentissage",
+  "aquagym",
+  "aquaphobie",
+  "bebeNageur",
   "competition",
-  "openWater",
-  "allLevels",
-  "butterfly",
-  "advanced",
+  "eauLibre",
+  "natationAdaptee",
+  "natationPalmes",
+  "perfectionnement",
+  "sauvetageAquatique",
+  "triathlon",
 ]
 
 const ALL_LANGUAGES: LanguageCode[] = [

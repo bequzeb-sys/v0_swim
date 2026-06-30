@@ -18,10 +18,17 @@ import { fr, enUS } from "date-fns/locale"
 
 const specialtyKeys = [
   "all",
-  "freestyle",
-  "openWater",
-  "butterfly",
+  "apprentissage",
+  "aquagym",
+  "aquaphobie",
+  "bebeNageur",
   "competition",
+  "eauLibre",
+  "natationAdaptee",
+  "natationPalmes",
+  "perfectionnement",
+  "sauvetageAquatique",
+  "triathlon",
 ] as const
 
 const LOCALE_MAP = { fr, en: enUS } as const

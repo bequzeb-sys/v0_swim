@@ -21,7 +21,19 @@ export default async function CoachesPage() {
   const tl = await getTranslations("languages")
   const td = await getTranslations("coachProfile")
 
-  const badgeKeys = ["freestyle", "competition", "openWater", "allLevels", "butterfly", "advanced"] as const
+  const badgeKeys = [
+    "apprentissage",
+    "aquagym",
+    "aquaphobie",
+    "bebeNageur",
+    "competition",
+    "eauLibre",
+    "natationAdaptee",
+    "natationPalmes",
+    "perfectionnement",
+    "sauvetageAquatique",
+    "triathlon",
+  ] as const
   const langKeys = ["fr", "en", "es", "de", "it", "ar", "zh", "pt", "ru", "ja"] as const
   const dayKeys = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const
 
