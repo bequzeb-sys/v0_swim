@@ -26,7 +26,7 @@ export function HeaderActions({
   if (user) {
     return (
       <Button variant="entry" href="/dashboard" onClick={handleClick} className={className}>
-        {compact ? <Plus size={18} aria-hidden="true" /> : null}
+        {compact ? <Plus size={18} className="lg:hidden" aria-hidden="true" /> : null}
         <span className={compact ? "hidden lg:inline" : undefined}>
           {t("dashboardCta")}
         </span>
@@ -37,7 +37,7 @@ export function HeaderActions({
   return (
     // Commencer — entry variant, blue, rounded-xl, navigates to search
     <Button variant="entry" href="#search" onClick={handleClick} className={className}>
-      {compact ? <Plus size={18} aria-hidden="true" /> : null}
+      {compact ? <Plus size={18} className="lg:hidden" aria-hidden="true" /> : null}
       <span className={compact ? "hidden lg:inline" : undefined}>
         {t("cta")}
       </span>
