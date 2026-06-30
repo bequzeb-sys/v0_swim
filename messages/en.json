@@ -1,7 +1,8 @@
 {
   "brand": {
     "swim": "Swim",
-    "ai": "AI"
+    "ai": "AI",
+    "homeLink": "SwimAI — Home"
   },
   "nav": {
     "links": {

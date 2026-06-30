@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { getTranslations } from "next-intl/server"
 import { getLocale } from "next-intl/server"
 import { coaches } from "@/lib/coaches"
@@ -53,7 +54,8 @@ export default async function CoachesPage() {
     <>
       <UnderwaterBackground />
       <SecondaryPageHeader />
-      <CoachesListingClient
+      <Suspense fallback={null}>
+        <CoachesListingClient
         coaches={coaches}
         translations={{
           badges: Object.fromEntries(
@@ -92,6 +94,7 @@ export default async function CoachesPage() {
         badgeLabels={badgeLabels}
         dayLabels={dayLabels}
       />
+      </Suspense>
     </>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
@@ -25,7 +25,7 @@ function LevelPill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-xl border px-4 py-2 text-sm font-medium transition-all active:scale-[0.97] ${
+      className={`cursor-pointer rounded-xl border px-4 py-2 text-sm font-medium transition-all active:scale-[0.97] ${
         selected
           ? "border-teal-accent bg-teal-accent/15 text-teal-accent"
           : "border-white/10 bg-white/[4%] text-white/60 hover:border-white/20 hover:text-white/80"
@@ -37,6 +37,14 @@ function LevelPill({
 }
 
 export default function OnboardingClientLocationPage() {
+  return (
+    <Suspense fallback={null}>
+      <OnboardingClientLocationPageInner />
+    </Suspense>
+  )
+}
+
+function OnboardingClientLocationPageInner() {
   const t = useTranslations("onboarding.client.location")
   const router = useRouter()
 

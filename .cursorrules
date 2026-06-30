@@ -302,7 +302,8 @@ do nothing when reached via a redirect bounce.
  page, check whether it (or any component it renders) calls
  useSearchParams() — if yes, the Suspense wrapper is mandatory.
 - Pages already fixed: login, signup, signup/client, signup/coach,
- onboarding/client/done, onboarding/coach/done.
+ onboarding/client/done, onboarding/client/location, onboarding/coach/done,
+ coaches (listing page).
 
 ### shadcn defaults in dark mode
 - shadcn/ui components ship with `dark:` variant classes that have
@@ -442,3 +443,38 @@ the same visible symptom (element doesn't stick) but have different
 causes and different fixes. Check BOTH: (1) any ancestor `overflow-*`
 declaration, AND (2) whether the immediate parent's height actually
 extends with the scrollable content.
+
+## Pre-flight checklist — required before every Cursor prompt
+
+Before sending any prompt to Cursor that introduces new JSX, Claude must
+verify each of the following. Any item that fails must be corrected in
+the prompt before it is sent:
+
+### Interactive elements
+- Every new `<button>`, `<a>`, or clickable element has `cursor-pointer`
+- Every new `<button>` has `rounded-xl` — never square, never `rounded-full`
+- Every new `<button>` has `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60`
+- Disabled buttons keep their focus ring — do not add `disabled:focus-visible:ring-0`
+
+### Strings
+- Every user-visible string goes through `useTranslations()` — no hardcoded
+  French or English text in JSX, including `aria-label`, `placeholder`,
+  `title`, and fallback expressions like `|| "default text"`
+- Every new key added to `fr.json` has a matching key added to `en.json`
+  in the same change
+- No `as any` casts on translation key paths — if the path feels wrong,
+  use a separate `useTranslations()` hook for the correct namespace
+
+### Colors and tokens
+- No raw hex or oklch values in `.tsx` files — use design tokens from
+  `app/globals.css` only (e.g. `bg-teal-accent`, not `bg-[#00B5A4]`)
+
+### Suspense
+- Any new page component that calls (or renders a child that calls)
+  `useSearchParams()` must wrap that component in `<Suspense fallback={null}>`
+
+### Verification
+- Every prompt ends with explicit browser verification instructions —
+  not just `pnpm build`, but specific things to click, interact with,
+  and visually confirm before closing the checkpoint
+- Claude never asks to commit until browser verification is confirmed
