@@ -17,13 +17,33 @@ interface Props {
   params: Promise<{ locale: string; id: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale, id } = await params
   const coach = getCoachById(id)
-  if (!coach) return { title: "Coach not found" }
+  if (!coach) {
+    const t = await getTranslations({ locale, namespace: "seo" })
+    return { title: t("notFound") }
+  }
+  const tSeo = await getTranslations({ locale, namespace: "seo" })
+  const tBadges = await getTranslations({ locale, namespace: "coaches.badges" })
+  const specialties = coach.badgeKeys
+    .slice(0, 3)
+    .map((key) => tBadges(key))
+    .join(", ")
   return {
     title: `${coach.name} — SwimAI`,
-    description: coach.bio,
+    description: tSeo("coachProfileDescription")
+      .replace("{name}", coach.name)
+      .replace("{specialties}", specialties),
+    alternates: {
+      canonical: `https://swimai.app/${locale}/coaches/${id}`,
+      languages: {
+        "fr": `https://swimai.app/fr/coaches/${id}`,
+        "en": `https://swimai.app/en/coaches/${id}`,
+      },
+    },
   }
 }
 

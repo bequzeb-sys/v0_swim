@@ -18,6 +18,15 @@
     "menu": "Menu",
     "switchTo": "Changer la langue en English"
   },
+  "seo": {
+    "siteName": "SwimAI",
+    "homeTitle": "SwimAI — Trouvez votre coach de natation idéal",
+    "homeDescription": "Réservez des coachs de natation certifiés près de chez vous. Progressez plus vite grâce à l'IA.",
+    "coachesTitle": "Coachs de natation — Triathlon, Eau Libre, Compétition | SwimAI",
+    "coachesDescription": "Parcourez et filtrez les coachs de natation certifiés près de chez vous. Aquaphobie, apprentissage, perfectionnement, eau libre, triathlon et plus.",
+    "coachProfileDescription": "Réservez une séance avec {name}, coach de natation certifié spécialisé en {specialties}.",
+    "notFound": "Coach introuvable — SwimAI"
+  },
   "hero": {
     "title1": "Trouvez votre coach",
     "title2": "de natation idéal",

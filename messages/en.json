@@ -18,6 +18,15 @@
     "menu": "Menu",
     "switchTo": "Change language to Français"
   },
+  "seo": {
+    "siteName": "SwimAI",
+    "homeTitle": "SwimAI — Find Your Ideal Swimming Coach",
+    "homeDescription": "Book certified swimming coaches near you. Progress faster with AI.",
+    "coachesTitle": "Swimming Coaches — Triathlon, Open Water, Competition | SwimAI",
+    "coachesDescription": "Browse and filter certified swimming coaches near you. Fear of water, learn to swim, stroke improvement, open water, triathlon and more.",
+    "coachProfileDescription": "Book a session with {name}, certified swimming coach specialising in {specialties}.",
+    "notFound": "Coach not found — SwimAI"
+  },
   "hero": {
     "title1": "Find your ideal",
     "title2": "swim coach",

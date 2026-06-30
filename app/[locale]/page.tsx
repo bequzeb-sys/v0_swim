@@ -8,6 +8,21 @@ import { ForCoaches } from "@/components/for-coaches"
 import { FooterCTA } from "@/components/footer-cta"
 import { Footer } from "@/components/footer"
 import { UnderwaterBackground } from "@/components/underwater-background"
+import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "seo" })
+  return {
+    title: t("homeTitle"),
+    description: t("homeDescription"),
+  }
+}
 
 export default function Page() {
   return (

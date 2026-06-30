@@ -8,10 +8,16 @@ import { UnderwaterBackground } from "@/components/underwater-background"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import type { Metadata } from "next"
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "seo" })
   return {
-    title: "Trouvez un coach — SwimAI",
-    description: "Parcourez et filtrez les coachs de natation certifiés près de chez vous.",
+    title: t("coachesTitle"),
+    description: t("coachesDescription"),
   }
 }
 
