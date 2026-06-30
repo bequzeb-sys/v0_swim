@@ -33,7 +33,7 @@ export function SearchBar() {
 
   const [location, setLocation] = useState("")
   const [specialty, setSpecialty] = useState("all")
-  const [date, setDate] = useState<Date | undefined>(() => new Date())
+  const [date, setDate] = useState<Date | undefined>(undefined)
 
   function handleSearch() {
     const params = new URLSearchParams()

@@ -83,6 +83,7 @@ export function DatePickerField({
               month={month}
               onMonthChange={setMonth}
               hideNavigation
+              showOutsideDays
               disabled={(day) => {
                 const m = month
                 return day.getMonth() !== m.getMonth() || day.getFullYear() !== m.getFullYear()
@@ -106,7 +107,7 @@ export function DatePickerField({
                   "inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-white transition-colors hover:bg-teal-accent/20 hover:text-teal-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
                 today: "dark:!text-teal-accent dark:font-semibold",
                 selected: "dark:!bg-teal-accent dark:!text-white dark:hover:!bg-teal-accent dark:hover:!text-white rounded-md",
-                outside: "text-white/20 opacity-40",
+                outside: "text-white/25 opacity-50",
                 disabled: "text-white/20 opacity-40 cursor-not-allowed",
               }}
             />
