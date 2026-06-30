@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils"
 
 export function LanguageSwitcher() {
   const t = useTranslations("languages")
+  const tn = useTranslations("nav")
   const currentLocale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
@@ -31,8 +32,7 @@ export function LanguageSwitcher() {
     )
   }
 
-  const triggerLabel =
-    currentLocale === "fr" ? "Changer la langue en English" : "Change language to Français"
+  const triggerLabel = tn("switchTo")
 
   return (
     <Popover.Root>

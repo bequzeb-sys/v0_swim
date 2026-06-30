@@ -9,6 +9,7 @@ import { fr, enUS } from "date-fns/locale"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Popover } from "@base-ui/react/popover"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 
 interface DatePickerFieldProps {
   value: Date | undefined
@@ -31,6 +32,7 @@ export function DatePickerField({
   ariaLabel,
 }: DatePickerFieldProps) {
   const dateFnsLocale = LOCALE_MAP[locale] ?? enUS
+  const t = useTranslations("search")
   const formatted = value ? format(value, "d MMM yyyy", { locale: dateFnsLocale }) : ""
   const [month, setMonth] = useState<Date>(value ?? new Date())
   const [open, setOpen] = useState(false)
@@ -59,7 +61,7 @@ export function DatePickerField({
             <div className="mb-2 flex h-10 items-center justify-between px-2">
               <button
                 type="button"
-                aria-label={locale === "fr" ? "Mois précédent" : "Previous month"}
+                aria-label={t("prevMonth")}
                 onClick={goToPrevMonth}
                 className="inline-flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
               >
@@ -70,7 +72,7 @@ export function DatePickerField({
               </span>
               <button
                 type="button"
-                aria-label={locale === "fr" ? "Mois suivant" : "Next month"}
+                aria-label={t("nextMonth")}
                 onClick={goToNextMonth}
                 className="inline-flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
               >

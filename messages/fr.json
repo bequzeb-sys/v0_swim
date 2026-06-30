@@ -14,7 +14,8 @@
     "dashboardCta": "Tableau de bord",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
-    "menu": "Menu"
+    "menu": "Menu",
+    "switchTo": "Changer la langue en English"
   },
   "hero": {
     "title1": "Trouvez votre coach",
@@ -55,6 +56,8 @@
     "cityLabel": "Ville",
     "useMyLocation": "Utiliser ma position",
     "locating": "Localisation…",
+    "prevMonth": "Mois précédent",
+    "nextMonth": "Mois suivant",
     "countries": {
       "FR": "France",
       "BE": "Belgique",
