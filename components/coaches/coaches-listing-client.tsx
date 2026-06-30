@@ -4,22 +4,17 @@ import { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { SlidersHorizontal, ChevronDown } from "lucide-react"
+import { SlidersHorizontal, ChevronDown, Check } from "lucide-react"
 import { CoachListingCard } from "@/components/coaches/coach-listing-card"
 import { Input } from "@/components/ui/input"
 import { Pill } from "@/components/ui/pill"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogBody,
-} from "@/components/ui/dialog"
 import { LanguageFlag } from "@/components/ui/language-flag"
 import { Scrollbar } from "@/components/ui/scrollbar"
 import type { Coach, CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 import * as Flags from "country-flag-icons/react/3x2"
 import { Popover } from "@base-ui/react/popover"
+import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
+import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const COUNTRIES = [
@@ -109,9 +104,11 @@ export function CoachesListingClient({
   const searchParams = useSearchParams()
 
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [countryOpen, setCountryOpen] = useState(false)
+  const [mobileClosing, setMobileClosing] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
   const resetStripRef = useRef<HTMLDivElement>(null)
+  const mobileScrollRef = useRef<HTMLDivElement>(null)
+  const mobileResetRef = useRef<HTMLDivElement>(null)
   const [resetStripHeight, setResetStripHeight] = useState(0)
 
   const getParam = <T,>(key: string, defaultVal: T, parse?: (v: string) => T): T => {
@@ -252,8 +249,10 @@ export function CoachesListingClient({
     languagesTitle: t.languagesTitle,
   }), [t.badges, t.languages, t.listingCta, t.reviewsSuffix, t.priceUnit, t.languagesTitle])
 
-  const FilterContent = () => (
-    <div className="flex flex-col gap-4">
+  const FilterContent = () => {
+    const [countryOpen, setCountryOpen] = useState(false)
+    return (
+      <div className="flex flex-col gap-4">
       {/* Pays */}
       <fieldset>
         <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.country}</legend>
@@ -486,8 +485,9 @@ export function CoachesListingClient({
         </div>
       </fieldset>
 
-    </div>
-  )
+      </div>
+    )
+  }
 
   return (
     <main className="relative z-10">
@@ -572,17 +572,107 @@ export function CoachesListingClient({
         </div>
       </div>
 
-      {/* Mobile filter drawer */}
-      <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
-        <DialogContent className="max-h-[85vh] overflow-y-auto" closeLabel={page.close}>
-          <DialogHeader>
-            <DialogTitle>{page.mobileFilters}</DialogTitle>
-          </DialogHeader>
-          <DialogBody>
-            <FilterContent />
-          </DialogBody>
-        </DialogContent>
-      </Dialog>
+      {/* Mobile filter left drawer */}
+      <DialogPrimitive.Root open={mobileOpen || mobileClosing} onOpenChange={(open) => {
+            if (!open) {
+              setMobileClosing(true)
+              setTimeout(() => {
+                setMobileOpen(false)
+                setMobileClosing(false)
+              }, 360)
+            } else {
+              setMobileOpen(true)
+            }
+          }}>
+        <DialogPrimitive.Portal keepMounted>
+          <AnimatePresence>
+            {mobileOpen && (
+              <>
+                {/* Backdrop — plain fixed div, no Base UI wrapper */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+                  onClick={() => {
+                    setMobileClosing(true)
+                    setTimeout(() => {
+                      setMobileOpen(false)
+                      setMobileClosing(false)
+                    }, 360)
+                  }}
+                />
+
+                {/* Left drawer panel — plain fixed div, no Base UI Popup wrapper */}
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "-100%", transition: { duration: 0.35, ease: "easeIn" } }}
+                  transition={{ type: "spring", stiffness: 380, damping: 38 }}
+                  className="fixed inset-y-0 left-0 z-50 flex w-[min(20rem,85vw)] flex-col shadow-xl shadow-black/20 outline-none"
+                >
+                  {/* Header */}
+                  <div className="flex items-center justify-between rounded-t-3xl border border-b-0 border-blue-300/20 bg-blue-400/[15%] px-5 pt-5 pb-4">
+                    <span className="text-base font-semibold text-white">{page.mobileFilters}</span>
+                    <DialogPrimitive.Close
+                      className={cn(
+                        "inline-flex size-8 cursor-pointer items-center justify-center rounded-xl border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                        hasActiveFilters
+                          ? "border-teal-accent/30 bg-teal-accent/10 text-teal-accent hover:bg-teal-accent/20"
+                          : "border-white/15 bg-white/5 text-white/50 hover:border-white/25 hover:text-white"
+                      )}
+                      aria-label={page.close}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setMobileClosing(true)
+                        setTimeout(() => {
+                          setMobileOpen(false)
+                          setMobileClosing(false)
+                        }, 360)
+                      }}
+                    >
+                      <Check className="size-4" aria-hidden="true" />
+                    </DialogPrimitive.Close>
+                  </div>
+
+                  {/* Scrollable filter content */}
+                  <div
+                    ref={mobileScrollRef}
+                    className="relative flex-1 overflow-y-auto border-x border-blue-300/20 bg-blue-400/[15%] px-5 py-4 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                  >
+                    <FilterContent />
+                  </div>
+
+                  {/* Pinned reset button */}
+                  <div ref={mobileResetRef} className="rounded-b-3xl border border-t-0 border-blue-300/20 bg-blue-400/[15%] px-5 py-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        resetFilters()
+                        setMobileClosing(true)
+                        setTimeout(() => {
+                          setMobileOpen(false)
+                          setMobileClosing(false)
+                        }, 360)
+                      }}
+                      disabled={!hasActiveFilters}
+                      className={cn(
+                        "w-full cursor-pointer rounded-xl border py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                        hasActiveFilters
+                          ? "border-teal-accent/30 bg-teal-accent/10 text-teal-accent hover:bg-teal-accent/20"
+                          : "border-white/10 bg-white/5 text-white/30 cursor-not-allowed"
+                      )}
+                    >
+                      {page.filters.reset}
+                    </button>
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
     </main>
   )
 }
