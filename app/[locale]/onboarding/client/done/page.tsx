@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { CheckCircle2 } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -8,7 +9,7 @@ import { useAuth } from "@/lib/auth/auth-context"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { Button } from "@/components/ui/button"
 
-export default function OnboardingClientDonePage() {
+function OnboardingClientDonePageInner() {
   const t = useTranslations("onboarding.client.done")
   const { user } = useAuth()
   const router = useRouter()
@@ -75,5 +76,13 @@ function OnboardingShell({
         {children}
       </div>
     </main>
+  )
+}
+
+export default function OnboardingClientDonePage() {
+  return (
+    <Suspense fallback={null}>
+      <OnboardingClientDonePageInner />
+    </Suspense>
   )
 }

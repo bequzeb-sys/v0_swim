@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Waves, UserCheck, Award } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -29,7 +30,7 @@ function RoleCard({ href, icon, title, description }: RoleCardProps) {
   )
 }
 
-export default function SignupPage() {
+function SignupPageInner() {
   const t = useTranslations("auth.signup")
   const tBrand = useTranslations("brand")
   const searchParams = useSearchParams()
@@ -109,5 +110,13 @@ export default function SignupPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupPageInner />
+    </Suspense>
   )
 }

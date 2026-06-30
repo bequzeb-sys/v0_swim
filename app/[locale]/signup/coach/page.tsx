@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { ArrowLeft, Waves } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import type { FakeUser } from "@/lib/auth/types"
 
-export default function SignupCoachPage() {
+function SignupCoachPageInner() {
   const t = useTranslations("auth.signup.coach")
   const tParent = useTranslations("auth.signup")
   const tBrand = useTranslations("brand")
@@ -148,5 +148,13 @@ export default function SignupCoachPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function SignupCoachPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupCoachPageInner />
+    </Suspense>
   )
 }
