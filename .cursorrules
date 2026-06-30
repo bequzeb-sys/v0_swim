@@ -84,6 +84,17 @@ shadow-black/20 backdrop-blur-md
  onboarding chain (`/onboarding/coach` → profile → availability → done) exist
  and work end-to-end; both "Devenir coach" CTAs now link there directly.
  Any OTHER new `href="#"` must be explicitly flagged in a comment.
+- `proxy.ts` (the Next.js 16 middleware file) MUST import and use
+ `NextRequest` from `next/server` — never the generic Web API `Request`
+ type. Using `Request` (even with `as any`) causes next-intl's middleware to
+ fail silently, returning 404 on all locale-prefixed routes (`/fr`, `/en`,
+ etc.) with a ~1300 ms hang before the 404. Correct signature:
+ ```ts
+ import type { NextRequest } from "next/server"
+ export function proxy(request: NextRequest) {
+   return handleI18nRouting(request)
+ }
+ ```
 - Before adding a `href="#"` placeholder with a "pending infrastructure"
 comment, verify the claim is still true — check whether the actual
 destination (signup page, onboarding flow, etc.) already exists and
@@ -271,6 +282,28 @@ do nothing when reached via a redirect bounce.
  `usePathname()`) AND `params` (from `useParams()`) to `router.replace()` —
  omitting `params` loses the dynamic segment when switching locale.
 
+### useSearchParams() — Suspense boundary required
+- ANY component that calls `useSearchParams()` (from `next/navigation`) MUST
+  be wrapped in a `<Suspense fallback={null}>` boundary in its parent page.
+  Without it, Next.js 16 App Router throws a 500 on that route.
+- The canonical pattern: extract the component body into an inner function
+  (e.g. `function LoginPageInner()`), then make the default export a thin
+  shell that wraps it:
+  ```tsx
+  export default function LoginPage() {
+    return (
+      <Suspense fallback={null}>
+        <LoginPageInner />
+      </Suspense>
+    )
+  }
+  ```
+- This applies to every new page added to the app. Before shipping any new
+ page, check whether it (or any component it renders) calls
+ useSearchParams() — if yes, the Suspense wrapper is mandatory.
+- Pages already fixed: login, signup, signup/client, signup/coach,
+ onboarding/client/done, onboarding/coach/done.
+
 ### shadcn defaults in dark mode
 - shadcn/ui components ship with `dark:` variant classes that have
  HIGHER specificity than plain Tailwind utility classes (e.g.
@@ -309,6 +342,14 @@ do nothing when reached via a redirect bounce.
  match this exact treatment. Do NOT introduce a new visual style for
  floating surfaces — consistency across these elements is the design
  system contract.
+- When a Base UI `Popover.Root` needs to be closed programmatically
+ (e.g. after the user selects a value inside it), make it controlled:
+ add `const [open, setOpen] = useState(false)` and pass
+ `open={open} onOpenChange={setOpen}` to `<Popover.Root>`. Then call
+ `setOpen(false)` (or `setTimeout(() => setOpen(false), 150)` for a
+ brief visible confirmation before closing) inside the selection handler.
+ An uncontrolled `Popover.Root` has no API to close it from inside its
+ own content.
 
 ### Customizing third-party components
 - When a third-party component (react-day-picker, shadcn primitives,
@@ -330,6 +371,26 @@ do nothing when reached via a redirect bounce.
  `undefined` as children does NOT trigger a placeholder fallback once a real
  value is set — Base UI considers any non-null value "selected" and skips
  the placeholder branch entirely.
+- react-day-picker outside days (days from the previous/next month shown
+ in the current month grid):
+
+ To show them as visible but unselectable, combine TWO things:
+
+ - `showOutsideDays` prop on `<DayPicker>` (makes the numbers render)
+ - A `disabled` prop that blocks selection:
+   ```tsx
+   disabled={(day) =>
+     day.getMonth() !== month.getMonth() ||
+     day.getFullYear() !== month.getFullYear()
+   }
+   ```
+
+ Style them via the `outside` and `disabled` classNames keys
+ (e.g. `"text-white/25 opacity-50"` and
+ `"text-white/20 opacity-40 cursor-not-allowed"`).
+ Without `showOutsideDays`, the cells render empty (blank grid slots).
+ Without the `disabled` prop, outside days are visually dimmed but still
+ selectable — the `classNames` key alone has no behavioral effect.
 
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an
