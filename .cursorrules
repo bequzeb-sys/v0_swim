@@ -125,9 +125,15 @@ fail to scroll.
  inline button styling):
  - `variant="primary"` (teal) — "perform the action": search, book, confirm,
  save, submit, continue
+ Text color: `text-navy-deep` (#0a1f3d) — dark navy, NOT white. The teal
+ background is bright enough that white text feels harsh; navy-deep provides
+ strong contrast while feeling intentional against the mint surface.
+ `navy-deep` token is defined in `app/globals.css`.
  - `variant="entry"` (blue) — "enter / start the journey": Commencer, Dashboard,
  Become a coach, Subscribe
+ Text color: `text-white` — blue-accent is dark enough for white text.
  - `variant="ghost"` (transparent) — tertiary actions
+ Text color: `text-white`.
 - The shape (`rounded-xl`) is shared across ALL variants. Color signals role,
  shape signals "this is a button." Never use `rounded-full` or pill-shaped
  buttons.
