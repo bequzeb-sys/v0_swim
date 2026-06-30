@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Waves } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -134,7 +134,9 @@ export default function LoginPage() {
           }}
         />
       </div>
-      <LoginForm />
+      <Suspense fallback={null}>
+        <LoginForm />
+      </Suspense>
     </main>
   )
 }
