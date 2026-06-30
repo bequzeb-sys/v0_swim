@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { AuthProvider } from '@/lib/auth/auth-context'
+import { ScrollRestoration } from '@/app/scroll-restoration'
 import DevOverlay from '@/components/dev/dev-overlay'
 import '../globals.css'
 
@@ -61,8 +62,9 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`dark scroll-smooth ${inter.variable}`}>
+    <html lang={locale} className={`dark ${inter.variable}`}>
       <body className="bg-background font-sans antialiased overflow-y-scroll">
+        <ScrollRestoration />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             {children}

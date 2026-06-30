@@ -172,6 +172,16 @@
   }
   html {
     @apply font-sans;
+    scroll-padding-top: 6rem;
+  }
+
+  /* Smooth scroll only for in-page anchor navigation on the homepage */
+  #search,
+  #coaches,
+  #how,
+  #pricing,
+  #coaches-pro {
+    scroll-behavior: smooth;
   }
 }
 
