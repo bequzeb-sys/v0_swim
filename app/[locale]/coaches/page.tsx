@@ -70,6 +70,8 @@ export default async function CoachesPage() {
           filters: {
             location: t("filters.location"),
             locationPlaceholder: t("filters.locationPlaceholder"),
+            country: t("filters.country"),
+            allCountries: t("filters.allCountries"),
             specialty: t("filters.specialty"),
             language: t("filters.language"),
             maxPrice: t("filters.maxPrice"),

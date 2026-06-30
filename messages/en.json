@@ -48,8 +48,41 @@
       "triathlon": "Triathlon"
     },
     "dateLabel": "Date",
-    "datePlaceholder": "Select a date",
-    "cta": "Search coaches"
+    "datePlaceholder": "Date",
+    "cta": "Search coaches",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Country",
+    "cityLabel": "City",
+    "useMyLocation": "Use my location",
+    "locating": "Locating…",
+    "countries": {
+      "FR": "France",
+      "BE": "Belgium",
+      "CH": "Switzerland",
+      "CA": "Canada",
+      "MA": "Morocco",
+      "DZ": "Algeria",
+      "TN": "Tunisia",
+      "ES": "Spain",
+      "DE": "Germany",
+      "IT": "Italy",
+      "PT": "Portugal",
+      "LU": "Luxembourg"
+    },
+    "cityPlaceholders": {
+      "FR": "Paris, Lyon, Marseille…",
+      "BE": "Brussels, Liège, Ghent…",
+      "CH": "Geneva, Zurich, Lausanne…",
+      "CA": "Montreal, Quebec City, Ottawa…",
+      "MA": "Casablanca, Rabat, Marrakech…",
+      "DZ": "Algiers, Oran, Constantine…",
+      "TN": "Tunis, Sfax, Sousse…",
+      "ES": "Madrid, Barcelona, Seville…",
+      "DE": "Berlin, Munich, Hamburg…",
+      "IT": "Rome, Milan, Naples…",
+      "PT": "Lisbon, Porto, Faro…",
+      "LU": "Luxembourg City, Esch-sur-Alzette…"
+    }
   },
   "coaches": {
     "title": "Coaches available near you",
@@ -258,6 +291,8 @@
         "bioPlaceholder": "Describe your experience, certifications, coaching philosophy…",
         "cityLabel": "City",
         "cityPlaceholder": "e.g. Paris, London…",
+        "countryLabel": "Country",
+        "countryPlaceholder": "Select your country",
         "priceLabel": "Session rate",
         "priceUnit": "€ / session",
         "continue": "Continue",
@@ -334,6 +369,8 @@
     "filters": {
       "location": "Location",
       "locationPlaceholder": "City or region…",
+      "country": "Country",
+      "allCountries": "All countries",
       "specialty": "Specialty",
       "language": "Languages spoken",
       "maxPrice": "Maximum price",
@@ -356,6 +393,8 @@
     "notFoundTitle": "Coach not found",
     "notFoundCta": "Back to home",
     "back": "Back",
+    "countryLabel": "Country",
+    "cityAndCountry": "{city}, {country}",
     "days": {
       "mon": "Mon",
       "tue": "Tue",

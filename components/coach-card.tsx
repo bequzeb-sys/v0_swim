@@ -3,6 +3,7 @@ import { MapPin, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LanguageList } from "@/components/ui/language-list"
 import type { Coach, LanguageCode } from "@/lib/coaches"
+import * as Flags from "country-flag-icons/react/3x2"
 
 interface CoachCardProps {
   coach: Coach
@@ -65,8 +66,18 @@ export function CoachCard({ coach, translations: t }: CoachCardProps) {
       {/* Location + price */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex min-w-0 items-center gap-2">
-          <MapPin className="size-5 shrink-0 text-teal-accent" />
-          <span className="truncate text-lg text-white">{coach.city}</span>
+          <MapPin className="size-5 shrink-0 text-teal-accent" aria-hidden="true" />
+          <span className="flex items-center gap-1.5 text-sm text-white/50">
+            {coach.city}
+            {(() => {
+              const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[coach.country]
+              return F ? (
+                <span aria-hidden="true" className="ml-1">
+                  <F style={{ width: 16, height: 11 }} className="rounded-sm opacity-70" />
+                </span>
+              ) : null
+            })()}
+          </span>
         </div>
         <div className="flex shrink-0 items-baseline whitespace-nowrap">
           <span className="text-2xl font-bold text-white">{coach.price}</span>

@@ -10,6 +10,10 @@ import { LanguageFlag } from "@/components/ui/language-flag"
 import { Pill } from "@/components/ui/pill"
 import { Button } from "@/components/ui/button"
 import type { LanguageCode } from "@/lib/coaches"
+import * as Flags from "country-flag-icons/react/3x2"
+import { Popover } from "@base-ui/react/popover"
+import { ChevronDown } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const ALL_LANGUAGE_CODES: LanguageCode[] = [
   "fr",
@@ -26,13 +30,31 @@ const ALL_LANGUAGE_CODES: LanguageCode[] = [
 
 const MAX_LANGUAGES = 4
 
+const COUNTRIES = [
+  { code: "FR" },
+  { code: "BE" },
+  { code: "CH" },
+  { code: "CA" },
+  { code: "MA" },
+  { code: "DZ" },
+  { code: "TN" },
+  { code: "ES" },
+  { code: "DE" },
+  { code: "IT" },
+  { code: "PT" },
+  { code: "LU" },
+] as const
+
 export default function OnboardingCoachProfilePage() {
   const t = useTranslations("onboarding.coach.profile")
+  const tSearch = useTranslations("search")
   const tl = useTranslations("languages")
   const router = useRouter()
 
   const [bio, setBio] = useState("")
   const [city, setCity] = useState("")
+  const [country, setCountry] = useState("")
+  const [countryOpen, setCountryOpen] = useState(false)
   const [price, setPrice] = useState("")
   const [selectedLanguages, setSelectedLanguages] = useState<LanguageCode[]>([])
 
@@ -56,6 +78,60 @@ export default function OnboardingCoachProfilePage() {
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
+
+        {/* Country picker */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-white/70">
+            {t("countryLabel")}
+          </label>
+          <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
+            <Popover.Trigger className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-blue-300/20 bg-blue-400/[8%] px-4 py-3 text-left text-sm font-medium text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-teal-accent/60">
+              {country ? (
+                <span className="flex items-center gap-2 text-white">
+                  {(() => {
+                    const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[country]
+                    return F ? <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span> : null
+                  })()}
+                  {tSearch(`countries.${country}`)}
+                </span>
+              ) : (
+                <span>{t("countryPlaceholder")}</span>
+              )}
+              <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
+            </Popover.Trigger>
+            <Popover.Portal>
+              <Popover.Positioner sideOffset={8} align="start" className="z-50">
+                <Popover.Popup className="min-w-[var(--anchor-width)] rounded-2xl border border-blue-300/20 bg-blue-400/[8%] py-1.5 shadow-xl shadow-black/20 backdrop-blur-md">
+                  <div className="relative">
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-6 rounded-t-2xl bg-gradient-to-b from-blue-400/[12%] to-transparent" />
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 rounded-b-2xl bg-gradient-to-t from-blue-400/[12%] to-transparent" />
+                    <ul role="listbox" aria-label={t("countryLabel")} className="max-h-48 overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                      {COUNTRIES.map(({ code }) => {
+                        const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[code]
+                        return (
+                          <li key={code} role="option" aria-selected={country === code}>
+                            <button
+                              type="button"
+                              onClick={() => { setCountry(code); setCountryOpen(false) }}
+                              className={cn(
+                                "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
+                                country === code ? "text-teal-accent" : "text-white/80"
+                              )}
+                            >
+                              {F && <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span>}
+                              {tSearch(`countries.${code}`)}
+                            </button>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </Popover.Popup>
+              </Popover.Positioner>
+            </Popover.Portal>
+          </Popover.Root>
+        </div>
+
         <Input
           label={t("cityLabel")}
           placeholder={t("cityPlaceholder")}

@@ -48,8 +48,41 @@
       "triathlon": "Triathlon"
     },
     "dateLabel": "Date",
-    "datePlaceholder": "Sélectionnez une date",
-    "cta": "Rechercher des coachs"
+    "datePlaceholder": "Date",
+    "cta": "Rechercher des coachs",
+    "countryLabel": "Pays",
+    "countryPlaceholder": "Pays",
+    "cityLabel": "Ville",
+    "useMyLocation": "Utiliser ma position",
+    "locating": "Localisation…",
+    "countries": {
+      "FR": "France",
+      "BE": "Belgique",
+      "CH": "Suisse",
+      "CA": "Canada",
+      "MA": "Maroc",
+      "DZ": "Algérie",
+      "TN": "Tunisie",
+      "ES": "Espagne",
+      "DE": "Allemagne",
+      "IT": "Italie",
+      "PT": "Portugal",
+      "LU": "Luxembourg"
+    },
+    "cityPlaceholders": {
+      "FR": "Paris, Lyon, Marseille…",
+      "BE": "Bruxelles, Liège, Gand…",
+      "CH": "Genève, Zurich, Lausanne…",
+      "CA": "Montréal, Québec, Ottawa…",
+      "MA": "Casablanca, Rabat, Marrakech…",
+      "DZ": "Alger, Oran, Constantine…",
+      "TN": "Tunis, Sfax, Sousse…",
+      "ES": "Madrid, Barcelone, Séville…",
+      "DE": "Berlin, Munich, Hambourg…",
+      "IT": "Rome, Milan, Naples…",
+      "PT": "Lisbonne, Porto, Faro…",
+      "LU": "Luxembourg, Esch-sur-Alzette…"
+    }
   },
   "coaches": {
     "title": "Coachs disponibles près de chez vous",
@@ -258,6 +291,8 @@
         "bioPlaceholder": "Décrivez votre expérience, vos diplômes, votre philosophie d'enseignement…",
         "cityLabel": "Ville",
         "cityPlaceholder": "Ex : Paris, Marseille…",
+        "countryLabel": "Pays",
+        "countryPlaceholder": "Sélectionner votre pays",
         "priceLabel": "Tarif par séance",
         "priceUnit": "€ / séance",
         "continue": "Continuer",
@@ -334,6 +369,8 @@
     "filters": {
       "location": "Localisation",
       "locationPlaceholder": "Ville ou région…",
+      "country": "Pays",
+      "allCountries": "Tous les pays",
       "specialty": "Spécialité",
       "language": "Langues parlées",
       "maxPrice": "Prix maximum",
@@ -356,6 +393,8 @@
     "notFoundTitle": "Coach introuvable",
     "notFoundCta": "Retour à l'accueil",
     "back": "Retour",
+    "countryLabel": "Pays",
+    "cityAndCountry": "{city}, {country}",
     "days": {
       "mon": "Lun",
       "tue": "Mar",

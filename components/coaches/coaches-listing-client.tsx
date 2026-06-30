@@ -3,7 +3,8 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useSearchParams } from "next/navigation"
-import { SlidersHorizontal } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { SlidersHorizontal, ChevronDown } from "lucide-react"
 import { CoachCard } from "@/components/coach-card"
 import { Input } from "@/components/ui/input"
 import { Pill } from "@/components/ui/pill"
@@ -16,6 +17,24 @@ import {
 } from "@/components/ui/dialog"
 import { LanguageFlag } from "@/components/ui/language-flag"
 import type { Coach, CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
+import * as Flags from "country-flag-icons/react/3x2"
+import { Popover } from "@base-ui/react/popover"
+import { cn } from "@/lib/utils"
+
+const COUNTRIES = [
+  { code: "FR" },
+  { code: "BE" },
+  { code: "CH" },
+  { code: "CA" },
+  { code: "MA" },
+  { code: "DZ" },
+  { code: "TN" },
+  { code: "ES" },
+  { code: "DE" },
+  { code: "IT" },
+  { code: "PT" },
+  { code: "LU" },
+] as const
 
 const ALL_BADGES: CoachBadgeKey[] = [
   "apprentissage",
@@ -52,6 +71,8 @@ interface Props {
     filters: {
       location: string
       locationPlaceholder: string
+      country: string
+      allCountries: string
       specialty: string
       language: string
       maxPrice: string
@@ -81,9 +102,11 @@ export function CoachesListingClient({
   dayLabels,
 }: Props) {
   const router = useRouter()
+  const tSearch = useTranslations("search")
   const searchParams = useSearchParams()
 
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [countryOpen, setCountryOpen] = useState(false)
 
   const getParam = <T,>(key: string, defaultVal: T, parse?: (v: string) => T): T => {
     const val = searchParams.get(key)
@@ -93,6 +116,7 @@ export function CoachesListingClient({
   }
 
   const [location, setLocation] = useState(() => getParam("location", ""))
+  const [country, setCountry] = useState<string>(() => searchParams.get("country") ?? "")
   const [selectedBadges, setSelectedBadges] = useState<Set<CoachBadgeKey>>(() => {
     const raw = searchParams.get("badges")
     const vals = raw ? raw.split(",").filter(Boolean) as CoachBadgeKey[] : []
@@ -117,10 +141,11 @@ export function CoachesListingClient({
   const isFirstRender = useRef(true)
 
   const pushParams = useCallback(
-    (newLocation: string, newBadges: Set<CoachBadgeKey>, newLanguages: Set<LanguageCode>,
+    (newCountry: string, newLocation: string, newBadges: Set<CoachBadgeKey>, newLanguages: Set<LanguageCode>,
      newMaxPrice: number, newMinRating: number, newMinExperience: number,
      newDays: Set<DayKey>, newGender: "" | "M" | "F") => {
       const params = new URLSearchParams()
+      if (newCountry) params.set("country", newCountry)
       if (newLocation) params.set("location", newLocation)
       if (newBadges.size > 0) params.set("badges", [...newBadges].join(","))
       if (newLanguages.size > 0) params.set("language", [...newLanguages].join(","))
@@ -141,8 +166,8 @@ export function CoachesListingClient({
       isFirstRender.current = false
       return
     }
-    pushParams(location, selectedBadges, selectedLanguages, maxPrice, minRating, minExperience, selectedDays, gender)
-  }, [location, selectedBadges, selectedLanguages, maxPrice, minRating, minExperience, selectedDays, gender, pushParams])
+    pushParams(country, location, selectedBadges, selectedLanguages, maxPrice, minRating, minExperience, selectedDays, gender)
+  }, [country, location, selectedBadges, selectedLanguages, maxPrice, minRating, minExperience, selectedDays, gender, pushParams])
 
   useEffect(() => {
     return () => {
@@ -155,6 +180,7 @@ export function CoachesListingClient({
       clearTimeout(debounceTimers.current[key])
       debounceTimers.current[key] = setTimeout(() => {
         const params = new URLSearchParams()
+        if (country) params.set("country", country)
         if (location) params.set("location", location)
         if (selectedBadges.size > 0) params.set("badges", [...selectedBadges].join(","))
         if (selectedLanguages.size > 0) params.set("language", [...selectedLanguages].join(","))
@@ -165,10 +191,11 @@ export function CoachesListingClient({
         router.replace(qs ? { pathname: "/coaches", query: Object.fromEntries(params) } : "/coaches", { scroll: false })
       }, 200)
     },
-    [location, selectedBadges, selectedLanguages, selectedDays, gender, router]
+    [country, location, selectedBadges, selectedLanguages, selectedDays, gender, router]
   )
 
   const resetFilters = () => {
+    setCountry("")
     setLocation("")
     setSelectedBadges(new Set())
     setSelectedLanguages(new Set())
@@ -181,6 +208,7 @@ export function CoachesListingClient({
   }
 
   const hasActiveFilters =
+    country ||
     location ||
     selectedBadges.size > 0 ||
     selectedLanguages.size > 0 ||
@@ -191,6 +219,7 @@ export function CoachesListingClient({
     gender !== ""
 
   const filtered = coaches.filter((coach) => {
+    if (country && coach.country !== country) return false
     if (location && !coach.city.toLowerCase().includes(location.toLowerCase())) return false
     if (selectedBadges.size > 0 && !coach.badgeKeys.some((b) => selectedBadges.has(b))) return false
     if (selectedLanguages.size > 0 && !coach.languages.some((l) => selectedLanguages.has(l))) return false
@@ -204,6 +233,69 @@ export function CoachesListingClient({
 
   const FilterContent = () => (
     <div className="flex flex-col gap-6">
+      {/* Pays */}
+      <fieldset>
+        <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.country}</legend>
+        <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
+          <Popover.Trigger className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-blue-300/20 bg-blue-400/[8%] px-4 py-3 text-left text-sm font-medium text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-teal-accent/60">
+            {country ? (
+              <span className="flex items-center gap-2 text-white">
+                {(() => {
+                  const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[country]
+                  return F ? <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span> : null
+                })()}
+                {tSearch(`countries.${country}`)}
+              </span>
+            ) : (
+              <span>{page.filters.allCountries}</span>
+            )}
+            <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
+          </Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Positioner sideOffset={8} align="start" className="z-50">
+              <Popover.Popup className="min-w-[var(--anchor-width)] rounded-2xl border border-blue-300/20 bg-blue-400/[8%] py-1.5 shadow-xl shadow-black/20 backdrop-blur-md">
+                <div className="relative">
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-6 rounded-t-2xl bg-gradient-to-b from-blue-400/[12%] to-transparent" />
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 rounded-b-2xl bg-gradient-to-t from-blue-400/[12%] to-transparent" />
+                  <ul role="listbox" aria-label={page.filters.country} className="max-h-48 overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <li role="option" aria-selected={country === ""}>
+                      <button
+                        type="button"
+                        onClick={() => { setCountry(""); setCountryOpen(false) }}
+                        className={cn(
+                          "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
+                          country === "" ? "text-teal-accent" : "text-white/50"
+                        )}
+                      >
+                        {page.filters.allCountries}
+                      </button>
+                    </li>
+                    {COUNTRIES.map(({ code }) => {
+                      const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[code]
+                      return (
+                        <li key={code} role="option" aria-selected={country === code}>
+                          <button
+                            type="button"
+                            onClick={() => { setCountry(code); setCountryOpen(false) }}
+                            className={cn(
+                              "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
+                              country === code ? "text-teal-accent" : "text-white/80"
+                            )}
+                          >
+                            {F && <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span>}
+                            {tSearch(`countries.${code}`)}
+                          </button>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              </Popover.Popup>
+            </Popover.Positioner>
+          </Popover.Portal>
+        </Popover.Root>
+      </fieldset>
+
       {/* Localisation */}
       <fieldset>
         <legend className="mb-2 text-sm font-medium text-white/70">{page.filters.location}</legend>

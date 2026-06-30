@@ -11,6 +11,7 @@ import { UnderwaterBackground } from "@/components/underwater-background"
 import type { DayKey } from "@/lib/coaches"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
+import * as Flags from "country-flag-icons/react/3x2"
 
 interface Props {
   params: Promise<{ locale: string; id: string }>
@@ -92,8 +93,18 @@ export default async function CoachProfilePage({ params }: Props) {
                     <span className="text-sm">({coach.reviews} {tc("reviewsSuffix")})</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <MapPin className="size-4 shrink-0 text-teal-accent" />
-                    <span>{coach.city}</span>
+                    <MapPin className="size-4 shrink-0 text-teal-accent" aria-hidden="true" />
+                    <span className="flex items-center gap-1.5 text-white">
+                      {coach.city}
+                      {(() => {
+                        const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[coach.country]
+                        return F ? (
+                          <span aria-hidden="true">
+                            <F style={{ width: 20, height: 14 }} className="rounded-sm opacity-80" />
+                          </span>
+                        ) : null
+                      })()}
+                    </span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Clock className="size-4 shrink-0 text-teal-accent" />

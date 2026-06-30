@@ -45,6 +45,7 @@ export interface Coach {
   gender: 'M' | 'F'
   avatar: string
   city: string
+  country: string
   rating: string
   reviews: number
   price: string
@@ -62,6 +63,7 @@ export const coaches: Coach[] = [
     gender: 'M',
     avatar: '/coach-marc.png',
     city: 'Réunion',
+    country: 'FR',
     rating: '4.8',
     reviews: 124,
     price: '€45',
@@ -78,6 +80,7 @@ export const coaches: Coach[] = [
     gender: 'F',
     avatar: '/coach-sophie.png',
     city: 'Paris',
+    country: 'FR',
     rating: '4.8',
     reviews: 98,
     price: '€45',
@@ -94,6 +97,7 @@ export const coaches: Coach[] = [
     gender: 'M',
     avatar: '/coach-karim.png',
     city: 'Lyon',
+    country: 'FR',
     rating: '4.8',
     reviews: 87,
     price: '€45',
@@ -110,6 +114,7 @@ export const coaches: Coach[] = [
     gender: 'F',
     avatar: '/coach-sophie.png',
     city: 'Lyon',
+    country: 'FR',
     rating: '4.7',
     reviews: 62,
     price: '€40',
@@ -126,6 +131,7 @@ export const coaches: Coach[] = [
     gender: 'M',
     avatar: '/coach-marc.png',
     city: 'Strasbourg',
+    country: 'FR',
     rating: '4.9',
     reviews: 156,
     price: '€55',
@@ -142,6 +148,7 @@ export const coaches: Coach[] = [
     gender: 'F',
     avatar: '/coach-sophie.png',
     city: 'Marseille',
+    country: 'FR',
     rating: '4.6',
     reviews: 41,
     price: '€38',
@@ -158,6 +165,7 @@ export const coaches: Coach[] = [
     gender: 'M',
     avatar: '/coach-karim.png',
     city: 'Nice',
+    country: 'FR',
     rating: '4.8',
     reviews: 73,
     price: '€50',
@@ -174,6 +182,7 @@ export const coaches: Coach[] = [
     gender: 'F',
     avatar: '/coach-sophie.png',
     city: 'Paris',
+    country: 'FR',
     rating: '4.9',
     reviews: 201,
     price: '€60',
@@ -190,6 +199,7 @@ export const coaches: Coach[] = [
     gender: 'F',
     avatar: '/coach-sophie.png',
     city: 'Bordeaux',
+    country: 'FR',
     rating: '4.5',
     reviews: 28,
     price: '€35',
@@ -206,6 +216,7 @@ export const coaches: Coach[] = [
     gender: 'M',
     avatar: '/coach-marc.png',
     city: 'Toulouse',
+    country: 'FR',
     rating: '4.7',
     reviews: 94,
     price: '€52',
