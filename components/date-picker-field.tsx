@@ -33,12 +33,13 @@ export function DatePickerField({
   const dateFnsLocale = LOCALE_MAP[locale] ?? enUS
   const formatted = value ? format(value, "d MMM yyyy", { locale: dateFnsLocale }) : ""
   const [month, setMonth] = useState<Date>(value ?? new Date())
+  const [open, setOpen] = useState(false)
 
   const goToPrevMonth = () => setMonth((current) => subMonths(current, 1))
   const goToNextMonth = () => setMonth((current) => addMonths(current, 1))
 
   return (
-    <Popover.Root>
+    <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger
         aria-label={ariaLabel ?? placeholder}
         className="group flex w-full cursor-pointer items-center justify-between gap-2 bg-transparent text-left text-lg font-medium text-white outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
@@ -82,8 +83,15 @@ export function DatePickerField({
               month={month}
               onMonthChange={setMonth}
               hideNavigation
+              disabled={(day) => {
+                const m = month
+                return day.getMonth() !== m.getMonth() || day.getFullYear() !== m.getFullYear()
+              }}
               selected={value}
-              onSelect={(d) => onChange(d ?? undefined)}
+              onSelect={(d) => {
+                onChange(d ?? undefined)
+                setTimeout(() => setOpen(false), 150)
+              }}
               locale={dateFnsLocale}
               classNames={{
                 root: "rdp-dark",
@@ -95,11 +103,11 @@ export function DatePickerField({
                 week: "flex w-full mt-1",
                 day: "size-9 p-0 text-sm relative",
                 day_button:
-                  "inline-flex size-9 items-center justify-center rounded-md text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                  "inline-flex size-9 cursor-pointer items-center justify-center rounded-md text-white transition-colors hover:bg-teal-accent/20 hover:text-teal-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
                 today: "dark:!text-teal-accent dark:font-semibold",
-                selected: "dark:!bg-teal-accent dark:!text-primary-foreground dark:hover:!bg-teal-accent rounded-md",
-                outside: "text-white/30",
-                disabled: "text-white/30 cursor-not-allowed",
+                selected: "dark:!bg-teal-accent dark:!text-white dark:hover:!bg-teal-accent dark:hover:!text-white rounded-md",
+                outside: "text-white/20 opacity-40",
+                disabled: "text-white/20 opacity-40 cursor-not-allowed",
               }}
             />
           </Popover.Popup>
