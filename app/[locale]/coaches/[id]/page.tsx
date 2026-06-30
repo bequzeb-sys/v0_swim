@@ -34,9 +34,10 @@ export async function generateMetadata({
     .join(", ")
   return {
     title: `${coach.name} — SwimAI`,
-    description: tSeo("coachProfileDescription")
-      .replace("{name}", coach.name)
-      .replace("{specialties}", specialties),
+    description: tSeo("coachProfileDescription", {
+      name: coach.name,
+      specialties,
+    }),
     alternates: {
       canonical: `https://swimai.app/${locale}/coaches/${id}`,
       languages: {
@@ -98,7 +99,7 @@ export default async function CoachProfilePage({ params }: Props) {
                   {coach.badgeKeys.map((badgeKey) => (
                     <span
                       key={badgeKey}
-                      className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-3 py-1 text-sm font-medium text-teal-accent-light"
+                      className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light"
                     >
                       {tc(`badges.${badgeKey}`)}
                     </span>
