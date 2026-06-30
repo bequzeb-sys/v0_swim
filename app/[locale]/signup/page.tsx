@@ -66,7 +66,7 @@ function SignupPageInner() {
       {/* Card */}
       <div className="relative z-10 w-full max-w-md rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-8 shadow-2xl shadow-black/20 backdrop-blur-md">
         {/* Logo + wordmark → homepage */}
-        <Link href="/" className="mb-6 flex justify-center" aria-label="SwimAI — Accueil">
+        <Link href="/" className="mb-6 flex justify-center" aria-label={tBrand("homeLink")}>
           <span className="flex items-center gap-2.5">
             <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-accent to-blue-accent-dark text-white shadow-lg shadow-blue-accent/30">
               <Waves className="size-5" strokeWidth={2.5} />
