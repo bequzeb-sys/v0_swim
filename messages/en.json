@@ -436,7 +436,11 @@
       "fri": "Fri",
       "sat": "Sat",
       "sun": "Sun"
-    }
+    },
+    "specialtiesTitle": "Specialties",
+    "reviewsTitle": "Swimmer reviews",
+    "reviewerPlaceholder": "SwimAI Swimmer",
+    "reviewPlaceholder": "Excellent coach, very professional and attentive. Highly recommend!"
   },
   "booking": {
     "panelTitle": "Book with {coach}",

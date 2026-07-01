@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
-import { MapPin, Star, Clock } from "lucide-react"
+import { MapPin, Star, Clock, User, Waves } from "lucide-react"
 import { getCoachById } from "@/lib/coaches"
 import type { LanguageCode } from "@/lib/coaches"
 import { LanguageList } from "@/components/ui/language-list"
@@ -80,8 +80,8 @@ export default async function CoachProfilePage({ params }: Props) {
       <SecondaryPageHeader />
       <main className="relative z-10">
         {/* Hero */}
-        <div className="border-b border-white/10">
-          <div className="relative mx-auto max-w-3xl px-4 py-12">
+        <div className="mx-auto max-w-3xl px-4 pt-6 pb-0">
+          <div className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
             {/* Coach info */}
             <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
               <div className="relative shrink-0">
@@ -106,6 +106,16 @@ export default async function CoachProfilePage({ params }: Props) {
                       {tc(`badges.${badgeKey}`)}
                     </span>
                   ))}
+                </div>
+
+                {/* Languages */}
+                <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+                  <LanguageList
+                    codes={coach.languages}
+                    labels={languageLabels}
+                    size={16}
+                    showLabels
+                  />
                 </div>
 
                 {/* Meta */}
@@ -135,60 +145,67 @@ export default async function CoachProfilePage({ params }: Props) {
                   </div>
                 </div>
               </div>
-
-              {/* Price + CTA */}
-              <div className="flex shrink-0 flex-col items-center gap-2 sm:items-end">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-bold text-white">{coach.price}</span>
-                  <span className="text-sm text-white/50">{tc("priceUnit")}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
 
         {/* Body */}
-        <div className="mx-auto max-w-3xl px-4 py-10">
+        <div className="mx-auto max-w-3xl px-4 pt-4 pb-10">
           <div className="grid gap-8 sm:grid-cols-3">
             {/* Left: bio + availability */}
             <div className="flex flex-col gap-8 sm:col-span-2">
               {/* Bio */}
-              <section>
-                <h2 className="mb-3 text-lg font-bold text-white">{t("bioTitle")}</h2>
+              <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
+                <h2 className="mb-3 flex items-center gap-2 text-base font-semibold text-white">
+                  <User className="size-4 text-teal-accent" aria-hidden="true" />
+                  {t("bioTitle")}
+                </h2>
                 <p className="text-sm leading-relaxed text-white/70">{coach.bio}</p>
               </section>
 
-              {/* Languages */}
-              <section>
-                <h2 className="mb-3 text-lg font-bold text-white">{t("languagesTitle")}</h2>
-                <LanguageList
-                  codes={coach.languages}
-                  labels={languageLabels}
-                  size={20}
-                  showLabels
-                />
+              {/* Specialties */}
+              <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
+                <h2 className="mb-4 flex items-center gap-2 text-base font-semibold text-white">
+                  <Waves className="size-4 text-teal-accent" aria-hidden="true" />
+                  {t("specialtiesTitle")}
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {coach.badgeKeys.map((badgeKey) => (
+                    <span
+                      key={badgeKey}
+                      className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-3 py-1.5 text-sm font-medium text-teal-accent-light"
+                    >
+                      {tc(`badges.${badgeKey}`)}
+                    </span>
+                  ))}
+                </div>
               </section>
 
-              {/* Availability */}
-              <section>
-                <h2 className="mb-3 text-lg font-bold text-white">{t("availabilityTitle")}</h2>
-                <div className="flex flex-wrap gap-2">
-                  {ALL_DAYS.map((day) => {
-                    const available = coach.availability.includes(day)
-                    return (
-                      <span
-                        key={day}
-                        className={cn(
-                          "flex size-10 items-center justify-center rounded-full text-sm font-medium transition-all",
-                          available
-                            ? "bg-teal-accent/15 text-teal-accent ring-1 ring-teal-accent/30"
-                            : "bg-white/5 text-white/25 ring-1 ring-white/10"
-                        )}
-                      >
-                        {t(`days.${day}`)}
-                      </span>
-                    )
-                  })}
+              {/* Reviews */}
+              <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
+                <h2 className="mb-4 flex items-center gap-2 text-base font-semibold text-white">
+                  <Star className="size-4 text-teal-accent" aria-hidden="true" />
+                  {t("reviewsTitle")} ({coach.reviews})
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {[1, 2].map((i) => (
+                    <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                      <div className="mb-2 flex items-center gap-3">
+                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-sm font-bold text-teal-accent">
+                          N
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-white">{t("reviewerPlaceholder")}</p>
+                          <div className="flex items-center gap-0.5 mt-0.5">
+                            {Array.from({ length: 5 }).map((_, j) => (
+                              <Star key={j} className="size-3 fill-star-gold text-star-gold" aria-hidden="true" />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-xs leading-relaxed text-white/60">{t("reviewPlaceholder")}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>

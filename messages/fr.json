@@ -436,7 +436,11 @@
       "fri": "Ven",
       "sat": "Sam",
       "sun": "Dim"
-    }
+    },
+    "specialtiesTitle": "Spécialités",
+    "reviewsTitle": "Avis des nageurs",
+    "reviewerPlaceholder": "Nageur SwimAI",
+    "reviewPlaceholder": "Excellent coach, très professionnel et à l'écoute. Je recommande vivement !"
   },
   "booking": {
     "panelTitle": "Réserver avec {coach}",
