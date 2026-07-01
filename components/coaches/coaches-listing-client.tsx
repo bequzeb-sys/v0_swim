@@ -531,32 +531,30 @@ export function CoachesListingClient({
       <div className="mx-auto max-w-7xl px-4 py-6">
         <div className="flex items-start gap-8">
           {/* Desktop sidebar */}
-          <aside className="hidden w-80 shrink-0 lg:block">
-            <div className="fixed left-[max(1rem,calc(50vw-640px+1rem))] top-28 w-80">
-              <div className="relative flex h-[calc(100vh-8rem)] flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[15%] shadow-xl shadow-black/20">
-                <div
-                  ref={sidebarRef}
-                  className="flex-1 overflow-y-auto pl-4 pr-7 pt-4 pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-                >
-                  <FilterContent />
-                </div>
-                <div ref={resetStripRef} className="px-4 py-3">
-                  <button
-                    type="button"
-                    onClick={resetFilters}
-                    disabled={!hasActiveFilters}
-                    className={cn(
-                      "w-full rounded-xl border py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
-                      hasActiveFilters
-                        ? "cursor-pointer border-teal-accent/30 bg-teal-accent/10 text-teal-accent hover:bg-teal-accent/20"
-                        : "cursor-not-allowed border-white/10 bg-white/5 text-white/30"
-                    )}
-                  >
-                    {page.filters.reset}
-                  </button>
-                </div>
-                <Scrollbar scrollRef={sidebarRef} offsetBottom={resetStripHeight} />
+          <aside className="hidden w-80 shrink-0 self-start sticky top-28 lg:block">
+            <div className="relative flex h-[calc(100vh-8rem)] flex-col rounded-3xl border border-blue-300/20 bg-blue-400/[15%] shadow-xl shadow-black/20">
+              <div
+                ref={sidebarRef}
+                className="flex-1 overflow-y-auto pl-4 pr-7 pt-4 pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              >
+                <FilterContent />
               </div>
+              <div ref={resetStripRef} className="px-4 py-3">
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  disabled={!hasActiveFilters}
+                  className={cn(
+                    "w-full rounded-xl border py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                    hasActiveFilters
+                      ? "cursor-pointer border-teal-accent/30 bg-teal-accent/10 text-teal-accent hover:bg-teal-accent/20"
+                      : "cursor-not-allowed border-white/10 bg-white/5 text-white/30"
+                  )}
+                >
+                  {page.filters.reset}
+                </button>
+              </div>
+              <Scrollbar scrollRef={sidebarRef} offsetBottom={resetStripHeight} />
             </div>
           </aside>
 

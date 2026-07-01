@@ -28,6 +28,7 @@ export function Header() {
   const tBrand = useTranslations("brand")
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerClosing, setDrawerClosing] = useState(false)
 
   useEffect(() => {
     function handleScroll() {
@@ -39,7 +40,20 @@ export function Header() {
   }, [])
 
   return (
-    <DialogPrimitive.Root open={drawerOpen} onOpenChange={setDrawerOpen}>
+    <DialogPrimitive.Root
+      open={drawerOpen || drawerClosing}
+      onOpenChange={(open) => {
+        if (!open) {
+          setDrawerClosing(true)
+          setDrawerOpen(false)
+          setTimeout(() => {
+            setDrawerClosing(false)
+          }, 500)
+        } else {
+          setDrawerOpen(true)
+        }
+      }}
+    >
       {/* Floating sticky pill */}
       <header
         className={cn(
@@ -108,7 +122,7 @@ export function Header() {
       {/* Mobile/tablet side drawer */}
       <DialogPrimitive.Portal keepMounted>
         <AnimatePresence>
-          {drawerOpen && (
+          {(drawerOpen || drawerClosing) && (
             <>
               <DialogPrimitive.Backdrop
                 className="fixed inset-0 z-50"
@@ -116,7 +130,7 @@ export function Header() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
+                  exit={{ opacity: 0, transition: { duration: 0.4, ease: "easeIn" } }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   className="size-full bg-black/60 backdrop-blur-sm"
                 />
@@ -127,14 +141,20 @@ export function Header() {
                 <motion.div
                   initial={{ x: "100%" }}
                   animate={{ x: 0 }}
-                  exit={{ x: "100%", transition: { duration: 0.35, ease: "easeIn" } }}
+                  exit={{ x: "100%", transition: { duration: 0.45, ease: "easeIn" } }}
                   transition={{ type: "spring", stiffness: 380, damping: 38 }}
                   className="flex h-full w-[min(20rem,85vw)] flex-col gap-2 border-l border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md rounded-l-3xl"
                 >
                   <div className="flex items-center justify-between">
                     <Link
                       href="/"
-                      onClick={() => setDrawerOpen(false)}
+                      onClick={() => {
+                        setDrawerClosing(true)
+                        setDrawerOpen(false)
+                        setTimeout(() => {
+                          setDrawerClosing(false)
+                        }, 500)
+                      }}
                       className="flex items-center gap-2"
                     >
                       <span className="flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-blue-accent to-blue-accent-dark text-white shadow-lg shadow-blue-accent/30">
@@ -152,6 +172,14 @@ export function Header() {
                       <DialogPrimitive.Close
                         className="inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5 text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                         aria-label={t("closeMenu")}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setDrawerClosing(true)
+                          setDrawerOpen(false)
+                          setTimeout(() => {
+                            setDrawerClosing(false)
+                          }, 500)
+                        }}
                       >
                         <X className="size-4" aria-hidden="true" />
                       </DialogPrimitive.Close>
@@ -166,7 +194,13 @@ export function Header() {
                         key={link.key}
                         variant="ghost"
                         href={link.href}
-                        onClick={() => setDrawerOpen(false)}
+                        onClick={() => {
+                          setDrawerClosing(true)
+                          setDrawerOpen(false)
+                          setTimeout(() => {
+                            setDrawerClosing(false)
+                          }, 500)
+                        }}
                         className="w-full justify-start px-4 py-3 text-[15px] font-medium text-white/80"
                       >
                         {t(`links.${link.key}`)}
@@ -176,7 +210,13 @@ export function Header() {
 
                   <div className="mt-2">
                     <HeaderActions
-                      onNavigate={() => setDrawerOpen(false)}
+                      onNavigate={() => {
+                        setDrawerClosing(true)
+                        setDrawerOpen(false)
+                        setTimeout(() => {
+                          setDrawerClosing(false)
+                        }, 500)
+                      }}
                       className="w-full"
                     />
                   </div>
