@@ -44,7 +44,7 @@ function DialogContent({
       >
         <div className="relative z-50 w-full max-w-md rounded-2xl border border-white/10 bg-sidebar p-6 shadow-2xl backdrop-blur-md">
           <DialogPrimitive.Close
-            className="absolute right-4 top-4 rounded-lg p-1 text-white/40 transition-colors hover:bg-white/5 hover:text-white"
+            className="absolute right-4 top-4 cursor-pointer rounded-lg p-1 text-white/40 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
             aria-label={closeLabel}
           >
             <X className="size-4" />

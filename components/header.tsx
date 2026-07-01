@@ -94,7 +94,7 @@ export function Header() {
               <li key={link.key}>
                 <a
                   href={link.href}
-                  className="text-[15px] font-medium text-white/80 transition-colors hover:text-white"
+                  className="cursor-pointer text-[15px] font-medium text-white/80 transition-colors hover:text-white"
                 >
                   {t(`links.${link.key}`)}
                 </a>
@@ -110,7 +110,12 @@ export function Header() {
             <HeaderActions compact />
             {/* Hamburger trigger — mobile/tablet only */}
             <DialogPrimitive.Trigger
-              className="inline-flex size-10 cursor-pointer items-center justify-center rounded-xl border border-blue-300/20 bg-blue-400/10 text-white/80 transition-colors hover:bg-blue-400/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 lg:hidden"
+              className={cn(
+  "inline-flex size-10 cursor-pointer items-center justify-center rounded-xl border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60 lg:hidden",
+  (drawerOpen || drawerClosing)
+    ? "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
+    : "border-blue-300/20 bg-blue-400/10 text-white/80 hover:bg-blue-400/20 hover:text-white"
+)}
               aria-label={t("openMenu")}
             >
               <Menu className="size-5" strokeWidth={2.25} aria-hidden="true" />
