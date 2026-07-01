@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useEffect, useRef, useMemo } from "react"
+import { useState, useCallback, useEffect, useRef, useMemo, type Dispatch, type SetStateAction } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
@@ -92,6 +92,327 @@ interface Props {
   }
   badgeLabels: Record<CoachBadgeKey, string>
   dayLabels: Record<DayKey, string>
+}
+
+interface FilterContentProps {
+  page: Props["page"]
+  t: Props["translations"]
+  badgeLabels: Record<CoachBadgeKey, string>
+  dayLabels: Record<DayKey, string>
+  tSearch: (key: string, params?: Record<string, string | number | Date>) => string
+  country: string
+  setCountry: (v: string) => void
+  location: string
+  setLocation: (v: string) => void
+  selectedBadges: Set<CoachBadgeKey>
+  setSelectedBadges: Dispatch<SetStateAction<Set<CoachBadgeKey>>>
+  selectedLanguages: Set<LanguageCode>
+  setSelectedLanguages: Dispatch<SetStateAction<Set<LanguageCode>>>
+  maxPrice: number
+  setMaxPrice: (v: number) => void
+  minRating: number
+  setMinRating: (v: number) => void
+  minExperience: number
+  setMinExperience: (v: number) => void
+  selectedDays: Set<DayKey>
+  setSelectedDays: Dispatch<SetStateAction<Set<DayKey>>>
+  gender: "" | "M" | "F"
+  setGender: (v: "" | "M" | "F") => void
+  specialtyOpen: boolean
+  setSpecialtyOpen: Dispatch<SetStateAction<boolean>>
+  debouncedUpdate: (key: string, value: number | null, urlKey: string) => void
+}
+
+function FilterContent({
+  page, t, badgeLabels, dayLabels, tSearch,
+  country, setCountry,
+  location, setLocation,
+  selectedBadges, setSelectedBadges,
+  selectedLanguages, setSelectedLanguages,
+  maxPrice, setMaxPrice,
+  minRating, setMinRating,
+  minExperience, setMinExperience,
+  selectedDays, setSelectedDays,
+  gender, setGender,
+  specialtyOpen, setSpecialtyOpen,
+  debouncedUpdate,
+}: FilterContentProps) {
+  const [countryOpen, setCountryOpen] = useState(false)
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Pays */}
+      <fieldset>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.country}</legend>
+        <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
+          <Popover.Trigger className={cn(
+            "flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-3 text-left text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+            countryOpen
+              ? "border-teal-accent/40 bg-teal-accent/10 text-white"
+              : "border-blue-300/20 bg-blue-400/[8%] text-white/70 hover:text-white"
+          )}>
+            {country ? (
+              <span className="flex items-center gap-2 text-white">
+                {(() => {
+                  const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[country]
+                  return F ? <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span> : null
+                })()}
+                {tSearch(`countries.${country}`)}
+              </span>
+            ) : (
+              <span>{page.filters.allCountries}</span>
+            )}
+            <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
+          </Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Positioner sideOffset={8} align="start" className="z-50">
+              <Popover.Popup className="min-w-[var(--anchor-width)] rounded-2xl border border-blue-300/20 bg-blue-400/[8%] py-1.5 shadow-xl shadow-black/20 backdrop-blur-md">
+                <div className="relative">
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-6 rounded-t-2xl bg-gradient-to-b from-blue-400/[12%] to-transparent" />
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 rounded-b-2xl bg-gradient-to-t from-blue-400/[12%] to-transparent" />
+                  <ul role="listbox" aria-label={page.filters.country} className="max-h-48 overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <li role="option" aria-selected={country === ""}>
+                      <button
+                        type="button"
+                        onClick={() => { setCountry(""); setCountryOpen(false) }}
+                        className={cn(
+                          "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
+                          country === "" ? "text-teal-accent" : "text-white/50"
+                        )}
+                      >
+                        {page.filters.allCountries}
+                      </button>
+                    </li>
+                    {COUNTRIES.map(({ code }) => {
+                      const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[code]
+                      return (
+                        <li key={code} role="option" aria-selected={country === code}>
+                          <button
+                            type="button"
+                            onClick={() => { setCountry(code); setCountryOpen(false) }}
+                            className={cn(
+                              "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
+                              country === code ? "text-teal-accent" : "text-white/80"
+                            )}
+                          >
+                            {F && <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span>}
+                            {tSearch(`countries.${code}`)}
+                          </button>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              </Popover.Popup>
+            </Popover.Positioner>
+          </Popover.Portal>
+        </Popover.Root>
+      </fieldset>
+
+      {/* Localisation */}
+      <fieldset>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.location}</legend>
+        <Input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder={page.filters.locationPlaceholder}
+          className="w-full"
+        />
+      </fieldset>
+
+      {/* Spécialité */}
+      <fieldset>
+        {/* Collapsible header */}
+        <button
+          type="button"
+          onClick={() => setSpecialtyOpen((v) => !v)}
+          className="mb-1.5 flex w-full cursor-pointer items-center justify-between text-sm font-medium text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <span>{page.filters.specialty}</span>
+          <ChevronDown
+            className={cn(
+              "size-4 shrink-0 text-white/40 transition-transform duration-200",
+              specialtyOpen && "rotate-180"
+            )}
+            aria-hidden="true"
+          />
+        </button>
+
+        {specialtyOpen && (
+          <div className="flex flex-col gap-1.5">
+            {/* Toutes spécialités — select/deselect all */}
+            <label className="flex cursor-pointer items-center gap-2.5">
+              <input
+                type="checkbox"
+                checked={selectedBadges.size === 0}
+                onChange={() => {
+                  if (selectedBadges.size > 0) {
+                    setSelectedBadges(new Set())
+                  }
+                }}
+                className="peer accent-teal-accent cursor-pointer focus-visible:outline-none"
+              />
+              <span className="text-sm text-white/70 transition-colors peer-checked:text-white">{page.filters.allSpecialties}</span>
+            </label>
+
+            {/* Divider */}
+            <div className="my-0.5 h-px bg-white/10" />
+
+            {/* Individual specialty checkboxes */}
+            {ALL_BADGES.map((badge) => (
+              <label key={badge} className="flex cursor-pointer items-center gap-2.5">
+                <input
+                  type="checkbox"
+                  checked={selectedBadges.has(badge)}
+                  onChange={() => {
+                    setSelectedBadges((prev) => {
+                      const next = new Set(prev)
+                      if (next.has(badge)) next.delete(badge)
+                      else next.add(badge)
+                      return next
+                    })
+                  }}
+                  className="peer accent-teal-accent cursor-pointer focus-visible:outline-none"
+                />
+                <span className="text-sm text-white/70 transition-colors peer-checked:text-white">{badgeLabels[badge]}</span>
+              </label>
+            ))}
+          </div>
+        )}
+      </fieldset>
+
+      {/* Langues */}
+      <fieldset>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.language}</legend>
+        <div className="flex flex-wrap gap-1.5">
+          {ALL_LANGUAGES.map((code) => (
+            <Pill
+              key={code}
+              selected={selectedLanguages.has(code)}
+              ariaLabel={page.filters.language}
+              className="rounded-md"
+              onClick={() =>
+                setSelectedLanguages((prev) => {
+                  const next = new Set(prev)
+                  next.has(code) ? next.delete(code) : next.add(code)
+                  return next
+                })
+              }
+              icon={<LanguageFlag code={code} size={16} />}
+            />
+          ))}
+        </div>
+      </fieldset>
+
+      {/* Prix maximum */}
+      <fieldset>
+        <legend className="mb-1 text-sm font-medium text-white/70">
+          {page.filters.maxPrice} — <span className="text-teal-accent">€{maxPrice}</span>
+        </legend>
+        <RangeSlider
+          min={20}
+          max={80}
+          step={1}
+          value={maxPrice}
+          onChange={(v) => {
+            setMaxPrice(v)
+            debouncedUpdate("maxPrice", v, "maxPrice")
+          }}
+        />
+        <div className="mt-0.5 flex justify-between text-xs text-white/30">
+          <span>€20</span><span>€80</span>
+        </div>
+      </fieldset>
+
+      {/* Note minimum */}
+      <fieldset>
+        <legend className="mb-1 text-sm font-medium text-white/70">
+          {page.filters.minRating} — <span className="text-teal-accent">{minRating.toFixed(1)}</span>
+        </legend>
+        <RangeSlider
+          min={4.0}
+          max={5.0}
+          step={0.1}
+          value={minRating}
+          onChange={(v) => {
+            setMinRating(v)
+            debouncedUpdate("minRating", v, "minRating")
+          }}
+        />
+        <div className="mt-0.5 flex justify-between text-xs text-white/30">
+          <span>4.0</span><span>5.0</span>
+        </div>
+      </fieldset>
+
+      {/* Années d'expérience */}
+      <fieldset>
+        <legend className="mb-1 text-sm font-medium text-white/70">
+          {page.filters.minExperience} — <span className="text-teal-accent">{minExperience}+</span>
+        </legend>
+        <RangeSlider
+          min={0}
+          max={20}
+          step={1}
+          value={minExperience}
+          onChange={(v) => {
+            setMinExperience(v)
+            debouncedUpdate("minExperience", v, "minExperience")
+          }}
+        />
+        <div className="mt-0.5 flex justify-between text-xs text-white/30">
+          <span>0</span><span>20</span>
+        </div>
+      </fieldset>
+
+      {/* Disponibilité */}
+      <fieldset>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.availability}</legend>
+        <div className="flex flex-wrap gap-1.5">
+          {ALL_DAYS.map((day) => (
+            <Pill
+              key={day}
+              selected={selectedDays.has(day)}
+              className="rounded-md px-2.5 py-1"
+              onClick={() =>
+                setSelectedDays((prev) => {
+                  const next = new Set(prev)
+                  next.has(day) ? next.delete(day) : next.add(day)
+                  return next
+                })
+              }
+            >
+              {dayLabels[day]}
+            </Pill>
+          ))}
+        </div>
+      </fieldset>
+
+      {/* Genre */}
+      <fieldset>
+        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.gender}</legend>
+        <div className="flex flex-col gap-1.5">
+          {([
+            ["", page.filters.all],
+            ["F", page.filters.female],
+            ["M", page.filters.male],
+          ] as const).map(([val, label]) => (
+            <label key={val} className="flex cursor-pointer items-center gap-2.5">
+              <input
+                type="radio"
+                name="gender"
+                value={val}
+                checked={gender === val}
+                onChange={() => setGender(val)}
+                className="peer accent-teal-accent focus-visible:outline-none"
+              />
+              <span className="text-sm text-white/70 transition-colors peer-checked:text-white">{label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+    </div>
+  )
 }
 
 export function CoachesListingClient({
@@ -252,285 +573,6 @@ export function CoachesListingClient({
     languagesTitle: t.languagesTitle,
   }), [t.badges, t.languages, t.listingCta, t.reviewsSuffix, t.priceUnit, t.languagesTitle])
 
-  const FilterContent = () => {
-    const [countryOpen, setCountryOpen] = useState(false)
-    return (
-      <div className="flex flex-col gap-4">
-      {/* Pays */}
-      <fieldset>
-        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.country}</legend>
-        <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
-          <Popover.Trigger className={cn(
-            "flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-3 text-left text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-teal-accent/60",
-            countryOpen
-              ? "border-teal-accent/40 bg-teal-accent/10 text-white"
-              : "border-blue-300/20 bg-blue-400/[8%] text-white/70 hover:text-white"
-          )}>
-            {country ? (
-              <span className="flex items-center gap-2 text-white">
-                {(() => {
-                  const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[country]
-                  return F ? <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span> : null
-                })()}
-                {tSearch(`countries.${country}`)}
-              </span>
-            ) : (
-              <span>{page.filters.allCountries}</span>
-            )}
-            <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
-          </Popover.Trigger>
-          <Popover.Portal>
-            <Popover.Positioner sideOffset={8} align="start" className="z-50">
-              <Popover.Popup className="min-w-[var(--anchor-width)] rounded-2xl border border-blue-300/20 bg-blue-400/[8%] py-1.5 shadow-xl shadow-black/20 backdrop-blur-md">
-                <div className="relative">
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-6 rounded-t-2xl bg-gradient-to-b from-blue-400/[12%] to-transparent" />
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 rounded-b-2xl bg-gradient-to-t from-blue-400/[12%] to-transparent" />
-                  <ul role="listbox" aria-label={page.filters.country} className="max-h-48 overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                    <li role="option" aria-selected={country === ""}>
-                      <button
-                        type="button"
-                        onClick={() => { setCountry(""); setCountryOpen(false) }}
-                        className={cn(
-                          "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
-                          country === "" ? "text-teal-accent" : "text-white/50"
-                        )}
-                      >
-                        {page.filters.allCountries}
-                      </button>
-                    </li>
-                    {COUNTRIES.map(({ code }) => {
-                      const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[code]
-                      return (
-                        <li key={code} role="option" aria-selected={country === code}>
-                          <button
-                            type="button"
-                            onClick={() => { setCountry(code); setCountryOpen(false) }}
-                            className={cn(
-                              "flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:text-white",
-                              country === code ? "text-teal-accent" : "text-white/80"
-                            )}
-                          >
-                            {F && <span aria-hidden="true"><F style={{ width: 20, height: 14 }} className="rounded-sm" /></span>}
-                            {tSearch(`countries.${code}`)}
-                          </button>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-              </Popover.Popup>
-            </Popover.Positioner>
-          </Popover.Portal>
-        </Popover.Root>
-      </fieldset>
-
-      {/* Localisation */}
-      <fieldset>
-        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.location}</legend>
-        <Input
-          type="text"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          placeholder={page.filters.locationPlaceholder}
-          className="w-full"
-        />
-      </fieldset>
-
-      {/* Spécialité */}
-      <fieldset>
-        {/* Collapsible header */}
-        <button
-          type="button"
-          onClick={() => setSpecialtyOpen((v) => !v)}
-          className="mb-1.5 flex w-full cursor-pointer items-center justify-between text-sm font-medium text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-        >
-          <span>{page.filters.specialty}</span>
-          <ChevronDown
-            className={cn(
-              "size-4 shrink-0 text-white/40 transition-transform duration-200",
-              specialtyOpen && "rotate-180"
-            )}
-            aria-hidden="true"
-          />
-        </button>
-
-        {specialtyOpen && (
-          <div className="flex flex-col gap-1.5">
-            {/* Toutes spécialités — select/deselect all */}
-            <label className="flex cursor-pointer items-center gap-2.5">
-              <input
-                type="checkbox"
-                checked={selectedBadges.size === 0}
-                onChange={() => {
-                  if (selectedBadges.size > 0) {
-                    setSelectedBadges(new Set())
-                  }
-                }}
-                className="peer accent-teal-accent cursor-pointer"
-              />
-              <span className="text-sm text-white/70 transition-colors peer-checked:text-white">{page.filters.allSpecialties}</span>
-            </label>
-
-            {/* Divider */}
-            <div className="my-0.5 h-px bg-white/10" />
-
-            {/* Individual specialty checkboxes */}
-            {ALL_BADGES.map((badge) => (
-              <label key={badge} className="flex cursor-pointer items-center gap-2.5">
-                <input
-                  type="checkbox"
-                  checked={selectedBadges.has(badge)}
-                  onChange={() => {
-                    setSelectedBadges((prev) => {
-                      const next = new Set(prev)
-                      if (next.has(badge)) next.delete(badge)
-                      else next.add(badge)
-                      return next
-                    })
-                  }}
-                  className="peer accent-teal-accent cursor-pointer"
-                />
-                <span className="text-sm text-white/70 transition-colors peer-checked:text-white">{badgeLabels[badge]}</span>
-              </label>
-            ))}
-          </div>
-        )}
-      </fieldset>
-
-      {/* Langues */}
-      <fieldset>
-        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.language}</legend>
-        <div className="flex flex-wrap gap-1.5">
-          {ALL_LANGUAGES.map((code) => (
-            <Pill
-              key={code}
-              selected={selectedLanguages.has(code)}
-              ariaLabel={page.filters.language}
-              className="rounded-md"
-              onClick={() =>
-                setSelectedLanguages((prev) => {
-                  const next = new Set(prev)
-                  next.has(code) ? next.delete(code) : next.add(code)
-                  return next
-                })
-              }
-              icon={<LanguageFlag code={code} size={16} />}
-            />
-          ))}
-        </div>
-      </fieldset>
-
-      {/* Prix maximum */}
-      <fieldset>
-        <legend className="mb-1 text-sm font-medium text-white/70">
-          {page.filters.maxPrice} — <span className="text-teal-accent">€{maxPrice}</span>
-        </legend>
-        <RangeSlider
-          min={20}
-          max={80}
-          step={1}
-          value={maxPrice}
-          onChange={(v) => {
-            setMaxPrice(v)
-            debouncedUpdate("maxPrice", v, "maxPrice")
-          }}
-        />
-        <div className="mt-0.5 flex justify-between text-xs text-white/30">
-          <span>€20</span><span>€80</span>
-        </div>
-      </fieldset>
-
-      {/* Note minimum */}
-      <fieldset>
-        <legend className="mb-1 text-sm font-medium text-white/70">
-          {page.filters.minRating} — <span className="text-teal-accent">{minRating.toFixed(1)}</span>
-        </legend>
-        <RangeSlider
-          min={4.0}
-          max={5.0}
-          step={0.1}
-          value={minRating}
-          onChange={(v) => {
-            setMinRating(v)
-            debouncedUpdate("minRating", v, "minRating")
-          }}
-        />
-        <div className="mt-0.5 flex justify-between text-xs text-white/30">
-          <span>4.0</span><span>5.0</span>
-        </div>
-      </fieldset>
-
-      {/* Années d'expérience */}
-      <fieldset>
-        <legend className="mb-1 text-sm font-medium text-white/70">
-          {page.filters.minExperience} — <span className="text-teal-accent">{minExperience}+</span>
-        </legend>
-        <RangeSlider
-          min={0}
-          max={20}
-          step={1}
-          value={minExperience}
-          onChange={(v) => {
-            setMinExperience(v)
-            debouncedUpdate("minExperience", v, "minExperience")
-          }}
-        />
-        <div className="mt-0.5 flex justify-between text-xs text-white/30">
-          <span>0</span><span>20</span>
-        </div>
-      </fieldset>
-
-      {/* Disponibilité */}
-      <fieldset>
-        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.availability}</legend>
-        <div className="flex flex-wrap gap-1.5">
-          {ALL_DAYS.map((day) => (
-            <Pill
-              key={day}
-              selected={selectedDays.has(day)}
-              className="rounded-md px-2.5 py-1"
-              onClick={() =>
-                setSelectedDays((prev) => {
-                  const next = new Set(prev)
-                  next.has(day) ? next.delete(day) : next.add(day)
-                  return next
-                })
-              }
-            >
-              {dayLabels[day]}
-            </Pill>
-          ))}
-        </div>
-      </fieldset>
-
-      {/* Genre */}
-      <fieldset>
-        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.gender}</legend>
-        <div className="flex flex-col gap-1.5">
-          {([
-            ["", page.filters.all],
-            ["F", page.filters.female],
-            ["M", page.filters.male],
-          ] as const).map(([val, label]) => (
-            <label key={val} className="flex cursor-pointer items-center gap-2.5">
-              <input
-                type="radio"
-                name="gender"
-                value={val}
-                checked={gender === val}
-                onChange={() => setGender(val)}
-                className="peer accent-teal-accent"
-              />
-              <span className="text-sm text-white/70 transition-colors peer-checked:text-white">{label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
-      </div>
-    )
-  }
-
   return (
     <main className="relative z-10">
       <div className="mx-auto max-w-7xl px-4 py-6">
@@ -542,7 +584,34 @@ export function CoachesListingClient({
                 ref={sidebarRef}
                 className="flex-1 overflow-y-auto pl-4 pr-7 pt-4 pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               >
-                <FilterContent />
+                <FilterContent
+                  page={page}
+                  t={t}
+                  badgeLabels={badgeLabels}
+                  dayLabels={dayLabels}
+                  tSearch={tSearch}
+                  country={country}
+                  setCountry={setCountry}
+                  location={location}
+                  setLocation={setLocation}
+                  selectedBadges={selectedBadges}
+                  setSelectedBadges={setSelectedBadges}
+                  selectedLanguages={selectedLanguages}
+                  setSelectedLanguages={setSelectedLanguages}
+                  maxPrice={maxPrice}
+                  setMaxPrice={setMaxPrice}
+                  minRating={minRating}
+                  setMinRating={setMinRating}
+                  minExperience={minExperience}
+                  setMinExperience={setMinExperience}
+                  selectedDays={selectedDays}
+                  setSelectedDays={setSelectedDays}
+                  gender={gender}
+                  setGender={setGender}
+                  specialtyOpen={specialtyOpen}
+                  setSpecialtyOpen={setSpecialtyOpen}
+                  debouncedUpdate={debouncedUpdate}
+                />
               </div>
               <div ref={resetStripRef} className="px-4 py-3">
                 <button
@@ -681,21 +750,43 @@ export function CoachesListingClient({
                     ref={mobileScrollRef}
                     className="relative flex-1 overflow-y-auto border-x border-blue-300/20 bg-blue-400/[15%] px-5 py-4 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                   >
-                    <FilterContent />
+                    <FilterContent
+                  page={page}
+                  t={t}
+                  badgeLabels={badgeLabels}
+                  dayLabels={dayLabels}
+                  tSearch={tSearch}
+                  country={country}
+                  setCountry={setCountry}
+                  location={location}
+                  setLocation={setLocation}
+                  selectedBadges={selectedBadges}
+                  setSelectedBadges={setSelectedBadges}
+                  selectedLanguages={selectedLanguages}
+                  setSelectedLanguages={setSelectedLanguages}
+                  maxPrice={maxPrice}
+                  setMaxPrice={setMaxPrice}
+                  minRating={minRating}
+                  setMinRating={setMinRating}
+                  minExperience={minExperience}
+                  setMinExperience={setMinExperience}
+                  selectedDays={selectedDays}
+                  setSelectedDays={setSelectedDays}
+                  gender={gender}
+                  setGender={setGender}
+                  specialtyOpen={specialtyOpen}
+                  setSpecialtyOpen={setSpecialtyOpen}
+                  debouncedUpdate={debouncedUpdate}
+                />
                   </div>
 
                   {/* Pinned reset button */}
                   <div ref={mobileResetRef} className="rounded-b-3xl border border-t-0 border-blue-300/20 bg-blue-400/[15%] px-5 py-4">
                     <button
                       type="button"
-                      onClick={() => {
-                        resetFilters()
-                        setMobileClosing(true)
-                        setTimeout(() => {
-                          setMobileOpen(false)
-                          setMobileClosing(false)
-                        }, 360)
-                      }}
+                          onClick={() => {
+                            resetFilters()
+                          }}
                       disabled={!hasActiveFilters}
                       className={cn(
                         "w-full cursor-pointer rounded-xl border py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
