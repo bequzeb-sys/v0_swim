@@ -5,6 +5,7 @@ import { Waves, Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { useTranslations } from "next-intl"
+import { usePathname } from "@/i18n/navigation"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { Link } from "@/i18n/navigation"
 import { HeaderActions } from "@/components/header-actions"
@@ -17,15 +18,17 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { key: "coaches", href: "#coaches" },
-  { key: "how", href: "#how" },
-  { key: "pricing", href: "#pricing" },
-  { key: "forCoaches", href: "#coaches-pro" },
+  { key: "coaches", href: "/#coaches" },
+  { key: "how", href: "/#how" },
+  { key: "pricing", href: "/#pricing" },
+  { key: "forCoaches", href: "/#coaches-pro" },
 ]
 
 export function Header() {
   const t = useTranslations("nav")
   const tBrand = useTranslations("brand")
+  const pathname = usePathname()
+  const isHome = pathname === "/"
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [drawerClosing, setDrawerClosing] = useState(false)
@@ -90,16 +93,31 @@ export function Header() {
 
           {/* Center nav — hidden on small screens */}
           <ul className="hidden items-center justify-self-center gap-9 lg:flex">
-            {navLinks.map((link) => (
-              <li key={link.key}>
-                <a
-                  href={link.href}
-                  className="cursor-pointer text-[15px] font-medium text-white/80 transition-colors hover:text-white"
-                >
-                  {t(`links.${link.key}`)}
-                </a>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const anchorId = link.href.replace("/#", "")
+              return (
+                <li key={link.key}>
+                  {isHome ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        document.getElementById(anchorId)?.scrollIntoView({ behavior: "smooth" })
+                      }}
+                      className="cursor-pointer text-[15px] font-medium text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                    >
+                      {t(`links.${link.key}`)}
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href as Parameters<typeof Link>[0]["href"]}
+                      className="cursor-pointer text-[15px] font-medium text-white/80 transition-colors hover:text-white"
+                    >
+                      {t(`links.${link.key}`)}
+                    </Link>
+                  )}
+                </li>
+              )
+            })}
           </ul>
 
           {/* Right-side actions: language switcher + auth-aware CTA */}
