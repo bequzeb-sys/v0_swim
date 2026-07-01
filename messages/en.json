@@ -348,17 +348,35 @@
       "expandSidebar": "Expand sidebar"
     },
     "client": {
-      "home": { "title": "Dashboard" },
-      "bookings": { "title": "My Bookings" },
-      "messages": { "title": "Messages" },
-      "settings": { "title": "Settings" }
+      "home": {
+        "title": "Dashboard"
+      },
+      "bookings": {
+        "title": "My Bookings"
+      },
+      "messages": {
+        "title": "Messages"
+      },
+      "settings": {
+        "title": "Settings"
+      }
     },
     "coach": {
-      "home": { "title": "Dashboard" },
-      "profile": { "title": "My Profile" },
-      "schedule": { "title": "Schedule" },
-      "bookings": { "title": "Bookings" },
-      "settings": { "title": "Settings" }
+      "home": {
+        "title": "Dashboard"
+      },
+      "profile": {
+        "title": "My Profile"
+      },
+      "schedule": {
+        "title": "Schedule"
+      },
+      "bookings": {
+        "title": "Bookings"
+      },
+      "settings": {
+        "title": "Settings"
+      }
     }
   },
   "languages": {
@@ -555,8 +573,8 @@
     "company": {
       "heading": "Company",
       "becomeCoach": "Become a coach",
-      "about": "About — coming soon",
-      "contact": "Contact — coming soon"
+      "about": "About",
+      "contact": "Contact"
     },
     "legal": {
       "heading": "Legal",
@@ -658,5 +676,56 @@
         }
       }
     }
+  },
+  "about": {
+    "metaTitle": "About — SwimAI",
+    "metaDescription": "SwimAI was born from a swimmer passion and one conviction: every swimmer deserves quality coaching, accessible anywhere.",
+    "badge": "Our story",
+    "hero": "Born in the water,\nbuilt for you.",
+    "heroSub": "I'm a swimmer. Not a startup founder. A swimmer who was looking for a better way to improve — and couldn't find one.",
+    "section1Title": "The problem I lived",
+    "section1Body": "Finding a great swimming coach is hard. Generic platforms don't understand swimming's specifics. Certifications aren't verified. And once you find someone, there are no tools to track progress, analyse technique, or plan sessions intelligently.",
+    "section2Title": "The vision",
+    "section2Body": "SwimAI connects passionate swimmers with certified coaches — and adds a layer of artificial intelligence to personalise every journey. AI analyses, the human coach guides, the swimmer progresses. Three actors, one goal: go further in the water.",
+    "section3Title": "For whom?",
+    "section3Body": "For the adult who wants to learn to swim without judgment. For the triathlete who wants to optimise their crawl. For the competitive swimmer chasing those last seconds. For the aquaphobe who finally wants to make peace with water. SwimAI is built for everyone fascinated by swimming — whatever their level.",
+    "comingSoonTitle": "The platform is coming soon",
+    "comingSoonBody": "We're finalising the last details. Sign up to be among the first to access SwimAI.",
+    "comingSoonCta": "Join the waitlist",
+    "valuesTitle": "What we believe",
+    "value1Title": "The human coach is irreplaceable",
+    "value1Body": "AI amplifies, it doesn't replace. Every SwimAI coach is certified and verified.",
+    "value2Title": "Progress is measurable",
+    "value2Body": "No vague promises. Real metrics, documented sessions, visible results.",
+    "value3Title": "Water is for everyone",
+    "value3Body": "Aquaphobia, disability, first crawl or Olympic preparation — our platform adapts to every swimmer."
+  },
+  "contact": {
+    "metaTitle": "Contact — SwimAI",
+    "metaDescription": "A question, a problem, an idea? Contact the SwimAI team.",
+    "badge": "Contact",
+    "hero": "How can we help?",
+    "heroSub": "Choose the topic that fits — we'll reply within 24 hours.",
+    "topic1Title": "Find a coach",
+    "topic1Body": "You're looking for a coach suited to your level or specialty.",
+    "topic1Prefill": "Hello,\n\nI'm looking for a SwimAI coach for [describe your goal — learning, improvement, competition, aquaphobia, etc.].\n\nMy current level: [beginner / intermediate / advanced]\nMy location: [city or region]\n\nThank you.",
+    "topic2Title": "Become a coach",
+    "topic2Body": "You're a certified coach and want to join the platform.",
+    "topic2Prefill": "Hello,\n\nI'm a certified swimming coach and would like to offer my services on SwimAI.\n\nMy certifications: [e.g. Level 2 Swimming Coach, ASA]\nMy specialty: [e.g. open water, competition, learn to swim]\nMy city: [city]\n\nPlease contact me to discuss next steps.",
+    "topic3Title": "Technical issue",
+    "topic3Body": "A bug, an error, something that isn't working as expected.",
+    "topic3Prefill": "Hello,\n\nI encountered an issue on SwimAI.\n\nPage: [URL or page name]\nDescription: [describe what happened]\nBrowser / device: [e.g. Chrome on iPhone]\n\nThank you.",
+    "topic4Title": "Other enquiry",
+    "topic4Body": "A suggestion, a partnership, a general question.",
+    "topic4Prefill": "Hello,\n\nI'm contacting you about:\n\n[your message]\n\nThank you.",
+    "emailLabel": "Your email (optional)",
+    "emailPlaceholder": "you@example.com",
+    "messageLabel": "Your message",
+    "copyButton": "Copy message",
+    "copiedButton": "Copied!",
+    "emailCta": "Send by email",
+    "emailAddress": "hello@swimai.app",
+    "comingSoonBadge": "Form coming soon",
+    "comingSoonNote": "In the meantime, copy your message and send it directly by email."
   }
 }

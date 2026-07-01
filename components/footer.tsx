@@ -94,14 +94,20 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <span className="text-sm text-white/40">
+                <Link
+                  href="/about"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                >
                   {t("company.about")}
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-sm text-white/40">
+                <Link
+                  href="/contact"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                >
                   {t("company.contact")}
-                </span>
+                </Link>
               </li>
             </ul>
           </div>

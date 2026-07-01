@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/mentions-legales", priority: 0.2, changeFrequency: "yearly" as const },
     { path: "/cgu", priority: 0.2, changeFrequency: "yearly" as const },
     { path: "/confidentialite", priority: 0.2, changeFrequency: "yearly" as const },
+    { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/contact", priority: 0.7, changeFrequency: "monthly" as const },
   ]
 
   const staticEntries = staticRoutes.flatMap(({ path, priority, changeFrequency }) =>

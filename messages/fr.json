@@ -348,17 +348,35 @@
       "expandSidebar": "Expand sidebar"
     },
     "client": {
-      "home": { "title": "Tableau de bord" },
-      "bookings": { "title": "Mes réservations" },
-      "messages": { "title": "Messages" },
-      "settings": { "title": "Paramètres" }
+      "home": {
+        "title": "Tableau de bord"
+      },
+      "bookings": {
+        "title": "Mes réservations"
+      },
+      "messages": {
+        "title": "Messages"
+      },
+      "settings": {
+        "title": "Paramètres"
+      }
     },
     "coach": {
-      "home": { "title": "Tableau de bord" },
-      "profile": { "title": "Mon profil" },
-      "schedule": { "title": "Disponibilités" },
-      "bookings": { "title": "Réservations" },
-      "settings": { "title": "Paramètres" }
+      "home": {
+        "title": "Tableau de bord"
+      },
+      "profile": {
+        "title": "Mon profil"
+      },
+      "schedule": {
+        "title": "Disponibilités"
+      },
+      "bookings": {
+        "title": "Réservations"
+      },
+      "settings": {
+        "title": "Paramètres"
+      }
     }
   },
   "languages": {
@@ -555,8 +573,8 @@
     "company": {
       "heading": "Entreprise",
       "becomeCoach": "Devenir coach",
-      "about": "À propos — bientôt disponible",
-      "contact": "Contact — bientôt disponible"
+      "about": "À propos",
+      "contact": "Contact"
     },
     "legal": {
       "heading": "Légal",
@@ -658,5 +676,56 @@
         }
       }
     }
+  },
+  "about": {
+    "metaTitle": "À propos — SwimAI",
+    "metaDescription": "SwimAI est né de la passion d'un nageur pour la natation et d'une conviction : chaque nageur mérite un coach de qualité, accessible partout.",
+    "badge": "Notre histoire",
+    "hero": "Né dans l'eau,\nconstruit pour vous.",
+    "heroSub": "Je suis nageur. Pas un fondateur de startup. Un nageur qui cherchait un meilleur moyen de progresser — et qui n'en trouvait pas.",
+    "section1Title": "Le problème que j'ai vécu",
+    "section1Body": "Trouver un bon coach de natation, c'est difficile. Les plateformes génériques ne comprennent pas les spécificités de la natation. Les certifications FFN ne sont pas vérifiées. Et une fois qu'on a trouvé quelqu'un, il n'y a aucun outil pour suivre ses progrès, analyser sa technique, ou planifier ses séances intelligemment.",
+    "section2Title": "La vision",
+    "section2Body": "SwimAI connecte des nageurs passionnés avec des coachs certifiés — et y ajoute une couche d'intelligence artificielle pour personnaliser chaque parcours. L'IA analyse, le coach humain guide, le nageur progresse. Trois acteurs, un seul objectif : aller plus loin dans l'eau.",
+    "section3Title": "Pour qui ?",
+    "section3Body": "Pour l'adulte qui veut apprendre à nager sans jugement. Pour le triathlète qui veut optimiser son crawl. Pour le nageur compétiteur qui cherche ces dernières secondes. Pour l'aquaphobe qui veut enfin se réconcilier avec l'eau. SwimAI est construit pour tous ceux que la natation fascine — quel que soit leur niveau.",
+    "comingSoonTitle": "La plateforme arrive bientôt",
+    "comingSoonBody": "Nous finalisons les derniers détails. Inscrivez-vous pour être parmi les premiers à accéder à SwimAI.",
+    "comingSoonCta": "Rejoindre la liste d'attente",
+    "valuesTitle": "Ce en quoi nous croyons",
+    "value1Title": "Le coach humain est irremplaçable",
+    "value1Body": "L'IA amplifie, elle ne remplace pas. Chaque coach SwimAI est certifié et vérifié.",
+    "value2Title": "Le progrès se mesure",
+    "value2Body": "Pas de vague promesse. Des métriques réelles, des séances documentées, des résultats visibles.",
+    "value3Title": "L'eau est pour tout le monde",
+    "value3Body": "Aquaphobie, handicap, premier crawl ou préparation olympique — notre plateforme s'adapte à chaque nageur."
+  },
+  "contact": {
+    "metaTitle": "Contact — SwimAI",
+    "metaDescription": "Une question, un problème, une idée ? Contactez l'équipe SwimAI.",
+    "badge": "Contact",
+    "hero": "Comment pouvons-nous vous aider ?",
+    "heroSub": "Choisissez le sujet qui vous correspond — nous vous répondrons sous 24h.",
+    "topic1Title": "Trouver un coach",
+    "topic1Body": "Vous cherchez un coach adapté à votre niveau ou votre spécialité.",
+    "topic1Prefill": "Bonjour,\n\nJe cherche un coach SwimAI pour [décrivez votre objectif — apprentissage, perfectionnement, compétition, aquaphobie, etc.].\n\nMon niveau actuel : [débutant / intermédiaire / avancé]\nMa localisation : [ville ou région]\n\nMerci d'avance.",
+    "topic2Title": "Devenir coach",
+    "topic2Body": "Vous êtes coach certifié et souhaitez rejoindre la plateforme.",
+    "topic2Prefill": "Bonjour,\n\nJe suis coach de natation certifié et je souhaite proposer mes services sur SwimAI.\n\nMes certifications : [ex. BPJEPS Natation, MNS, Éducateur FFN]\nMa spécialité : [ex. eau libre, compétition, apprentissage]\nMa ville : [ville]\n\nMerci de me contacter pour la suite.",
+    "topic3Title": "Problème technique",
+    "topic3Body": "Un bug, une erreur, quelque chose qui ne fonctionne pas comme prévu.",
+    "topic3Prefill": "Bonjour,\n\nJ'ai rencontré un problème sur SwimAI.\n\nPage concernée : [URL ou nom de la page]\nDescription du problème : [décrivez ce qui s'est passé]\nNavigateur / appareil : [ex. Chrome sur iPhone]\n\nMerci.",
+    "topic4Title": "Autre demande",
+    "topic4Body": "Une suggestion, un partenariat, une question générale.",
+    "topic4Prefill": "Bonjour,\n\nJe vous contacte au sujet de :\n\n[votre message]\n\nMerci.",
+    "emailLabel": "Votre email (optionnel)",
+    "emailPlaceholder": "vous@exemple.com",
+    "messageLabel": "Votre message",
+    "copyButton": "Copier le message",
+    "copiedButton": "Copié !",
+    "emailCta": "Envoyer par email",
+    "emailAddress": "hello@swimai.app",
+    "comingSoonBadge": "Formulaire bientôt disponible",
+    "comingSoonNote": "En attendant, copiez votre message et envoyez-le directement par email."
   }
 }
