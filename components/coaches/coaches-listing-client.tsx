@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl"
 import { SlidersHorizontal, ChevronDown, Check } from "lucide-react"
 import { CoachListingCard } from "@/components/coaches/coach-listing-card"
 import { Input } from "@/components/ui/input"
+import { RangeSlider } from "@/components/ui/range-slider"
 import { Pill } from "@/components/ui/pill"
 import { LanguageFlag } from "@/components/ui/language-flag"
 import { Scrollbar } from "@/components/ui/scrollbar"
@@ -72,6 +73,7 @@ interface Props {
       country: string
       allCountries: string
       specialty: string
+      allSpecialties: string
       language: string
       maxPrice: string
       minRating: string
@@ -105,6 +107,7 @@ export function CoachesListingClient({
 
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileClosing, setMobileClosing] = useState(false)
+  const [specialtyOpen, setSpecialtyOpen] = useState(true)
   const sidebarRef = useRef<HTMLDivElement>(null)
   const resetStripRef = useRef<HTMLDivElement>(null)
   const mobileScrollRef = useRef<HTMLDivElement>(null)
@@ -330,26 +333,63 @@ export function CoachesListingClient({
 
       {/* Spécialité */}
       <fieldset>
-        <legend className="mb-1.5 text-sm font-medium text-white/70">{page.filters.specialty}</legend>
-        <div className="flex flex-col gap-1.5">
-          {ALL_BADGES.map((badge) => (
-            <label key={badge} className="flex cursor-pointer items-center gap-2.5">
+        {/* Collapsible header */}
+        <button
+          type="button"
+          onClick={() => setSpecialtyOpen((v) => !v)}
+          className="mb-1.5 flex w-full cursor-pointer items-center justify-between text-sm font-medium text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <span>{page.filters.specialty}</span>
+          <ChevronDown
+            className={cn(
+              "size-4 shrink-0 text-white/40 transition-transform duration-200",
+              specialtyOpen && "rotate-180"
+            )}
+            aria-hidden="true"
+          />
+        </button>
+
+        {specialtyOpen && (
+          <div className="flex flex-col gap-1.5">
+            {/* Toutes spécialités — select/deselect all */}
+            <label className="flex cursor-pointer items-center gap-2.5">
               <input
                 type="checkbox"
-                checked={selectedBadges.has(badge)}
-                onChange={() =>
-                  setSelectedBadges((prev) => {
-                    const next = new Set(prev)
-                    next.has(badge) ? next.delete(badge) : next.add(badge)
-                    return next
-                  })
-                }
-                className="accent-teal-accent"
+                checked={selectedBadges.size === 0}
+                onChange={() => {
+                  if (selectedBadges.size > 0) {
+                    setSelectedBadges(new Set())
+                  }
+                }}
+                className="accent-teal-accent cursor-pointer"
               />
-              <span className="text-sm text-white/70">{badgeLabels[badge]}</span>
+              <span className="text-sm text-white/70">{page.filters.allSpecialties}</span>
             </label>
-          ))}
-        </div>
+
+            {/* Divider */}
+            <div className="my-0.5 h-px bg-white/10" />
+
+            {/* Individual specialty checkboxes */}
+            {ALL_BADGES.map((badge) => (
+              <label key={badge} className="flex cursor-pointer items-center gap-2.5">
+                <input
+                  type="checkbox"
+                  checked={selectedBadges.has(badge)}
+                  onChange={() => {
+                    setSelectedBadges((prev) => {
+                      const next = new Set(prev)
+                      if (next.has(badge)) next.delete(badge)
+                      else next.add(badge)
+                      return next
+                    })
+                  }}
+                  className="accent-teal-accent cursor-pointer"
+                />
+                <span className="text-sm text-white/70">{badgeLabels[badge]}</span>
+              </label>
+            ))}
+          </div>
+        )}
       </fieldset>
 
       {/* Langues */}
@@ -380,19 +420,18 @@ export function CoachesListingClient({
         <legend className="mb-1 text-sm font-medium text-white/70">
           {page.filters.maxPrice} — <span className="text-teal-accent">€{maxPrice}</span>
         </legend>
-        <input
-          type="range"
-          min={30}
+        <RangeSlider
+          min={20}
           max={80}
-          step={5}
+          step={1}
           value={maxPrice}
-          onChange={(e) =>
-            debouncedUpdate("maxPrice", Number(e.target.value), "maxPrice")
-          }
-          className="w-full accent-teal-accent"
+          onChange={(v) => {
+            setMaxPrice(v)
+            debouncedUpdate("maxPrice", v, "maxPrice")
+          }}
         />
         <div className="mt-0.5 flex justify-between text-xs text-white/30">
-          <span>€30</span><span>€80</span>
+          <span>€20</span><span>€80</span>
         </div>
       </fieldset>
 
@@ -401,16 +440,15 @@ export function CoachesListingClient({
         <legend className="mb-1 text-sm font-medium text-white/70">
           {page.filters.minRating} — <span className="text-teal-accent">{minRating.toFixed(1)}</span>
         </legend>
-        <input
-          type="range"
+        <RangeSlider
           min={4.0}
           max={5.0}
           step={0.1}
           value={minRating}
-          onChange={(e) =>
-            debouncedUpdate("minRating", parseFloat(e.target.value), "minRating")
-          }
-          className="w-full accent-teal-accent"
+          onChange={(v) => {
+            setMinRating(v)
+            debouncedUpdate("minRating", v, "minRating")
+          }}
         />
         <div className="mt-0.5 flex justify-between text-xs text-white/30">
           <span>4.0</span><span>5.0</span>
@@ -422,16 +460,15 @@ export function CoachesListingClient({
         <legend className="mb-1 text-sm font-medium text-white/70">
           {page.filters.minExperience} — <span className="text-teal-accent">{minExperience}+</span>
         </legend>
-        <input
-          type="range"
+        <RangeSlider
           min={0}
           max={20}
           step={1}
           value={minExperience}
-          onChange={(e) =>
-            debouncedUpdate("minExperience", Number(e.target.value), "minExperience")
-          }
-          className="w-full accent-teal-accent"
+          onChange={(v) => {
+            setMinExperience(v)
+            debouncedUpdate("minExperience", v, "minExperience")
+          }}
         />
         <div className="mt-0.5 flex justify-between text-xs text-white/30">
           <span>0</span><span>20</span>
