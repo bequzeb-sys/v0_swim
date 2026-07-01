@@ -6,7 +6,6 @@ import type { CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 import { CoachesListingClient } from "@/components/coaches/coaches-listing-client"
 import { UnderwaterBackground } from "@/components/underwater-background"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
-import { FooterCTA } from "@/components/footer-cta"
 import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
 
@@ -106,7 +105,6 @@ export default async function CoachesPage() {
         dayLabels={dayLabels}
       />
       </Suspense>
-      <FooterCTA />
       <Footer />
     </>
   )
