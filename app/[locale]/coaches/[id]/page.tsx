@@ -8,6 +8,8 @@ import { LanguageList } from "@/components/ui/language-list"
 import { BookingPanel } from "@/components/coach-profile/booking-panel"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import { UnderwaterBackground } from "@/components/underwater-background"
+import { FooterCTA } from "@/components/footer-cta"
+import { Footer } from "@/components/footer"
 import type { DayKey } from "@/lib/coaches"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
@@ -202,6 +204,8 @@ export default async function CoachProfilePage({ params }: Props) {
           </div>
         </div>
       </main>
+      <FooterCTA />
+      <Footer />
     </>
   )
 }

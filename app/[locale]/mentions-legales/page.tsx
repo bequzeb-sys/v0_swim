@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
+import { Footer } from "@/components/footer"
 
 export async function generateMetadata() {
   const t = await getTranslations("siteFooter.legalPages.mentionsLegales")
@@ -50,6 +51,7 @@ function MentionsLegalesContent() {
 
       <p className="mt-12 text-xs text-white/40">{t("inDev")}</p>
     </main>
+    <Footer />
     </>
   )
 }

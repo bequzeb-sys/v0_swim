@@ -6,6 +6,8 @@ import type { CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 import { CoachesListingClient } from "@/components/coaches/coaches-listing-client"
 import { UnderwaterBackground } from "@/components/underwater-background"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
+import { FooterCTA } from "@/components/footer-cta"
+import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
 
 export async function generateMetadata({
@@ -83,6 +85,7 @@ export default async function CoachesPage() {
             country: t("filters.country"),
             allCountries: t("filters.allCountries"),
             specialty: t("filters.specialty"),
+          allSpecialties: t("filters.allSpecialties"),
             language: t("filters.language"),
             maxPrice: t("filters.maxPrice"),
             minRating: t("filters.minRating"),
@@ -103,6 +106,8 @@ export default async function CoachesPage() {
         dayLabels={dayLabels}
       />
       </Suspense>
+      <FooterCTA />
+      <Footer />
     </>
   )
 }
