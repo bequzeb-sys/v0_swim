@@ -6,6 +6,7 @@ import { getMessages, getTranslations } from 'next-intl/server'
 import { AuthProvider } from '@/lib/auth/auth-context'
 import { ScrollRestoration } from '@/app/scroll-restoration'
 import DevOverlay from '@/components/dev/dev-overlay'
+import { PageTransition } from '@/components/page-transition'
 import '../globals.css'
 
 const inter = Inter({
@@ -69,7 +70,7 @@ export default async function RootLayout({
         <ScrollRestoration />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
-            {children}
+            <PageTransition>{children}</PageTransition>
             {process.env.NODE_ENV === 'development' && <DevOverlay />}
           </AuthProvider>
         </NextIntlClientProvider>
