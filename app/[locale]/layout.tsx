@@ -26,23 +26,31 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      default: t('homeTitle'),
-      template: `%s | ${t('siteName')}`,
+      default: t("homeTitle"),
+      template: `%s | ${t("siteName")}`,
     },
-    description: t('homeDescription'),
+    description: t("homeDescription"),
+    manifest: "/manifest.webmanifest",
+    applicationName: "SwimAI",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "SwimAI",
+    },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {
-        'fr': `${baseUrl}/fr`,
-        'en': `${baseUrl}/en`,
+        "fr": `${baseUrl}/fr`,
+        "en": `${baseUrl}/en`,
       },
     },
     icons: {
       icon: [
-        { url: '/favicon.ico', sizes: 'any' },
-        { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: "/icon.svg", type: "image/svg+xml" },
       ],
-      apple: '/apple-icon.png',
+      apple: [
+        { url: "/icon.svg", sizes: "any" },
+      ],
     },
   }
 }
@@ -52,6 +60,8 @@ export const viewport: Viewport = {
   themeColor: '#0d2a52',
   width: 'device-width',
   initialScale: 1,
+  minimumScale: 1,
+  viewportFit: 'cover',
 }
 
 export default async function RootLayout({
