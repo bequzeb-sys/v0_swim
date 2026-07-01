@@ -1,3 +1,5 @@
+"use client"
+
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
@@ -54,9 +56,15 @@ export function Pricing() {
               {t("client.optional")}
             </p>
             <div className="mt-6 grow" />
-            <Button variant="entry" href="#search" className="mt-6 w-full">
+            <button
+              type="button"
+              onClick={() =>
+                document.getElementById("search")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-accent px-6 py-3 text-base font-semibold text-white shadow-lg shadow-blue-accent/30 transition-all hover:bg-blue-accent-dark active:opacity-90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+            >
               {t("client.cta")}
-            </Button>
+            </button>
           </article>
 
           {/* For coaches — free until 3 confirmed bookings */}

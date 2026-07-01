@@ -217,23 +217,40 @@ export function Header() {
                   <div className="border-t border-white/10 mt-3" />
 
                   <nav className="flex flex-col gap-1" aria-label={t("menu")}>
-                    {navLinks.map((link) => (
-                      <Button
-                        key={link.key}
-                        variant="ghost"
-                        href={link.href}
-                        onClick={() => {
-                          setDrawerClosing(true)
-                          setDrawerOpen(false)
-                          setTimeout(() => {
-                            setDrawerClosing(false)
-                          }, 500)
-                        }}
-                        className="w-full justify-start px-4 py-3 text-[15px] font-medium text-white/80"
-                      >
-                        {t(`links.${link.key}`)}
-                      </Button>
-                    ))}
+                    {navLinks.map((link) => {
+                      const anchorId = link.href.replace("/#", "")
+                      return isHome ? (
+                        <button
+                          key={link.key}
+                          type="button"
+                          onClick={() => {
+                            setDrawerClosing(true)
+                            setDrawerOpen(false)
+                            setTimeout(() => {
+                              document.getElementById(anchorId)?.scrollIntoView({ behavior: "smooth" })
+                            }, 520)
+                            setTimeout(() => setDrawerClosing(false), 500)
+                          }}
+                          className="w-full cursor-pointer rounded-xl px-4 py-3 text-left text-[15px] font-medium text-white/80 transition-colors hover:bg-white/5 active:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                        >
+                          {t(`links.${link.key}`)}
+                        </button>
+                      ) : (
+                        <Button
+                          key={link.key}
+                          variant="ghost"
+                          href={link.href}
+                          onClick={() => {
+                            setDrawerClosing(true)
+                            setDrawerOpen(false)
+                            setTimeout(() => setDrawerClosing(false), 500)
+                          }}
+                          className="w-full justify-start px-4 py-3 text-[15px] font-medium text-white/80"
+                        >
+                          {t(`links.${link.key}`)}
+                        </Button>
+                      )
+                    })}
                   </nav>
 
                   <div className="mt-2">
