@@ -85,7 +85,12 @@ export default function OnboardingCoachProfilePage() {
             {t("countryLabel")}
           </label>
           <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
-            <Popover.Trigger className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-blue-300/20 bg-blue-400/[8%] px-4 py-3 text-left text-sm font-medium text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-teal-accent/60">
+            <Popover.Trigger className={cn(
+            "flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-3 text-left text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+            countryOpen
+              ? "border-teal-accent/40 bg-teal-accent/10 text-white"
+              : "border-blue-300/20 bg-blue-400/[8%] text-white/70 hover:text-white"
+          )}>
               {country ? (
                 <span className="flex items-center gap-2 text-white">
                   {(() => {

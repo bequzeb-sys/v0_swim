@@ -302,7 +302,16 @@ export function SearchBar() {
           <Waves className="size-6 shrink-0 text-teal-accent" />
           <div className="flex w-full items-center">
             <Select value={specialty} onValueChange={(v) => setSpecialty(v ?? "all")}>
-              <SelectTrigger className="h-auto w-full gap-2 rounded-none border-0 bg-transparent p-0 text-lg font-medium text-white shadow-none outline-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 data-[size=default]:h-auto [&_svg]:text-white [&_svg:not([class*='size-'])]:size-4">
+              <SelectTrigger className={cn(
+                "h-auto w-full gap-2 rounded-none border-0 p-0 text-lg font-medium shadow-none outline-none",
+                "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent",
+                "focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0",
+                "data-[size=default]:h-auto [&_svg]:text-white [&_svg:not([class*='size-'])]:size-4",
+                "dark:data-[state=open]:bg-transparent",
+                specialty !== "all"
+                  ? "text-teal-accent [&_svg]:text-teal-accent"
+                  : "text-white data-[state=open]:text-teal-accent data-[state=open]:[&_svg]:text-teal-accent"
+              )}>
                 <SelectValue placeholder={t("specialtyPlaceholder")}>
                   {(value: string | null) =>
                     value && value !== "all"

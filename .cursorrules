@@ -266,6 +266,34 @@ Any component offering a login shortcut must explicitly read
 the production `LoginForm.handleSubmit` pattern, or it will silently
 do nothing when reached via a redirect bounce.
 
+### Drawer closing animation — drawerClosing pattern
+When combining Base UI Dialog Portal with Framer Motion AnimatePresence
+for exit animations, use the following pattern to ensure the exit animation
+plays fully before the Portal unmounts:
+
+1. Declare a `drawerClosing` state alongside `drawerOpen`:
+   `const [drawerClosing, setDrawerClosing] = useState(false)`
+
+2. Keep the Portal mounted during animation:
+   `<DialogPrimitive.Root open={drawerOpen || drawerClosing}>`
+
+3. Watch BOTH states in AnimatePresence:
+   `{(drawerOpen || drawerClosing) && (...)}`
+
+4. On close — flip `drawerOpen` false IMMEDIATELY (AnimatePresence detects
+   exit and starts animation), then flip `drawerClosing` false after the
+   animation duration:
+   `setDrawerClosing(true)`
+   `setDrawerOpen(false)`
+   `setTimeout(() => setDrawerClosing(false), animDuration + 50)`
+
+5. Apply `drawerClosing` state to trigger button className so it stays
+   visually active during the closing animation:
+   `className={cn(...) && drawerClosing ? "teal" : "default"}`
+
+This pattern is used in: `components/header.tsx` (nav drawer) and
+`components/coaches/coaches-listing-client.tsx` (mobile filter drawer).
+
 ### next-intl API (important gotchas)
 - `i18n/navigation.ts` exports `{ Link, redirect, useRouter, usePathname }`
  as named exports only — no default export. Always use `import { Link } from ...`
@@ -456,6 +484,12 @@ the same visible symptom (element doesn't stick) but have different
 causes and different fixes. Check BOTH: (1) any ancestor `overflow-*`
 declaration, AND (2) whether the immediate parent's height actually
 extends with the scrollable content.
+- The sticky element must be a DIRECT CHILD of a container that extends with
+  the scrollable page content. A common mistake: putting `sticky` on an inner
+  card div whose parent `<aside>` is only as tall as the card itself — the
+  aside has no scroll distance for the card to pin across, so sticky behaves
+  like static. The correct fix is structural: move `sticky top-X` to the
+  `<aside>` itself, which IS a direct child of the long-scrolling flex row.
 
 ## Pre-flight checklist — required before every Cursor prompt
 

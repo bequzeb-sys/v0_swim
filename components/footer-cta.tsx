@@ -2,7 +2,11 @@ import { ChevronRight, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
 
-export function FooterCTA() {
+interface FooterCTAProps {
+  href?: string
+}
+
+export function FooterCTA({ href = "#search" }: FooterCTAProps) {
   const t = useTranslations("footer")
 
   return (
@@ -15,7 +19,7 @@ export function FooterCTA() {
           <p className="text-base text-white sm:text-lg">{t("text")}</p>
         </div>
         {/* Primary CTA — "Essayez gratuitement", teal, rounded-xl */}
-        <Button variant="primary" href="#search" iconRight={ChevronRight}>
+        <Button variant="primary" href={href} iconRight={ChevronRight}>
           {t("cta")}
         </Button>
       </div>

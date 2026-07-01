@@ -22,7 +22,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand + tagline */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5" aria-label="SwimAI">
+            <Link href="/" className="flex cursor-pointer items-center gap-2.5 focus-visible:outline-none focus-visible:rounded-lg focus-visible:ring-2 focus-visible:ring-teal-accent/60" aria-label="SwimAI">
               <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-accent to-blue-accent-dark text-white shadow-lg shadow-blue-accent/30">
                 <Waves className="size-5" strokeWidth={2.5} />
               </span>
@@ -47,7 +47,7 @@ export function Footer() {
               <li>
                 <Link
                   href={hashHref("#search")}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("product.findCoach")}
                 </Link>
@@ -55,7 +55,7 @@ export function Footer() {
               <li>
                 <Link
                   href={hashHref("#pricing")}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("product.pricing")}
                 </Link>
@@ -63,7 +63,7 @@ export function Footer() {
               <li>
                 <Link
                   href={hashHref("#how")}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("product.howItWorks")}
                 </Link>
@@ -71,7 +71,7 @@ export function Footer() {
               <li>
                 <Link
                   href={hashHref("#coaches-pro")}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("product.forCoaches")}
                 </Link>
@@ -88,7 +88,7 @@ export function Footer() {
               <li>
                 <Link
                   href={hashHref("#coaches-pro")}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("company.becomeCoach")}
                 </Link>
@@ -115,7 +115,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/mentions-legales"
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("legal.mentionsLegales")}
                 </Link>
@@ -123,7 +123,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/cgu"
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("legal.cgu")}
                 </Link>
@@ -131,7 +131,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/confidentialite"
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("legal.confidentialite")}
                 </Link>

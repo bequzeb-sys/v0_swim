@@ -175,7 +175,12 @@ export function Header() {
                     <div className="flex items-center gap-2">
                       <LanguageSwitcher />
                       <DialogPrimitive.Close
-                        className="inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5 text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                        className={cn(
+              "inline-flex size-9 cursor-pointer items-center justify-center rounded-md border p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+              drawerClosing
+                ? "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
+                : "border-white/15 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10 hover:text-white"
+            )}
                         aria-label={t("closeMenu")}
                         onClick={(e) => {
                           e.preventDefault()

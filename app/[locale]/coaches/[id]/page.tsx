@@ -204,7 +204,7 @@ export default async function CoachProfilePage({ params }: Props) {
           </div>
         </div>
       </main>
-      <FooterCTA />
+      <FooterCTA href="/coaches" />
       <Footer />
     </>
   )

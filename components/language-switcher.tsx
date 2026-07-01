@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { useLocale } from "next-intl"
 import { usePathname, useRouter } from "@/i18n/navigation"
 import { useParams } from "next/navigation"
@@ -33,15 +34,18 @@ export function LanguageSwitcher() {
   }
 
   const triggerLabel = tn("switchTo")
+  const [open, setOpen] = useState(false)
 
   return (
-    <Popover.Root>
+    <Popover.Root defaultOpen={false} onOpenChange={(next) => setOpen(next)}>
       <Popover.Trigger
         aria-label={triggerLabel}
         className={cn(
-          "inline-flex cursor-pointer items-center justify-center rounded-md border border-white/15 bg-white/5 p-1.5",
-          "text-white/70 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+          "inline-flex cursor-pointer items-center justify-center rounded-md border p-1.5",
+          "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+          open
+            ? "border-teal-accent/40 bg-teal-accent/10 text-teal-accent"
+            : "border-white/15 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10 hover:text-white"
         )}
       >
         <LanguageFlag
