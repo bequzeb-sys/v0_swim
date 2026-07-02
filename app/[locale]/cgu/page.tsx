@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { UnderwaterBackground } from "@/components/underwater-background"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import { Footer } from "@/components/footer"
 
@@ -22,8 +23,9 @@ function CGUContent() {
   const t = useTranslations("siteFooter.legalPages.cgu")
   return (
     <>
+      <UnderwaterBackground />
       <SecondaryPageHeader />
-      <main className="relative mx-auto max-w-3xl px-6 py-16">
+      <main className="relative z-10 mx-auto max-w-3xl px-6 pt-24 pb-16">
       <h1 className="text-3xl font-bold text-white md:text-4xl">{t("title")}</h1>
       <p className="mt-2 text-sm text-white/50">{t("subtitle")}</p>
 
