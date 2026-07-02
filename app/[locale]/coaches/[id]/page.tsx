@@ -79,82 +79,81 @@ export default async function CoachProfilePage({ params }: Props) {
       <UnderwaterBackground />
       <SecondaryPageHeader />
       <main className="relative z-10">
-        {/* Hero */}
-        <div className="mx-auto max-w-3xl px-4 pt-6 pb-0">
-          <div className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
-            {/* Coach info */}
-            <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
-              <div className="relative shrink-0">
-                <Image
-                  src={coach.avatar || "/placeholder.svg"}
-                  alt={coach.name}
-                  width={120}
-                  height={120}
-                  className="size-28 rounded-md object-cover ring-4 ring-white/10 sm:size-32"
-                />
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-10">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
+
+            {/* LEFT SIDE — hero + content cards stacked */}
+            <div className="flex min-w-0 flex-1 flex-col gap-6">
+
+              {/* Hero card */}
+              <div className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
+                {/* Coach info */}
+                <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
+                  <div className="relative shrink-0">
+                    <Image
+                      src={coach.avatar || "/placeholder.svg"}
+                      alt={coach.name}
+                      width={120}
+                      height={120}
+                      className="size-28 rounded-md object-cover ring-4 ring-white/10 sm:size-32"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h1 className="text-3xl font-bold text-white sm:text-4xl">{coach.name}</h1>
+
+                    {/* Badges */}
+                    <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+                      {coach.badgeKeys.map((badgeKey) => (
+                        <span
+                          key={badgeKey}
+                          className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light"
+                        >
+                          {tc(`badges.${badgeKey}`)}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Languages */}
+                    <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+                      <LanguageList
+                        codes={coach.languages}
+                        labels={languageLabels}
+                        size={16}
+                        showLabels
+                      />
+                    </div>
+
+                    {/* Meta */}
+                    <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-white/70 sm:justify-start">
+                      <div className="flex items-center gap-1.5">
+                        <Star className="size-4 shrink-0 fill-star-gold text-star-gold" />
+                        <span className="font-bold text-white">{coach.rating}</span>
+                        <span className="text-sm">({coach.reviews} {tc("reviewsSuffix")})</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <MapPin className="size-4 shrink-0 text-teal-accent" aria-hidden="true" />
+                        <span className="flex items-center gap-1.5 text-white">
+                          {coach.city}
+                          {(() => {
+                            const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[coach.country]
+                            return F ? (
+                              <span aria-hidden="true">
+                                <F style={{ width: 20, height: 14 }} className="rounded-sm opacity-80" />
+                              </span>
+                            ) : null
+                          })()}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="size-4 shrink-0 text-teal-accent" />
+                        <span>{t("yearsExperience", { count: coach.yearsExperience })}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <h1 className="text-3xl font-bold text-white sm:text-4xl">{coach.name}</h1>
 
-                {/* Badges */}
-                <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
-                  {coach.badgeKeys.map((badgeKey) => (
-                    <span
-                      key={badgeKey}
-                      className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light"
-                    >
-                      {tc(`badges.${badgeKey}`)}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Languages */}
-                <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
-                  <LanguageList
-                    codes={coach.languages}
-                    labels={languageLabels}
-                    size={16}
-                    showLabels
-                  />
-                </div>
-
-                {/* Meta */}
-                <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-white/70 sm:justify-start">
-                  <div className="flex items-center gap-1.5">
-                    <Star className="size-4 shrink-0 fill-star-gold text-star-gold" />
-                    <span className="font-bold text-white">{coach.rating}</span>
-                    <span className="text-sm">({coach.reviews} {tc("reviewsSuffix")})</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <MapPin className="size-4 shrink-0 text-teal-accent" aria-hidden="true" />
-                    <span className="flex items-center gap-1.5 text-white">
-                      {coach.city}
-                      {(() => {
-                        const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[coach.country]
-                        return F ? (
-                          <span aria-hidden="true">
-                            <F style={{ width: 20, height: 14 }} className="rounded-sm opacity-80" />
-                          </span>
-                        ) : null
-                      })()}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="size-4 shrink-0 text-teal-accent" />
-                    <span>{t("yearsExperience", { count: coach.yearsExperience })}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Body */}
-        <div className="mx-auto max-w-3xl px-4 pt-4 pb-10">
-          <div className="grid gap-8 sm:grid-cols-3">
-            {/* Left: bio + availability */}
-            <div className="flex flex-col gap-8 sm:col-span-2">
-              {/* Bio */}
+              {/* Bio card */}
               <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
                 <h2 className="mb-3 flex items-center gap-2 text-base font-semibold text-white">
                   <User className="size-4 text-teal-accent" aria-hidden="true" />
@@ -163,7 +162,7 @@ export default async function CoachProfilePage({ params }: Props) {
                 <p className="text-sm leading-relaxed text-white/70">{coach.bio}</p>
               </section>
 
-              {/* Specialties */}
+              {/* Specialties card */}
               <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
                 <h2 className="mb-4 flex items-center gap-2 text-base font-semibold text-white">
                   <Waves className="size-4 text-teal-accent" aria-hidden="true" />
@@ -181,7 +180,7 @@ export default async function CoachProfilePage({ params }: Props) {
                 </div>
               </section>
 
-              {/* Reviews */}
+              {/* Reviews card */}
               <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
                 <h2 className="mb-4 flex items-center gap-2 text-base font-semibold text-white">
                   <Star className="size-4 text-teal-accent" aria-hidden="true" />
@@ -208,16 +207,18 @@ export default async function CoachProfilePage({ params }: Props) {
                   ))}
                 </div>
               </section>
+
             </div>
 
-            {/* Right: booking panel */}
-            <div className="sm:col-span-1">
-              <div className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
+            {/* RIGHT SIDE — booking panel sticky */}
+            <div className="w-full lg:w-96 lg:shrink-0">
+              <div className="sticky top-28 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
                 <p className="mb-1 text-2xl font-bold text-white">{coach.price}</p>
                 <p className="mb-4 text-sm text-white/50">{tc("priceUnit")}</p>
                 <BookingPanel coach={coach} locale={locale} />
               </div>
             </div>
+
           </div>
         </div>
       </main>
