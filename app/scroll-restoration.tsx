@@ -6,9 +6,11 @@ import { usePathname } from "next/navigation"
 export function ScrollRestoration() {
   const pathname = usePathname()
 
-  useEffect(() => {
+useEffect(() => {
+  if (!window.location.hash) {
     window.scrollTo(0, 0)
-  }, [pathname])
+  }
+}, [pathname])
 
   return null
 }

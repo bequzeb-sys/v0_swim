@@ -4,15 +4,6 @@ import { Waves } from "lucide-react"
 import { Link, usePathname } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 
-// next-intl's typed <Link> rejects raw hash strings ("#search", "#pricing", …)
-// at type-check time. Hash anchors are same-page navigation, not routes —
-// they correctly resolve to native anchor jumps at runtime. Casting through
-// the Link href union lets us write them inline without spreading the cast
-// everywhere by hand.
-function hashHref(hash: string): Parameters<typeof Link>[0]["href"] {
-  return hash as unknown as Parameters<typeof Link>[0]["href"]
-}
-
 export function Footer() {
   const t = useTranslations("siteFooter")
   const tBrand = useTranslations("brand")
@@ -58,12 +49,12 @@ export function Footer() {
                     {t("product.findCoach")}
                   </button>
                 ) : (
-                  <Link
-                    href={hashHref("#search")}
+                  <a
+                    href="/#search"
                     className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   >
                     {t("product.findCoach")}
-                  </Link>
+                  </a>
                 )}
               </li>
               <li>
@@ -76,12 +67,12 @@ export function Footer() {
                     {t("product.pricing")}
                   </button>
                 ) : (
-                  <Link
-                    href={hashHref("#pricing")}
+                  <a
+                    href="/#pricing"
                     className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   >
                     {t("product.pricing")}
-                  </Link>
+                  </a>
                 )}
               </li>
               <li>
@@ -94,12 +85,12 @@ export function Footer() {
                     {t("product.howItWorks")}
                   </button>
                 ) : (
-                  <Link
-                    href={hashHref("#how")}
+                  <a
+                    href="/#how"
                     className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   >
                     {t("product.howItWorks")}
-                  </Link>
+                  </a>
                 )}
               </li>
               <li>
@@ -112,12 +103,12 @@ export function Footer() {
                     {t("product.forCoaches")}
                   </button>
                 ) : (
-                  <Link
-                    href={hashHref("#coaches-pro")}
+                  <a
+                    href="/#coaches-pro"
                     className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   >
                     {t("product.forCoaches")}
-                  </Link>
+                  </a>
                 )}
               </li>
             </ul>
@@ -139,12 +130,12 @@ export function Footer() {
                     {t("company.becomeCoach")}
                   </button>
                 ) : (
-                  <Link
-                    href={hashHref("#coaches-pro")}
+                  <a
+                    href="/#coaches-pro"
                     className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                   >
                     {t("company.becomeCoach")}
-                  </Link>
+                  </a>
                 )}
               </li>
               <li>
