@@ -1,5 +1,7 @@
+"use client"
+
 import { Waves } from "lucide-react"
-import { Link } from "@/i18n/navigation"
+import { Link, usePathname } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 
 // next-intl's typed <Link> rejects raw hash strings ("#search", "#pricing", …)
@@ -14,6 +16,8 @@ function hashHref(hash: string): Parameters<typeof Link>[0]["href"] {
 export function Footer() {
   const t = useTranslations("siteFooter")
   const tBrand = useTranslations("brand")
+  const pathname = usePathname()
+  const isHome = pathname === "/"
   const year = new Date().getFullYear()
 
   return (
@@ -45,36 +49,76 @@ export function Footer() {
             </h3>
             <ul className="mt-4 flex flex-col gap-3">
               <li>
-                <Link
-                  href={hashHref("#search")}
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-                >
-                  {t("product.findCoach")}
-                </Link>
+                {isHome ? (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("search")?.scrollIntoView({ behavior: "smooth" })}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.findCoach")}
+                  </button>
+                ) : (
+                  <Link
+                    href={hashHref("#search")}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.findCoach")}
+                  </Link>
+                )}
               </li>
               <li>
-                <Link
-                  href={hashHref("#pricing")}
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-                >
-                  {t("product.pricing")}
-                </Link>
+                {isHome ? (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.pricing")}
+                  </button>
+                ) : (
+                  <Link
+                    href={hashHref("#pricing")}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.pricing")}
+                  </Link>
+                )}
               </li>
               <li>
-                <Link
-                  href={hashHref("#how")}
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-                >
-                  {t("product.howItWorks")}
-                </Link>
+                {isHome ? (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("how")?.scrollIntoView({ behavior: "smooth" })}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.howItWorks")}
+                  </button>
+                ) : (
+                  <Link
+                    href={hashHref("#how")}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.howItWorks")}
+                  </Link>
+                )}
               </li>
               <li>
-                <Link
-                  href={hashHref("#coaches-pro")}
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-                >
-                  {t("product.forCoaches")}
-                </Link>
+                {isHome ? (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("coaches-pro")?.scrollIntoView({ behavior: "smooth" })}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.forCoaches")}
+                  </button>
+                ) : (
+                  <Link
+                    href={hashHref("#coaches-pro")}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("product.forCoaches")}
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
@@ -86,17 +130,27 @@ export function Footer() {
             </h3>
             <ul className="mt-4 flex flex-col gap-3">
               <li>
-                <Link
-                  href={hashHref("#coaches-pro")}
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
-                >
-                  {t("company.becomeCoach")}
-                </Link>
+                {isHome ? (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("coaches-pro")?.scrollIntoView({ behavior: "smooth" })}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("company.becomeCoach")}
+                  </button>
+                ) : (
+                  <Link
+                    href={hashHref("#coaches-pro")}
+                    className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  >
+                    {t("company.becomeCoach")}
+                  </Link>
+                )}
               </li>
               <li>
                 <Link
                   href="/about"
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("company.about")}
                 </Link>
@@ -104,7 +158,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("company.contact")}
                 </Link>
@@ -121,7 +175,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/mentions-legales"
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("legal.mentionsLegales")}
                 </Link>
@@ -129,7 +183,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/cgu"
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("legal.cgu")}
                 </Link>
@@ -137,7 +191,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/confidentialite"
-                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+                  className="cursor-pointer text-sm text-white/70 transition-colors hover:text-white active:text-teal-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-teal-accent/60"
                 >
                   {t("legal.confidentialite")}
                 </Link>
