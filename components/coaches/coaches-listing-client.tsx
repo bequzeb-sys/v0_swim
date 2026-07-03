@@ -722,7 +722,10 @@ export function CoachesListingClient({
                   className="fixed inset-y-0 left-0 z-50 flex w-[min(20rem,85vw)] flex-col shadow-xl shadow-black/20 outline-none"
                 >
                   {/* Header */}
-                  <div className="flex items-center justify-between rounded-t-3xl border border-b-0 border-blue-300/20 bg-blue-400/[15%] px-5 pt-5 pb-4">
+                  <div
+                    className="flex items-center justify-between rounded-t-3xl border border-b-0 border-blue-300/20 bg-blue-400/[15%] px-5 pb-4"
+                    style={{ paddingTop: "calc(1.25rem + env(safe-area-inset-top, 0px))" }}
+                  >
                     <span className="text-base font-semibold text-white">{page.mobileFilters}</span>
                     <DialogPrimitive.Close
                       className={cn(
@@ -781,7 +784,11 @@ export function CoachesListingClient({
                   </div>
 
                   {/* Pinned reset button */}
-                  <div ref={mobileResetRef} className="rounded-b-3xl border border-t-0 border-blue-300/20 bg-blue-400/[15%] px-5 py-4">
+                  <div
+                    ref={mobileResetRef}
+                    className="rounded-b-3xl border border-t-0 border-blue-300/20 bg-blue-400/[15%] px-5 pt-4"
+                    style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
+                  >
                     <button
                       type="button"
                           onClick={() => {
