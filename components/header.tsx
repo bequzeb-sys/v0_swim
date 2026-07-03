@@ -168,7 +168,8 @@ export function Header() {
                   animate={{ x: 0 }}
                   exit={{ x: "100%", transition: { duration: 0.45, ease: "easeIn" } }}
                   transition={{ type: "spring", stiffness: 380, damping: 38 }}
-                  className="flex h-full w-[min(20rem,85vw)] flex-col gap-2 border-l border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md rounded-l-3xl"
+                  className="flex h-full w-[min(20rem,85vw)] flex-col gap-2 border-l border-blue-300/20 bg-blue-400/[8%] px-6 pb-6 shadow-xl shadow-black/20 backdrop-blur-md rounded-l-3xl"
+                  style={{ paddingTop: "calc(1.5rem + env(safe-area-inset-top, 0px))" }}
                 >
                   <div className="flex items-center justify-between">
                     <Link
@@ -255,7 +256,7 @@ export function Header() {
                     })}
                   </nav>
 
-                  <div className="mt-2">
+                  <div className="mt-auto pt-4 border-t border-white/10">
                     <HeaderActions
                       onNavigate={() => {
                         setDrawerClosing(true)
