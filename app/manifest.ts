@@ -1,10 +1,5 @@
 import type { MetadataRoute } from "next"
 
-// TODO: Add icon-192.png and icon-512.png to /public
-// These can be generated from icon.svg using:
-// https://www.pwabuilder.com or https://realfavicongenerator.net
-// Required sizes: 192x192 and 512x512
-
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "SwimAI — Trouvez votre coach de natation",
@@ -27,27 +22,21 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
       {
-        src: "/icon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
-        purpose: "maskable",
-      },
-      {
-        src: "/icon.svg",
+        src: "/icon-192.png",
         sizes: "192x192",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon.svg",
+        src: "/icon-512.png",
         sizes: "512x512",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon.svg",
+        src: "/icon-512.png",
         sizes: "512x512",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "maskable",
       },
     ],
