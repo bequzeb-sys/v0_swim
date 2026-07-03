@@ -172,8 +172,13 @@
   }
   html {
     @apply font-sans;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: calc(6rem + env(safe-area-inset-top));
+    background-color: #050B1A;
   }
+
+  body {
+  padding-top: env(safe-area-inset-top);
+}
 
   /* Smooth scroll only for in-page anchor navigation on the homepage */
   #search,

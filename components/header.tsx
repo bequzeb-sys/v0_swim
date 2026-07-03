@@ -60,16 +60,18 @@ export function Header() {
       {/* Floating sticky pill */}
       <header
         className={cn(
-          "sticky top-3 z-50 mx-auto mt-3 max-w-[min(72rem,calc(100vw-2rem))] transition-all duration-300",
-          scrolled
-            ? "bg-blue-400/[12%] backdrop-blur-xl border-blue-300/25 shadow-lg shadow-black/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
-            : "bg-blue-400/[6%] backdrop-blur-lg border-blue-300/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
-        )}
-        style={{
-          borderWidth: "1px",
-          borderStyle: "solid",
-          borderRadius: "1.125rem",
-        }}
+        "sticky z-50 mx-auto max-w-[min(72rem,calc(100vw-2rem))] transition-all duration-300",
+        scrolled
+          ? "bg-blue-400/[12%] backdrop-blur-xl border-blue-300/25 shadow-lg shadow-black/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+          : "bg-blue-400/[6%] backdrop-blur-lg border-blue-300/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+      )}
+      style={{
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderRadius: "1.125rem",
+        top: "calc(0.75rem + env(safe-area-inset-top, 0px))",
+        marginTop: "calc(0.75rem + env(safe-area-inset-top, 0px))",
+      }}
       >
         <nav
           className="flex items-center gap-3 px-5 py-4 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-8"
