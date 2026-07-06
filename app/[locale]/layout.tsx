@@ -77,6 +77,11 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`dark ${inter.variable}`}>
       <body className="bg-background font-sans antialiased overflow-y-scroll [padding-top:env(safe-area-inset-top,0px)]">
+        <div
+          className="fixed inset-x-0 top-0 z-[100] bg-[#050B1A]"
+          style={{ height: "env(safe-area-inset-top, 0px)" }}
+          aria-hidden="true"
+        />
         <ScrollRestoration />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
