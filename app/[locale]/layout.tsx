@@ -78,8 +78,11 @@ export default async function RootLayout({
     <html lang={locale} className={`dark ${inter.variable}`}>
       <body className="bg-background font-sans antialiased overflow-y-scroll [padding-top:env(safe-area-inset-top,0px)]">
         <div
-          className="fixed inset-x-0 top-0 z-[100] bg-[#050B1A]"
-          style={{ height: "env(safe-area-inset-top, 0px)" }}
+          className="fixed inset-x-0 top-0 z-[100] backdrop-blur-md"
+          style={{
+            height: "env(safe-area-inset-top, 0px)",
+            background: "linear-gradient(to bottom, rgba(5,11,26,0.6) 0%, rgba(5,11,26,0) 100%)"
+          }}
           aria-hidden="true"
         />
         <ScrollRestoration />
