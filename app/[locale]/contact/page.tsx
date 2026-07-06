@@ -46,7 +46,7 @@ export default function ContactPage() {
     <>
       <UnderwaterBackground />
       <SecondaryPageHeader />
-      <main className="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-12">
+      <main className="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-24">
 
         {/* Badge */}
         <div className="mb-6 flex justify-center">

@@ -440,7 +440,19 @@
     "specialtiesTitle": "Spécialités",
     "reviewsTitle": "Avis des nageurs",
     "reviewerPlaceholder": "Nageur SwimAI",
-    "reviewPlaceholder": "Excellent coach, très professionnel et à l'écoute. Je recommande vivement !"
+    "reviewPlaceholder": "Excellent coach, très professionnel et à l'écoute. Je recommande vivement !",
+    "viewAllReviews": "Voir tous les avis",
+    "allReviews": "Tous les avis",
+    "close": "Fermer",
+    "priceUnit": "séance",
+    "chooseDate": "Choisissez une date",
+    "chooseTime": "Choisissez un créneau",
+    "prevMonth": "Mois précédent",
+    "nextMonth": "Mois suivant",
+    "bookSession": "Réserver cette séance",
+    "bookingConfirming": "Confirmation...",
+    "bookingConfirmed": "Séance confirmée ✓",
+    "cancellationNote": "Annulation gratuite jusqu'à 24h avant"
   },
   "booking": {
     "panelTitle": "Réserver avec {coach}",

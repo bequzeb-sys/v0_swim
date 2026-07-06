@@ -434,6 +434,23 @@ This pattern is used in: `components/header.tsx` (nav drawer) and
  Without the `disabled` prop, outside days are visually dimmed but still
  selectable — the `classNames` key alone has no behavioral effect.
 
+### react-day-picker — calendar navigation arrows
+NEVER fight react-day-picker's internal nav classNames for arrow placement.
+The library's nav/caption layout is inconsistent across versions and produces
+different failure modes with every CSS attempt.
+
+The correct pattern (confirmed working):
+1. Add `hideNavigation` prop to <DayPicker> to suppress the built-in nav
+2. Add `month={calendarMonth}` and `onMonthChange={setCalendarMonth}` for controlled month
+3. Build a fully custom header above the <DayPicker> with our own prev/next buttons:
+   - ChevronLeft / ChevronRight from lucide-react
+   - month label via `calendarMonth.toLocaleDateString(locale, { month: "long", year: "numeric" })`
+   - `capitalize` class on the label (French months are lowercase by default)
+4. Hide the caption row: `month_caption: "hidden"` in classNames
+
+This took 1 round. CSS-only approaches took 8+ rounds and never fully worked.
+Already implemented in: components/coach-profile/booking-panel.tsx
+
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an
  existing util already covers the need.

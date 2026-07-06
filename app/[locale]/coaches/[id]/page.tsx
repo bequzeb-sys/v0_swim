@@ -6,6 +6,7 @@ import { getCoachById } from "@/lib/coaches"
 import type { LanguageCode } from "@/lib/coaches"
 import { LanguageList } from "@/components/ui/language-list"
 import { BookingPanel } from "@/components/coach-profile/booking-panel"
+import { ReviewsPanel } from "@/components/coach-profile/reviews-panel"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import { UnderwaterBackground } from "@/components/underwater-background"
 import { FooterCTA } from "@/components/footer-cta"
@@ -100,10 +101,11 @@ export default async function CoachProfilePage({ params }: Props) {
                   </div>
                   <div className="min-w-0 flex-1">
                     <h1 className="text-3xl font-bold text-white sm:text-4xl">{coach.name}</h1>
+                    <p className="mt-1 text-sm text-white/50">{coach.certification}</p>
 
                     {/* Badges */}
                     <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
-                      {coach.badgeKeys.map((badgeKey) => (
+                      {coach.badgeKeys.slice(0, 2).map((badgeKey) => (
                         <span
                           key={badgeKey}
                           className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light"
@@ -114,7 +116,8 @@ export default async function CoachProfilePage({ params }: Props) {
                     </div>
 
                     {/* Languages */}
-                    <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+                    <div className="mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+                      <span className="text-xs text-white/40">{t("languagesTitle")}</span>
                       <LanguageList
                         codes={coach.languages}
                         labels={languageLabels}
@@ -186,35 +189,48 @@ export default async function CoachProfilePage({ params }: Props) {
                   <Star className="size-4 text-teal-accent" aria-hidden="true" />
                   {t("reviewsTitle")} ({coach.reviews})
                 </h2>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {[1, 2].map((i) => (
-                    <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {coach.reviewsList.slice(0, 3).map((review) => (
+                    <div key={review.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
                       <div className="mb-2 flex items-center gap-3">
                         <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-sm font-bold text-teal-accent">
-                          N
+                          {review.reviewerName.charAt(0)}
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-white">{t("reviewerPlaceholder")}</p>
-                          <div className="flex items-center gap-0.5 mt-0.5">
-                            {Array.from({ length: 5 }).map((_, j) => (
-                              <Star key={j} className="size-3 fill-star-gold text-star-gold" aria-hidden="true" />
-                            ))}
+                          <p className="text-sm font-semibold text-white">{review.reviewerName}</p>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <div className="flex items-center gap-0.5">
+                              {Array.from({ length: review.rating }).map((_, j) => (
+                                <Star key={j} className="size-3 fill-star-gold text-star-gold" aria-hidden="true" />
+                              ))}
+                            </div>
+                            <span className="text-xs text-white/40">
+                              {new Date(review.date).toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" })}
+                            </span>
                           </div>
                         </div>
                       </div>
-                      <p className="text-xs leading-relaxed text-white/60">{t("reviewPlaceholder")}</p>
+                      <p className="text-xs leading-relaxed text-white/60">{review.text}</p>
                     </div>
                   ))}
                 </div>
+                <ReviewsPanel
+                  reviews={coach.reviewsList}
+                  totalCount={coach.reviews}
+                  locale={locale}
+                  labels={{
+                    viewAll: t("viewAllReviews"),
+                    close: t("close"),
+                    allReviews: t("allReviews"),
+                  }}
+                />
               </section>
 
             </div>
 
             {/* RIGHT SIDE — booking panel sticky */}
-            <div className="w-full lg:w-96 lg:shrink-0">
+            <div className="w-full lg:w-96 lg:max-w-96 lg:shrink-0">
               <div className="sticky top-28 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
-                <p className="mb-1 text-2xl font-bold text-white">{coach.price}</p>
-                <p className="mb-4 text-sm text-white/50">{tc("priceUnit")}</p>
                 <BookingPanel coach={coach} locale={locale} />
               </div>
             </div>

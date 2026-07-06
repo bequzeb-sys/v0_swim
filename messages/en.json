@@ -440,7 +440,19 @@
     "specialtiesTitle": "Specialties",
     "reviewsTitle": "Swimmer reviews",
     "reviewerPlaceholder": "SwimAI Swimmer",
-    "reviewPlaceholder": "Excellent coach, very professional and attentive. Highly recommend!"
+    "reviewPlaceholder": "Excellent coach, very professional and attentive. Highly recommend!",
+    "viewAllReviews": "View all reviews",
+    "allReviews": "All reviews",
+    "close": "Close",
+    "priceUnit": "session",
+    "chooseDate": "Choose a date",
+    "chooseTime": "Choose a time slot",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "bookSession": "Book this session",
+    "bookingConfirming": "Confirming...",
+    "bookingConfirmed": "Session confirmed ✓",
+    "cancellationNote": "Free cancellation up to 24h before"
   },
   "booking": {
     "panelTitle": "Book with {coach}",
