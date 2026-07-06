@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "Réservez des coachs de natation certifiés près de chez vous. Progressez plus vite grâce à l'IA.",
     start_url: "/fr",
     display: "standalone",
-    background_color: "#050B1A",
+    background_color: "#0a1f3d",
     theme_color: "#0d2a52",
     orientation: "portrait-primary",
     scope: "/",
