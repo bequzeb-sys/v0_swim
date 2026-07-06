@@ -69,8 +69,8 @@ export function Header() {
         borderWidth: "1px",
         borderStyle: "solid",
         borderRadius: "1.125rem",
-        top: "calc(0.75rem + env(safe-area-inset-top, 0px))",
-        marginTop: "0.75rem",
+        top: "calc(0.375rem + env(safe-area-inset-top, 0px))",
+        marginTop: "0.375rem",
       }}
       >
         <nav
