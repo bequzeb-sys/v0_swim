@@ -69,12 +69,14 @@ export function ReviewsSection({ reviews, totalCount, locale, labels }: ReviewsS
       </div>
 
       {/* Reviews grid — first 3 always visible */}
+      {/* First 3 reviews — always visible */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {reviews.slice(0, 3).map((review) => (
           <ReviewCard key={review.id} review={review} locale={locale} />
         ))}
       </div>
 
+      {/* Expanded reviews — smooth animation, all reviews scroll together */}
       <AnimatePresence>
         {expanded && (
           <motion.div
@@ -84,7 +86,7 @@ export function ReviewsSection({ reviews, totalCount, locale, labels }: ReviewsS
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="overflow-hidden"
           >
-            <div className="mt-4 grid max-h-[32rem] gap-4 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {reviews.slice(3, 10).map((review) => (
                 <ReviewCard key={review.id} review={review} locale={locale} />
               ))}
