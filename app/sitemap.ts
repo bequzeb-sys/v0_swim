@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { coaches } from "@/lib/coaches"
+import { getAllCoaches } from "@/lib/coaches"
 
 const BASE_URL = "https://swimai.app"
 const LOCALES = ["fr", "en"] as const
@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   )
 
   // Dynamic coach profile routes — one entry per coach per locale
-  const coachEntries = coaches.flatMap((coach) =>
+  const coachEntries = getAllCoaches().flatMap((coach) =>
     LOCALES.map((locale) => ({
       url: `${BASE_URL}/${locale}/coaches/${coach.id}`,
       lastModified: now,

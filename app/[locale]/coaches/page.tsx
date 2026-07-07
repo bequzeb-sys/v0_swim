@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { getTranslations } from "next-intl/server"
 import { getLocale } from "next-intl/server"
-import { coaches } from "@/lib/coaches"
+import { getAllCoaches } from "@/lib/coaches"
 import type { CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
 import { CoachesListingClient } from "@/components/coaches/coaches-listing-client"
 import { UnderwaterBackground } from "@/components/underwater-background"
@@ -63,7 +63,7 @@ export default async function CoachesPage() {
       <SecondaryPageHeader />
       <Suspense fallback={null}>
         <CoachesListingClient
-        coaches={coaches}
+          coaches={getAllCoaches()}
         translations={{
           badges: Object.fromEntries(
             badgeKeys.map((k) => [k, tc(`badges.${k}`)])

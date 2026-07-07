@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
-import { coaches } from "@/lib/coaches"
+import { getAllCoaches } from "@/lib/coaches"
+import type { Coach } from "@/types/coach"
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -8,17 +9,18 @@ interface Props {
 
 interface MockMessage {
   id: string
-  coach: (typeof coaches)[0]
+  coach: Coach
   preview: string
   time: string
   unread: boolean
 }
 
 function buildMockMessages(): MockMessage[] {
+  const all = getAllCoaches()
   return [
     {
       id: "m1",
-      coach: coaches[0],
+      coach: all[0],
       preview:
         "Super séance aujourd'hui ! On continue la technique en crawl la prochaine fois.",
       time: "14h32",
@@ -26,14 +28,14 @@ function buildMockMessages(): MockMessage[] {
     },
     {
       id: "m2",
-      coach: coaches[1],
+      coach: all[1],
       preview: "N'oubliez pas d'apporter vos palmes pour vendredi.",
       time: "Hier",
       unread: true,
     },
     {
       id: "m3",
-      coach: coaches[2],
+      coach: all[2],
       preview: "Merci pour la séance, à la prochaine !",
       time: "Lun",
       unread: false,

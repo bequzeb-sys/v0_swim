@@ -457,6 +457,19 @@ Already implemented in: components/coach-profile/booking-panel.tsx
 - Run `pnpm build` locally before considering a feature "done" — it must build
  with zero errors.
 
+## Data / API
+- NEVER import `coaches` array directly from `lib/coaches` or `lib/coaches-data`
+  in any new component or page. Always use the API functions:
+  - `getAllCoaches()` — get all coaches
+  - `getCoachById(id)` — get one coach by id
+  - `getCoachesByFilters(filters)` — get filtered coaches
+  - `getCoachReviews(coachId)` — get reviews for a coach
+- These functions currently read from static data but will be replaced
+  with real database calls during the database sprint.
+- Direct data imports bypass the API layer and break database migration.
+- Exception: `lib/coaches-data.ts` itself imports the raw array — that is
+  the ONLY file allowed to do so.
+
 ## Spacing/layout disputes — measure, don't calculate
 - When a visual spacing/gap issue persists across 2+ rounds of `className`
  value changes that don't match the rendered result, STOP recalculating from

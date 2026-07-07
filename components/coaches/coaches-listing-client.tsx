@@ -551,6 +551,9 @@ export function CoachesListingClient({
     }
   }, [hasActiveFilters])
 
+  // TODO (database sprint): replace this client-side filter with a server call to
+  // getCoachesByFilters(filters) from @/lib/coaches-api, passing filters as params.
+  // The filter logic below mirrors getCoachesByFilters exactly for easy migration.
   const filtered = coaches.filter((coach) => {
     if (country && coach.country !== country) return false
     if (location && !coach.city.toLowerCase().includes(location.toLowerCase())) return false

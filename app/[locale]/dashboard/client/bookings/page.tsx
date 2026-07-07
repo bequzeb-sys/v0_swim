@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
-import { Link } from "@/i18n/navigation"
-import { coaches } from "@/lib/coaches"
+import { getAllCoaches } from "@/lib/coaches"
+import type { Coach } from "@/types/coach"
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -9,7 +9,7 @@ interface Props {
 
 interface MockBooking {
   id: string
-  coach: (typeof coaches)[0]
+  coach: Coach
   date: string
   status: "upcoming" | "completed"
 }
@@ -32,22 +32,23 @@ function buildMockBookings(locale: string): MockBooking[] {
   const pastDate2 = new Date(today)
   pastDate2.setDate(today.getDate() - 25)
 
+  const all = getAllCoaches()
   return [
     {
       id: "b1",
-      coach: coaches[0],
+      coach: all[0],
       date: fmt(upcomingDate),
       status: "upcoming",
     },
     {
       id: "b2",
-      coach: coaches[1],
+      coach: all[1],
       date: fmt(pastDate),
       status: "completed",
     },
     {
       id: "b3",
-      coach: coaches[2],
+      coach: all[2],
       date: fmt(pastDate2),
       status: "completed",
     },
