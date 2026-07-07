@@ -282,6 +282,13 @@
       }
     },
     "coach": {
+      "step1Title": "Your specialties",
+      "step1Subtitle": "Select all your swimming specialties",
+      "selectedCount": "specialty(ies) selected",
+      "featuredTitle": "Featured specialties",
+      "featuredSubtitle": "Choose up to 2 specialties to highlight on your profile",
+      "featuredHint": "Tap a specialty to feature it",
+      "next": "Next",
       "specialty": {
         "title": "What's your specialty?",
         "subtitle": "Select one or more disciplines you're certified in.",
