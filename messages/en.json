@@ -265,7 +265,8 @@
         "learnToSwim": "Learn to swim",
         "improveTechnique": "Improve my technique",
         "trainCompetition": "Train for competition",
-        "fitness": "Fitness"
+        "fitness": "Fitness",
+        "continue": "Continue"
       },
       "location": {
         "title": "Where are you located?",
@@ -273,10 +274,15 @@
         "locationLabel": "City or region",
         "locationPlaceholder": "e.g. Paris, London, Marseille…",
         "levelLabel": "Current level",
+        "levelSubtitle": "So coaches can adapt their sessions to your level",
         "levelBeginner": "Beginner",
+        "levelBeginnerDesc": "I'm starting or returning to swimming",
         "levelIntermediate": "Intermediate",
+        "levelIntermediateDesc": "I swim regularly and want to improve",
         "levelAdvanced": "Advanced",
-        "continue": "Continue"
+        "levelAdvancedDesc": "I swim well and aim for performance",
+        "continue": "Continue",
+        "next": "Next"
       },
       "done": {
         "title": "You're all set!",

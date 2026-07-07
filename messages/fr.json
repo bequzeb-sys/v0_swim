@@ -265,7 +265,8 @@
         "learnToSwim": "Apprendre à nager",
         "improveTechnique": "Améliorer ma technique",
         "trainCompetition": "Préparer une compétition",
-        "fitness": "Remise en forme"
+        "fitness": "Remise en forme",
+        "continue": "Continuer"
       },
       "location": {
         "title": "Où êtes-vous situé ?",
@@ -273,10 +274,15 @@
         "locationLabel": "Ville ou région",
         "locationPlaceholder": "Ex : Paris, Lyon, Marseille…",
         "levelLabel": "Niveau actuel",
+        "levelSubtitle": "Pour que les coachs adaptent leurs séances à votre niveau",
         "levelBeginner": "Débutant",
+        "levelBeginnerDesc": "Je débute ou reprends la natation",
         "levelIntermediate": "Intermédiaire",
+        "levelIntermediateDesc": "Je nage régulièrement et veux progresser",
         "levelAdvanced": "Avancé",
-        "continue": "Continuer"
+        "levelAdvancedDesc": "Je nage bien et vise la performance",
+        "continue": "Continuer",
+        "next": "Suivant"
       },
       "done": {
         "title": "Tout est prêt !",

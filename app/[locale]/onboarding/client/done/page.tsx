@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { CheckCircle2 } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -9,12 +9,19 @@ import { useAuth } from "@/lib/auth/auth-context"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 import { Button } from "@/components/ui/button"
+import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
 
 function OnboardingClientDonePageInner() {
   const t = useTranslations("onboarding.client.done")
   const { user } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { reset } = useClientOnboardingStore()
+
+  useEffect(() => {
+    // TODO (database sprint): save client profile via API
+    reset()
+  }, [reset])
 
   function handleCta() {
     const redirectTo = searchParams.get("redirect")
