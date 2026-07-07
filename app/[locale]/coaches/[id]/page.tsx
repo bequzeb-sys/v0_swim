@@ -3,16 +3,13 @@ import { notFound } from "next/navigation"
 import { getTranslations } from "next-intl/server"
 import { MapPin, Star, Clock, User, Waves } from "lucide-react"
 import { getCoachById } from "@/lib/coaches"
-import type { LanguageCode } from "@/lib/coaches"
 import { LanguageList } from "@/components/ui/language-list"
 import { BookingPanel } from "@/components/coach-profile/booking-panel"
-import { ReviewsPanel } from "@/components/coach-profile/reviews-panel"
+import { ReviewsSection } from "@/components/coach-profile/reviews-section"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
 import { UnderwaterBackground } from "@/components/underwater-background"
 import { FooterCTA } from "@/components/footer-cta"
 import { Footer } from "@/components/footer"
-import type { DayKey } from "@/lib/coaches"
-import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import * as Flags from "country-flag-icons/react/3x2"
 
@@ -50,16 +47,6 @@ export async function generateMetadata({
     },
   }
 }
-
-const ALL_DAYS: DayKey[] = [
-  "mon",
-  "tue",
-  "wed",
-  "thu",
-  "fri",
-  "sat",
-  "sun",
-]
 
 export default async function CoachProfilePage({ params }: Props) {
   const { locale, id } = await params
@@ -184,47 +171,16 @@ export default async function CoachProfilePage({ params }: Props) {
               </section>
 
               {/* Reviews card */}
-              <section className="rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md">
-                <h2 className="mb-4 flex items-center gap-2 text-base font-semibold text-white">
-                  <Star className="size-4 text-teal-accent" aria-hidden="true" />
-                  {t("reviewsTitle")} ({coach.reviews})
-                </h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {coach.reviewsList.slice(0, 3).map((review) => (
-                    <div key={review.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="mb-2 flex items-center gap-3">
-                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-teal-accent/15 text-sm font-bold text-teal-accent">
-                          {review.reviewerName.charAt(0)}
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-white">{review.reviewerName}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <div className="flex items-center gap-0.5">
-                              {Array.from({ length: review.rating }).map((_, j) => (
-                                <Star key={j} className="size-3 fill-star-gold text-star-gold" aria-hidden="true" />
-                              ))}
-                            </div>
-                            <span className="text-xs text-white/40">
-                              {new Date(review.date).toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" })}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-xs leading-relaxed text-white/60">{review.text}</p>
-                    </div>
-                  ))}
-                </div>
-                <ReviewsPanel
-                  reviews={coach.reviewsList}
-                  totalCount={coach.reviews}
-                  locale={locale}
-                  labels={{
-                    viewAll: t("viewAllReviews"),
-                    close: t("close"),
-                    allReviews: t("allReviews"),
-                  }}
-                />
-              </section>
+              <ReviewsSection
+                reviews={coach.reviewsList}
+                totalCount={coach.reviews}
+                locale={locale}
+                labels={{
+                  reviewsTitle: t("reviewsTitle"),
+                  viewAllReviews: t("viewAllReviews"),
+                  close: t("close"),
+                }}
+              />
 
             </div>
 
