@@ -64,6 +64,7 @@ export default function CoachOnboardingStep2() {
   const t = useTranslations("onboarding.coach.profile")
   const tSearch = useTranslations("search")
   const tLanguages = useTranslations("languages")
+  const tStep = useTranslations("onboarding.step")
   const router = useRouter()
   const { data, setStep2 } = useCoachOnboardingStore()
 
@@ -321,35 +322,32 @@ export default function CoachOnboardingStep2() {
 
   return (
     <OnboardingShell current={2} total={4}>
-      <header className="mb-8 text-center">
-        <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
-        <p className="mt-2 text-sm text-white/50">{t("subtitle")}</p>
-      </header>
-
-        {/* Slide indicators (non-interactive, purely visual) */}
-        <ol
-          aria-label={`${currentSlide + 1} / ${TOTAL_SLIDES}`}
-          className="mb-6 flex items-center justify-center gap-2"
-        >
-          {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
-            <li
+      <div className="mb-6 text-center">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
+          {tStep("of", { current: 2, total: 4 })}
+        </p>
+        <div className="mb-4 flex items-center justify-center gap-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
               key={i}
-              aria-current={i === currentSlide ? "step" : undefined}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                i === currentSlide
+                "h-2 rounded-full transition-all duration-300",
+                i === 1
                   ? "w-6 bg-teal-accent"
-                  : i < currentSlide
-                    ? "w-2 bg-teal-accent/40"
-                    : "w-2 bg-white/20"
+                  : i < 1
+                  ? "w-2 bg-teal-accent/40"
+                  : "w-2 bg-white/20"
               )}
             />
           ))}
-        </ol>
+        </div>
+        <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
+        <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
+      </div>
 
         {/* Slide container — touch swipe surface */}
         <div
-          className="relative overflow-hidden rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md"
+          className="overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -373,7 +371,7 @@ export default function CoachOnboardingStep2() {
           {isLastSlide ? (
             <Button
               type="button"
-              variant="primary"
+              variant="entry"
               onClick={handleContinue}
               disabled={!canGoNext}
               className="flex-1"
@@ -383,7 +381,7 @@ export default function CoachOnboardingStep2() {
           ) : (
             <Button
               type="button"
-              variant="primary"
+              variant="entry"
               onClick={handleNext}
               disabled={!canGoNext}
               className="flex-1"

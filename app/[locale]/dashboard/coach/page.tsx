@@ -150,7 +150,7 @@ export default async function CoachDashboardPage({ params }: Props) {
   await params
   const activeLocale = await getLocale()
   const t = await getTranslations("dashboardCoach")
-  const tDays = await getTranslations("coachProfile.days")
+  const tDays = await getTranslations("onboarding.coach.availability")
   const pendingRequests = buildPendingRequests(activeLocale)
   const upcomingSessions = buildUpcomingSessions(activeLocale)
   const coachDays = COACH_AVAILABILITY.map((d) => ({

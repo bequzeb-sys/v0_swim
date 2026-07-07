@@ -451,6 +451,43 @@ The correct pattern (confirmed working):
 This took 1 round. CSS-only approaches took 8+ rounds and never fully worked.
 Already implemented in: components/coach-profile/booking-panel.tsx
 
+### Onboarding carousel pattern (coach + client onboarding steps)
+
+All onboarding steps use the shared `OnboardingShell` component from
+`components/onboarding/onboarding-shell.tsx`. Never recreate inline shell
+wrappers — always import the shared one.
+
+**Slide carousel rules:**
+- Use `AnimatePresence mode="wait" custom={direction}` from Framer Motion
+- Direction: `1` = forward (slide from right), `-1` = backward (slide from left)
+- Variants: enter x: "100%"/-"100%", center x: 0, exit x: "-100%"/"100%"
+- Touch swipe: useRef for touchStartX, 50px threshold, wired to handleNext/handleBack
+- CRITICAL: wrap AnimatePresence in `<div className="overflow-hidden">` — prevents slide content escaping the card during x-axis transitions
+- Never add an inner glass card inside OnboardingShell — it already provides the card
+
+**Step indicator rules:**
+- Translation key: `onboarding.step.of` = "Étape {current} sur {total}" / "Step {current} of {total}"
+- Use `useTranslations("onboarding.step")` as a separate hook (tStep)
+- Dots: current = `w-6 bg-teal-accent`, completed = `w-2 bg-teal-accent/40`, future = `w-2 bg-white/20`
+- Always h-2 rounded-full on all dots
+
+**Button variants in onboarding:**
+- Next / Continue CTA → `Button variant="entry"` (blue) — NOT teal/primary
+- Back chevron → native `<button>` with ChevronLeft icon, no border/bg, text-white/60
+- Skip optional step → plain text button, text-white/30 hover:text-white/50
+- All buttons: cursor-pointer, rounded-xl, focus-visible:ring-2 focus-visible:ring-teal-accent/60
+
+**Validation rules:**
+- Validate per slide — disable Next when current slide invalid
+- Required fields: show red asterisk (*), disable Next
+- Optional fields: show "Optionnel" label, always valid (returns true)
+- Min length fields: show character counter below input
+
+**Reuse existing namespaces for labels:**
+- Country labels: `search.countries.*`
+- Language labels: `languages.*`
+- Never hardcode country/language names in component arrays
+
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an
  existing util already covers the need.

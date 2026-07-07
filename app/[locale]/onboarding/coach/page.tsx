@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
 import type { CoachBadgeKey } from "@/types/coach"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
+import { Button } from "@/components/ui/button"
 
 const SPECIALTIES: CoachBadgeKey[] = [
   "apprentissage",
@@ -35,6 +36,7 @@ const FEATURED_SLIDE_INDEX = SLIDES.length // index 3
 export default function CoachOnboardingStep1() {
   const t = useTranslations("onboarding.coach")
   const tSpecialty = useTranslations("onboarding.coach.specialty")
+  const tStep = useTranslations("onboarding.step")
   const router = useRouter()
   const { data, setStep1 } = useCoachOnboardingStore()
 
@@ -114,32 +116,28 @@ export default function CoachOnboardingStep1() {
 
   return (
     <OnboardingShell current={1} total={4}>
-      {/* Header */}
-      <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold text-white">{t("step1Title")}</h1>
-        <p className="mt-2 text-sm text-white/50">{t("step1Subtitle")}</p>
-      </div>
-
-        {/* Slide indicators */}
-        <div className="mb-6 flex items-center justify-center gap-2">
-          {Array.from({ length: totalSlides }).map((_, i) => (
+      <div className="mb-6 text-center">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
+          {tStep("of", { current: 1, total: 4 })}
+        </p>
+        <div className="mb-4 flex items-center justify-center gap-2">
+          {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                i === currentSlide
-                  ? "w-6 bg-teal-accent"
-                  : i < currentSlide
-                  ? "w-2 bg-teal-accent/40"
-                  : "w-2 bg-white/20"
+                "h-2 w-2 rounded-full transition-all duration-300",
+                i === 0 ? "w-6 bg-teal-accent" : "bg-white/20"
               )}
             />
           ))}
         </div>
+        <h1 className="text-2xl font-bold text-white">{t("step1Title")}</h1>
+        <p className="mt-1 text-sm text-white/50">{t("step1Subtitle")}</p>
+      </div>
 
         {/* Slide container */}
         <div
-          className="relative overflow-hidden rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-6 shadow-xl shadow-black/20 backdrop-blur-md"
+          className="overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -257,23 +255,25 @@ export default function CoachOnboardingStep1() {
 
           {/* Continue or Next */}
           {isFeaturedSlide ? (
-            <button
+            <Button
               type="button"
+              variant="entry"
               onClick={handleContinue}
               disabled={selected.size === 0}
-              className="flex-1 cursor-pointer rounded-xl bg-teal-accent py-3 text-sm font-semibold text-navy-deep transition-all hover:bg-teal-accent-light active:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+              className="flex-1"
             >
               {tSpecialty("continue")}
-            </button>
+            </Button>
           ) : (
-            <button
+            <Button
               type="button"
+              variant="entry"
               onClick={handleNext}
               disabled={!canGoNext}
-              className="flex-1 cursor-pointer rounded-xl border border-teal-accent/30 bg-teal-accent/10 py-3 text-sm font-semibold text-teal-accent transition-all hover:bg-teal-accent/20 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+              className="flex-1"
             >
               {t("next")}
-            </button>
+            </Button>
           )}
 
           {/* Next arrow */}
