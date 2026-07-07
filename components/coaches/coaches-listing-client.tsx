@@ -551,9 +551,11 @@ export function CoachesListingClient({
     }
   }, [hasActiveFilters])
 
-  // TODO (database sprint): replace this client-side filter with a server call to
-  // getCoachesByFilters(filters) from @/lib/coaches-api, passing filters as params.
-  // The filter logic below mirrors getCoachesByFilters exactly for easy migration.
+  // NOTE: Client-side filtering is kept for instant UI feedback while the user
+  // adjusts filters (sliders, pills, checkboxes). The server pre-filters on
+  // initial page load via getCoachesByFilters() in app/[locale]/coaches/page.tsx.
+  // During database sprint: remove client-side filter logic and use server
+  // filtering + router.push() to reload with new params on filter change.
   const filtered = coaches.filter((coach) => {
     if (country && coach.country !== country) return false
     if (location && !coach.city.toLowerCase().includes(location.toLowerCase())) return false

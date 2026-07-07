@@ -1,8 +1,8 @@
 import { Suspense } from "react"
 import { getTranslations } from "next-intl/server"
 import { getLocale } from "next-intl/server"
-import { getAllCoaches } from "@/lib/coaches"
-import type { CoachBadgeKey, LanguageCode, DayKey } from "@/lib/coaches"
+import { getAllCoaches, getCoachesByFilters } from "@/lib/coaches"
+import type { CoachFilters, CoachBadgeKey, DayKey, LanguageCode } from "@/lib/coaches"
 import { CoachesListingClient } from "@/components/coaches/coaches-listing-client"
 import { UnderwaterBackground } from "@/components/underwater-background"
 import { SecondaryPageHeader } from "@/components/secondary-page-header"
@@ -22,8 +22,33 @@ export async function generateMetadata({
   }
 }
 
-export default async function CoachesPage() {
-  const locale = await getLocale()
+export default async function CoachesPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const { locale } = await params
+  const sp = await searchParams
+
+  const filters: CoachFilters = {
+    country: typeof sp.country === "string" ? sp.country : undefined,
+    location: typeof sp.location === "string" ? sp.location : undefined,
+    badges: typeof sp.badges === "string" ? ([sp.badges] as CoachBadgeKey[]) : undefined,
+    languages: typeof sp.languages === "string" ? ([sp.languages] as LanguageCode[]) : undefined,
+    maxPrice: typeof sp.maxPrice === "string" ? Number(sp.maxPrice) : undefined,
+    minRating: typeof sp.minRating === "string" ? parseFloat(sp.minRating) : undefined,
+    minExperience: typeof sp.minExperience === "string" ? Number(sp.minExperience) : undefined,
+    availability: typeof sp.availability === "string" ? ([sp.availability] as DayKey[]) : undefined,
+    gender: typeof sp.gender === "string" ? (sp.gender as "" | "M" | "F") : undefined,
+  }
+
+  // Use server-side filtering — replace with real DB call during database sprint
+  const filteredCoaches = Object.values(filters).some(Boolean)
+    ? getCoachesByFilters(filters)
+    : getAllCoaches()
+
   const t = await getTranslations("coachesPage")
   const tc = await getTranslations("coaches")
   const tl = await getTranslations("languages")
@@ -63,7 +88,7 @@ export default async function CoachesPage() {
       <SecondaryPageHeader />
       <Suspense fallback={null}>
         <CoachesListingClient
-          coaches={getAllCoaches()}
+          coaches={filteredCoaches}
         translations={{
           badges: Object.fromEntries(
             badgeKeys.map((k) => [k, tc(`badges.${k}`)])
