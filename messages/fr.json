@@ -452,7 +452,10 @@
     "bookSession": "Réserver cette séance",
     "bookingConfirming": "Confirmation...",
     "bookingConfirmed": "Séance confirmée ✓",
-    "cancellationNote": "Annulation gratuite jusqu'à 24h avant"
+    "cancellationNote": "Annulation gratuite jusqu'à 24h avant",
+    "loginRequired": "Connectez-vous pour finaliser votre réservation",
+    "loginCta": "Se connecter",
+    "backButton": "Retour"
   },
   "booking": {
     "panelTitle": "Réserver avec {coach}",

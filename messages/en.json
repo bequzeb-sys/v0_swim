@@ -452,7 +452,10 @@
     "bookSession": "Book this session",
     "bookingConfirming": "Confirming...",
     "bookingConfirmed": "Session confirmed ✓",
-    "cancellationNote": "Free cancellation up to 24h before"
+    "cancellationNote": "Free cancellation up to 24h before",
+    "loginRequired": "Please log in to complete your booking",
+    "loginCta": "Log in",
+    "backButton": "Back"
   },
   "booking": {
     "panelTitle": "Book with {coach}",

@@ -8,6 +8,7 @@ import { Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { Coach, DayKey } from "@/lib/coaches"
 import { useTranslations } from "next-intl"
+import { useAuth } from "@/lib/auth/auth-context"
 
 // Map DayKey to JS day-of-week index (0=Sun, 1=Mon, ...)
 const DAY_KEY_TO_INDEX: Record<DayKey, number> = {
@@ -55,6 +56,8 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
   const [confirming, setConfirming] = useState(false)
   const [confirmed, setConfirmed] = useState(false)
   const [calendarMonth, setCalendarMonth] = useState<Date>(new Date())
+  const [needsLogin, setNeedsLogin] = useState(false)
+  const { user } = useAuth()
 
   // Available days of week from coach availability
   const availableDayIndexes = useMemo(() => {
@@ -73,6 +76,10 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
 
   async function handleConfirm() {
     if (!selectedDate || !selectedTime) return
+    if (!user) {
+      setNeedsLogin(true)
+      return
+    }
     setConfirming(true)
     await new Promise((r) => setTimeout(r, 800))
     setConfirmed(true)
@@ -186,25 +193,45 @@ export function BookingPanel({ coach, locale }: BookingPanelProps) {
       )}
 
       {/* Confirm button */}
-      <button
-        type="button"
-        onClick={handleConfirm}
-        disabled={!canConfirm || confirming || confirmed}
-        className={cn(
-          "w-full cursor-pointer rounded-xl py-3 text-sm font-semibold transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
-          confirmed
-            ? "border border-teal-accent/30 bg-teal-accent/10 text-teal-accent"
-            : canConfirm
-            ? "bg-blue-accent text-white hover:bg-blue-accent-dark active:opacity-90 shadow-lg shadow-blue-accent/20"
-            : "cursor-not-allowed bg-white/5 text-white/30 border border-white/10"
-        )}
-      >
-        {confirmed
-          ? t("bookingConfirmed")
-          : confirming
-          ? t("bookingConfirming")
-          : t("bookSession")}
-      </button>
+      {needsLogin ? (
+        <div className="flex flex-col gap-3">
+          <p className="text-center text-sm text-white/60">{t("loginRequired")}</p>
+          <button
+            type="button"
+            onClick={() => router.push(`/login?redirect=/coaches/${coach.id}` as Parameters<typeof router.push>[0])}
+            className="w-full cursor-pointer rounded-xl bg-blue-accent py-3 text-sm font-semibold text-white transition-all hover:bg-blue-accent-dark active:opacity-90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+          >
+            {t("loginCta")}
+          </button>
+          <button
+            type="button"
+            onClick={() => setNeedsLogin(false)}
+            className="w-full cursor-pointer rounded-xl border border-white/10 py-2.5 text-sm text-white/50 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+          >
+            {t("backButton")}
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={handleConfirm}
+          disabled={!canConfirm || confirming || confirmed}
+          className={cn(
+            "w-full cursor-pointer rounded-xl py-3 text-sm font-semibold transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+            confirmed
+              ? "border border-teal-accent/30 bg-teal-accent/10 text-teal-accent"
+              : canConfirm
+              ? "bg-blue-accent text-white hover:bg-blue-accent-dark active:opacity-90 shadow-lg shadow-blue-accent/20"
+              : "cursor-not-allowed bg-white/5 text-white/30 border border-white/10"
+          )}
+        >
+          {confirmed
+            ? t("bookingConfirmed")
+            : confirming
+            ? t("bookingConfirming")
+            : t("bookSession")}
+        </button>
+      )}
 
       {/* Cancellation note */}
       {canConfirm && !confirmed && (
