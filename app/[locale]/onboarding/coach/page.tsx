@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
 import type { CoachBadgeKey } from "@/types/coach"
+import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 
 const SPECIALTIES: CoachBadgeKey[] = [
   "apprentissage",
@@ -112,14 +113,12 @@ export default function CoachOnboardingStep1() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <div className="w-full max-w-lg">
-
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-2xl font-bold text-white">{t("step1Title")}</h1>
-          <p className="mt-2 text-sm text-white/50">{t("step1Subtitle")}</p>
-        </div>
+    <OnboardingShell current={1} total={4}>
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className="text-2xl font-bold text-white">{t("step1Title")}</h1>
+        <p className="mt-2 text-sm text-white/50">{t("step1Subtitle")}</p>
+      </div>
 
         {/* Slide indicators */}
         <div className="mb-6 flex items-center justify-center gap-2">
@@ -287,8 +286,6 @@ export default function CoachOnboardingStep1() {
             <ChevronRight className="size-5" aria-hidden="true" />
           </button>
         </div>
-
-      </div>
-    </div>
+    </OnboardingShell>
   )
 }

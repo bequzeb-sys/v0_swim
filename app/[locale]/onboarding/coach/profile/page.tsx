@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
 import type { LanguageCode } from "@/types/coach"
 import * as Flags from "country-flag-icons/react/3x2"
+import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 
 // Available languages — labels resolved via the existing `languages` namespace
 // at runtime so we never hardcode user-visible strings.
@@ -319,12 +320,11 @@ export default function CoachOnboardingStep2() {
   ]
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <div className="w-full max-w-lg">
-        <header className="mb-8 text-center">
-          <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
-          <p className="mt-2 text-sm text-white/50">{t("subtitle")}</p>
-        </header>
+    <OnboardingShell current={2} total={4}>
+      <header className="mb-8 text-center">
+        <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
+        <p className="mt-2 text-sm text-white/50">{t("subtitle")}</p>
+      </header>
 
         {/* Slide indicators (non-interactive, purely visual) */}
         <ol
@@ -412,7 +412,6 @@ export default function CoachOnboardingStep2() {
             {t("skipCertification")}
           </button>
         )}
-      </div>
-    </main>
+    </OnboardingShell>
   )
 }
