@@ -3,10 +3,13 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
+import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
+import type { CoachBadgeKey } from "@/types/coach"
+import { cn } from "@/lib/utils"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { Button } from "@/components/ui/button"
 
-const SPECIALTIES = [
+const ALL_BADGE_KEYS: CoachBadgeKey[] = [
   "apprentissage",
   "aquagym",
   "aquaphobie",
@@ -18,15 +21,14 @@ const SPECIALTIES = [
   "perfectionnement",
   "sauvetageAquatique",
   "triathlon",
-] as const
-type Specialty = (typeof SPECIALTIES)[number]
+]
 
 function SpecialtyCard({
   specialty,
   selected,
   onClick,
 }: {
-  specialty: Specialty
+  specialty: CoachBadgeKey
   selected: boolean
   onClick: () => void
 }) {
@@ -60,21 +62,30 @@ function SpecialtyCard({
 export default function OnboardingCoachPage() {
   const t = useTranslations("onboarding.coach.specialty")
   const router = useRouter()
-  const [selected, setSelected] = useState<Set<Specialty>>(new Set())
+  const { data, setStep1 } = useCoachOnboardingStore()
 
-  function toggle(s: Specialty) {
+  const [selected, setSelected] = useState<Set<CoachBadgeKey>>(
+    new Set(data.badgeKeys as CoachBadgeKey[])
+  )
+  const [featuredKeys, setFeaturedKeys] = useState<CoachBadgeKey[]>(data.featuredBadgeKeys)
+  const [showFeatured, setShowFeatured] = useState(data.badgeKeys.length > 0)
+
+  function toggle(s: CoachBadgeKey) {
     const next = new Set(selected)
-    if (next.has(s)) next.delete(s)
-    else next.add(s)
+    if (next.has(s)) {
+      next.delete(s)
+      setFeaturedKeys((prev) => prev.filter((k) => k !== s))
+    } else {
+      next.add(s)
+    }
     setSelected(next)
+    setShowFeatured(next.size > 0)
   }
 
   function handleContinue() {
-    const params = new URLSearchParams({ step: "2" })
-    router.push({
-      pathname: "/onboarding/coach/profile",
-      query: Object.fromEntries(params),
-    })
+    if (selected.size === 0) return
+    setStep1(Array.from(selected), featuredKeys)
+    router.push("/onboarding/coach/profile")
   }
 
   return (
@@ -83,7 +94,7 @@ export default function OnboardingCoachPage() {
       <h1 className="mt-6 text-xl font-bold text-white">{t("title")}</h1>
       <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       <div className="mt-6 flex flex-col gap-2">
-        {SPECIALTIES.map((s) => (
+        {ALL_BADGE_KEYS.map((s) => (
           <SpecialtyCard
             key={s}
             specialty={s}
@@ -92,6 +103,42 @@ export default function OnboardingCoachPage() {
           />
         ))}
       </div>
+
+      {selected.size > 0 && (
+        <div className="mt-6 rounded-2xl border border-teal-accent/20 bg-teal-accent/5 p-4">
+          <p className="mb-3 text-sm font-medium text-white/70">
+            {t("featuredTitle")}{" "}
+            <span className="text-teal-accent">({featuredKeys.length}/2)</span>
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {Array.from(selected).map((key) => {
+              const isFeatured = featuredKeys.includes(key)
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => {
+                    if (isFeatured) {
+                      setFeaturedKeys(featuredKeys.filter((k) => k !== key))
+                    } else if (featuredKeys.length < 2) {
+                      setFeaturedKeys([...featuredKeys, key])
+                    }
+                  }}
+                  className={cn(
+                    "cursor-pointer rounded-xl border px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                    isFeatured
+                      ? "border-teal-accent bg-teal-accent text-navy-deep"
+                      : "border-white/20 bg-white/5 text-white/60 hover:border-teal-accent/40 hover:text-white"
+                  )}
+                >
+                  {isFeatured ? "★ " : ""}{t(key)}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
       <Button
         type="button"
         onClick={handleContinue}

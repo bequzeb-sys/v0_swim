@@ -1,11 +1,12 @@
 "use client"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { CheckCircle2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
 import { useAuth } from "@/lib/auth/auth-context"
+import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { Button } from "@/components/ui/button"
 
@@ -14,6 +15,14 @@ function OnboardingCoachDonePageInner() {
   const { user } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { data, reset } = useCoachOnboardingStore()
+
+  useEffect(() => {
+    // TODO (database sprint): replace console.log with API call to save coach profile
+    console.log("Coach onboarding complete:", data)
+    // Reset store after logging (or after successful DB save)
+    // reset() — called after DB confirms save
+  }, [])
 
   function handleCta() {
     const redirectTo = searchParams.get("redirect")
@@ -36,6 +45,13 @@ function OnboardingCoachDonePageInner() {
           {t("subtitle", { name: user?.name ?? "" })}
         </p>
       </div>
+
+      <div className="mt-4 rounded-2xl border border-blue-300/20 bg-blue-400/[8%] p-4 text-left">
+        <p className="text-xs text-white/40 mb-2">{t("summaryTitle")}</p>
+        <p className="text-sm text-white/70">{data.badgeKeys.length} {t("specialtiesSelected")}</p>
+        <p className="text-sm text-white/70">{data.certification || t("noCertification")}</p>
+      </div>
+
       <Button
         type="button"
         onClick={handleCta}

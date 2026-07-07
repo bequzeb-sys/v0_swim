@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
+import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
@@ -51,19 +52,19 @@ export default function OnboardingCoachProfilePage() {
   const tl = useTranslations("languages")
   const router = useRouter()
 
-  const [bio, setBio] = useState("")
-  const [city, setCity] = useState("")
-  const [country, setCountry] = useState("")
+  const { data, setStep2 } = useCoachOnboardingStore()
+
+  const [bio, setBio] = useState(data.bio)
+  const [city, setCity] = useState(data.city)
+  const [country, setCountry] = useState(data.country)
+  const [price, setPrice] = useState(data.price)
+  const [certification, setCertification] = useState(data.certification)
+  const [selectedLanguages, setSelectedLanguages] = useState<LanguageCode[]>(data.languages)
   const [countryOpen, setCountryOpen] = useState(false)
-  const [price, setPrice] = useState("")
-  const [selectedLanguages, setSelectedLanguages] = useState<LanguageCode[]>([])
 
   function handleContinue() {
-    const params = new URLSearchParams({ step: "3" })
-    router.push({
-      pathname: "/onboarding/coach/availability",
-      query: Object.fromEntries(params),
-    })
+    setStep2({ bio, city, country, price, certification, languages: selectedLanguages })
+    router.push("/onboarding/coach/availability")
   }
 
   return (
@@ -168,6 +169,16 @@ export default function OnboardingCoachProfilePage() {
               {t("priceUnit")}
             </span>
           </div>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-white/70">{t("certificationLabel")}</label>
+          <Input
+            type="text"
+            placeholder={t("certificationPlaceholder")}
+            value={certification}
+            onChange={(e) => setCertification(e.target.value)}
+          />
         </div>
 
         {/* Languages */}

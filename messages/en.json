@@ -296,7 +296,8 @@
         "natationPalmes": "Finswimming",
         "perfectionnement": "Stroke Improvement",
         "sauvetageAquatique": "Water Safety & Rescue",
-        "triathlon": "Triathlon"
+        "triathlon": "Triathlon",
+        "featuredTitle": "Choose your 2 featured specialties shown on your profile"
       },
       "profile": {
         "title": "Tell us about yourself",
@@ -312,7 +313,9 @@
         "continue": "Continue",
         "languagesLabel": "Languages spoken",
         "languagesHint": "Select up to 4 languages",
-        "languagesMax": "Maximum 4 languages selected"
+        "languagesMax": "Maximum 4 languages selected",
+        "certificationLabel": "Certification / Diploma",
+        "certificationPlaceholder": "e.g. Level 2 Swimming Coach, ASA, STA"
       },
       "availability": {
         "title": "When are you available?",
@@ -329,7 +332,10 @@
       "done": {
         "title": "Your profile is ready!",
         "subtitle": "Everything's set up, {name}. Clients can now discover you.",
-        "cta": "View my dashboard"
+        "cta": "View my dashboard",
+        "summaryTitle": "Your profile summary",
+        "specialtiesSelected": "specialties selected",
+        "noCertification": "No certification provided"
       }
     }
   },
@@ -419,25 +425,16 @@
   },
   "coachProfile": {
     "bioTitle": "About",
-    "languagesTitle": "Languages spoken",
-    "availabilityTitle": "Availability",
     "bookCta": "Book a session",
     "yearsExperience": "{count} years experience",
+    "yearsExp": "years experience",
     "notFoundTitle": "Coach not found",
     "notFoundCta": "Back to home",
     "back": "Back",
     "countryLabel": "Country",
     "cityAndCountry": "{city}, {country}",
-    "days": {
-      "mon": "Mon",
-      "tue": "Tue",
-      "wed": "Wed",
-      "thu": "Thu",
-      "fri": "Fri",
-      "sat": "Sat",
-      "sun": "Sun"
-    },
     "specialtiesTitle": "Specialties",
+    "languagesTitle": "Languages spoken",
     "reviewsTitle": "Swimmer reviews",
     "reviewerPlaceholder": "SwimAI Swimmer",
     "reviewPlaceholder": "Excellent coach, very professional and attentive. Highly recommend!",

@@ -296,7 +296,8 @@
         "natationPalmes": "Natation avec Palmes",
         "perfectionnement": "Perfectionnement",
         "sauvetageAquatique": "Sauvetage Aquatique",
-        "triathlon": "Triathlon"
+        "triathlon": "Triathlon",
+        "featuredTitle": "Choisissez vos 2 spécialités mises en avant sur votre profil"
       },
       "profile": {
         "title": "Parlez-nous de vous",
@@ -312,7 +313,9 @@
         "continue": "Continuer",
         "languagesLabel": "Langues parlées",
         "languagesHint": "Sélectionnez jusqu'à 4 langues",
-        "languagesMax": "4 langues maximum sélectionnées"
+        "languagesMax": "4 langues maximum sélectionnées",
+        "certificationLabel": "Certification / Diplôme",
+        "certificationPlaceholder": "ex. BPJEPS Natation, MNS, Éducateur FFN"
       },
       "availability": {
         "title": "Quand êtes-vous disponible ?",
@@ -329,7 +332,10 @@
       "done": {
         "title": "Votre profil est prêt !",
         "subtitle": "Tout est configuré, {name}. Les clients peuvent désormais vous trouver.",
-        "cta": "Voir mon tableau de bord"
+        "cta": "Voir mon tableau de bord",
+        "summaryTitle": "Résumé de votre profil",
+        "specialtiesSelected": "spécialités sélectionnées",
+        "noCertification": "Aucune certification renseignée"
       }
     }
   },
@@ -419,25 +425,16 @@
   },
   "coachProfile": {
     "bioTitle": "À propos",
-    "languagesTitle": "Langues parlées",
-    "availabilityTitle": "Disponibilités",
     "bookCta": "Réserver une séance",
     "yearsExperience": "{count} ans d'expérience",
+    "yearsExp": "ans d'expérience",
     "notFoundTitle": "Coach introuvable",
     "notFoundCta": "Retour à l'accueil",
     "back": "Retour",
     "countryLabel": "Pays",
     "cityAndCountry": "{city}, {country}",
-    "days": {
-      "mon": "Lun",
-      "tue": "Mar",
-      "wed": "Mer",
-      "thu": "Jeu",
-      "fri": "Ven",
-      "sat": "Sam",
-      "sun": "Dim"
-    },
     "specialtiesTitle": "Spécialités",
+    "languagesTitle": "Langues parlées",
     "reviewsTitle": "Avis des nageurs",
     "reviewerPlaceholder": "Nageur SwimAI",
     "reviewPlaceholder": "Excellent coach, très professionnel et à l'écoute. Je recommande vivement !",

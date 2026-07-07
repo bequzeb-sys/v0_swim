@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
+import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
+import type { DayKey } from "@/types/coach"
 import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { Button } from "@/components/ui/button"
 
@@ -37,9 +39,12 @@ function DayPill({
 export default function OnboardingCoachAvailabilityPage() {
   const t = useTranslations("onboarding.coach.availability")
   const router = useRouter()
-  const [selected, setSelected] = useState<Set<Day>>(new Set())
+  const { data, setStep3 } = useCoachOnboardingStore()
+  const [selected, setSelected] = useState<Set<DayKey>>(
+    new Set(data.availability as DayKey[])
+  )
 
-  function toggle(day: Day) {
+  function toggle(day: DayKey) {
     const next = new Set(selected)
     if (next.has(day)) next.delete(day)
     else next.add(day)
@@ -47,11 +52,8 @@ export default function OnboardingCoachAvailabilityPage() {
   }
 
   function handleContinue() {
-    const params = new URLSearchParams({ step: "4" })
-    router.push({
-      pathname: "/onboarding/coach/done",
-      query: Object.fromEntries(params),
-    })
+    setStep3(Array.from(selected))
+    router.push("/onboarding/coach/done")
   }
 
   return (
