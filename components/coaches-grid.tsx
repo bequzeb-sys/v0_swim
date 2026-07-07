@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server"
 import { CoachCard } from "@/components/coach-card"
-import { getAllCoaches } from "@/lib/coaches"
+import { getFeaturedCoaches } from "@/lib/coaches"
 
 export async function CoachesGrid() {
   const t = await getTranslations("coaches")
@@ -30,7 +30,7 @@ export async function CoachesGrid() {
           {t("title")}
         </h2>
         <div className="mt-7 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {getAllCoaches().slice(0, 3).map((coach) => (
+          {getFeaturedCoaches(3).map((coach) => (
             <CoachCard
               key={coach.id}
               coach={coach}

@@ -3,4 +3,4 @@
 export type { CoachBadgeKey, LanguageCode, DayKey, CoachReview, Coach } from "@/types/coach"
 export type { CoachFilters } from "@/lib/coaches-api"
 export { coaches } from "@/lib/coaches-data"
-export { getCoachById, getAllCoaches, getCoachesByFilters, getCoachReviews } from "@/lib/coaches-api"
+export { getCoachById, getAllCoaches, getFeaturedCoaches, getCoachesByFilters, getCoachReviews } from "@/lib/coaches-api"

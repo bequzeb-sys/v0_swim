@@ -11,6 +11,12 @@ export function getAllCoaches(): Coach[] {
   return coaches
 }
 
+export function getFeaturedCoaches(limit: number = 3): Coach[] {
+  // TODO (database sprint): replace with DB query
+  // e.g. supabase.from("coaches").select("*").eq("featured", true).limit(limit)
+  return coaches.slice(0, limit)
+}
+
 export interface CoachFilters {
   country?: string
   location?: string
