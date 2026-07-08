@@ -1,10 +1,6 @@
 export type ClientGoal = "learnToSwim" | "improveTechnique" | "trainCompetition" | "fitness"
 export type ClientLevel = "beginner" | "intermediate" | "advanced"
 
-export interface ClientAvatarOptions {
-  seed: string
-}
-
 export interface ClientOnboardingData {
   displayName: string
   avatarType: "default" | "upload"

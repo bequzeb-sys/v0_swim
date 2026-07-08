@@ -488,6 +488,43 @@ wrappers — always import the shared one.
 - Language labels: `languages.*`
 - Never hardcode country/language names in component arrays
 
+**Client onboarding — 6-step pattern:**
+- 6 standalone pages under `app/[locale]/onboarding/client/`
+- Route order: /onboarding/client (name) → avatar → location → level → languages → goal → done
+- Each page: OnboardingShell + back chevron + 6 dots + title + content + 3-element nav row
+- 3-element nav row: [ChevronLeft button] [Button variant="entry" flex-1] [ChevronRight button]
+- ChevronLeft/Right: size-11, rounded-xl, border-white/10, bg-white/5, disabled=opacity-25
+- ChevronRight duplicates the Continue action — same onClick, same disabled state
+- Store: `lib/stores/onboarding-client-store.ts` — Zustand persist, key `swimai-client-onboarding`
+- Actions: setStep1(displayName) → setStep2(avatarType, avatarUrl) → setStep3(location, country) → setStep4(level) → setStep5(languages) → setStep6(goal) → reset()
+- Types: `types/client.ts` — ClientGoal, ClientLevel, ClientOnboardingData
+
+**Avatar step — two options only:**
+- Default: show user initials (first 2 chars of displayName) on teal/20 background
+- Upload: file input → FileReader → base64 → store as avatarUrl
+- NO external avatar APIs (DiceBear v10 HTTP API silently ignores component params)
+
+**Language badges — text only, no flags:**
+- LANGUAGES array of 10 codes: fr, en, es, de, it, pt, ar, zh, ru, ja
+- Use `useTranslations("languages")` for labels
+- Max 4 languages enforced with counter X/4
+- Text-only badges: rounded-xl border px-4 py-2
+- Selected: border-teal-accent/40 bg-teal-accent/10 text-teal-accent
+- Unselected: border-white/10 bg-white/5 text-white/60
+
+**Coach listing card pattern:**
+- Avatar: size-28 sm:size-32, rounded-md, ring-2 ring-white/10
+- Badges: text-only pills, no dot separator between them
+- Bottom row: location (teal MapPin) + price on same line
+- CTA: full-width Button variant="primary" (teal) below location/price row
+
+**DiceBear — DO NOT USE via HTTP API for specific options:**
+The DiceBear v10 HTTP API silently ignores component-specific params
+(topType, facialHairType, hair, etc.) — only seed and backgroundColor work
+reliably. If avatar customization is needed, use the npm package
+@dicebear/core + @dicebear/collection with correct v10 API, or use
+initials-based default avatars.
+
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an
  existing util already covers the need.
@@ -505,7 +542,13 @@ wrappers — always import the shared one.
   with real database calls during the database sprint.
 - Direct data imports bypass the API layer and break database migration.
 - Exception: `lib/coaches-data.ts` itself imports the raw array — that is
-  the ONLY file allowed to do so.
+ the ONLY file allowed to do so.
+
+**Client types location:**
+- Client types live in `types/client.ts` — ClientGoal, ClientLevel, ClientOnboardingData
+- Client onboarding store: `lib/stores/onboarding-client-store.ts`
+- Coach onboarding store: `lib/stores/onboarding-coach-store.ts`
+- Never inline onboarding data shapes in component files
 
 ## Spacing/layout disputes — measure, don't calculate
 - When a visual spacing/gap issue persists across 2+ rounds of `className`
