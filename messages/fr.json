@@ -259,14 +259,42 @@
       "of": "Étape {current} sur {total}"
     },
     "client": {
-      "goals": {
-        "title": "Quels sont vos objectifs ?",
-        "subtitle": "Sélectionnez l'objectif qui vous correspond le mieux.",
+      "name": {
+        "title": "Comment vous appelez-vous ?",
+        "subtitle": "Choisissez le nom qui apparaîtra sur votre profil",
+        "label": "Votre prénom ou pseudo",
+        "placeholder": "Ex : Marie, JeanNageur...",
+        "minLength": "Minimum 2 caractères",
+        "continue": "Continuer"
+      },
+      "avatar": {
+        "title": "Votre avatar",
+        "subtitle": "Créez votre identité visuelle",
+        "subtitleNamed": "Bonjour {name}, créez votre identité visuelle",
+        "tabGenerate": "Générer",
+        "tabUpload": "Photo",
+        "randomize": "Autre avatar",
+        "skinColor": "Couleur de peau",
+        "hairStyle": "Coiffure",
+        "hair_short01": "Court",
+        "hair_short02": "Bouclé",
+        "hair_long01": "Long",
+        "hair_long02": "Ondulé",
+        "hair_bun": "Chignon",
+        "hair_hijab": "Hijab",
+        "glasses": "Lunettes",
+        "uploadLabel": "Choisir une photo",
+        "uploadHint": "JPG, PNG ou WebP · Max 5 Mo",
+        "continue": "Continuer"
+      },
+      "goal": {
+        "title": "Votre objectif",
+        "subtitle": "Qu'est-ce qui vous motive à nager ?",
         "learnToSwim": "Apprendre à nager",
         "improveTechnique": "Améliorer ma technique",
-        "trainCompetition": "Préparer une compétition",
-        "fitness": "Remise en forme",
-        "continue": "Continuer"
+        "trainCompetition": "M'entraîner en compétition",
+        "fitness": "Nager pour le fitness",
+        "continue": "Terminer"
       },
       "location": {
         "title": "Où êtes-vous situé ?",
@@ -287,6 +315,8 @@
         "intermediateDesc": "Je nage régulièrement et veux progresser",
         "advancedLabel": "Avancé",
         "advancedDesc": "Je nage bien et vise la performance",
+        "languagesTitle": "Langues parlées",
+        "languagesSubtitle": "Pour être mis en relation avec des coachs qui parlent votre langue",
         "continue": "Continuer"
       },
       "done": {

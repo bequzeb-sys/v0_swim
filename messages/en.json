@@ -259,14 +259,42 @@
       "of": "Step {current} of {total}"
     },
     "client": {
-      "goals": {
-        "title": "What are your swimming goals?",
-        "subtitle": "Select the goal that best describes what you're looking for.",
+      "name": {
+        "title": "What's your name?",
+        "subtitle": "Choose the name that will appear on your profile",
+        "label": "Your first name or username",
+        "placeholder": "E.g. Marie, SwimmerJohn...",
+        "minLength": "Minimum 2 characters",
+        "continue": "Continue"
+      },
+      "avatar": {
+        "title": "Your avatar",
+        "subtitle": "Create your visual identity",
+        "subtitleNamed": "Hello {name}, create your visual identity",
+        "tabGenerate": "Generate",
+        "tabUpload": "Photo",
+        "randomize": "New avatar",
+        "skinColor": "Skin tone",
+        "hairStyle": "Hair style",
+        "hair_short01": "Short",
+        "hair_short02": "Curly",
+        "hair_long01": "Long",
+        "hair_long02": "Wavy",
+        "hair_bun": "Bun",
+        "hair_hijab": "Hijab",
+        "glasses": "Glasses",
+        "uploadLabel": "Choose a photo",
+        "uploadHint": "JPG, PNG or WebP · Max 5 MB",
+        "continue": "Continue"
+      },
+      "goal": {
+        "title": "Your goal",
+        "subtitle": "What motivates you to swim?",
         "learnToSwim": "Learn to swim",
         "improveTechnique": "Improve my technique",
         "trainCompetition": "Train for competition",
-        "fitness": "Fitness",
-        "continue": "Continue"
+        "fitness": "Swim for fitness",
+        "continue": "Finish"
       },
       "location": {
         "title": "Where are you located?",
@@ -287,6 +315,8 @@
         "intermediateDesc": "I swim regularly and want to improve",
         "advancedLabel": "Advanced",
         "advancedDesc": "I swim well and aim for performance",
+        "languagesTitle": "Spoken languages",
+        "languagesSubtitle": "So we can match you with coaches who speak your language",
         "continue": "Continue"
       },
       "done": {
