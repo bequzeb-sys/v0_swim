@@ -19,18 +19,19 @@ interface CoachListingCardProps {
 }
 
 function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
+  const CountryFlag = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[coach.country]
   return (
     <article className="flex flex-row items-stretch gap-5 rounded-3xl border border-blue-300/20 bg-blue-400/[8%] p-5 shadow-xl shadow-black/20 backdrop-blur-md">
 
       {/* Left — Avatar */}
       <div className="shrink-0">
-        <div className="relative size-24 overflow-hidden rounded-2xl">
+        <div className="relative size-28 overflow-hidden rounded-2xl">
           <Image
             src={coach.avatar}
             alt={coach.name}
             fill
             className="object-cover"
-            sizes="96px"
+            sizes="112px"
           />
         </div>
       </div>
@@ -71,30 +72,30 @@ function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
           </div>
         </div>
 
-        {/* Bottom — location + price + CTA */}
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex min-w-0 flex-col gap-0.5">
+        {/* Bottom — location + price row, then full-width CTA */}
+        <div className="flex flex-col gap-3">
+          {/* Location + price on same row */}
+          <div className="flex items-center justify-between gap-2">
             <span className="flex items-center gap-1.5 text-xs text-white/50">
               <MapPin className="size-3 shrink-0" aria-hidden="true" />
               <span className="truncate">{coach.city}</span>
-              {(() => {
-                const F = (Flags as unknown as Record<string, React.ComponentType<{ style?: React.CSSProperties; className?: string }>>)[coach.country]
-                return F ? (
-                  <span aria-hidden="true">
-                    <F style={{ width: 14, height: 10 }} className="rounded-sm opacity-70" />
-                  </span>
-                ) : null
-              })()}
+              {CountryFlag && (
+                <span aria-hidden="true">
+                  <CountryFlag style={{ width: 14, height: 10 }} className="rounded-sm opacity-70" />
+                </span>
+              )}
             </span>
-            <span className="text-base font-bold text-white">
-              {coach.price}
-              <span className="text-xs font-normal text-white/50"> {t.priceUnit}</span>
+            <span className="shrink-0 text-sm font-bold text-white">
+              €{coach.price}
+              <span className="text-xs font-normal text-white/50"> /{t.priceUnit}</span>
             </span>
           </div>
+
+          {/* Full-width CTA button */}
           <Button
             variant="primary"
             href={{ pathname: "/coaches/[id]", params: { id: coach.id } }}
-            className="shrink-0 px-4 py-2 text-sm"
+            className="w-full"
           >
             {t.listingCta}
           </Button>
