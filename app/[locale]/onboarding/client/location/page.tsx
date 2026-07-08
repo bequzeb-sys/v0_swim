@@ -1,10 +1,9 @@
 "use client"
 
-import * as React from "react"
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Check, ChevronDown } from "lucide-react"
+import { MapPin } from "lucide-react"
 import { Popover } from "@base-ui/react/popover"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -13,8 +12,6 @@ import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
 import * as Flags from "country-flag-icons/react/3x2"
 
-// Country codes for the country picker — labels resolved via the existing
-// `search.countries` namespace (shared with the search bar and coach onboarding).
 const COUNTRIES = [
   { code: "FR" },
   { code: "RE" },
@@ -26,12 +23,12 @@ const COUNTRIES = [
   { code: "MU" },
 ]
 
-export default function OnboardingClientStep2() {
+export default function OnboardingClientStep3() {
   const t = useTranslations("onboarding.client.location")
   const tStep = useTranslations("onboarding.step")
   const tCountries = useTranslations("search.countries")
   const router = useRouter()
-  const { data, setStep2 } = useClientOnboardingStore()
+  const { data, setStep3 } = useClientOnboardingStore()
 
   const [location, setLocation] = useState(data.location)
   const [country, setCountry] = useState(data.country || "FR")
@@ -41,35 +38,29 @@ export default function OnboardingClientStep2() {
   const SelectedFlag = selectedFlag
 
   function handleContinue() {
-    setStep2(location, country)
+    if (!location.trim() || !country) return
+    setStep3(location.trim(), country)
     router.push("/onboarding/client/level")
   }
 
   return (
-    <OnboardingShell current={2} total={4}>
-      {/* Step indicator */}
+    <OnboardingShell current={3} total={5}>
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-          {tStep("of", { current: 2, total: 4 })}
+          {tStep("of", { current: 3, total: 5 })}
         </p>
         <div className="mb-4 flex items-center justify-center gap-2">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300",
-                i === 1 ? "w-6 bg-teal-accent"
-                : i < 1 ? "w-2 bg-teal-accent/40"
-                : "w-2 bg-white/20"
-              )}
-            />
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className={cn(
+              "h-2 rounded-full transition-all duration-300",
+              i < 3 ? "w-6 bg-teal-accent" : "w-2 bg-white/20"
+            )} />
           ))}
         </div>
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
 
-      {/* Country dropdown — on top (Base UI Popover) */}
       <div className="mb-4">
         <label className="mb-1.5 block text-xs font-medium text-white/50">
           {t("countryLabel")} *
@@ -85,17 +76,10 @@ export default function OnboardingClientStep2() {
           >
             <div className="flex items-center gap-2">
               {SelectedFlag && <SelectedFlag className="size-5 rounded-sm" />}
-              <span>{tCountries(country as any)}</span>
+              <span>{tCountries(country as Parameters<typeof tCountries>[0])}</span>
             </div>
-            <ChevronDown
-              className={cn(
-                "size-4 shrink-0 text-white/40 transition-transform duration-200",
-                countryOpen && "rotate-180"
-              )}
-              aria-hidden="true"
-            />
+            <MapPin className="size-4 shrink-0 text-white/40" aria-hidden="true" />
           </Popover.Trigger>
-
           <Popover.Portal>
             <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--anchor-width)]">
               <Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white data-[state=open]:animate-in data-[state=closed]:animate-out">
@@ -115,10 +99,7 @@ export default function OnboardingClientStep2() {
                         )}
                       >
                         {Flag && <Flag className="size-5 rounded-sm" aria-hidden="true" />}
-                        <span>{tCountries(code as any)}</span>
-                        {country === code && (
-                          <Check className="ml-auto size-4 text-teal-accent" aria-hidden="true" />
-                        )}
+                        <span>{tCountries(code as Parameters<typeof tCountries>[0])}</span>
                       </button>
                     )
                   })}
@@ -129,7 +110,6 @@ export default function OnboardingClientStep2() {
         </Popover.Root>
       </div>
 
-      {/* City input — below */}
       <div className="mb-6">
         <label className="mb-1.5 block text-xs font-medium text-white/50">{t("locationLabel")} *</label>
         <Input
@@ -140,7 +120,6 @@ export default function OnboardingClientStep2() {
         />
       </div>
 
-      {/* Continue button */}
       <Button
         variant="entry"
         onClick={handleContinue}

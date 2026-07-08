@@ -6,10 +6,10 @@ import { CheckCircle2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
 import { useAuth } from "@/lib/auth/auth-context"
-import { StepIndicator } from "@/components/onboarding/step-indicator"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 import { Button } from "@/components/ui/button"
 import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
+import { cn } from "@/lib/utils"
 
 function OnboardingClientDonePageInner() {
   const t = useTranslations("onboarding.client.done")
@@ -19,7 +19,6 @@ function OnboardingClientDonePageInner() {
   const { reset } = useClientOnboardingStore()
 
   useEffect(() => {
-    // TODO (database sprint): save client profile via API
     reset()
   }, [reset])
 
@@ -33,9 +32,17 @@ function OnboardingClientDonePageInner() {
   }
 
   return (
-    <OnboardingShell current={4} total={4}>
-      <StepIndicator current={4} total={4} />
-      <div className="mt-6 flex flex-col items-center text-center">
+    <OnboardingShell current={5} total={5}>
+      <div className="mb-6 flex items-center justify-center gap-2">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className={cn(
+            "h-2 rounded-full transition-all duration-300",
+            "w-6 bg-teal-accent"
+          )} />
+        ))}
+      </div>
+
+      <div className="mt-4 flex flex-col items-center text-center">
         <div className="mb-4 flex size-14 items-center justify-center rounded-md bg-teal-accent/15">
           <CheckCircle2 className="size-8 text-teal-accent" />
         </div>
