@@ -44,14 +44,9 @@ function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
             {coach.name}
           </h3>
           <div className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-            {coach.badgeKeys.slice(0, 2).map((badgeKey, i) => (
-              <span key={badgeKey} className="flex items-center gap-1.5">
-                <span className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light">
-                  {t.badges[badgeKey]}
-                </span>
-                {i < coach.badgeKeys.length - 1 && (
-                  <span className="text-text-secondary">·</span>
-                )}
+            {coach.badgeKeys.slice(0, 2).map((badgeKey) => (
+              <span key={badgeKey} className="whitespace-nowrap rounded-full border border-teal-accent/30 bg-teal-accent/10 px-2 py-0.5 text-xs font-medium text-teal-accent-light">
+                {t.badges[badgeKey]}
               </span>
             ))}
           </div>
