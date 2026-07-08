@@ -25,7 +25,7 @@ function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
 
       {/* Left — Avatar */}
       <div className="shrink-0">
-        <div className="relative size-28 overflow-hidden rounded-2xl">
+        <div className="relative size-28 overflow-hidden rounded-2xl ring-2 ring-white/20">
           <Image
             src={coach.avatar}
             alt={coach.name}
@@ -77,7 +77,7 @@ function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
           {/* Location + price on same row */}
           <div className="flex items-center justify-between gap-2">
             <span className="flex items-center gap-1.5 text-xs text-white/50">
-              <MapPin className="size-3 shrink-0" aria-hidden="true" />
+              <MapPin className="size-3 shrink-0 text-teal-accent" aria-hidden="true" />
               <span className="truncate">{coach.city}</span>
               {CountryFlag && (
                 <span aria-hidden="true">
@@ -86,8 +86,8 @@ function CoachListingCardInner({ coach, t }: CoachListingCardProps) {
               )}
             </span>
             <span className="shrink-0 text-sm font-bold text-white">
-              €{coach.price}
-              <span className="text-xs font-normal text-white/50"> /{t.priceUnit}</span>
+              {coach.price}
+              <span className="text-xs font-normal text-white/50"> {t.priceUnit}</span>
             </span>
           </div>
 
