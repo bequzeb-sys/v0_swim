@@ -1,57 +1,35 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
-import type {
-  ClientGoal,
-  ClientLevel,
-  ClientGender,
-  ClientAvatarOptions,
-  ClientOnboardingData,
-} from "@/types/client"
+import type { ClientGoal, ClientLevel, ClientOnboardingData } from "@/types/client"
+
+// TODO (database sprint): country maps to clients.country in DB
+// location maps to clients.city in DB
 
 interface ClientOnboardingStore {
   data: ClientOnboardingData
-  setStep1: (displayName: string) => void
-  setStep2: (avatarType: "generated" | "upload", avatarSeed: string, avatarOptions: ClientAvatarOptions, avatarUrl: string) => void
-  setStep3: (location: string, country: string) => void
-  setStep4: (level: ClientLevel, languages: string[]) => void
-  setStep5: (goal: ClientGoal) => void
+  setStep1: (goal: ClientGoal) => void
+  setStep2: (location: string, country: string) => void
+  setStep3: (level: ClientLevel) => void
   reset: () => void
 }
 
-const defaultAvatarOptions: ClientAvatarOptions = {
-  skinColor: "f5d0b5",
-  hair: "long01",
-  gender: "neutral",
-  glasses: false,
-}
-
 const defaultData: ClientOnboardingData = {
-  displayName: "",
-  avatarType: "generated",
-  avatarSeed: "",
-  avatarOptions: defaultAvatarOptions,
-  avatarUrl: "",
+  goal: null,
   location: "",
   country: "",
   level: null,
-  languages: [],
-  goal: null,
 }
 
 export const useClientOnboardingStore = create<ClientOnboardingStore>()(
   persist(
     (set) => ({
       data: defaultData,
-      setStep1: (displayName) =>
-        set((state) => ({ data: { ...state.data, displayName } })),
-      setStep2: (avatarType, avatarSeed, avatarOptions, avatarUrl) =>
-        set((state) => ({ data: { ...state.data, avatarType, avatarSeed, avatarOptions, avatarUrl } })),
-      setStep3: (location, country) =>
-        set((state) => ({ data: { ...state.data, location, country } })),
-      setStep4: (level, languages) =>
-        set((state) => ({ data: { ...state.data, level, languages } })),
-      setStep5: (goal) =>
+      setStep1: (goal) =>
         set((state) => ({ data: { ...state.data, goal } })),
+      setStep2: (location, country) =>
+        set((state) => ({ data: { ...state.data, location, country } })),
+      setStep3: (level) =>
+        set((state) => ({ data: { ...state.data, level } })),
       reset: () => set({ data: defaultData }),
     }),
     {

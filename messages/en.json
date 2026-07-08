@@ -259,28 +259,7 @@
       "of": "Step {current} of {total}"
     },
     "client": {
-      "name": {
-        "title": "What should we call you?",
-        "subtitle": "This name will be displayed on your profile.",
-        "label": "Your name",
-        "placeholder": "e.g. Sophie",
-        "minLength": "At least 2 characters",
-        "continue": "Continue"
-      },
-      "avatar": {
-        "title": "Create your avatar",
-        "subtitle": "An avatar represents you on the platform.",
-        "seedLabel": "Avatar description",
-        "seedPlaceholder": "e.g. swimming person, blue background",
-        "genderLabel": "Gender (optional)",
-        "gender": {
-          "male": "Male",
-          "female": "Female",
-          "neutral": "Neutral"
-        },
-        "continue": "Continue"
-      },
-      "goal": {
+      "goals": {
         "title": "What are your swimming goals?",
         "subtitle": "Select the goal that best describes what you're looking for.",
         "learnToSwim": "Learn to swim",
@@ -308,7 +287,6 @@
         "intermediateDesc": "I swim regularly and want to improve",
         "advancedLabel": "Advanced",
         "advancedDesc": "I swim well and aim for performance",
-        "languagesLabel": "Spoken languages (optional)",
         "continue": "Continue"
       },
       "done": {

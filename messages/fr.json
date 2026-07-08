@@ -259,28 +259,7 @@
       "of": "Étape {current} sur {total}"
     },
     "client": {
-      "name": {
-        "title": "Comment vous appelez-vous ?",
-        "subtitle": "Ce nom sera affiché sur votre profil.",
-        "label": "Votre nom",
-        "placeholder": "Ex : Sophie",
-        "minLength": "Au moins 2 caractères",
-        "continue": "Continuer"
-      },
-      "avatar": {
-        "title": "Créez votre avatar",
-        "subtitle": "Un avatar vous représente sur la plateforme.",
-        "seedLabel": "Description de l'avatar",
-        "seedPlaceholder": "Ex : swimming person, blue background",
-        "genderLabel": "Genre (optionnel)",
-        "gender": {
-          "male": "Homme",
-          "female": "Femme",
-          "neutral": "Neutre"
-        },
-        "continue": "Continuer"
-      },
-      "goal": {
+      "goals": {
         "title": "Quels sont vos objectifs ?",
         "subtitle": "Sélectionnez l'objectif qui vous correspond le mieux.",
         "learnToSwim": "Apprendre à nager",
@@ -308,7 +287,6 @@
         "intermediateDesc": "Je nage régulièrement et veux progresser",
         "advancedLabel": "Avancé",
         "advancedDesc": "Je nage bien et vise la performance",
-        "languagesLabel": "Langues parlées (optionnel)",
         "continue": "Continuer"
       },
       "done": {

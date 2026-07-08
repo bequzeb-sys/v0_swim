@@ -3,78 +3,115 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { User } from "lucide-react"
+import { Activity, Check, Target, Trophy, WavesLadder } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
-import { useAuth } from "@/lib/auth/auth-context"
+import type { ClientGoal } from "@/types/client"
+
+const GOALS: ClientGoal[] = ["learnToSwim", "improveTechnique", "trainCompetition", "fitness"]
+
+interface GoalCardProps {
+  goal: ClientGoal
+  label: string
+  selected: boolean
+  onClick: () => void
+}
+
+function GoalIcon({ goal, className }: { goal: ClientGoal; className?: string }) {
+  switch (goal) {
+    case "learnToSwim": return <WavesLadder className={className} aria-hidden="true" />
+    case "improveTechnique": return <Target className={className} aria-hidden="true" />
+    case "trainCompetition": return <Trophy className={className} aria-hidden="true" />
+    case "fitness": return <Activity className={className} aria-hidden="true" />
+  }
+}
+
+function GoalCard({ goal, label, selected, onClick }: GoalCardProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "relative flex cursor-pointer items-center gap-4 rounded-xl border p-4 text-left transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+        selected
+          ? "border-teal-accent/40 bg-teal-accent/10"
+          : "border-white/10 bg-white/[4%] hover:border-teal-accent/20 hover:bg-white/[6%]"
+      )}
+    >
+      <div className={cn(
+        "flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors",
+        selected ? "bg-teal-accent/20" : "bg-teal-accent/10"
+      )}>
+        <GoalIcon goal={goal} className={cn("size-5", selected ? "text-teal-accent" : "text-teal-accent/60")} />
+      </div>
+      <span className={cn("text-sm font-medium", selected ? "text-white" : "text-white/70")}>
+        {label}
+      </span>
+      {selected && (
+        <div className="absolute right-4 flex size-5 items-center justify-center rounded-full bg-teal-accent">
+          <Check className="size-3 text-navy-deep" aria-hidden="true" />
+        </div>
+      )}
+    </button>
+  )
+}
 
 export default function OnboardingClientStep1() {
-  const t = useTranslations("onboarding.client.name")
+  const t = useTranslations("onboarding.client.goals")
   const tStep = useTranslations("onboarding.step")
   const router = useRouter()
-  const { user } = useAuth()
   const { data, setStep1 } = useClientOnboardingStore()
-
-  const [displayName, setDisplayName] = useState(
-    data.displayName || user?.name || ""
-  )
-
-  const isValid = displayName.trim().length >= 2
+  const [selected, setSelected] = useState<ClientGoal | null>(data.goal)
 
   function handleContinue() {
-    if (!isValid) return
-    setStep1(displayName.trim())
-    router.push("/onboarding/client/avatar")
+    if (!selected) return
+    setStep1(selected)
+    router.push("/onboarding/client/location")
   }
 
   return (
-    <OnboardingShell current={1} total={5}>
+    <OnboardingShell current={1} total={4}>
+      {/* Step indicator */}
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-          {tStep("of", { current: 1, total: 5 })}
+          {tStep("of", { current: 1, total: 4 })}
         </p>
         <div className="mb-4 flex items-center justify-center gap-2">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className={cn(
-              "h-2 rounded-full transition-all duration-300",
-              i === 0 ? "w-6 bg-teal-accent" : "w-2 bg-white/20"
-            )} />
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                "h-2 rounded-full transition-all duration-300",
+                i === 0 ? "w-6 bg-teal-accent" : "w-2 bg-white/20"
+              )}
+            />
           ))}
         </div>
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
 
-      <div className="mb-6">
-        <label className="mb-1.5 block text-xs font-medium text-white/50">
-          {t("label")} *
-        </label>
-        <div className="relative">
-          <User className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-white/30" aria-hidden="true" />
-          <Input
-            type="text"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            placeholder={t("placeholder")}
-            className="pl-9"
-            autoFocus
-            maxLength={50}
-            onKeyDown={(e) => e.key === "Enter" && handleContinue()}
+      {/* Goal cards */}
+      <div className="flex flex-col gap-3">
+        {GOALS.map((goal) => (
+          <GoalCard
+            key={goal}
+            goal={goal}
+            label={t(goal)}
+            selected={selected === goal}
+            onClick={() => setSelected(goal)}
           />
-        </div>
-        {displayName.trim().length > 0 && displayName.trim().length < 2 && (
-          <p className="mt-1.5 text-xs text-red-400/70">{t("minLength")}</p>
-        )}
+        ))}
       </div>
 
+      {/* Continue */}
       <Button
         variant="entry"
         onClick={handleContinue}
-        disabled={!isValid}
-        className="w-full"
+        disabled={!selected}
+        className="mt-6 w-full"
       >
         {t("continue")}
       </Button>
