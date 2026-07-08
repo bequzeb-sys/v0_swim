@@ -40,7 +40,9 @@ export default function OnboardingClientStep1() {
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className={cn(
               "h-2 rounded-full transition-all duration-300",
-              i === 0 ? "w-6 bg-teal-accent" : "w-2 bg-white/20"
+              i === 0 ? "w-6 bg-teal-accent"
+              : i < 0 ? "w-2 bg-teal-accent/40"
+              : "w-2 bg-white/20"
             )} />
           ))}
         </div>

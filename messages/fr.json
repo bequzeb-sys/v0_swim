@@ -268,32 +268,25 @@
         "continue": "Continuer"
       },
       "avatar": {
-        "title": "Votre avatar",
-        "subtitle": "Créez votre identité visuelle",
-        "subtitleNamed": "Bonjour {name}, créez votre identité visuelle",
-        "tabGenerate": "Générer",
-        "tabUpload": "Photo",
-        "randomize": "Autre avatar",
-        "skinColor": "Couleur de peau",
-        "hairStyle": "Coiffure",
-        "hair_short01": "Court",
-        "hair_short02": "Bouclé",
-        "hair_long01": "Long",
-        "hair_long02": "Ondulé",
-        "hair_bun": "Chignon",
-        "hair_hijab": "Hijab",
-        "glasses": "Lunettes",
-        "uploadLabel": "Choisir une photo",
-        "uploadHint": "JPG, PNG ou WebP · Max 5 Mo",
+        "title": "Votre photo de profil",
+        "subtitle": "Choisissez comment vous souhaitez apparaître",
+        "defaultLabel": "Avatar par défaut",
+        "defaultHint": "Vos initiales sur fond coloré",
+        "uploadLabel": "Ajouter une photo",
+        "uploadHint": "JPG, PNG ou WebP",
         "continue": "Continuer"
       },
       "goal": {
         "title": "Votre objectif",
         "subtitle": "Qu'est-ce qui vous motive à nager ?",
         "learnToSwim": "Apprendre à nager",
+        "learnToSwimDesc": "Premiers cours avec un coach certifié",
         "improveTechnique": "Améliorer ma technique",
+        "improveTechniqueDesc": "Perfectionnez votre nage avec un expert",
         "trainCompetition": "M'entraîner en compétition",
+        "trainCompetitionDesc": "Préparez vos compétitions sérieusement",
         "fitness": "Nager pour le fitness",
+        "fitnessDesc": "Nagez pour votre santé et votre forme",
         "continue": "Terminer"
       },
       "location": {
@@ -317,6 +310,7 @@
         "advancedDesc": "Je nage bien et vise la performance",
         "languagesTitle": "Langues parlées",
         "languagesSubtitle": "Pour être mis en relation avec des coachs qui parlent votre langue",
+        "next": "Suivant",
         "continue": "Continuer"
       },
       "done": {

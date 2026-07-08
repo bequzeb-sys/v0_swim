@@ -16,11 +16,14 @@ function OnboardingClientDonePageInner() {
   const { user } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { data, reset } = useClientOnboardingStore()
+  const { data } = useClientOnboardingStore()
 
   useEffect(() => {
-    reset()
-  }, [reset])
+    // TODO (database sprint): save client profile via API
+    console.log("Client onboarding complete:", data)
+    // reset() called after DB save in database sprint
+    // reset()
+  }, [])
 
   const displayName = data.displayName || user?.name || ""
 

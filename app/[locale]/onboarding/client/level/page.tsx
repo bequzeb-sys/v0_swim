@@ -82,11 +82,11 @@ export default function OnboardingClientStep4() {
   const touchStartX = useRef<number | null>(null)
 
   function toggleLanguage(lang: string) {
-    setLanguages((prev) =>
-      prev.includes(lang)
-        ? prev.filter((l) => l !== lang)
-        : [...prev, lang]
-    )
+    setLanguages((prev) => {
+      if (prev.includes(lang)) return prev.filter((l) => l !== lang)
+      if (prev.length >= 4) return prev
+      return [...prev, lang]
+    })
   }
 
   const slideValid = [
@@ -186,7 +186,9 @@ export default function OnboardingClientStep4() {
             {slide === 1 && (
               <div>
                 <p className="mb-1 text-xs font-medium text-white/50">{t("languagesTitle")}</p>
-                <p className="mb-3 text-xs text-white/30">{t("languagesSubtitle")}</p>
+                <p className="mb-4 text-xs text-white/40">
+                  {t("languagesSubtitle")} <span className={cn("font-medium", languages.length >= 4 ? "text-teal-accent" : "text-white/30")}>{languages.length}/4</span>
+                </p>
                 <div className="grid grid-cols-2 gap-2">
                   {LANGUAGES.map((lang) => {
                     const Flag = (Flags as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>>)[lang.toUpperCase()]
@@ -234,7 +236,7 @@ export default function OnboardingClientStep4() {
           disabled={!slideValid[slide]}
           className="flex-1"
         >
-          {slide === TOTAL_SLIDES - 1 ? t("continue") : t("continue")}
+          {slide === TOTAL_SLIDES - 1 ? t("continue") : t("next")}
         </Button>
       </div>
     </OnboardingShell>

@@ -3,7 +3,6 @@ import { persist, createJSONStorage } from "zustand/middleware"
 import type {
   ClientGoal,
   ClientLevel,
-  ClientGender,
   ClientAvatarOptions,
   ClientOnboardingData,
 } from "@/types/client"
@@ -19,10 +18,7 @@ interface ClientOnboardingStore {
 }
 
 const defaultAvatarOptions: ClientAvatarOptions = {
-  skinColor: "f5d0b5",
-  hair: "long01",
-  gender: "neutral",
-  glasses: false,
+  seed: "",
 }
 
 const defaultData: ClientOnboardingData = {

@@ -268,32 +268,25 @@
         "continue": "Continue"
       },
       "avatar": {
-        "title": "Your avatar",
-        "subtitle": "Create your visual identity",
-        "subtitleNamed": "Hello {name}, create your visual identity",
-        "tabGenerate": "Generate",
-        "tabUpload": "Photo",
-        "randomize": "New avatar",
-        "skinColor": "Skin tone",
-        "hairStyle": "Hair style",
-        "hair_short01": "Short",
-        "hair_short02": "Curly",
-        "hair_long01": "Long",
-        "hair_long02": "Wavy",
-        "hair_bun": "Bun",
-        "hair_hijab": "Hijab",
-        "glasses": "Glasses",
-        "uploadLabel": "Choose a photo",
-        "uploadHint": "JPG, PNG or WebP · Max 5 MB",
+        "title": "Your profile picture",
+        "subtitle": "Choose how you want to appear",
+        "defaultLabel": "Default avatar",
+        "defaultHint": "Your initials on a colored background",
+        "uploadLabel": "Add a photo",
+        "uploadHint": "JPG, PNG or WebP",
         "continue": "Continue"
       },
       "goal": {
         "title": "Your goal",
         "subtitle": "What motivates you to swim?",
         "learnToSwim": "Learn to swim",
+        "learnToSwimDesc": "First lessons with a certified coach",
         "improveTechnique": "Improve my technique",
+        "improveTechniqueDesc": "Perfect your stroke with an expert",
         "trainCompetition": "Train for competition",
+        "trainCompetitionDesc": "Prepare your competitions seriously",
         "fitness": "Swim for fitness",
+        "fitnessDesc": "Swim for your health and fitness",
         "continue": "Finish"
       },
       "location": {
@@ -317,6 +310,7 @@
         "advancedDesc": "I swim well and aim for performance",
         "languagesTitle": "Spoken languages",
         "languagesSubtitle": "So we can match you with coaches who speak your language",
+        "next": "Next",
         "continue": "Continue"
       },
       "done": {

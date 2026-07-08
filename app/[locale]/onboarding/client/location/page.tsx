@@ -123,6 +123,7 @@ export default function OnboardingClientStep3() {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder={t("locationPlaceholder")}
+          onKeyDown={(e) => e.key === "Enter" && location.trim() && country && handleContinue()}
         />
       </div>
 

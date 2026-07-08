@@ -1,12 +1,8 @@
 export type ClientGoal = "learnToSwim" | "improveTechnique" | "trainCompetition" | "fitness"
 export type ClientLevel = "beginner" | "intermediate" | "advanced"
-export type ClientGender = "male" | "female" | "neutral"
 
 export interface ClientAvatarOptions {
-  skinColor: string
-  hair: string
-  gender: ClientGender
-  glasses: boolean
+  seed: string
 }
 
 export interface ClientOnboardingData {

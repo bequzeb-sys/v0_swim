@@ -24,11 +24,12 @@ function GoalIcon({ goal, className }: { goal: ClientGoal; className?: string })
 interface GoalCardProps {
   goal: ClientGoal
   label: string
+  description: string
   selected: boolean
   onClick: () => void
 }
 
-function GoalCard({ goal, label, selected, onClick }: GoalCardProps) {
+function GoalCard({ goal, label, description, selected, onClick }: GoalCardProps) {
   return (
     <button
       type="button"
@@ -46,9 +47,10 @@ function GoalCard({ goal, label, selected, onClick }: GoalCardProps) {
       )}>
         <GoalIcon goal={goal} className={cn("size-5", selected ? "text-teal-accent" : "text-teal-accent/60")} />
       </div>
-      <span className={cn("text-sm font-medium", selected ? "text-white" : "text-white/70")}>
-        {label}
-      </span>
+      <div>
+        <p className={cn("text-sm font-medium", selected ? "text-white" : "text-white/70")}>{label}</p>
+        <p className="text-xs text-white/40 mt-0.5">{description}</p>
+      </div>
       {selected && (
         <div className="absolute right-4 flex size-5 items-center justify-center rounded-full bg-teal-accent">
           <Check className="size-3 text-navy-deep" aria-hidden="true" />
@@ -81,7 +83,8 @@ export default function OnboardingClientStep5() {
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className={cn(
               "h-2 rounded-full transition-all duration-300",
-              "w-6 bg-teal-accent"
+              i === 4 ? "w-6 bg-teal-accent"
+              : "w-2 bg-teal-accent/40"
             )} />
           ))}
         </div>
@@ -95,6 +98,7 @@ export default function OnboardingClientStep5() {
             key={goal}
             goal={goal}
             label={t(goal)}
+            description={t(`${goal}Desc`)}
             selected={selected === goal}
             onClick={() => setSelected(goal)}
           />
