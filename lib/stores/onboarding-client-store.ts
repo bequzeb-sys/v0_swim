@@ -1,31 +1,21 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
-import type {
-  ClientGoal,
-  ClientLevel,
-  ClientAvatarOptions,
-  ClientOnboardingData,
-} from "@/types/client"
+import type { ClientGoal, ClientLevel, ClientOnboardingData } from "@/types/client"
 
 interface ClientOnboardingStore {
   data: ClientOnboardingData
   setStep1: (displayName: string) => void
-  setStep2: (avatarType: "generated" | "upload", avatarSeed: string, avatarOptions: ClientAvatarOptions, avatarUrl: string) => void
+  setStep2: (avatarType: "default" | "upload", avatarUrl: string) => void
   setStep3: (location: string, country: string) => void
-  setStep4: (level: ClientLevel, languages: string[]) => void
-  setStep5: (goal: ClientGoal) => void
+  setStep4: (level: ClientLevel) => void
+  setStep5: (languages: string[]) => void
+  setStep6: (goal: ClientGoal) => void
   reset: () => void
-}
-
-const defaultAvatarOptions: ClientAvatarOptions = {
-  seed: "",
 }
 
 const defaultData: ClientOnboardingData = {
   displayName: "",
-  avatarType: "generated",
-  avatarSeed: "",
-  avatarOptions: defaultAvatarOptions,
+  avatarType: "default",
   avatarUrl: "",
   location: "",
   country: "",
@@ -40,13 +30,15 @@ export const useClientOnboardingStore = create<ClientOnboardingStore>()(
       data: defaultData,
       setStep1: (displayName) =>
         set((state) => ({ data: { ...state.data, displayName } })),
-      setStep2: (avatarType, avatarSeed, avatarOptions, avatarUrl) =>
-        set((state) => ({ data: { ...state.data, avatarType, avatarSeed, avatarOptions, avatarUrl } })),
+      setStep2: (avatarType, avatarUrl) =>
+        set((state) => ({ data: { ...state.data, avatarType, avatarUrl } })),
       setStep3: (location, country) =>
         set((state) => ({ data: { ...state.data, location, country } })),
-      setStep4: (level, languages) =>
-        set((state) => ({ data: { ...state.data, level, languages } })),
-      setStep5: (goal) =>
+      setStep4: (level) =>
+        set((state) => ({ data: { ...state.data, level } })),
+      setStep5: (languages) =>
+        set((state) => ({ data: { ...state.data, languages } })),
+      setStep6: (goal) =>
         set((state) => ({ data: { ...state.data, goal } })),
       reset: () => set({ data: defaultData }),
     }),

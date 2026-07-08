@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Activity, Check, Target, Trophy, WavesLadder } from "lucide-react"
+import { Activity, Check, Target, Trophy, WavesLadder, ChevronLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
@@ -64,33 +64,42 @@ export default function OnboardingClientStep5() {
   const t = useTranslations("onboarding.client.goal")
   const tStep = useTranslations("onboarding.step")
   const router = useRouter()
-  const { data, setStep5 } = useClientOnboardingStore()
+  const { data, setStep6 } = useClientOnboardingStore()
   const [selected, setSelected] = useState<ClientGoal | null>(data.goal)
 
   function handleContinue() {
     if (!selected) return
-    setStep5(selected)
+    setStep6(selected)
     router.push("/onboarding/client/done")
   }
 
   return (
-    <OnboardingShell current={5} total={5}>
+    <OnboardingShell current={6} total={6}>
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-          {tStep("of", { current: 5, total: 5 })}
+          {tStep("of", { current: 6, total: 6 })}
         </p>
         <div className="mb-4 flex items-center justify-center gap-2">
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className={cn(
               "h-2 rounded-full transition-all duration-300",
-              i === 4 ? "w-6 bg-teal-accent"
-              : "w-2 bg-teal-accent/40"
+              i < 5 ? "w-2 bg-teal-accent/40"
+              : "w-6 bg-teal-accent"
             )} />
           ))}
         </div>
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
+
+      <button
+        type="button"
+        onClick={() => router.push("/onboarding/client/level")}
+        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
+      >
+        <ChevronLeft className="size-4" aria-hidden="true" />
+        {tStep("back")}
+      </button>
 
       <div className="flex flex-col gap-3">
         {GOALS.map((goal) => (

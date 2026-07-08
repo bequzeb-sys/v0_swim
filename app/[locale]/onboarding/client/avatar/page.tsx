@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Upload, User } from "lucide-react"
+import { Upload, User, ChevronLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
@@ -33,7 +33,7 @@ export default function OnboardingClientStep2() {
 
   function handleContinue() {
     const finalUrl = avatarType === "upload" ? uploadedUrl : ""
-    setStep2(avatarType as "generated" | "upload", "", {} as any, finalUrl)
+    setStep2(avatarType, finalUrl)
     router.push("/onboarding/client/location")
   }
 
@@ -42,14 +42,14 @@ export default function OnboardingClientStep2() {
     : "SW"
 
   return (
-    <OnboardingShell current={2} total={5}>
+    <OnboardingShell current={2} total={6}>
       {/* Step indicator */}
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-          {tStep("of", { current: 2, total: 5 })}
+          {tStep("of", { current: 2, total: 6 })}
         </p>
         <div className="mb-4 flex items-center justify-center gap-2">
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className={cn(
               "h-2 rounded-full transition-all duration-300",
               i === 1 ? "w-6 bg-teal-accent"
@@ -61,6 +61,15 @@ export default function OnboardingClientStep2() {
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
+
+      <button
+        type="button"
+        onClick={() => router.push("/onboarding/client")}
+        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
+      >
+        <ChevronLeft className="size-4" aria-hidden="true" />
+        {tStep("back")}
+      </button>
 
       {/* Avatar preview */}
       <div className="mb-6 flex justify-center">

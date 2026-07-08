@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Check, MapPin } from "lucide-react"
+import { Check, MapPin, ChevronLeft } from "lucide-react"
 import { Popover } from "@base-ui/react/popover"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -45,17 +45,17 @@ export default function OnboardingClientStep3() {
   }
 
   return (
-    <OnboardingShell current={3} total={5}>
+    <OnboardingShell current={3} total={6}>
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-          {tStep("of", { current: 3, total: 5 })}
+          {tStep("of", { current: 3, total: 6 })}
         </p>
         <div className="mb-4 flex items-center justify-center gap-2">
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className={cn(
               "h-2 rounded-full transition-all duration-300",
-              i < 3 ? "w-6 bg-teal-accent"
-              : i === 3 ? "w-2 bg-teal-accent/40"
+              i === 2 ? "w-6 bg-teal-accent"
+              : i < 2 ? "w-2 bg-teal-accent/40"
               : "w-2 bg-white/20"
             )} />
           ))}
@@ -63,6 +63,15 @@ export default function OnboardingClientStep3() {
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
+
+      <button
+        type="button"
+        onClick={() => router.push("/onboarding/client/avatar")}
+        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
+      >
+        <ChevronLeft className="size-4" aria-hidden="true" />
+        {tStep("back")}
+      </button>
 
       <div className="mb-4">
         <label className="mb-1.5 block text-xs font-medium text-white/50">

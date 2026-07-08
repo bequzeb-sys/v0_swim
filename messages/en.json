@@ -256,7 +256,8 @@
   },
   "onboarding": {
     "step": {
-      "of": "Step {current} of {total}"
+      "of": "Step {current} of {total}",
+      "back": "Back"
     },
     "client": {
       "name": {
@@ -308,9 +309,13 @@
         "intermediateDesc": "I swim regularly and want to improve",
         "advancedLabel": "Advanced",
         "advancedDesc": "I swim well and aim for performance",
-        "languagesTitle": "Spoken languages",
-        "languagesSubtitle": "So we can match you with coaches who speak your language",
         "next": "Next",
+        "continue": "Continue"
+      },
+      "languages": {
+        "title": "Your languages",
+        "subtitle": "What languages do you speak with your coach?",
+        "max": "max",
         "continue": "Continue"
       },
       "done": {

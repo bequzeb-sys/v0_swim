@@ -37,9 +37,9 @@ function OnboardingClientDonePageInner() {
   }
 
   return (
-    <OnboardingShell current={5} total={5}>
+    <OnboardingShell current={6} total={6}>
       <div className="mb-6 flex items-center justify-center gap-2">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className={cn(
             "h-2 rounded-full transition-all duration-300",
             "w-6 bg-teal-accent"
