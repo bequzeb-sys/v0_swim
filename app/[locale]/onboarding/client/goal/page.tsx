@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Activity, Check, Target, Trophy, WavesLadder, ChevronLeft } from "lucide-react"
+import { Activity, Check, ChevronLeft, ChevronRight, Target, Trophy, WavesLadder } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
@@ -60,17 +60,22 @@ function GoalCard({ goal, label, description, selected, onClick }: GoalCardProps
   )
 }
 
-export default function OnboardingClientStep5() {
+export default function OnboardingClientStep6() {
   const t = useTranslations("onboarding.client.goal")
   const tStep = useTranslations("onboarding.step")
   const router = useRouter()
   const { data, setStep6 } = useClientOnboardingStore()
   const [selected, setSelected] = useState<ClientGoal | null>(data.goal)
+  const isValid = selected !== null
 
   function handleContinue() {
     if (!selected) return
     setStep6(selected)
     router.push("/onboarding/client/done")
+  }
+
+  function handleBack() {
+    router.push("/onboarding/client/languages")
   }
 
   return (
@@ -92,15 +97,6 @@ export default function OnboardingClientStep5() {
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
 
-      <button
-        type="button"
-        onClick={() => router.push("/onboarding/client/level")}
-        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
-      >
-        <ChevronLeft className="size-4" aria-hidden="true" />
-        {tStep("back")}
-      </button>
-
       <div className="flex flex-col gap-3">
         {GOALS.map((goal) => (
           <GoalCard
@@ -114,14 +110,33 @@ export default function OnboardingClientStep5() {
         ))}
       </div>
 
-      <Button
-        variant="entry"
-        onClick={handleContinue}
-        disabled={!selected}
-        className="mt-6 w-full"
-      >
-        {t("continue")}
-      </Button>
+      <div className="mt-6 flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handleBack}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronLeft className="size-5" aria-hidden="true" />
+        </button>
+
+        <Button
+          variant="entry"
+          onClick={handleContinue}
+          disabled={!isValid}
+          className="flex-1"
+        >
+          {t("continue")}
+        </Button>
+
+        <button
+          type="button"
+          onClick={handleContinue}
+          disabled={!isValid}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronRight className="size-5" aria-hidden="true" />
+        </button>
+      </div>
     </OnboardingShell>
   )
 }

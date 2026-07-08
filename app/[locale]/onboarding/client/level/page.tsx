@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { ChevronLeft, Sprout, TrendingUp, Trophy } from "lucide-react"
+import { ChevronLeft, ChevronRight, Sprout, TrendingUp, Trophy } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
@@ -68,6 +68,7 @@ export default function OnboardingClientStep4() {
   const { data, setStep4 } = useClientOnboardingStore()
 
   const [level, setLevel] = useState<ClientLevel | null>(data.level)
+  const isValid = level !== null
 
   function handleContinue() {
     if (!level) return
@@ -81,15 +82,6 @@ export default function OnboardingClientStep4() {
 
   return (
     <OnboardingShell current={4} total={6}>
-      <button
-        type="button"
-        onClick={handleBack}
-        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
-      >
-        <ChevronLeft className="size-4" aria-hidden="true" />
-        {tStep("back")}
-      </button>
-
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
           {tStep("of", { current: 4, total: 6 })}
@@ -121,14 +113,33 @@ export default function OnboardingClientStep4() {
         ))}
       </div>
 
-      <Button
-        variant="entry"
-        onClick={handleContinue}
-        disabled={!level}
-        className="mt-6 w-full"
-      >
-        {t("continue")}
-      </Button>
+      <div className="mt-6 flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handleBack}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronLeft className="size-5" aria-hidden="true" />
+        </button>
+
+        <Button
+          variant="entry"
+          onClick={handleContinue}
+          disabled={!isValid}
+          className="flex-1"
+        >
+          {t("continue")}
+        </Button>
+
+        <button
+          type="button"
+          onClick={handleContinue}
+          disabled={!isValid}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronRight className="size-5" aria-hidden="true" />
+        </button>
+      </div>
     </OnboardingShell>
   )
 }

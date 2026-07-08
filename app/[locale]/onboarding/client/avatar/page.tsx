@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Upload, User, ChevronLeft } from "lucide-react"
+import { ChevronLeft, ChevronRight, Upload, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
@@ -37,6 +37,10 @@ export default function OnboardingClientStep2() {
     router.push("/onboarding/client/location")
   }
 
+  function handleBack() {
+    router.push("/onboarding/client")
+  }
+
   const initials = data.displayName
     ? data.displayName.slice(0, 2).toUpperCase()
     : "SW"
@@ -61,15 +65,6 @@ export default function OnboardingClientStep2() {
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
-
-      <button
-        type="button"
-        onClick={() => router.push("/onboarding/client")}
-        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
-      >
-        <ChevronLeft className="size-4" aria-hidden="true" />
-        {tStep("back")}
-      </button>
 
       {/* Avatar preview */}
       <div className="mb-6 flex justify-center">
@@ -137,13 +132,31 @@ export default function OnboardingClientStep2() {
 
       </div>
 
-      <Button
-        variant="entry"
-        onClick={handleContinue}
-        className="w-full"
-      >
-        {t("continue")}
-      </Button>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handleBack}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronLeft className="size-5" aria-hidden="true" />
+        </button>
+
+        <Button
+          variant="entry"
+          onClick={handleContinue}
+          className="flex-1"
+        >
+          {t("continue")}
+        </Button>
+
+        <button
+          type="button"
+          onClick={handleContinue}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronRight className="size-5" aria-hidden="true" />
+        </button>
+      </div>
     </OnboardingShell>
   )
 }

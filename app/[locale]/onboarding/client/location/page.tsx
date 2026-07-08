@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Check, MapPin, ChevronLeft } from "lucide-react"
+import { Check, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 import { Popover } from "@base-ui/react/popover"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -38,10 +38,16 @@ export default function OnboardingClientStep3() {
   const selectedFlag = (Flags as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>>)[country]
   const SelectedFlag = selectedFlag
 
+  const isValid = Boolean(location.trim()) && Boolean(country)
+
   function handleContinue() {
-    if (!location.trim() || !country) return
+    if (!isValid) return
     setStep3(location.trim(), country)
     router.push("/onboarding/client/level")
+  }
+
+  function handleBack() {
+    router.push("/onboarding/client/avatar")
   }
 
   return (
@@ -63,15 +69,6 @@ export default function OnboardingClientStep3() {
         <h1 className="text-2xl font-bold text-white">{t("title")}</h1>
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
-
-      <button
-        type="button"
-        onClick={() => router.push("/onboarding/client/avatar")}
-        className="mb-4 inline-flex cursor-pointer items-center gap-1.5 text-sm text-white/40 transition-colors hover:text-white focus-visible:outline-none"
-      >
-        <ChevronLeft className="size-4" aria-hidden="true" />
-        {tStep("back")}
-      </button>
 
       <div className="mb-4">
         <label className="mb-1.5 block text-xs font-medium text-white/50">
@@ -132,18 +129,37 @@ export default function OnboardingClientStep3() {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder={t("locationPlaceholder")}
-          onKeyDown={(e) => e.key === "Enter" && location.trim() && country && handleContinue()}
+          onKeyDown={(e) => e.key === "Enter" && isValid && handleContinue()}
         />
       </div>
 
-      <Button
-        variant="entry"
-        onClick={handleContinue}
-        disabled={!location.trim() || !country}
-        className="w-full"
-      >
-        {t("continue")}
-      </Button>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handleBack}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronLeft className="size-5" aria-hidden="true" />
+        </button>
+
+        <Button
+          variant="entry"
+          onClick={handleContinue}
+          disabled={!isValid}
+          className="flex-1"
+        >
+          {t("continue")}
+        </Button>
+
+        <button
+          type="button"
+          onClick={handleContinue}
+          disabled={!isValid}
+          className="inline-flex size-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition-colors hover:border-white/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60"
+        >
+          <ChevronRight className="size-5" aria-hidden="true" />
+        </button>
+      </div>
     </OnboardingShell>
   )
 }
