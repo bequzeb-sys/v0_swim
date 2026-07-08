@@ -270,19 +270,24 @@
       },
       "location": {
         "title": "Où êtes-vous situé ?",
-        "subtitle": "Pour trouver les coachs près de chez vous.",
+        "subtitle": "Dites-nous où vous êtes pour trouver les meilleurs coachs près de chez vous",
         "locationLabel": "Ville ou région",
         "locationPlaceholder": "Ex : Paris, Lyon, Marseille…",
-        "levelLabel": "Niveau actuel",
-        "levelSubtitle": "Pour que les coachs adaptent leurs séances à votre niveau",
-        "levelBeginner": "Débutant",
-        "levelBeginnerDesc": "Je débute ou reprends la natation",
-        "levelIntermediate": "Intermédiaire",
-        "levelIntermediateDesc": "Je nage régulièrement et veux progresser",
-        "levelAdvanced": "Avancé",
-        "levelAdvancedDesc": "Je nage bien et vise la performance",
+        "countryLabel": "Votre pays",
+        "countrySubtitle": "Pour trouver les coachs dans votre région",
         "continue": "Continuer",
         "next": "Suivant"
+      },
+      "level": {
+        "title": "Votre niveau",
+        "subtitle": "Pour que les coachs adaptent leurs séances à vos besoins",
+        "beginnerLabel": "Débutant",
+        "beginnerDesc": "Je débute ou reprends la natation",
+        "intermediateLabel": "Intermédiaire",
+        "intermediateDesc": "Je nage régulièrement et veux progresser",
+        "advancedLabel": "Avancé",
+        "advancedDesc": "Je nage bien et vise la performance",
+        "continue": "Continuer"
       },
       "done": {
         "title": "Tout est prêt !",
@@ -486,7 +491,16 @@
     "cancellationNote": "Annulation gratuite jusqu'à 24h avant",
     "loginRequired": "Connectez-vous pour finaliser votre réservation",
     "loginCta": "Se connecter",
-    "backButton": "Retour"
+    "backButton": "Retour",
+    "days": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam",
+      "sun": "Dim"
+    }
   },
   "booking": {
     "panelTitle": "Réserver avec {coach}",

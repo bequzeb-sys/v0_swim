@@ -270,19 +270,24 @@
       },
       "location": {
         "title": "Where are you located?",
-        "subtitle": "So we can find coaches near you.",
+        "subtitle": "Tell us where you are to find the best coaches near you",
         "locationLabel": "City or region",
         "locationPlaceholder": "e.g. Paris, London, Marseille…",
-        "levelLabel": "Current level",
-        "levelSubtitle": "So coaches can adapt their sessions to your level",
-        "levelBeginner": "Beginner",
-        "levelBeginnerDesc": "I'm starting or returning to swimming",
-        "levelIntermediate": "Intermediate",
-        "levelIntermediateDesc": "I swim regularly and want to improve",
-        "levelAdvanced": "Advanced",
-        "levelAdvancedDesc": "I swim well and aim for performance",
+        "countryLabel": "Your country",
+        "countrySubtitle": "To find coaches in your region",
         "continue": "Continue",
         "next": "Next"
+      },
+      "level": {
+        "title": "Your level",
+        "subtitle": "So coaches can adapt their sessions to your needs",
+        "beginnerLabel": "Beginner",
+        "beginnerDesc": "I'm starting or returning to swimming",
+        "intermediateLabel": "Intermediate",
+        "intermediateDesc": "I swim regularly and want to improve",
+        "advancedLabel": "Advanced",
+        "advancedDesc": "I swim well and aim for performance",
+        "continue": "Continue"
       },
       "done": {
         "title": "You're all set!",
@@ -486,7 +491,16 @@
     "cancellationNote": "Free cancellation up to 24h before",
     "loginRequired": "Please log in to complete your booking",
     "loginCta": "Log in",
-    "backButton": "Back"
+    "backButton": "Back",
+    "days": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    }
   },
   "booking": {
     "panelTitle": "Book with {coach}",

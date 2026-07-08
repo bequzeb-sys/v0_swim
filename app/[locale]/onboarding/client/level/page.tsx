@@ -3,32 +3,32 @@
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Activity, Check, Target, Trophy, WavesLadder } from "lucide-react"
+import { Sprout, TrendingUp, Trophy } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
-import type { ClientGoal } from "@/types/client"
+import type { ClientLevel } from "@/types/client"
 
-const GOALS: ClientGoal[] = ["learnToSwim", "improveTechnique", "trainCompetition", "fitness"]
+const LEVELS: ClientLevel[] = ["beginner", "intermediate", "advanced"]
 
-interface GoalCardProps {
-  goal: ClientGoal
+interface LevelCardProps {
+  level: ClientLevel
   label: string
+  description: string
   selected: boolean
   onClick: () => void
 }
 
-function GoalIcon({ goal, className }: { goal: ClientGoal; className?: string }) {
-  switch (goal) {
-    case "learnToSwim": return <WavesLadder className={className} aria-hidden="true" />
-    case "improveTechnique": return <Target className={className} aria-hidden="true" />
-    case "trainCompetition": return <Trophy className={className} aria-hidden="true" />
-    case "fitness": return <Activity className={className} aria-hidden="true" />
+function LevelIcon({ level, className }: { level: ClientLevel; className?: string }) {
+  switch (level) {
+    case "beginner": return <Sprout className={className} aria-hidden="true" />
+    case "intermediate": return <TrendingUp className={className} aria-hidden="true" />
+    case "advanced": return <Trophy className={className} aria-hidden="true" />
   }
 }
 
-function GoalCard({ goal, label, selected, onClick }: GoalCardProps) {
+function LevelCard({ level, label, description, selected, onClick }: LevelCardProps) {
   return (
     <button
       type="button"
@@ -44,39 +44,41 @@ function GoalCard({ goal, label, selected, onClick }: GoalCardProps) {
         "flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors",
         selected ? "bg-teal-accent/20" : "bg-teal-accent/10"
       )}>
-        <GoalIcon goal={goal} className={cn("size-5", selected ? "text-teal-accent" : "text-teal-accent/60")} />
+        <LevelIcon level={level} className={cn("size-5", selected ? "text-teal-accent" : "text-teal-accent/60")} />
       </div>
-      <span className={cn("text-sm font-medium", selected ? "text-white" : "text-white/70")}>
-        {label}
-      </span>
+      <div className="flex-1">
+        <p className={cn("text-sm font-semibold", selected ? "text-white" : "text-white/70")}>{label}</p>
+        <p className="mt-0.5 text-xs text-white/40">{description}</p>
+      </div>
       {selected && (
-        <div className="absolute right-4 flex size-5 items-center justify-center rounded-full bg-teal-accent">
-          <Check className="size-3 text-navy-deep" aria-hidden="true" />
+        <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-teal-accent">
+          <svg className="size-3" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6l3 3 5-5" stroke="#0a1f3d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       )}
     </button>
   )
 }
 
-export default function OnboardingClientStep1() {
-  const t = useTranslations("onboarding.client.goals")
+export default function OnboardingClientStep3() {
+  const t = useTranslations("onboarding.client.level")
   const tStep = useTranslations("onboarding.step")
   const router = useRouter()
-  const { data, setStep1 } = useClientOnboardingStore()
-  const [selected, setSelected] = useState<ClientGoal | null>(data.goal)
+  const { data, setStep3 } = useClientOnboardingStore()
+  const [level, setLevel] = useState<ClientLevel | null>(data.level)
 
   function handleContinue() {
-    if (!selected) return
-    setStep1(selected)
-    router.push("/onboarding/client/location")
+    if (!level) return
+    setStep3(level)
+    router.push("/onboarding/client/done")
   }
 
   return (
-    <OnboardingShell current={1} total={4}>
-      {/* Step indicator */}
+    <OnboardingShell current={3} total={4}>
       <div className="mb-6 text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-          {tStep("of", { current: 1, total: 4 })}
+          {tStep("of", { current: 3, total: 4 })}
         </p>
         <div className="mb-4 flex items-center justify-center gap-2">
           {Array.from({ length: 4 }).map((_, i) => (
@@ -84,7 +86,9 @@ export default function OnboardingClientStep1() {
               key={i}
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
-                i === 0 ? "w-6 bg-teal-accent" : "w-2 bg-white/20"
+                i === 2 ? "w-6 bg-teal-accent"
+                : i < 2 ? "w-2 bg-teal-accent/40"
+                : "w-2 bg-white/20"
               )}
             />
           ))}
@@ -93,24 +97,23 @@ export default function OnboardingClientStep1() {
         <p className="mt-1 text-sm text-white/50">{t("subtitle")}</p>
       </div>
 
-      {/* Goal cards */}
       <div className="flex flex-col gap-3">
-        {GOALS.map((goal) => (
-          <GoalCard
-            key={goal}
-            goal={goal}
-            label={t(goal)}
-            selected={selected === goal}
-            onClick={() => setSelected(goal)}
+        {LEVELS.map((lvl) => (
+          <LevelCard
+            key={lvl}
+            level={lvl}
+            label={t(`${lvl}Label`)}
+            description={t(`${lvl}Desc`)}
+            selected={level === lvl}
+            onClick={() => setLevel(lvl)}
           />
         ))}
       </div>
 
-      {/* Continue */}
       <Button
         variant="entry"
         onClick={handleContinue}
-        disabled={!selected}
+        disabled={!level}
         className="mt-6 w-full"
       >
         {t("continue")}

@@ -22,6 +22,7 @@ export const routing = defineRouting({
     '/onboarding/client': '/onboarding/client',
     '/onboarding/client/done': '/onboarding/client/done',
     '/onboarding/client/location': '/onboarding/client/location',
+    '/onboarding/client/level': '/onboarding/client/level',
     '/onboarding/coach': '/onboarding/coach',
     '/onboarding/coach/availability': '/onboarding/coach/availability',
     '/onboarding/coach/done': '/onboarding/coach/done',
