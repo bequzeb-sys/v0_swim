@@ -13,6 +13,7 @@ export const routing = defineRouting({
     '/dashboard/client': '/dashboard/client',
     '/dashboard/client/bookings': '/dashboard/client/bookings',
     '/dashboard/client/messages': '/dashboard/client/messages',
+    '/dashboard/client/profile': '/dashboard/client/profile',
     '/dashboard/client/settings': '/dashboard/client/settings',
     '/dashboard/coach': '/dashboard/coach',
     '/dashboard/coach/bookings': '/dashboard/coach/bookings',

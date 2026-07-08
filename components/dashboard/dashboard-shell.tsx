@@ -22,6 +22,7 @@ const CLIENT_NAV = [
   { key: "home", href: "/dashboard/client", icon: LayoutDashboard },
   { key: "bookings", href: "/dashboard/client/bookings", icon: Calendar },
   { key: "messages", href: "/dashboard/client/messages", icon: MessageSquare },
+  { key: "profile", href: "/dashboard/client/profile", icon: User },
   { key: "settings", href: "/dashboard/client/settings", icon: Settings },
 ] as const
 

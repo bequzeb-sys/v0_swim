@@ -11,3 +11,23 @@ export interface ClientOnboardingData {
   languages: string[]
   goal: ClientGoal | null
 }
+
+export interface ClientProfile {
+  // Identity
+  displayName: string
+  bio: string
+  avatarType: "default" | "upload"
+  avatarUrl: string
+  // Location
+  location: string
+  country: string
+  // Swimming profile
+  level: ClientLevel | null
+  languages: string[]
+  goal: ClientGoal | null
+  // Contact (optional)
+  phone: string
+  // Preferences
+  notificationsEmail: boolean
+  notificationsPush: boolean
+}
