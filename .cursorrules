@@ -1,3 +1,36 @@
+# SwimAI — Workflow Rules (Claude.ai + Cursor)
+
+## Prompt discipline — max 3 tasks per prompt
+- NEVER send a Cursor prompt with more than 3 distinct file changes
+- If a feature needs more changes, split into sequential prompts
+- Each prompt must be independently buildable (pnpm build passes after it)
+- Rationale: long prompts cause agent timeouts, partial execution, and hard-to-debug failures
+
+## Audit → Plan → Confirm → Build (mandatory sequence)
+1. AUDIT ONLY prompt first — never modify files in an audit prompt
+2. Claude presents a plan based on audit findings
+3. Fred confirms the plan before any implementation prompt is sent
+4. Implementation prompt references the confirmed plan
+- NEVER skip the plan confirmation step for features touching 3+ files
+- Exception: single-file bug fixes can go straight to implementation
+
+## Report handling
+- Fred saves Cursor's response as a .txt or .md file and uploads to Claude.ai
+- Never paste Cursor reports directly — they consistently render as empty documents
+- If a report uploads empty, Claude reads it directly using the view tool
+
+## Browser verification (mandatory before commit)
+- Every implementation prompt ends with explicit browser verification steps
+- Fred verifies in real browser before telling Claude to commit
+- Claude never writes the git commit command until Fred confirms browser verification
+- No exceptions — "build passes" is not a substitute for browser verification
+
+## End-of-session ritual (last 5 minutes)
+1. git add -A && git commit && git push
+2. Claude updates swimai-build-retrospective.md
+3. Fred re-uploads .cursorrules to Claude Project if it was modified
+4. Fred re-uploads retrospective to Claude Project
+
 # SwimAI — Project Rules
 
 ## Stack
