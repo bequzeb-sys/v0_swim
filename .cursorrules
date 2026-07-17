@@ -558,6 +558,20 @@ reliably. If avatar customization is needed, use the npm package
 @dicebear/core + @dicebear/collection with correct v10 API, or use
 initials-based default avatars.
 
+### Scrollbar — canonical utility
+- Use `scrollbar-thin` (defined in app/globals.css) for ALL scrollable
+ containers that should show a visible scrollbar:
+ - Dropdown panels (Popover.Popup content)
+ - Any overflow-y-auto container that needs a visible bar
+ - Pattern: `className="max-h-56 overflow-y-auto scrollbar-thin"`
+- Use `scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none]
+ [scrollbar-width:none]` ONLY when:
+ - A custom JS <Scrollbar /> overlay is present
+ (coaches-listing-client.tsx sidebar)
+ - Mobile drawer scroll areas
+- NEVER use inline arbitrary scrollbar classes — always use scrollbar-thin
+ or scrollbar-none.
+
 ## General
 - Before adding a new dependency, check if shadcn/ui, lucide-react, or an
  existing util already covers the need.
