@@ -3,7 +3,7 @@
 import { useState, useRef } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { ChevronLeft, ChevronRight, User, MapPin, Euro, Award, Languages } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, MapPin, Euro, Award, Languages, ChevronDown, Check } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -12,6 +12,8 @@ import { useCoachOnboardingStore } from "@/lib/stores/onboarding-coach-store"
 import type { LanguageCode } from "@/types/coach"
 import * as Flags from "country-flag-icons/react/3x2"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
+import { Popover } from "@base-ui/react/popover"
+import { COUNTRIES } from "@/lib/countries"
 
 // Available languages — labels resolved via the existing `languages` namespace
 // at runtime so we never hardcode user-visible strings.
@@ -44,10 +46,6 @@ const LANGUAGE_FLAG: Record<LanguageCode, string> = {
   ja: "JP",
 }
 
-// Country codes for the location picker — labels resolved via the existing
-// `search.countries` namespace (shared with the search bar).
-const COUNTRY_CODES = ["FR", "RE", "BE", "CH", "CA", "MA", "SN", "MU"] as const
-
 const TOTAL_SLIDES = 5
 
 type FlagComponent = React.ComponentType<{
@@ -70,6 +68,7 @@ export default function CoachOnboardingStep2() {
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [direction, setDirection] = useState(1)
+  const [countryOpen, setCountryOpen] = useState(false)
   const touchStartX = useRef<number | null>(null)
 
   // Field state — initialized from store
@@ -193,27 +192,53 @@ export default function CoachOnboardingStep2() {
           onChange={(e) => setCity(e.target.value)}
           placeholder={t("cityPlaceholder")}
         />
-        <div className="grid grid-cols-2 gap-2">
-          {COUNTRY_CODES.map((code) => {
-            const Flag = getFlag(code)
-            return (
-              <button
-                key={code}
-                type="button"
-                onClick={() => setCountry(code)}
-                aria-pressed={country === code}
-                className={cn(
-                  "flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2.5 text-sm transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
-                  country === code
-                    ? "border-teal-accent/40 bg-teal-accent/10 text-white"
-                    : "border-white/10 bg-white/5 text-white/60 hover:border-teal-accent/20 hover:text-white"
-                )}
-              >
-                {Flag && <Flag className="size-4 rounded-sm" />}
-                <span>{tSearch(`countries.${code}`)}</span>
-              </button>
-            )
-          })}
+        <div>
+          <label className="mb-1.5 block text-xs font-medium text-white/50">
+            {t("countryLabel")} *
+          </label>
+          <Popover.Root open={countryOpen} onOpenChange={setCountryOpen}>
+            <Popover.Trigger className={cn(
+              "flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+              countryOpen
+                ? "border-teal-accent/40 bg-teal-accent/10 text-white"
+                : "border-white/10 bg-white/5 text-white/70 hover:border-teal-accent/20 hover:text-white"
+            )}>
+              <div className="flex items-center gap-2">
+                {(() => {
+                  const Flag = getFlag(country)
+                  return Flag ? <Flag className="size-5 rounded-sm" aria-hidden="true" /> : null
+                })()}
+                <span>{tSearch(`countries.${country}`)}</span>
+              </div>
+              <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
+            </Popover.Trigger>
+            <Popover.Portal>
+              <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--anchor-width)]">
+                <Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white data-[state=open]:animate-in data-[state=closed]:animate-out">
+                  {COUNTRIES.map(({ code }) => {
+                    const Flag = getFlag(code)
+                    return (
+                      <button
+                        key={code}
+                        type="button"
+                        onClick={() => { setCountry(code); setCountryOpen(false) }}
+                        className={cn(
+                          "flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-accent/60",
+                          country === code
+                            ? "bg-teal-accent/10 text-teal-accent"
+                            : "text-white/70 hover:bg-white/10 hover:text-white"
+                        )}
+                      >
+                        {Flag && <Flag className="size-5 rounded-sm" aria-hidden="true" />}
+                        {tSearch(`countries.${code}`)}
+                        {country === code && <Check className="ml-auto size-4 text-teal-accent" aria-hidden="true" />}
+                      </button>
+                    )
+                  })}
+                </Popover.Popup>
+              </Popover.Positioner>
+            </Popover.Portal>
+          </Popover.Root>
         </div>
       </div>
     </motion.div>,
