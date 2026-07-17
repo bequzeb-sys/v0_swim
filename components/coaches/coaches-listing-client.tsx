@@ -169,7 +169,7 @@ function FilterContent({
                 <div className="relative">
                   <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-6 rounded-t-2xl bg-gradient-to-b from-blue-400/[12%] to-transparent" />
                   <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 rounded-b-2xl bg-gradient-to-t from-blue-400/[12%] to-transparent" />
-                  <ul role="listbox" aria-label={page.filters.country} className="max-h-48 overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  <ul role="listbox" aria-label={page.filters.country} className="max-h-48 overflow-y-auto scrollbar-thin">
                     <li role="option" aria-selected={country === ""}>
                       <button
                         type="button"

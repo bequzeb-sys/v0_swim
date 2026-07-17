@@ -214,9 +214,10 @@ export default function CoachOnboardingStep2() {
             </Popover.Trigger>
             <Popover.Portal>
               <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--anchor-width)]">
-                <Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white data-[state=open]:animate-in data-[state=closed]:animate-out">
-                  {COUNTRIES.map(({ code }) => {
-                    const Flag = getFlag(code)
+<Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white data-[state=open]:animate-in data-[state=closed]:animate-out">
+                  <div className="max-h-56 overflow-y-auto scrollbar-thin">
+                    {COUNTRIES.map(({ code }) => {
+                      const Flag = getFlag(code)
                     return (
                       <button
                         key={code}
@@ -235,6 +236,7 @@ export default function CoachOnboardingStep2() {
                       </button>
                     )
                   })}
+                  </div>
                 </Popover.Popup>
               </Popover.Positioner>
             </Popover.Portal>

@@ -82,7 +82,7 @@ export default function OnboardingClientStep3() {
           <Popover.Portal>
             <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--anchor-width)]">
               <Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white data-[state=open]:animate-in data-[state=closed]:animate-out">
-                <div className="flex max-h-56 flex-col gap-0.5 overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="max-h-56 overflow-y-auto scrollbar-thin">
                   {COUNTRIES.map(({ code }) => {
                     const Flag = (Flags as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>>)[code]
                     return (

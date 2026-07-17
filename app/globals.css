@@ -268,6 +268,21 @@ input[type="radio"]:focus-visible {
   outline-offset: 2px;
 }
 
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.2) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(255 255 255 / 0.2);
+  border-radius: 9999px;
+}
+
 }
 
 /* Prevent GPU compositing flash on backdrop-blur elements during React repaint */
