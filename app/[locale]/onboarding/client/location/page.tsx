@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { Check, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
+import { Check, ChevronLeft, ChevronRight, ChevronDown, MapPin } from "lucide-react"
 import { Popover } from "@base-ui/react/popover"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -12,17 +12,7 @@ import { Button } from "@/components/ui/button"
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell"
 import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
 import * as Flags from "country-flag-icons/react/3x2"
-
-const COUNTRIES = [
-  { code: "FR" },
-  { code: "RE" },
-  { code: "BE" },
-  { code: "CH" },
-  { code: "CA" },
-  { code: "MA" },
-  { code: "SN" },
-  { code: "MU" },
-]
+import { COUNTRIES } from "@/lib/countries"
 
 export default function OnboardingClientStep3() {
   const t = useTranslations("onboarding.client.location")
@@ -87,7 +77,7 @@ export default function OnboardingClientStep3() {
               {SelectedFlag && <SelectedFlag className="size-5 rounded-sm" />}
               <span>{tCountries(country as Parameters<typeof tCountries>[0])}</span>
             </div>
-            <MapPin className="size-4 shrink-0 text-white/40" aria-hidden="true" />
+            <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
           </Popover.Trigger>
           <Popover.Portal>
             <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--anchor-width)]">

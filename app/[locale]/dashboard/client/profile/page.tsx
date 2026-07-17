@@ -14,15 +14,12 @@ import { useClientOnboardingStore } from "@/lib/stores/onboarding-client-store"
 import { useAuth } from "@/lib/auth/auth-context"
 import * as Flags from "country-flag-icons/react/3x2"
 import { Popover } from "@base-ui/react/popover"
+import { COUNTRIES } from "@/lib/countries"
 import type { ClientLevel, ClientGoal } from "@/types/client"
 
 const LEVELS: ClientLevel[] = ["beginner", "intermediate", "advanced"]
 const GOALS: ClientGoal[] = ["learnToSwim", "improveTechnique", "trainCompetition", "fitness"]
 const LANGUAGES = ["fr", "en", "es", "de", "it", "pt", "ar", "zh", "ru", "ja"]
-const COUNTRIES = [
-  { code: "FR" }, { code: "RE" }, { code: "BE" }, { code: "CH" },
-  { code: "CA" }, { code: "MA" }, { code: "SN" }, { code: "MU" },
-]
 
 function GoalIcon({ goal, className }: { goal: ClientGoal; className?: string }) {
   switch (goal) {
@@ -205,8 +202,8 @@ export default function ClientProfilePage() {
                 <ChevronDown className={cn("size-4 shrink-0 text-white/40 transition-transform duration-200", countryOpen && "rotate-180")} aria-hidden="true" />
               </Popover.Trigger>
               <Popover.Portal>
-                <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--available-width)]">
-                  <Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white">
+                <Popover.Positioner sideOffset={8} align="start" className="z-50 w-[var(--anchor-width)]">
+                  <Popover.Popup className="rounded-2xl border border-white/10 bg-white/[8%] p-1.5 shadow-xl shadow-black/20 backdrop-blur-md text-white data-[state=open]:animate-in data-[state=closed]:animate-out">
                     {COUNTRIES.map(({ code }) => {
                       const Flag = (Flags as unknown as Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>>)[code]
                       return (
